@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 15:22:07 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/04 20:50:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:45:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int						valid_env(char *env);
 
 t_env					*new_env(char *env);
 void					env_push_back(t_env **env2, char *env);
+char					*get_specific_env(char *env, t_env **envlist);
 
 /*						debug_option						*/
 
