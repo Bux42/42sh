@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 16:13:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/04 20:22:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:57:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,22 @@ int			matching_env(char *env, char *match)
 	if (ft_strncmp(env, match, ft_strlen(match)) == 0)
 		return (1);
 	return (0);
+}
+
+char		*get_specific_env(char *env, t_env **envlist)
+{
+	t_env	*cp;
+
+	if ((cp = (*envlist)))
+	{
+		while (cp)
+		{
+			if (ft_strncmp(env, cp->env, ft_strlen(env)) == 0)
+				return (ft_strdup(cp->env));
+			cp = cp->next;
+		}
+	}
+	return (NULL);
 }
 
 int			get_env(char **env, t_sh *sh)
