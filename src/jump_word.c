@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 17:25:12 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/04 19:45:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/07 20:02:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,28 @@ int			is_space(char c)
 	return (0);
 }
 
-int			condition_nd(void)
-{
-	ft_putstr(tgetstr("nd", NULL));
-	return (1);
-}
-
-int			condition_le(void)
-{
-	ft_putstr(tgetstr("le", NULL));
-	return (1);
-}
-
 void		jump_right_word(t_inp **inp)
 {
 	t_inp	*cp;
 
 	if ((cp = (*inp)))
 	{
-		if (cp->pos == 2)
-			condition_nd();
 		while (cp)
 		{
 			if (cp->pos && !(cp->pos = 0))
 				break ;
 			cp = cp->next;
 		}
-		if (cp->next && condition_nd())
+		if (cp->next)
 			cp = cp->next;
 		if (is_space(cp->c))
-			while (cp->next && is_space(cp->next->c) && condition_nd())
+			while (cp->next && is_space(cp->next->c))
 				cp = cp->next;
 		if (!is_space(cp->c))
 		{
-			while (cp->next && !is_space(cp->next->c) && condition_nd())
+			while (cp->next && !is_space(cp->next->c))
 				cp = cp->next;
-			while (cp->next && is_space(cp->next->c) && condition_nd())
+			while (cp->next && is_space(cp->next->c))
 				cp = cp->next;
 		}
 		cp->pos = 1;
@@ -81,13 +67,11 @@ void		jump_left_word(t_inp **inp)
 				break ;
 			cp = cp->next;
 		}
-		if (cp->previous)
-			ft_putstr(tgetstr("le", NULL));
-		if (cp->previous && !is_space(cp->c) && condition_le())
+		if (cp->previous && !is_space(cp->c))
 			cp = cp->previous;
-		while (cp->previous && is_space(cp->c) && condition_le())
+		while (cp->previous && is_space(cp->c))
 			cp = cp->previous;
-		while (cp->previous && !is_space(cp->previous->c) && condition_le())
+		while (cp->previous && !is_space(cp->previous->c))
 			cp = cp->previous;
 		if (!cp->previous)
 			cp->pos = 2;

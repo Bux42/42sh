@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 15:04:56 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/04 20:22:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/08 23:53:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int			main(int ac, char **av, char **env)
 	get_env(env, sh);
 	check_debug(av, sh);
 	current_dir(sh);
+	sh->width = tgetnum("co");
 	if (!init_term())
 		ft_putendl("init_term failed, why");
+	sh->retval = -1;
 	while (ac > -1)
 		if ((len = read(1, sh->buff, 5)))
-				treat_input(sh);
+			treat_input(sh);
 	return (0);
 }

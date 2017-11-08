@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 18:39:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/01 21:57:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/07 20:02:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		move_left(t_inp **inp)
 					cp->previous->pos = 1;
 					cp->pos = 0;
 				}
-				ft_putstr(tgetstr("le", NULL));
 				return ;
 			}
 			cp = cp->next;
@@ -54,15 +53,11 @@ void		move_right(t_inp **inp)
 				}
 				else
 					cp->pos = 1;
-				ft_putstr(tgetstr("nd", NULL));
 				return ;
 			}
 			cp = cp->next;
 		}
 		if (cp->pos == 2)
-		{
-			ft_putstr(tgetstr("nd", NULL));
 			cp->pos = 1;
-		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:38:14 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/04 18:13:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/07 20:03:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,6 @@ void		remove_middle(t_inp *cp)
 	}
 }
 
-void		restaure_input_line(t_inp **inp)
-{
-	t_inp	*cp;
-	int		i;
-
-	i = 1;
-	cp = (*inp);
-	ft_putstr(tgetstr("le", NULL));
-	while (cp->next)
-	{
-		i++;
-		ft_putchar(cp->next->c);
-		cp = cp->next;
-	}
-	ft_putchar(' ');
-	while (i--)
-		ft_putstr(tgetstr("le", NULL));
-}
-
 void		delete_pos(t_inp **inp)
 {
 	t_inp	*cp;
@@ -84,7 +65,6 @@ void		delete_pos(t_inp **inp)
 		{
 			if (cp->pos == 1)
 			{
-				restaure_input_line(&cp);
 				if (!cp->previous)
 					remove_first(cp, inp);
 				else
