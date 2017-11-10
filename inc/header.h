@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 15:22:07 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/10 00:21:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/10 05:56:47 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void					print_inp(t_inp **inp);
 
 /*						edit_prompt							*/
 
-void					move_right(t_inp **inp);
-void					move_left(t_inp **inp);
+void					move_right(t_inp **inp, t_sh *sh);
+void					move_left(t_inp **inp, t_sh *sh);
 void					delete_pos(t_inp **inp);
 void					remove_first(t_inp *cp, t_inp **inp);
 void					remove_middle(t_inp *cp);
@@ -101,15 +101,15 @@ void					delete_pos_a(t_inp **inp);
 void					delete_last(t_inp **inp, t_inp *cp);
 void					delete_at_begining(t_inp **inp, t_inp *cp);
 void					delete_middle(t_inp *cp);
-void					home_end(t_inp **inp, int i);
-void					jump_left_word(t_inp **inp);
-void					jump_right_word(t_inp **inp);
+void					home_end(t_inp **inp, int i, t_sh *sh);
+void					jump_left_word(t_inp **inp, t_sh *sh);
+void					jump_right_word(t_inp **inp, t_sh *sh);
 
 void					restaure_input_line(t_inp **inp);
 void					restaure_input_line_a(t_inp **inp);
 
-int						condition_le(void);
-int						condition_nd(void);
+int						padding_right(t_sh *sh);
+int						padding_left(t_sh *sh);
 
 int						is_space(char c);
 
