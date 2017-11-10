@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 21:11:48 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/08 23:55:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/09 23:24:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		current_dir(t_sh *sh)
 {
 	char	*home;
 
-	ft_putstr("\x1b[36m");
 	sh->posy = 3;
+	ft_putstr("\x1b[36m");
 	getcwd(sh->pwd, 2048);
 	if ((home = get_specific_env("HOME=", &sh->env)))
 	{
@@ -45,4 +45,5 @@ void		current_dir(t_sh *sh)
 		ft_putstr("\x1b[31m");
 	ft_putstr(" » ");
 	ft_putstr("\x1b[0m");
+	sh->prompt_len = sh->posy;
 }

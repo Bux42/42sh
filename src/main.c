@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 15:04:56 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/08 23:53:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/10 00:23:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			main(int ac, char **av, char **env)
 	sh->width = tgetnum("co");
 	if (!init_term())
 		ft_putendl("init_term failed, why");
+	sh->width = tgetnum("co");
 	sh->retval = -1;
 	while (ac > -1)
 		if ((len = read(1, sh->buff, 5)))

@@ -6,13 +6,13 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:22:15 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/02 18:20:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/10 00:23:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/header.h"
 
-void		debug_file(t_inp **inp)
+void		debug_file(t_inp **inp, t_sh *sh)
 {
 	int		fd;
 	t_inp	*cp;
@@ -37,6 +37,12 @@ void		debug_file(t_inp **inp)
 				ft_putchar_fd(' ', fd);
 				cp = cp->next;
 			}
+			ft_putchar_fd('\n', fd);
+			ft_putnbr_fd(sh->width, fd);
+			ft_putchar_fd('\t', fd);
+			ft_putnbr_fd(sh->posy, fd);
+			ft_putchar_fd('\t', fd);
+			ft_putnbr_fd(sh->pos_at, fd);
 			ft_putchar_fd('\n', fd);
 			close(fd);
 		}

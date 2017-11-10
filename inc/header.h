@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 15:22:07 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/08 23:50:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/10 00:21:38 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct			s_sh
 	char				buff[6];
 	int					debug;
 	int					posy;
+	int					prompt_len;
+	int					pos_at;
 	int					width;
 	int					retval;
 	char				pwd[2048];
@@ -121,6 +123,6 @@ void					current_dir(t_sh *sh);
 
 /*						debug stuff							*/
 
-void					debug_file(t_inp **inp);
+void					debug_file(t_inp **inp, t_sh *sh);
 
 #endif

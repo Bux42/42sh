@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 19:48:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/10/31 10:03:30 by drecours         ###   ########.fr       */
+/*   Updated: 2017/11/09 22:05:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void			signal_event(int signo)
 {
-	ft_putnbr(signo);
 	if (signo == SIGINT)
 		exit_term(signo);
-	ft_putnbr(signo);
 }
 
 void			signal_init(void)
