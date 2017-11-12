@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 05:11:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 05:41:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
+# include <sys/stat.h>
 # include "../libft/includes/libft.h"
 
 typedef struct			s_env
