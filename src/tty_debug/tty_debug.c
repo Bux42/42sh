@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tty_debug.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 05:27:51 by videsvau         ###   ########.fr       */
+/*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
+/*   Updated: 2017/11/12 05:26:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-int			main(int ac, char **av, char **env)
+void		tty_debug(t_sh *sh)
 {
-	t_sh	*sh;
+	char	buff[2048];
 
-	if (!(sh = (t_sh*)malloc(sizeof(t_sh))))
-		return (0);
-	get_env(env, sh);
-	print_prompt(sh);
-	if (!init_term() || !get_tty(sh, av[1]))
-		return (0);
-	sh->width = tgetnum("co");
-	if (sh->posy - 1 == sh->width)
-	{
-		sh->posy = 1;
-		ft_putchar(' ');
-		ft_putstr(tgetstr("le", NULL));
-	}
-	signal_init();
-	while (ac > -1)
-		if (read(1, sh->buff, 5))
-			treat_input(sh);
-	return (0);
+	ft_bzero(buff, 2047);
+	ft_strcat(buff, "echo ");
+	ft_strcat(buff, " posy ");
+	ft_strcat(buff, ft_itoa(sh->posy));
+	ft_strcat(buff, "     width ");
+	ft_strcat(buff, ft_itoa(sh->width));
+	ft_strcat(buff, " > ");
+	ft_strcat(buff, sh->tty);
+	system(buff);
+}
+
+int			get_tty(t_sh *sh, char *av)
+{
+	if (av)
+		sh->tty = ft_strdup(av);
+	else
+		sh->tty = NULL;
+	return (1);
 }

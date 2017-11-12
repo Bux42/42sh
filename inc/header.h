@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 03:56:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 05:11:27 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct			s_inp
 
 typedef struct			s_sh
 {
+	char				*tty;
 	char				*home_env;
 	char				buff[6];
 	int					posy;
@@ -71,5 +72,10 @@ void					prompt_colors(int i);
 
 void					treat_input(t_sh *sh);
 int						check_dimentions(t_sh *sh);
+
+/*						tty_debug										*/
+
+int						get_tty(t_sh *sh, char *av);
+void					tty_debug(t_sh *sh);
 
 #endif
