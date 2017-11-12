@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 09:21:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 09:46:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,28 @@ int			pos_at(t_inp **inp, int prompt_size)
 
 int			check_dimentions(t_sh *sh)
 {
+	int		new_size;
+	int		posat;
+
 	if (!(tgetent(NULL, TERM)))
 		return (0);
 	if (tgetnum("co") != sh->width)
-		;
+	{
+		new_size = tgetnum("co");
+		posat = pos_at(&sh->inpl->inp, sh->prompt_len);
+		if (new_size < sh->width)
+		{
+			if (posat > new_size)
+				sh->posy = posat % new_size;
+		}
+		else
+		{
+			if (posat > new_size)
+				sh->posy = posat % new_size;
+			else
+				sh->posy = posat;
+		}
+	}
 	if (sh->width + 1 == sh->posy)
 		ft_putchar(' ');
 	return (1);
