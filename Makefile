@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/12 05:16:17 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/12 06:42:06 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
 line_edition/treat_input.c\
+line_edition/add_delete_letter.c\
+line_edition/inp_list.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\

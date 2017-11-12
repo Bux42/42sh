@@ -6,15 +6,18 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 05:43:41 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 07:53:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void		tty_debug(t_sh *sh)
+void		tty_debug(t_sh *sh, t_inp **inp)
 {
 	char	buff[2048];
+	char	inpbuff[2];
+	char	*itoa;
+	t_inp	*cp;
 
 	ft_bzero(buff, 2047);
 	ft_strcat(buff, "echo ");
@@ -26,6 +29,32 @@ void		tty_debug(t_sh *sh)
 	ft_strcat(buff, ft_itoa(sh->prompt_len));
 	ft_strcat(buff, " retval: ");
 	ft_strcat(buff, ft_itoa(sh->retval));
+	ft_strcat(buff, "\n");itoa = ft_itoa(sh->buff[0]);ft_strcat(buff, itoa);free(itoa);
+	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[1]);ft_strcat(buff, itoa);free(itoa);
+	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[2]);ft_strcat(buff, itoa);free(itoa);
+	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[3]);ft_strcat(buff, itoa);free(itoa);
+	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[4]);ft_strcat(buff, itoa);free(itoa);
+	ft_strcat(buff, "\n");
+	if ((cp = (*inp)))
+	{
+		inpbuff[1] = '\0';
+		while (cp)
+		{
+			inpbuff[0] = cp->c;
+			ft_strcat(buff, inpbuff);
+			cp = cp->next;
+		}
+	}
+	ft_strcat(buff, "\n");
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			inpbuff[0] = cp->pos + 48;
+			ft_strcat(buff, inpbuff);
+			cp = cp->next;
+		}
+	}
 	ft_strcat(buff, "\" > ");
 	ft_strcat(buff, sh->tty);
 	system(buff);

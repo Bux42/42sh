@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 05:41:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 07:08:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct			s_inp
 	struct s_inp		*previous;
 }						t_inp;
 
+typedef struct			s_inpl
+{
+	struct s_inp		*inp;
+	struct s_inpl		*next;
+}						t_inpl;
+
 typedef struct			s_sh
 {
 	char				*tty;
@@ -45,6 +51,7 @@ typedef struct			s_sh
 	int					retval;
 	char				pwd[2048];
 	struct s_env		*env;
+	struct s_inpl		*inpl;
 }						t_sh;
 
 /*						initialize_term									*/
@@ -72,11 +79,19 @@ void					prompt_colors(int i);
 /*						line_edition									*/
 
 void					treat_input(t_sh *sh);
+void					add_delete_letter(t_sh *sh);
 int						check_dimentions(t_sh *sh);
+void					check_endline(t_sh *sh);
+
+t_inp					*new_inp(char c);
+void					inp_push_back(t_inp **inp, char c);
+void					insert_middle(t_inp *first, t_inp *tmp);
+void					insert_first(t_inp *first, t_inp *tmp, t_inp **inp);
+void					insert_beginning(t_inp *first, t_inp *tmp);
 
 /*						tty_debug										*/
 
 int						get_tty(t_sh *sh, char *av);
-void					tty_debug(t_sh *sh);
+void					tty_debug(t_sh *sh, t_inp **inp);
 
 #endif

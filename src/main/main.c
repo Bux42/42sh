@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 05:27:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 06:36:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int			main(int ac, char **av, char **env)
 	t_sh	*sh;
 
 	if (!(sh = (t_sh*)malloc(sizeof(t_sh))))
+		return (0);
+	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
 	get_env(env, sh);
 	print_prompt(sh);
@@ -30,6 +32,8 @@ int			main(int ac, char **av, char **env)
 		ft_putstr(tgetstr("le", NULL));
 	}
 	signal_init();
+	sh->inpl->inp = NULL;
+	sh->inpl->next = NULL;
 	while (ac > -1)
 		if (read(1, sh->buff, 5))
 			treat_input(sh);
