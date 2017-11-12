@@ -6,12 +6,13 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 03:10:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 03:41:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
+# define TERM "xterm-256color"
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -44,8 +45,14 @@ typedef struct			s_sh
 	struct s_env		*env;
 }						t_sh;
 
+/*						initialize_term									*/
+
 struct termios			g_old_term;
 struct termios			g_new_term;
+
+int						init_term(void);
+void					signal_init(void);
+void					signal_event(int signo);
 
 /*						environment										*/
 
