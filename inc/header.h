@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 11:31:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 12:35:47 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void					prompt_colors(int i);
 
 void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
+void					delete_letter(t_sh *sh, t_inp **inp);
+void					overwrite_remaining(t_sh *sh, t_inp **inp);
 int						check_dimentions(t_sh *sh);
 void					check_endline(t_sh *sh);
 
