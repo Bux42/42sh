@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 03:41:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 03:56:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,10 @@ t_env					*new_env(char *env);
 void					print_prompt(t_sh *sh);
 void					tild_prompt(t_sh *sh);
 void					prompt_colors(int i);
+
+/*						line_edition									*/
+
+void					treat_input(t_sh *sh);
+int						check_dimentions(t_sh *sh);
 
 #endif

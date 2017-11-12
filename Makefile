@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/12 03:41:14 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/12 03:56:31 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
 main/main.c\
+line_edition/treat_input.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\
