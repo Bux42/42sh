@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 08:32:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 11:31:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,14 @@ void					check_endline(t_sh *sh);
 void					move_cursor(t_sh *sh, char c);
 void					move_left(t_sh *sh, t_inp **inp);
 void					move_right(t_sh *sh, t_inp **inp);
-void					custom_left(t_sh *sh);
-void					custom_right(t_sh *sh);
+int						custom_left(t_sh *sh);
+int						custom_right(t_sh *sh);
+
+int						is_space(char c);
+void					jump_words(t_sh *sh, char c);
+void					jump_left(t_sh *sh, t_inp **inp);
+void					jump_right(t_sh *sh, t_inp **inp);
+void					home_end(t_sh *sh, t_inp **inp, int active);
 
 t_inp					*new_inp(char c);
 void					inp_push_back(t_inp **inp, char c);

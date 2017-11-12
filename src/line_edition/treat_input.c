@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 09:46:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 11:45:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int			check_dimentions(t_sh *sh)
 				sh->posy = posat;
 		}
 	}
-	if (sh->width + 1 == sh->posy)
-		ft_putchar(' ');
 	return (1);
 }
 
@@ -78,10 +76,12 @@ void		treat_input(t_sh *sh)
 		sh->width = tgetnum("co");
 	else
 		return ;
-	if (!sh->buff[1])
+	if (!sh->buff[1] && sh->buff[0] != 9)
 		add_delete_letter(sh);
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
 		move_cursor(sh, sh->buff[2]);
+	if (sh->buff[0] == 27 && sh->buff[1] == 27 && sh->buff[2] == 91)
+		jump_words(sh, sh->buff[3]);
 	sh->pos_at = pos_at(&sh->inpl->inp, sh->prompt_len);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);

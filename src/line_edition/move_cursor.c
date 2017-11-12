@@ -6,22 +6,23 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 08:17:30 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 09:05:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 11:45:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void		custom_left(t_sh *sh)
+int			custom_left(t_sh *sh)
 {
 	if (sh->posy == 1)
 		sh->posy = sh->width;
 	else
 		sh->posy--;
 	ft_putstr(tgetstr("le", NULL));
+	return (1);
 }
 
-void		custom_right(t_sh *sh)
+int			custom_right(t_sh *sh)
 {
 	if (sh->posy == sh->width)
 	{
@@ -34,6 +35,7 @@ void		custom_right(t_sh *sh)
 		ft_putstr(tgetstr("nd", NULL));
 		sh->posy++;
 	}
+	return (1);
 }
 
 void		move_left(t_sh *sh, t_inp **inp)
@@ -101,4 +103,8 @@ void		move_cursor(t_sh *sh, char c)
 		move_left(sh, &sh->inpl->inp);
 	if (c == 67)
 		move_right(sh, &sh->inpl->inp);
+	if (c == 70)
+		home_end(sh, &sh->inpl->inp, 1);
+	if (c == 72)
+		home_end(sh, &sh->inpl->inp, 0);
 }
