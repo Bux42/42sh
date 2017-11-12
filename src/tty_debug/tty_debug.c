@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 07:53:11 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 08:44:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 			cp = cp->next;
 		}
 	}
+	ft_strcat(buff, "\n");
 	ft_strcat(buff, "\" > ");
 	ft_strcat(buff, sh->tty);
 	system(buff);

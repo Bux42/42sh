@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 07:08:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/12 08:32:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
 int						check_dimentions(t_sh *sh);
 void					check_endline(t_sh *sh);
+
+void					move_cursor(t_sh *sh, char c);
+void					move_left(t_sh *sh, t_inp **inp);
+void					move_right(t_sh *sh, t_inp **inp);
+void					custom_left(t_sh *sh);
+void					custom_right(t_sh *sh);
 
 t_inp					*new_inp(char c);
 void					inp_push_back(t_inp **inp, char c);
