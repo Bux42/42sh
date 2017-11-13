@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:31:34 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 07:06:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:22:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void		overwrite_deleted(t_sh *sh, t_inp **inp)
 		custom_left(sh);
 }
 
+void		delete_beginning(t_inp **inp, t_inp *cp)
+{
+	if (cp->next)
+	{
+		(*inp) = (*inp)->next;
+		(*inp)->previous = NULL;
+		(*inp)->pos = 2;
+		free(cp);
+	}
+	else
+	{
+		free((*inp));
+		(*inp) = NULL;
+	}
+}
+
 void		delete_letter(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
@@ -73,20 +89,7 @@ void		delete_letter(t_sh *sh, t_inp **inp)
 				free(cp);
 			}
 			else
-			{
-				if (cp->next)
-				{
-					(*inp) = (*inp)->next;
-					(*inp)->previous = NULL;
-					(*inp)->pos = 2;
-					free(cp);
-				}
-				else
-				{
-					free((*inp));
-					(*inp) = NULL;
-				}
-			}
+				delete_beginning(inp, cp);
 			overwrite_deleted(sh, inp);
 		}
 	}

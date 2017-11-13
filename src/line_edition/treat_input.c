@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 12:47:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:42:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void		treat_input(t_sh *sh)
 		move_cursor(sh, sh->buff[2]);
 	if (sh->buff[0] == 27 && sh->buff[1] == 27 && sh->buff[2] == 91)
 		jump_words(sh, sh->buff[3]);
+	if (sh->buff[3] == 126 && sh->buff[2] == 51)
+		delete_after(sh, &sh->inpl->inp);
 	sh->pos_at = pos_at(&sh->inpl->inp, sh->prompt_len);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);
