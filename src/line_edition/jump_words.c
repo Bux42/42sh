@@ -6,11 +6,27 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:55:17 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 11:35:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:00:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+t_inp		*get_to_pos(t_inp **inp)
+{
+	t_inp	*cp;
+
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			if (cp->pos)
+				return (cp);
+			cp = cp->next;
+		}
+	}
+	return (NULL);
+}
 
 int			is_space(char c)
 {
@@ -31,14 +47,8 @@ void		jump_left(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
-		{
-			if (cp->pos)
-				break ;
-			cp = cp->next;
-		}
 		if (cp->pos == 1 && !cp->previous && (cp->pos = 2))
 			custom_left(sh);
 		else if (cp->pos != 2)
@@ -62,14 +72,8 @@ void		jump_right(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
-		{
-			if (cp->pos)
-				break ;
-			cp = cp->next;
-		}
 		if (cp->pos == 2 && custom_right(sh))
 			cp->pos = 1;
 		if (cp->next)

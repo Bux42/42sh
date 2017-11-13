@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 11:27:36 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 12:05:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:02:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,8 @@ void		home_end(t_sh *sh, t_inp **inp, int active)
 {
 	t_inp	*cp;
 
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
-		{
-			if (cp->pos)
-				break ;
-			cp = cp->next;
-		}
 		if (active == 1)
 		{
 			if (cp->pos == 2)

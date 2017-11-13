@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:31:34 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 12:47:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:06:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,8 @@ void		overwrite_remaining(t_sh *sh, t_inp **inp)
 	int		nb;
 
 	nb = 0;
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
-		{
-			if (cp->pos)
-				break ;
-			cp = cp->next;
-		}
 		while (cp->next && (nb++ > -1))
 		{
 			ft_putchar(cp->next->c);
@@ -37,21 +31,39 @@ void		overwrite_remaining(t_sh *sh, t_inp **inp)
 	}
 }
 
+void		overwrite_deleted(t_sh *sh, t_inp **inp)
+{
+	t_inp	*cp;
+	int		dec;
+
+	dec = 0;
+	if ((cp = get_to_pos(inp)))
+	{
+		if (cp->pos == 2 && (dec++ > -1))
+			custom_right(sh);
+		while (cp->next && (dec++ > -1))
+		{
+			ft_putchar(cp->next->c);
+			check_endline(sh);
+			cp = cp->next;
+		}
+	}
+	ft_putchar(' ');
+	check_endline(sh);
+	custom_left(sh);
+	while (dec--)
+		custom_left(sh);
+}
+
 void		delete_letter(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 
-	sh->posy = sh->posy;
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
-		{
-			if (cp->pos)
-				break ;
-			cp = cp->next;
-		}
 		if (cp->pos == 1)
 		{
+			custom_left(sh);
 			if (cp->previous)
 			{
 				cp->previous->next = cp->next;
@@ -75,6 +87,7 @@ void		delete_letter(t_sh *sh, t_inp **inp)
 					(*inp) = NULL;
 				}
 			}
+			overwrite_deleted(sh, inp);
 		}
 	}
 }

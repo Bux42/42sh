@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 08:17:30 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 12:36:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 07:05:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,18 @@ void		move_left(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
+		if (cp->pos == 1)
 		{
-			if (cp->pos)
+			if (cp->previous)
 			{
-				if (cp->pos == 1)
-				{
-					if (cp->previous)
-					{
-						cp->pos = 0;
-						cp->previous->pos = 1;
-					}
-					else
-						cp->pos = 2;
-					custom_left(sh);
-				}
-				break;
+				cp->pos = 0;
+				cp->previous->pos = 1;
 			}
-			cp = cp->next;
+			else
+				cp->pos = 2;
+			custom_left(sh);
 		}
 	}
 }
@@ -70,29 +62,21 @@ void		move_right(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 
-	if ((cp = (*inp)))
+	if ((cp = get_to_pos(inp)))
 	{
-		while (cp)
+		if (cp->pos == 2)
 		{
-			if (cp->pos)
+			cp->pos = 1;
+			custom_right(sh);
+		}
+		else
+		{
+			if (cp->next)
 			{
-				if (cp->pos == 2)
-				{
-					cp->pos = 1;
-					custom_right(sh);
-				}
-				else
-				{
-					if (cp->next)
-					{
-						cp->pos = 0;
-						cp->next->pos = 1;
-						custom_right(sh);
-					}
-				}
-				break ;
+				cp->pos = 0;
+				cp->next->pos = 1;
+				custom_right(sh);
 			}
-			cp = cp->next;
 		}
 	}
 }
