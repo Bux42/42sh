@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 07:42:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/13 10:02:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,18 @@ int			check_dimentions(t_sh *sh)
 		{
 			if (posat > new_size)
 				sh->posy = posat % new_size;
+			if (sh->posy == 1)
+			{
+				ft_putchar(' ');
+				ft_putstr(tgetstr("le", NULL));
+			}
 		}
 		else
 		{
 			if (posat > new_size)
+			{
 				sh->posy = posat % new_size;
+			}
 			else
 				sh->posy = posat;
 		}
@@ -76,6 +83,8 @@ void		treat_input(t_sh *sh)
 		sh->width = tgetnum("co");
 	else
 		return ;
+	if (sh->tty)
+		tty_debug(sh, &sh->inpl->inp);
 	if (!sh->buff[1] && sh->buff[0] != 9)
 		add_delete_letter(sh);
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
