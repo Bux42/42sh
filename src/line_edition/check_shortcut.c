@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 13:12:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 13:39:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ void		free_list_from_here(t_inp *cp)
 
 void		free_list_from_beginning(t_inp **inp)
 {
-	if ((*inp)->next)
-		free_list_from_here((*inp)->next);
-	free(*inp);
-	(*inp) = NULL;
+	if (*inp)
+	{
+		if ((*inp)->next)
+			free_list_from_here((*inp)->next);
+		free(*inp);
+		(*inp) = NULL;
+	}
 }
 
 void		cut_after(t_sh *sh, t_inp **inp)
@@ -94,4 +97,14 @@ void		check_shortcut(t_sh *sh)
 		paste_after(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 23)
 		cut_before(sh, &sh->inpl->inp);
+	if (sh->buff[0] == 10)
+	{
+		ft_putstr(tgetstr("do", NULL));
+		ft_putstr(tgetstr("cr", NULL));
+		ft_putstr("Oui ya juste l'edition de ligne");
+		ft_putstr(tgetstr("do", NULL));
+		ft_putstr(tgetstr("cr", NULL));
+		free_list_from_beginning(&sh->inpl->inp);
+		print_prompt(sh);
+	}
 }
