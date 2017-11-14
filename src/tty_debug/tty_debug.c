@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 11:08:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 07:49:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	ft_strcat(buff, ft_itoa(sh->retval));
 	ft_strcat(buff, " pos_at: ");
 	ft_strcat(buff, ft_itoa(sh->pos_at));
+	if (sh->clipboard)
+	{
+		ft_strcat(buff, " Clipboard: ");
+		ft_strcat(buff, sh->clipboard);
+	}
 	ft_strcat(buff, "\n");itoa = ft_itoa(sh->buff[0]);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[1]);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " ");itoa = ft_itoa(sh->buff[2]);ft_strcat(buff, itoa);free(itoa);

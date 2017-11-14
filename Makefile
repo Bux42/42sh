@@ -6,14 +6,14 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/13 07:41:35 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/14 08:15:47 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -33,6 +33,7 @@ main/main.c\
 tty_debug/tty_debug.c\
 line_edition/treat_input.c\
 line_edition/add_delete_letter.c\
+line_edition/check_shortcut.c\
 line_edition/delete_after.c\
 line_edition/move_cursor.c\
 line_edition/jump_words.c\

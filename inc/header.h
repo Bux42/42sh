@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 07:41:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 08:45:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct			s_sh
 {
 	char				*tty;
 	char				*home_env;
+	char				*clipboard;
 	char				buff[6];
 	int					posy;
 	int					prompt_len;
@@ -107,6 +108,12 @@ void					insert_first(t_inp *first, t_inp *tmp, t_inp **inp);
 void					insert_beginning(t_inp *first, t_inp *tmp);
 
 t_inp					*get_to_pos(t_inp **inp);
+
+void					check_shortcut(t_sh *sh);
+void					cut_after(t_sh *sh, t_inp **inp);
+char					*get_clipboard(t_inp *inp, int *dec, t_sh *sh);
+void					free_list_from_here(t_inp *cp);
+void					free_list_from_beginning(t_inp **inp);
 
 /*						tty_debug										*/
 

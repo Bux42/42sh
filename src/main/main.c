@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 06:36:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 06:41:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			main(int ac, char **av, char **env)
 	signal_init();
 	sh->inpl->inp = NULL;
 	sh->inpl->next = NULL;
+	sh->clipboard = NULL;
 	while (ac > -1)
 		if (read(1, sh->buff, 5))
 			treat_input(sh);
