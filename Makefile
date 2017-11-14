@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/14 08:15:47 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/14 09:39:19 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ tty_debug/tty_debug.c\
 line_edition/treat_input.c\
 line_edition/add_delete_letter.c\
 line_edition/check_shortcut.c\
+line_edition/paste_after.c\
 line_edition/delete_after.c\
 line_edition/move_cursor.c\
 line_edition/jump_words.c\

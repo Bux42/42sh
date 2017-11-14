@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 07:49:36 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 09:50:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		tty_debug(t_sh *sh, t_inp **inp)
 {
-	char	buff[2048];
+	char	buff[20048];
 	char	inpbuff[2];
 	char	*itoa;
 	t_inp	*cp;

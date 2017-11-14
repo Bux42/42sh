@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 08:50:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 13:12:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void		cut_after(t_sh *sh, t_inp **inp)
 				sh->clipboard = get_clipboard(cp, &dec, sh);
 				free_list_from_beginning(inp);
 			}
-			sh->retval = dec;
 			while (dec--)
 				custom_left(sh);
 		}
@@ -91,4 +90,8 @@ void		check_shortcut(t_sh *sh)
 {
 	if (sh->buff[0] == 11)
 		cut_after(sh, &sh->inpl->inp);
+	if (sh->buff[0] == 16 && sh->clipboard)
+		paste_after(sh, &sh->inpl->inp);
+	if (sh->buff[0] == 23)
+		cut_before(sh, &sh->inpl->inp);
 }

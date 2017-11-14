@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 06:37:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/14 13:12:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		treat_input(t_sh *sh)
 		return ;
 	if (!sh->buff[1])
 	{
-		if (sh->buff[0] > 31 && sh->buff[0] < 127)
+		if (sh->buff[0] > 31 && sh->buff[0] <= 127)
 			add_delete_letter(sh);
 		else
 			check_shortcut(sh);
