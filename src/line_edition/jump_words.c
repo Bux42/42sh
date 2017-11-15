@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:55:17 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 07:29:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/15 13:25:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,12 @@ void		jump_right(t_sh *sh, t_inp **inp)
 
 void		jump_words(t_sh *sh, char c)
 {
-	if (c == 68)
-		jump_left(sh, &sh->inpl->inp);
+	if (c == 65)
+		jump_up(sh, &sh->inpl->inp);
+	if (c == 66)
+		jump_down(sh, &sh->inpl->inp);
 	if (c == 67)
 		jump_right(sh, &sh->inpl->inp);
+	if (c == 68)
+		jump_left(sh, &sh->inpl->inp);
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 13:39:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/15 09:50:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		cut_after(t_sh *sh, t_inp **inp)
 
 	if ((cp = get_to_pos(inp)))
 	{
-		if (cp->next)
+		if (cp->next || cp->pos == 2)
 		{
 			if (sh->clipboard)
 				free(sh->clipboard);

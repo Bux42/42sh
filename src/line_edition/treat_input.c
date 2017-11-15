@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 13:12:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/15 13:25:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		treat_input(t_sh *sh)
 		jump_words(sh, sh->buff[3]);
 	if (sh->buff[3] == 126 && sh->buff[2] == 51)
 		delete_after(sh, &sh->inpl->inp);
+	sh->inp_len = inp_list_len(&sh->inpl->inp);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);
 	ft_bzero(sh->buff, 6);

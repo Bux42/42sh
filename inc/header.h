@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 11:36:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/15 12:40:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct			s_sh
 	int					posy;
 	int					prompt_len;
 	int					pos_at;
+	int					inp_len;
 	int					width;
 	int					retval;
 	char				pwd[2048];
@@ -101,6 +102,9 @@ void					jump_left(t_sh *sh, t_inp **inp);
 void					jump_right(t_sh *sh, t_inp **inp);
 void					home_end(t_sh *sh, t_inp **inp, int active);
 
+void					jump_up(t_sh *sh, t_inp **inp);
+void					jump_down(t_sh *sh, t_inp **inp);
+
 t_inp					*new_inp(char c);
 void					inp_push_back(t_inp **inp, char c);
 void					insert_middle(t_inp *first, t_inp *tmp);
@@ -108,6 +112,8 @@ void					insert_first(t_inp *first, t_inp *tmp, t_inp **inp);
 void					insert_beginning(t_inp *first, t_inp *tmp);
 
 t_inp					*get_to_pos(t_inp **inp);
+int						pos_at(t_inp **inp, int len);
+int						inp_list_len(t_inp **inp);
 
 void					check_shortcut(t_sh *sh);
 void					cut_after(t_sh *sh, t_inp **inp);

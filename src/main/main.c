@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 09:50:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/15 09:44:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			main(int ac, char **av, char **env)
 	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
 	get_env(env, sh);
+	sh->retval = 0;
 	print_prompt(sh);
 	if (!init_term() || !get_tty(sh, av[1]))
 		return (0);
@@ -35,6 +36,7 @@ int			main(int ac, char **av, char **env)
 	sh->inpl->inp = NULL;
 	sh->inpl->next = NULL;
 	sh->clipboard = NULL;
+	ft_bzero(sh->buff, 6);
 	while (ac > -1)
 		if (read(1, sh->buff, 5))
 			treat_input(sh);

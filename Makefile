@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/14 09:39:19 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/15 10:16:10 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ line_edition/paste_after.c\
 line_edition/delete_after.c\
 line_edition/move_cursor.c\
 line_edition/jump_words.c\
+line_edition/jump_up_down.c\
 line_edition/home_end.c\
 line_edition/inp_list.c\
 signal/signal_event.c\
@@ -63,7 +64,7 @@ $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		$(LIBFT_LIB) \
 		$(FLAGS) $(D_FLAGS)
 	@strip -x $@
-	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
+	@printf "\r\033[48;5;15;38;5;25m✅  MAKE $(NAME)\033[0m\033[K\n"
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
@@ -92,7 +93,7 @@ cleanlib:
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
-	@printf "\r\033[38;5;196m❌ fclean $(NAME).\033[0m\033[K\n"
+	@printf "\r\033[38;5;196m ❌ fclean $(NAME).\033[0m\033[K\n"
 
 fcleanlib:		cleanlib
 	@make -C $(LIBFT_DIR) fclean
