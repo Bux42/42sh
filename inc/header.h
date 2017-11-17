@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/17 15:04:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/17 16:15:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,9 @@ void					history_push_front(t_his **history, t_inp *inp);
 t_his					*history_new(t_inp *inp);
 int						history_len(t_his **history);
 
-void					search_history(t_sh *sh, t_his **history);
+void					search_history_backward(t_sh *sh, t_his **history);
+void					search_history_forward(t_sh *sh, t_his **history);
+void					search_history_inp(t_sh *sh, t_inp **inp);
 
 /*						tty_debug										*/
 

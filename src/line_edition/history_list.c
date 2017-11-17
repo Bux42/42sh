@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/17 15:08:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/17 16:17:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void		history_push_front(t_his **history, t_inp *inp)
 	else
 	{
 		first = history_new(inp);
+		while ((*history)->previous)
+			(*history) = (*history)->previous;
 		(*history)->previous = first;
 		first->next = (*history);
 		(*history) = first;
@@ -82,6 +84,7 @@ void		search_history_inp(t_sh *sh, t_inp **inp)
 		{
 			ft_putchar(cp->c);
 			check_endline(sh);
+			inp_insert_posat(&sh->inpl->inp, cp->c);
 			cp = cp->next;
 			dec--;
 			diff--;
@@ -96,12 +99,13 @@ void		search_history_inp(t_sh *sh, t_inp **inp)
 	}
 }
 
-void		search_history(t_sh *sh, t_his **history)
+void		search_history_backward(t_sh *sh, t_his **history)
 {
 	if ((*history))
 	{
-		search_history_inp(sh, &(*history)->inp);
 		if ((*history)->next)
 			(*history) = (*history)->next;
+		free_list_from_beginning(&sh->inpl->inp);
+		search_history_inp(sh, &(*history)->inp);
 	}
 }
