@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:38:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 06:56:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/16 14:23:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		insert_beginning(t_inp *first, t_inp *tmp)
 	tmp->previous = first;
 }
 
-void		inp_push_back(t_inp **inp, char c)
+void		inp_insert_posat(t_inp **inp, char c)
 {
 	t_inp	*first;
 	t_inp	*tmp;

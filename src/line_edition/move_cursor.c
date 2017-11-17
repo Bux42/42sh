@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 08:17:30 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/13 07:05:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/16 16:54:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,6 @@ void		move_cursor(t_sh *sh, char c)
 		home_end(sh, &sh->inpl->inp, 1);
 	if (c == 72)
 		home_end(sh, &sh->inpl->inp, 0);
+	if (c == 65)
+		search_history(sh, &sh->history);
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/14 13:32:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/16 14:23:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		paste_after(t_sh *sh, t_inp **inp)
 	{
 		ft_putchar(sh->clipboard[i]);
 		check_endline(sh);
-		inp_push_back(inp, sh->clipboard[i]);
+		inp_insert_posat(inp, sh->clipboard[i]);
 	}
 	if (i > 0)
 		overwrite_remaining(sh, inp);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/15 12:40:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:04:27 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef struct			s_inpl
 	struct s_inpl		*next;
 }						t_inpl;
 
+typedef struct			s_his
+{
+	struct s_inp		*inp;
+	struct s_his		*next;
+	struct s_his		*previous;
+}						t_his;
+
 typedef struct			s_sh
 {
 	char				*tty;
@@ -49,11 +56,14 @@ typedef struct			s_sh
 	int					prompt_len;
 	int					pos_at;
 	int					inp_len;
+	int					history_len;
+	struct s_his		*history_pos;
 	int					width;
 	int					retval;
 	char				pwd[2048];
 	struct s_env		*env;
 	struct s_inpl		*inpl;
+	struct s_his		*history;
 }						t_sh;
 
 /*						initialize_term									*/
@@ -106,7 +116,7 @@ void					jump_up(t_sh *sh, t_inp **inp);
 void					jump_down(t_sh *sh, t_inp **inp);
 
 t_inp					*new_inp(char c);
-void					inp_push_back(t_inp **inp, char c);
+void					inp_insert_posat(t_inp **inp, char c);
 void					insert_middle(t_inp *first, t_inp *tmp);
 void					insert_first(t_inp *first, t_inp *tmp, t_inp **inp);
 void					insert_beginning(t_inp *first, t_inp *tmp);
@@ -125,6 +135,12 @@ void					free_list_from_beginning(t_inp **inp);
 void					free_list_before(t_inp *cp);
 
 void					paste_after(t_sh *sh, t_inp **inp);
+
+void					history_push_front(t_his **history, t_inp *inp);
+t_his					*history_new(t_inp *inp);
+int						history_len(t_his **history);
+
+void					search_history(t_sh *sh, t_his **history);
 
 /*						tty_debug										*/
 

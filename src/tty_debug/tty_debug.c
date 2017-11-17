@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/15 12:42:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/17 10:30:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	ft_strcat(buff, ft_itoa(sh->pos_at));
 	ft_strcat(buff, " inp_len: ");
 	ft_strcat(buff, ft_itoa(sh->inp_len));
+	ft_strcat(buff, " history_len: ");
+	ft_strcat(buff, ft_itoa(sh->history_len));
+	ft_strcat(buff, " history_pos: ");
 	if (sh->clipboard)
 	{
 		ft_strcat(buff, " Clipboard: ");

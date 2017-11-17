@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/15 09:50:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:04:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,12 @@ void		check_shortcut(t_sh *sh)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cr", NULL));
-		ft_putstr("Oui ya juste l'edition de ligne");
+		if (sh->inpl->inp)
+			history_push_front(&sh->history, sh->inpl->inp);
+		sh->history_len = history_len(&sh->history);
+		free_list_from_beginning(&sh->inpl->inp);
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cr", NULL));
-		free_list_from_beginning(&sh->inpl->inp);
 		print_prompt(sh);
 	}
 }
