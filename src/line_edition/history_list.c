@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/17 16:37:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/18 17:01:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void		search_history_inp(t_sh *sh, t_inp **inp)
 	if ((cp = (*inp)))
 	{
 		home_end(sh, &sh->inpl->inp, 1);
-		diff = sh->posy - sh->prompt_len;
-		while (sh->posy > sh->prompt_len)
+		diff = sh->pos_at - sh->prompt_len;
+		while (sh->pos_at-- > sh->prompt_len)
 		{
 			custom_left(sh);
 			dec++;
@@ -106,11 +106,10 @@ void		search_history_backward(t_sh *sh, t_his **history)
 	{
 		if (sh->inpl->inp)
 		{
+			free_list_from_beginning(&sh->inpl->inp);
 			if ((*history)->next)
 				(*history) = (*history)->next;
 		}
-		else
-			free_list_from_beginning(&sh->inpl->inp);
 		search_history_inp(sh, &(*history)->inp);
 	}
 }
