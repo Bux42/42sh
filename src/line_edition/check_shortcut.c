@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 17:03:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 20:35:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void		check_shortcut(t_sh *sh)
 		paste_after(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 23)
 		cut_before(sh, &sh->inpl->inp);
+	if (sh->buff[0] == 9)
+		insert_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 10)
 	{
 		ft_putstr(tgetstr("do", NULL));

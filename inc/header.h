@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 17:00:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 20:30:43 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <sys/stat.h>
+# include <dirent.h>
 # include "../libft/includes/libft.h"
 
 typedef struct			s_env
@@ -51,6 +52,8 @@ typedef struct			s_sh
 	char				*tty;
 	char				*home_env;
 	char				*clipboard;
+	char				*comp_debug;
+	char				*comp_remain;
 	char				buff[6];
 	int					fd;
 	int					posy;
@@ -149,6 +152,13 @@ void					free_list_clear_line(t_sh *sh, t_inp **inp);
 char					*inp_to_char(t_inp **inp, t_sh *sh);
 void					restaure_history_from_file(t_sh *sh);
 int						check_empty_line(t_inp **inp);
+
+/*						auto_completion									*/
+
+void					autocompletion(t_inp **inp, t_sh *sh);
+void					print_completiong(t_sh *sh);
+void					insert_completion(t_sh *sh, t_inp **inp);
+char					*get_left_word(t_inp *cp);
 
 /*						tty_debug										*/
 

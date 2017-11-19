@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/16 16:43:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 20:29:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		treat_input(t_sh *sh)
 	if (sh->buff[3] == 126 && sh->buff[2] == 51)
 		delete_after(sh, &sh->inpl->inp);
 	sh->inp_len = inp_list_len(&sh->inpl->inp);
+	autocompletion(&sh->inpl->inp, sh);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);
 	ft_bzero(sh->buff, 6);
