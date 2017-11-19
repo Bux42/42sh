@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/18 16:57:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 16:08:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct			s_sh
 	char				*home_env;
 	char				*clipboard;
 	char				buff[6];
+	int					fd;
 	int					posy;
 	int					prompt_len;
 	int					pos_at;
@@ -144,6 +145,9 @@ void					search_history_backward(t_sh *sh, t_his **history);
 void					search_history_forward(t_sh *sh, t_his **history);
 void					search_history_inp(t_sh *sh, t_inp **inp);
 void					free_list_clear_line(t_sh *sh, t_inp **inp);
+
+char					*inp_to_char(t_inp **inp, t_sh *sh);
+void					restaure_history_from_file(t_sh *sh);
 
 /*						tty_debug										*/
 

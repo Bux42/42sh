@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/18 15:31:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 16:24:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ int			main(int ac, char **av, char **env)
 		return (0);
 	if (!(sh->history = (t_his*)malloc(sizeof(t_his))))
 		return (0);
+	if (!(sh->fd = open("./.history", O_CREAT | O_RDWR)))
+		return (0);
+	if (fchmod(sh->fd, 00777) == -1)
+		return (0);
 	get_env(env, sh);
+	sh->history = NULL;
+	restaure_history_from_file(sh);
 	sh->retval = 0;
 	print_prompt(sh);
 	if (!init_term() || !get_tty(sh, av[1]))
@@ -38,7 +44,6 @@ int			main(int ac, char **av, char **env)
 	sh->inpl->inp = NULL;
 	sh->inpl->next = NULL;
 	sh->clipboard = NULL;
-	sh->history = NULL;
 	sh->history_pos = NULL;
 	sh->history_len = 0;
 	ft_bzero(sh->buff, 6);

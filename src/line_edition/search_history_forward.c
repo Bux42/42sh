@@ -6,11 +6,31 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/18 17:01:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 16:19:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		restaure_history_from_file(t_sh *sh)
+{
+	char	*str;
+	int		i;
+	t_inp	*inp;
+
+	inp = NULL;
+	while (get_next_line(sh->fd, &str))
+	{
+		i = -1;
+		while (str[++i])
+		{
+			inp_insert_posat(&inp, str[i]);
+		}
+		history_push_front(&sh->history, inp);
+		free_list_from_beginning(&inp);
+		free(str);
+	}
+}
 
 void		free_list_clear_line(t_sh *sh, t_inp **inp)
 {

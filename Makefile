@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/17 15:31:51 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/19 15:55:41 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ line_edition/jump_up_down.c\
 line_edition/home_end.c\
 line_edition/inp_list.c\
 line_edition/history_list.c\
+line_edition/list_to_char.c\
 line_edition/search_history_forward.c\
 signal/signal_event.c\
 launch_term/init_term.c\
