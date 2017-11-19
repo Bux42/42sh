@@ -6,11 +6,29 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 16:19:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 17:03:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int			check_empty_line(t_inp **inp)
+{
+	t_inp	*cp;
+	int		letters;
+
+	letters = 0;
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			if (cp->c > 32 && cp->c < 127)
+				letters++;
+			cp = cp->next;
+		}
+	}
+	return (letters);
+}
 
 void		restaure_history_from_file(t_sh *sh)
 {
@@ -22,11 +40,10 @@ void		restaure_history_from_file(t_sh *sh)
 	while (get_next_line(sh->fd, &str))
 	{
 		i = -1;
-		while (str[++i])
-		{
+		while (str[++i] && str[i] > 32 && str[i] < 127)
 			inp_insert_posat(&inp, str[i]);
-		}
-		history_push_front(&sh->history, inp);
+		if (inp)
+			history_push_front(&sh->history, inp);
 		free_list_from_beginning(&inp);
 		free(str);
 	}

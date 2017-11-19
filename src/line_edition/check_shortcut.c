@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 16:24:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 17:03:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void		check_shortcut(t_sh *sh)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cr", NULL));
-		if (sh->inpl->inp)
+		if (sh->inpl->inp && check_empty_line(&sh->inpl->inp))
 		{
 			ft_putendl_fd(inp_to_char(&sh->inpl->inp, sh), sh->fd);
 			history_push_front(&sh->history, sh->inpl->inp);

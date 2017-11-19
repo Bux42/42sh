@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 16:08:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/19 17:00:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void					free_list_clear_line(t_sh *sh, t_inp **inp);
 
 char					*inp_to_char(t_inp **inp, t_sh *sh);
 void					restaure_history_from_file(t_sh *sh);
+int						check_empty_line(t_inp **inp);
 
 /*						tty_debug										*/
 
