@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 20:35:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 20:43:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void		print_completion(t_sh *sh)
 			}
 			if (decp)
 				sh->comp_remain = ft_strdup(&fl->d_name[ft_strlen(sh->comp_debug)]);
+			write(1, "\x1b[0m", 5);
+			overwrite_remaining(sh, &sh->inpl->inp);
+			write(1, "\e[2m", 5);
 			while (decp--)
 				custom_left(sh);
 			write(1, "\x1b[0m", 5);
@@ -105,12 +108,43 @@ void		print_completion(t_sh *sh)
 	sh->comp_remain = NULL;
 }
 
+void		erase_completion(t_sh *sh, t_inp **inp)
+{
+	int		i;
+	int		j;
+	int		len;
+	t_inp	*cp;
+
+	len = 1;
+	if ((cp = get_to_pos(inp)))
+	{
+		while (cp->next)
+		{
+			cp = cp->next;
+			len++;
+		}
+	}
+	if (sh->comp_remain)
+	{
+		i = ft_strlen(sh->comp_remain) + len;
+		j = i;
+		while (i--)
+		{
+			ft_putchar(' ');
+			check_endline(sh);
+		}
+		while (j--)
+			custom_left(sh);
+		overwrite_remaining(sh, &sh->inpl->inp);
+		free(sh->comp_remain);
+		sh->comp_remain = NULL;
+	}
+}
+
 void		autocompletion(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
 
-	sh->posy++;
-	sh->posy--;
 	if ((cp = get_to_pos(inp)))
 	{
 		if (!cp->next || is_space(cp->next->c))
@@ -125,6 +159,10 @@ void		autocompletion(t_inp **inp, t_sh *sh)
 				if ((sh->comp_debug = get_left_word(cp)))
 					print_completion(sh);
 			}
+			else
+				erase_completion(sh, &sh->inpl->inp);
 		}
 	}
+	else
+		erase_completion(sh, &sh->inpl->inp);
 }

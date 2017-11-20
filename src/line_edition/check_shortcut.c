@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 20:35:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:32:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void		cut_after(t_sh *sh, t_inp **inp)
 
 void		check_shortcut(t_sh *sh)
 {
+	if (sh->buff[0] != 9)
+		erase_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 11)
 		cut_after(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 16 && sh->clipboard)

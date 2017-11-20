@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 20:30:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:30:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int						check_empty_line(t_inp **inp);
 void					autocompletion(t_inp **inp, t_sh *sh);
 void					print_completiong(t_sh *sh);
 void					insert_completion(t_sh *sh, t_inp **inp);
+void					erase_completion(t_sh *sh, t_inp **inp);
 char					*get_left_word(t_inp *cp);
 
 /*						tty_debug										*/

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 20:29:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 20:43:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void		treat_input(t_sh *sh)
 	if (!sh->buff[1])
 	{
 		if (sh->buff[0] > 31 && sh->buff[0] <= 127)
+		{
 			add_delete_letter(sh);
+			autocompletion(&sh->inpl->inp, sh);
+		}
 		else
 			check_shortcut(sh);
 	}
@@ -92,9 +95,11 @@ void		treat_input(t_sh *sh)
 	if (sh->buff[0] == 27 && sh->buff[1] == 27 && sh->buff[2] == 91)
 		jump_words(sh, sh->buff[3]);
 	if (sh->buff[3] == 126 && sh->buff[2] == 51)
+	{
 		delete_after(sh, &sh->inpl->inp);
+		autocompletion(&sh->inpl->inp, sh);
+	}
 	sh->inp_len = inp_list_len(&sh->inpl->inp);
-	autocompletion(&sh->inpl->inp, sh);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);
 	ft_bzero(sh->buff, 6);

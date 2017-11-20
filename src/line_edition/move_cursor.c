@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 08:17:30 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/18 17:01:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:25:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		move_right(t_sh *sh, t_inp **inp)
 
 void		move_cursor(t_sh *sh, char c)
 {
+	erase_completion(sh, &sh->inpl->inp);
 	if (c == 68)
 		move_left(sh, &sh->inpl->inp);
 	if (c == 67)

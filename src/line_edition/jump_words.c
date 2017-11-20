@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:55:17 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/15 13:25:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:25:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		jump_right(t_sh *sh, t_inp **inp)
 
 void		jump_words(t_sh *sh, char c)
 {
+	erase_completion(sh, &sh->inpl->inp);
 	if (c == 65)
 		jump_up(sh, &sh->inpl->inp);
 	if (c == 66)
