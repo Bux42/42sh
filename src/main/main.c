@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/19 20:19:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/22 18:04:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			main(int ac, char **av, char **env)
 	sh->history_len = 0;
 	sh->comp_debug = NULL;
 	sh->comp_remain = NULL;
+	sh->comp_path = NULL;
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
 		if (read(1, sh->buff, 5))

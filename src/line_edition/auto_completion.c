@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/20 20:43:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/22 19:28:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,76 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 	}
 }
 
-char		*get_left_word(t_inp *cp)
+char		*get_comp_path(t_sh *sh, t_inp *cp)
+{
+	char	*ret;
+	char	*home;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	home = NULL;
+	while (cp)
+	{
+		if (cp->c == '~')
+		{
+			if (cp->next && cp->next->c == '/')
+			{
+				if ((home = get_specific_env("HOME=", &sh->env)))
+					len += ft_strlen(home) - 2;
+			}
+		}
+		if (!cp->previous || is_space(cp->previous->c))
+			break ;
+		len++;
+		cp = cp->previous;
+	}
+	sh->retval = len;
+	if (!(ret = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	ret[len] = '\0';
+	if (home)
+	{
+		cp = cp->next;
+		while (i < (int)ft_strlen(home))
+		{
+			ret[i] = home[i];
+			i++;
+		}
+	}
+	while (i < len)
+	{
+		ret[i++] = cp->c;
+		if (cp->next)
+			cp = cp->next;
+		else
+			break ;
+	}
+	return (ret);
+}
+
+char		*get_left_word(t_inp *cp, t_sh *sh)
 {
 	char	*ret;
 	int		i;
+	int		slash;
 
 	i = 1;
+	slash = 0;
 	while (cp->previous && !is_space(cp->previous->c))
 	{
+		if (cp->previous->c == '/' && (slash++) > -1)
+			break ;
 		i++;
 		cp = cp->previous;
 	}
 	if (!(ret = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
+	if (slash)
+		sh->comp_path = get_comp_path(sh, cp);
+	else
+		sh->comp_path = ft_strdup("./");
 	ret[i] = '\0';
 	i = 0;
 	while (cp && !is_space(cp->c))
@@ -63,8 +120,9 @@ void		print_completion(t_sh *sh)
 	int				dec;
 	int				decp;
 
-	if (!(od = opendir("./")))
+	if (!(od = opendir(sh->comp_path)))
 		return ;
+	//free(sh->comp_path);
 	while ((fl = readdir(od)))
 	{
 		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug)) == 0)
@@ -95,6 +153,7 @@ void		print_completion(t_sh *sh)
 			return ;
 		}
 	}
+	closedir(od);
 	dec = ft_strlen(sh->comp_remain);
 	decp = dec;
 	while (dec--)
@@ -156,7 +215,7 @@ void		autocompletion(t_inp **inp, t_sh *sh)
 					free(sh->comp_debug);
 					sh->comp_debug = NULL;
 				}
-				if ((sh->comp_debug = get_left_word(cp)))
+				if ((sh->comp_debug = get_left_word(cp, sh)))
 					print_completion(sh);
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/20 19:15:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/22 18:05:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	ft_strcat(buff, " remain: ");
 	if (sh->comp_remain)
 		ft_strcat(buff, sh->comp_remain);
+	else
+		ft_strcat(buff, "NULL");
+	ft_strcat(buff, " path: ");
+	if (sh->comp_path)
+		ft_strcat(buff, sh->comp_path);
 	else
 		ft_strcat(buff, "NULL");
 	if (sh->clipboard)
