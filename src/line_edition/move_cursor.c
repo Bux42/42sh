@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 08:17:30 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/24 23:04:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 06:00:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void		move_right(t_sh *sh, t_inp **inp)
 	}
 }
 
-void		move_cursor(t_sh *sh, char c)
+void		move_cursor(t_sh *sh, t_inp **inp, char c)
 {
+	t_inp	*cp;
+
 	erase_completion(sh, &sh->inpl->inp);
 	if (c == 68)
 		move_left(sh, &sh->inpl->inp);
@@ -93,7 +95,8 @@ void		move_cursor(t_sh *sh, char c)
 	if (c == 72)
 		home_end(sh, &sh->inpl->inp, 0);
 	if (c == 65)
-		search_history_backward(sh, &sh->history);
+		if (!(cp = get_to_pos(inp)) || !cp->next)
+			search_history_backward(sh, &sh->history);
 	if (c == 66)
 		search_history_forward(sh, &sh->history);
 }

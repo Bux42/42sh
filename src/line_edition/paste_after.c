@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 03:12:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 05:50:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ void		update_cut_before(int dec, t_inp **inp, t_sh *sh)
 		}
 	}
 	decp = dec;
-	while (dec--)
-	{
-		ft_putchar(' ');
-		check_endline(sh);
-	}
+	print_spaces(dec, sh);
 	while (decp--)
 		custom_left(sh);
 	while (remaining--)

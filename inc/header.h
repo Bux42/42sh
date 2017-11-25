@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 03:48:36 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 06:25:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void					overwrite_deleted(t_sh *sh, t_inp **inp);
 int						check_dimentions(t_sh *sh);
 void					check_endline(t_sh *sh);
 
-void					move_cursor(t_sh *sh, char c);
+void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);
 void					move_right(t_sh *sh, t_inp **inp);
 int						custom_left(t_sh *sh);
@@ -149,7 +149,7 @@ int						history_len(t_his **history);
 void					search_history_backward(t_sh *sh, t_his **history);
 void					search_history_forward(t_sh *sh, t_his **history);
 void					search_history_inp(t_sh *sh, t_inp **inp);
-void					free_list_clear_line(t_sh *sh, t_inp **inp);
+void					clear_line(t_sh *sh, t_inp **inp);
 
 char					*inp_to_char(t_inp **inp, t_sh *sh);
 void					restaure_history_from_file(t_sh *sh);
@@ -164,6 +164,7 @@ void					erase_completion(t_sh *sh, t_inp **inp);
 char					*get_left_word(t_inp *cp, t_sh *sh);
 void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
 void					free_comp(int i, t_sh *sh);
+void					print_spaces(int nb, t_sh *sh);
 
 /*						tty_debug										*/
 

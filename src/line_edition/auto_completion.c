@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 05:29:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 05:48:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,13 +171,8 @@ void		print_completion(t_sh *sh, t_inp **inp)
 				check_endline(sh);
 				cp = cp->next;
 			}
-			while (over > 0)
-			{
-				ft_putchar(' ');
-				check_endline(sh);
-				dec++;
-				over--;
-			}
+			print_spaces(over, sh);
+			dec += over;
 			while (dec--)
 				custom_left(sh);
 			closedir(od);
@@ -189,11 +184,7 @@ void		print_completion(t_sh *sh, t_inp **inp)
 		dec = ft_strlen(sh->comp_remain) - 1;
 		dec += inp_list_len(&cp);
 		ret = dec;
-		while (dec--)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-		}
+		print_spaces(dec, sh);
 		while (ret--)
 			custom_left(sh);
 		ret = 0;
@@ -234,11 +225,7 @@ void		erase_completion(t_sh *sh, t_inp **inp)
 	dec += ft_strlen(sh->comp_remain);
 	free_comp(1, sh);
 	decp = dec;
-	while (dec--)
-	{
-		ft_putchar(' ');
-		check_endline(sh);
-	}
+	print_spaces(dec, sh);
 	while (decp--)
 		custom_left(sh);
 	overwrite_remaining(sh, inp);
@@ -290,11 +277,7 @@ void		autocompletion(t_inp **inp, t_sh *sh)
 			cp = cp->next;
 		}
 		decp = dec;
-		while (dec--)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-		}
+		print_spaces(dec, sh);
 		decp += decpp;
 		while (decp--)
 			custom_left(sh);

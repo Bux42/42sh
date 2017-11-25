@@ -6,11 +6,26 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:22:25 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 00:59:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 05:46:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		print_spaces(int nb, t_sh *sh)
+{
+	char	buff[nb + 1];
+	int		cp;
+
+	buff[nb] = '\0';
+	cp = nb;
+	while (nb-- > 0)
+	{
+		check_endline(sh);
+		buff[nb] = ' ';
+	}
+	write(1, buff, cp);
+}
 
 void		free_comp(int i, t_sh *sh)
 {
@@ -55,11 +70,7 @@ void		overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i)
 			cp = cp->next;
 		}
 		nb += i;
-		while (i--)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-		}
+		print_spaces(i, sh);
 		while (nb--)
 			custom_left(sh);
 	}

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 04:00:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 05:59:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		treat_input(t_sh *sh)
 			check_shortcut(sh);
 	}
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
-		move_cursor(sh, sh->buff[2]);
+		move_cursor(sh, &sh->inpl->inp, sh->buff[2]);
 	if (sh->buff[0] == 27 && sh->buff[1] == 27 && sh->buff[2] == 91)
 		jump_words(sh, sh->buff[3]);
 	if (sh->buff[3] == 126 && sh->buff[2] == 51)

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/24 23:07:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 06:51:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		restaure_history_from_file(t_sh *sh)
 	while (get_next_line(sh->fd, &str))
 	{
 		i = -1;
-		while (str[++i] && str[i] > 32 && str[i] < 127)
+		while (str[++i] && str[i] > 31 && str[i] < 127)
 			inp_insert_posat(&inp, str[i]);
 		if (inp)
 			history_push_front(&sh->history, inp);
@@ -49,11 +49,30 @@ void		restaure_history_from_file(t_sh *sh)
 	}
 }
 
-void		free_list_clear_line(t_sh *sh, t_inp **inp)
+void		clear_line(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 	int		dec;
-	int		decp;
+
+	home_end(sh, inp, 0);
+	if ((cp = (*inp)))
+	{
+		dec = 0;
+		while (cp)
+		{
+			dec++;
+			cp = cp->next;
+		}
+		print_spaces(dec, sh);
+		while (dec--)
+			custom_left(sh);
+	}
+}
+
+void		clear_after_pos(t_sh *sh, t_inp **inp)
+{
+	t_inp	*cp;
+	int		dec;
 
 	if ((cp = get_to_pos(inp)))
 	{
@@ -61,16 +80,10 @@ void		free_list_clear_line(t_sh *sh, t_inp **inp)
 		while (cp)
 		{
 			dec++;
-			custom_left(sh);
-			cp = cp->previous;
+			cp = cp->next;
 		}
-		decp = dec;
+		print_spaces(dec, sh);
 		while (dec--)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-		}
-		while (decp--)
 			custom_left(sh);
 	}
 }
@@ -81,6 +94,7 @@ void		search_history_forward(t_sh *sh, t_his **history)
 	{
 		if ((*history)->previous)
 		{
+			clear_after_pos(sh, &sh->inpl->inp);
 			if (sh->inpl->inp)
 				free_list_from_beginning(&sh->inpl->inp);
 			(*history) = (*history)->previous;
@@ -88,7 +102,7 @@ void		search_history_forward(t_sh *sh, t_his **history)
 		}
 		else
 		{
-			free_list_clear_line(sh, &sh->inpl->inp);
+			clear_line(sh, &sh->inpl->inp);
 			free_list_from_beginning(&sh->inpl->inp);
 		}
 	}
