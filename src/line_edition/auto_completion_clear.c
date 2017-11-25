@@ -6,11 +6,42 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:22:25 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 05:46:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 09:39:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		rewrite_beginning(t_sh *sh, t_inp *cp)
+{
+	int		dec1;
+	int		dec2;
+
+	dec1 = ft_strlen(sh->comp_remain) + 1;
+	dec2 = 0;
+	while (cp)
+	{
+		ft_putchar(cp->c);
+		check_endline(sh);
+		dec1++;
+		dec2++;
+		cp = cp->next;
+	}
+	print_spaces(dec1, sh);
+	dec1 += dec2;
+	while (dec1--)
+		custom_left(sh);
+	free_comp(3, sh);
+}
+
+void		free_null(char **str)
+{
+	if ((*str))
+	{
+		free((*str));
+		(*str) = NULL;
+	}
+}
 
 void		print_spaces(int nb, t_sh *sh)
 {
@@ -29,30 +60,14 @@ void		print_spaces(int nb, t_sh *sh)
 
 void		free_comp(int i, t_sh *sh)
 {
+	if (i & 8)
+		erase_completion(sh, &sh->inpl->inp);
 	if (i & 1)
-	{
-		if (sh->comp_remain)
-		{
-			free(sh->comp_remain);
-			sh->comp_remain = NULL;
-		}
-	}
+		free_null(&sh->comp_remain);
 	if (i & 2)
-	{
-		if (sh->comp_debug)
-		{
-			free(sh->comp_debug);
-			sh->comp_debug = NULL;
-		}
-	}
+		free_null(&sh->comp_debug);
 	if (i & 4)
-	{
-		if (sh->comp_path)
-		{
-			free(sh->comp_path);
-			sh->comp_path = NULL;
-		}
-	}
+		free_null(&sh->comp_path);
 }
 
 void		overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i)

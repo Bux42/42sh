@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 05:48:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 09:39:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char		*get_left_word(t_inp *cp, t_sh *sh)
 
 	i = 1;
 	slash = 0;
+	free_comp(6, sh);
 	while (cp->previous && !is_space(cp->previous->c))
 	{
 		if (cp->previous->c == '/' && (slash++) > -1)
@@ -150,7 +151,6 @@ void		print_completion(t_sh *sh, t_inp **inp)
 		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug)) == 0)
 		{
 			over = get_diff(fl->d_name, sh);
-			sh->retval = over;
 			if (ft_strlen(sh->comp_debug) == ft_strlen(fl->d_name))
 			{
 				free_comp(3, sh);
@@ -200,16 +200,12 @@ void		print_completion(t_sh *sh, t_inp **inp)
 		free_comp(1, sh);
 	}
 	closedir(od);
-	/*overwrite_remaining_comp(sh, &sh->inpl->inp, ft_strlen(sh->comp_remain));
-	free(sh->comp_remain);
-	sh->comp_remain = NULL;
-*/}
+}
 
 void		erase_completion(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 	int		dec;
-	int		decp;
 
 	if (!sh->comp_remain)
 		return ;
@@ -224,9 +220,8 @@ void		erase_completion(t_sh *sh, t_inp **inp)
 	}
 	dec += ft_strlen(sh->comp_remain);
 	free_comp(1, sh);
-	decp = dec;
 	print_spaces(dec, sh);
-	while (decp--)
+	while (dec--)
 		custom_left(sh);
 	overwrite_remaining(sh, inp);
 }
@@ -234,9 +229,6 @@ void		erase_completion(t_sh *sh, t_inp **inp)
 void		autocompletion(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
-	int		dec;
-	int		decp;
-	int		decpp;
 
 	if ((cp = get_to_pos(inp)) && cp->pos != 2)
 	{
@@ -250,37 +242,14 @@ void		autocompletion(t_inp **inp, t_sh *sh)
 						print_completion(sh, &sh->inpl->inp);
 				}
 				else
-				{
-					erase_completion(sh, &sh->inpl->inp);
-					free_comp(3, sh);
-				}
+					free_comp(11, sh);
 			}
 			else
-			{
-				erase_completion(sh, &sh->inpl->inp);
-				free_comp(3, sh);
-			}
+				free_comp(11, sh);
 		}
 		else
 			free_comp(3, sh);
 	}
 	else
-	{
-		dec = ft_strlen(sh->comp_remain) + 1;
-		decpp = 0;
-		while (cp)
-		{
-			ft_putchar(cp->c);
-			check_endline(sh);
-			decpp++;
-			dec++;
-			cp = cp->next;
-		}
-		decp = dec;
-		print_spaces(dec, sh);
-		decp += decpp;
-		while (decp--)
-			custom_left(sh);
-		free_comp(3, sh);
-	}
+		rewrite_beginning(sh, cp);
 }

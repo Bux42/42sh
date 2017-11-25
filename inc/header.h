@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 06:25:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 08:59:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void					prompt_colors(int i);
 
 /*						line_edition									*/
 
+void					free_null(char **str);
+
 void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
 void					delete_letter(t_sh *sh, t_inp **inp);
@@ -165,6 +167,7 @@ char					*get_left_word(t_inp *cp, t_sh *sh);
 void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
 void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
+void					rewrite_beginning(t_sh *sh, t_inp *cp);
 
 /*						tty_debug										*/
 
