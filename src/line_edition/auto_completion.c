@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 04:51:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 05:29:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,18 @@ char		*get_left_word(t_inp *cp, t_sh *sh)
 int			get_diff(char *fl, t_sh *sh)
 {
 	int		new_len;
+	int		ret;
 
 	new_len = ft_strlen(sh->comp_debug);
 	new_len += ft_strlen(&fl[ft_strlen(sh->comp_debug)]);
 	if (new_len < sh->old_len)
 	{
-		sh->retval = sh->old_len - new_len;
+		ret = sh->old_len;
 		sh->old_len = new_len;
-		return (sh->old_len - new_len);
+		return (ret - new_len);
 	}
 	else
-	{
-		sh->retval = sh->old_len - new_len;
 		sh->old_len = new_len;
-	}
 	return (0);
 }
 
@@ -152,6 +150,7 @@ void		print_completion(t_sh *sh, t_inp **inp)
 		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug)) == 0)
 		{
 			over = get_diff(fl->d_name, sh);
+			sh->retval = over;
 			if (ft_strlen(sh->comp_debug) == ft_strlen(fl->d_name))
 			{
 				free_comp(3, sh);
@@ -172,7 +171,7 @@ void		print_completion(t_sh *sh, t_inp **inp)
 				check_endline(sh);
 				cp = cp->next;
 			}
-			while (over > -1)
+			while (over > 0)
 			{
 				ft_putchar(' ');
 				check_endline(sh);
