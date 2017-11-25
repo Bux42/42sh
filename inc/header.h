@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/20 20:59:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 03:48:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct			s_sh
 	char				*comp_debug;
 	char				*comp_remain;
 	char				*comp_path;
+	int					old_len;
 	char				buff[6];
 	int					fd;
 	int					posy;
@@ -157,10 +158,12 @@ int						check_empty_line(t_inp **inp);
 /*						auto_completion									*/
 
 void					autocompletion(t_inp **inp, t_sh *sh);
-void					print_completiong(t_sh *sh);
+void					print_completiong(t_sh *sh, t_inp **inp);
 void					insert_completion(t_sh *sh, t_inp **inp);
 void					erase_completion(t_sh *sh, t_inp **inp);
 char					*get_left_word(t_inp *cp, t_sh *sh);
+void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
+void					free_comp(int i, t_sh *sh);
 
 /*						tty_debug										*/
 

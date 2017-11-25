@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/16 14:23:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 03:12:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char		*get_clipboard_before(t_inp *inp, int *dec, t_sh *sh)
 		else
 			break ;
 	}
-	sh->retval = (*dec);
 	if (!(ret = (char*)malloc(sizeof(char) * (*dec) + 1)))
 		return (NULL);
 	ret[(*dec)] = '\0';

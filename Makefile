@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/11/19 20:23:31 by videsvau         ###   ########.fr        #
+#    Updated: 2017/11/23 22:23:32 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ line_edition/history_list.c\
 line_edition/list_to_char.c\
 line_edition/search_history_forward.c\
 line_edition/auto_completion.c\
+line_edition/auto_completion_clear.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\

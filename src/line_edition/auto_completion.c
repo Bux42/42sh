@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/22 19:28:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/25 04:51:30 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char		*get_comp_path(t_sh *sh, t_inp *cp)
 		len++;
 		cp = cp->previous;
 	}
-	sh->retval = len;
 	if (!(ret = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	ret[len] = '\0';
@@ -113,48 +112,128 @@ char		*get_left_word(t_inp *cp, t_sh *sh)
 	return (ret);
 }
 
-void		print_completion(t_sh *sh)
+int			get_diff(char *fl, t_sh *sh)
+{
+	int		new_len;
+
+	new_len = ft_strlen(sh->comp_debug);
+	new_len += ft_strlen(&fl[ft_strlen(sh->comp_debug)]);
+	if (new_len < sh->old_len)
+	{
+		sh->retval = sh->old_len - new_len;
+		sh->old_len = new_len;
+		return (sh->old_len - new_len);
+	}
+	else
+	{
+		sh->retval = sh->old_len - new_len;
+		sh->old_len = new_len;
+	}
+	return (0);
+}
+
+void		print_completion(t_sh *sh, t_inp **inp)
 {
 	DIR				*od;
 	struct dirent	*fl;
 	int				dec;
-	int				decp;
+	int				ret;
+	int				over;
+	t_inp			*cp;
 
+	cp = get_to_pos(inp);
+	cp = cp->next;
+	dec = -1;
+	over = 0;
 	if (!(od = opendir(sh->comp_path)))
 		return ;
-	//free(sh->comp_path);
 	while ((fl = readdir(od)))
 	{
 		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug)) == 0)
 		{
-			write(1, "\e[2m", 5);
-			dec = ft_strlen(sh->comp_debug);
-			decp = 0;
-			if (sh->comp_remain)
+			over = get_diff(fl->d_name, sh);
+			if (ft_strlen(sh->comp_debug) == ft_strlen(fl->d_name))
 			{
-				free(sh->comp_remain);
-				sh->comp_remain = NULL;
+				free_comp(3, sh);
+				return ;
 			}
-			while (fl->d_name[dec])
+			write(1, "\e[2m", 5);
+			sh->comp_remain = ft_strdup(&fl->d_name[ft_strlen(sh->comp_debug)]);
+			while (sh->comp_remain[++dec])
 			{
-				ft_putchar(fl->d_name[dec]);
+				ft_putchar(sh->comp_remain[dec]);
+				check_endline(sh);
+			}
+			write(1, "\x1b[0m", 5);
+			while (cp)
+			{
+				dec++;
+				ft_putchar(cp->c);
+				check_endline(sh);
+				cp = cp->next;
+			}
+			while (over > -1)
+			{
+				ft_putchar(' ');
 				check_endline(sh);
 				dec++;
-				decp++;
+				over--;
 			}
-			if (decp)
-				sh->comp_remain = ft_strdup(&fl->d_name[ft_strlen(sh->comp_debug)]);
-			write(1, "\x1b[0m", 5);
-			overwrite_remaining(sh, &sh->inpl->inp);
-			write(1, "\e[2m", 5);
-			while (decp--)
+			while (dec--)
 				custom_left(sh);
-			write(1, "\x1b[0m", 5);
+			closedir(od);
 			return ;
 		}
 	}
+	if (sh->comp_remain)
+	{
+		dec = ft_strlen(sh->comp_remain) - 1;
+		dec += inp_list_len(&cp);
+		ret = dec;
+		while (dec--)
+		{
+			ft_putchar(' ');
+			check_endline(sh);
+		}
+		while (ret--)
+			custom_left(sh);
+		ret = 0;
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			check_endline(sh);
+			ret++;
+			cp = cp->next;
+		}
+		while (ret--)
+			custom_left(sh);
+		free_comp(1, sh);
+	}
 	closedir(od);
-	dec = ft_strlen(sh->comp_remain);
+	/*overwrite_remaining_comp(sh, &sh->inpl->inp, ft_strlen(sh->comp_remain));
+	free(sh->comp_remain);
+	sh->comp_remain = NULL;
+*/}
+
+void		erase_completion(t_sh *sh, t_inp **inp)
+{
+	t_inp	*cp;
+	int		dec;
+	int		decp;
+
+	if (!sh->comp_remain)
+		return ;
+	dec = 0;
+	if ((cp = get_to_pos(inp)))
+	{
+		while (cp)
+		{
+			dec++;
+			cp = cp->next;
+		}
+	}
+	dec += ft_strlen(sh->comp_remain);
+	free_comp(1, sh);
 	decp = dec;
 	while (dec--)
 	{
@@ -163,65 +242,63 @@ void		print_completion(t_sh *sh)
 	}
 	while (decp--)
 		custom_left(sh);
-	free(sh->comp_remain);
-	sh->comp_remain = NULL;
-}
-
-void		erase_completion(t_sh *sh, t_inp **inp)
-{
-	int		i;
-	int		j;
-	int		len;
-	t_inp	*cp;
-
-	len = 1;
-	if ((cp = get_to_pos(inp)))
-	{
-		while (cp->next)
-		{
-			cp = cp->next;
-			len++;
-		}
-	}
-	if (sh->comp_remain)
-	{
-		i = ft_strlen(sh->comp_remain) + len;
-		j = i;
-		while (i--)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-		}
-		while (j--)
-			custom_left(sh);
-		overwrite_remaining(sh, &sh->inpl->inp);
-		free(sh->comp_remain);
-		sh->comp_remain = NULL;
-	}
+	overwrite_remaining(sh, inp);
 }
 
 void		autocompletion(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
+	int		dec;
+	int		decp;
+	int		decpp;
 
-	if ((cp = get_to_pos(inp)))
+	if ((cp = get_to_pos(inp)) && cp->pos != 2)
 	{
 		if (!cp->next || is_space(cp->next->c))
 		{
 			if (!is_space(cp->c))
 			{
-				if (sh->comp_debug)
+				if (cp->c != '/')
 				{
-					free(sh->comp_debug);
-					sh->comp_debug = NULL;
+					if ((sh->comp_debug = get_left_word(cp, sh)))
+						print_completion(sh, &sh->inpl->inp);
 				}
-				if ((sh->comp_debug = get_left_word(cp, sh)))
-					print_completion(sh);
+				else
+				{
+					erase_completion(sh, &sh->inpl->inp);
+					free_comp(3, sh);
+				}
 			}
 			else
+			{
 				erase_completion(sh, &sh->inpl->inp);
+				free_comp(3, sh);
+			}
 		}
+		else
+			free_comp(3, sh);
 	}
 	else
-		erase_completion(sh, &sh->inpl->inp);
+	{
+		dec = ft_strlen(sh->comp_remain) + 1;
+		decpp = 0;
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			check_endline(sh);
+			decpp++;
+			dec++;
+			cp = cp->next;
+		}
+		decp = dec;
+		while (dec--)
+		{
+			ft_putchar(' ');
+			check_endline(sh);
+		}
+		decp += decpp;
+		while (decp--)
+			custom_left(sh);
+		free_comp(3, sh);
+	}
 }
