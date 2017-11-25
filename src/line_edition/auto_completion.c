@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 09:39:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 00:52:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 	t_inp	*cp;
 	int		i;
 
-	if (sh->comp_remain && ft_strlen(sh->comp_remain) > 0)
+	if (sh->comp_remain)
 	{
 		if ((cp = get_to_pos(inp)))
 		{
@@ -30,6 +30,7 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 				overwrite_remaining(sh, &sh->inpl->inp);
 			}
 		}
+		free_comp(3, sh);
 	}
 }
 
@@ -221,6 +222,8 @@ void		erase_completion(t_sh *sh, t_inp **inp)
 	dec += ft_strlen(sh->comp_remain);
 	free_comp(1, sh);
 	print_spaces(dec, sh);
+	if (sh->posy == 1)
+		dec--;
 	while (dec--)
 		custom_left(sh);
 	overwrite_remaining(sh, inp);
