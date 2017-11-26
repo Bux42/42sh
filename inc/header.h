@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 08:59:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 03:04:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct			s_sh
 	char				*comp_remain;
 	char				*comp_path;
 	int					old_len;
+	int					over;
+	int					dec;
 	char				buff[6];
 	int					fd;
 	int					posy;
@@ -101,6 +103,8 @@ void					free_null(char **str);
 void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
 void					delete_letter(t_sh *sh, t_inp **inp);
+void					delete_first_letter(t_inp *cp, t_inp **inp);
+void					delete_in_between(t_inp *cp);
 void					delete_beginning(t_inp **inp, t_inp *cp);
 void					delete_after(t_sh *sh, t_inp **inp);
 void					overwrite_remaining(t_sh *sh, t_inp **inp);
@@ -160,10 +164,12 @@ int						check_empty_line(t_inp **inp);
 /*						auto_completion									*/
 
 void					autocompletion(t_inp **inp, t_sh *sh);
-void					print_completiong(t_sh *sh, t_inp **inp);
+void					print_completion(t_sh *sh, t_inp **inp);
+void					found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp);
 void					insert_completion(t_sh *sh, t_inp **inp);
 void					erase_completion(t_sh *sh, t_inp **inp);
 char					*get_left_word(t_inp *cp, t_sh *sh);
+char					*get_comp_path(t_sh *sh, t_inp *cp);
 void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
 void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);

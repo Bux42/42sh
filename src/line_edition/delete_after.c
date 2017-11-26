@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 07:29:44 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 07:17:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 03:04:13 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ void		delete_first_letter(t_inp *cp, t_inp **inp)
 	(*inp) = (*inp)->next;
 	(*inp)->previous = NULL;
 	(*inp)->pos = 2;
+	free(cp);
+}
+
+void		delete_in_between(t_inp *cp)
+{
+	cp = cp->next;
+	cp->previous->next = cp->next;
+	if (cp->next)
+		cp->next->previous = cp->previous;
 	free(cp);
 }
 
@@ -31,13 +40,7 @@ void		delete_after(t_sh *sh, t_inp **inp)
 			if (cp->pos == 2)
 				delete_first_letter(cp, inp);
 			else
-			{
-				cp = cp->next;
-				cp->previous->next = cp->next;
-				if (cp->next)
-					cp->next->previous = cp->previous;
-				free(cp);
-			}
+				delete_in_between(cp);
 			overwrite_deleted(sh, inp);
 		}
 		else if (cp->pos == 2)

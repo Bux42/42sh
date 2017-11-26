@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 05:50:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 03:06:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,25 @@ void		cut_before(t_sh *sh, t_inp **inp)
 	t_inp	*cp;
 	int		dec;
 
-	if ((cp = get_to_pos(inp)))
+	if ((cp = get_to_pos(inp)) && cp->pos == 1)
 	{
-		if (cp->pos == 1)
+		if (sh->clipboard)
+			free(sh->clipboard);
+		sh->clipboard = get_clipboard_before(cp, &dec, sh);
+		if (cp->next)
 		{
-			if (sh->clipboard)
-				free(sh->clipboard);
-			sh->clipboard = get_clipboard_before(cp, &dec, sh);
-			if (cp->next)
-			{
-				cp = cp->next;
-				free_list_before(cp);
-				cp->previous = NULL;
-				cp->pos = 2;
-				(*inp) = cp;
-			}
-			else
-			{
-				free_list_before(cp);
-				(*inp) = NULL;
-			}
-			update_cut_before(dec, inp, sh);
+			cp = cp->next;
+			free_list_before(cp);
+			cp->previous = NULL;
+			cp->pos = 2;
+			(*inp) = cp;
 		}
+		else
+		{
+			free_list_before(cp);
+			(*inp) = NULL;
+		}
+		update_cut_before(dec, inp, sh);
 	}
 }
 

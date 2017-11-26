@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/25 05:59:11 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 02:45:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int			check_dimentions(t_sh *sh)
 
 	if (!(tgetent(NULL, TERM)))
 		return (0);
-	if (tgetnum("co") != sh->width)
+	if ((new_size = tgetnum("co")) != sh->width)
 	{
-		new_size = tgetnum("co");
 		if (new_size < sh->width)
 		{
 			if (sh->pos_at > new_size)
@@ -76,10 +75,9 @@ void		check_endline(t_sh *sh)
 void		treat_input(t_sh *sh)
 {
 	sh->pos_at = pos_at(&sh->inpl->inp, sh->prompt_len);
-	if (check_dimentions(sh))
-		sh->width = tgetnum("co");
-	else
+	if (!check_dimentions(sh))
 		return ;
+	sh->width = tgetnum("co");
 	if (!sh->buff[1])
 	{
 		if (sh->buff[0] > 31 && sh->buff[0] <= 127)

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/22 19:32:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 03:05:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ char		*get_clipboard(t_inp *inp, int *dec, t_sh *sh)
 	*dec = 1;
 	while (inp)
 	{
-		if (inp->next)
-		{
+		if (inp->next && (*dec)++)
 			inp = inp->next;
-			(*dec)++;
-		}
 		else
 			break ;
 	}
