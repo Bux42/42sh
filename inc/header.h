@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 03:04:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 09:04:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ char					*get_clipboard(t_inp *inp, int *dec, t_sh *sh);
 char					*get_clipboard_before(t_inp *inp, int *dec, t_sh *sh);
 void					free_list_from_here(t_inp *cp);
 void					free_list_from_beginning(t_inp **inp);
-void					free_list_before(t_inp *cp);
+void					free_list_before(t_inp **cp);
 
 void					paste_after(t_sh *sh, t_inp **inp);
 
@@ -169,6 +169,7 @@ void					found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp);
 void					insert_completion(t_sh *sh, t_inp **inp);
 void					erase_completion(t_sh *sh, t_inp **inp);
 char					*get_left_word(t_inp *cp, t_sh *sh);
+int						left_word_len(int *slash, t_inp **cp);
 char					*get_comp_path(t_sh *sh, t_inp *cp);
 void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
 void					free_comp(int i, t_sh *sh);

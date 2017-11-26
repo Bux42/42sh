@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 03:06:41 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 05:39:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,22 @@ char		*get_clipboard_before(t_inp *inp, int *dec, t_sh *sh)
 	return (ret);
 }
 
-void		free_list_before(t_inp *cp)
+void		free_list_before(t_inp **cp)
 {
-	if (cp->previous)
-		free_list_before(cp->previous);
-	else
-		free(cp);
+	t_inp	*cpp;
+	t_inp	*tmp;
+
+	if ((cpp = (*cp)))
+	{
+		while (cpp->previous)
+		{
+			tmp = cpp;
+			cpp = cpp->previous;
+			free(cpp);
+		}
+		free(*cp);
+		(*cp) = NULL;
+	}
 }
 
 void		update_cut_before(int dec, t_inp **inp, t_sh *sh)
@@ -85,14 +95,14 @@ void		cut_before(t_sh *sh, t_inp **inp)
 		if (cp->next)
 		{
 			cp = cp->next;
-			free_list_before(cp);
+			free_list_before(&cp);
 			cp->previous = NULL;
 			cp->pos = 2;
 			(*inp) = cp;
 		}
 		else
 		{
-			free_list_before(cp);
+			free_list_before(&cp);
 			(*inp) = NULL;
 		}
 		update_cut_before(dec, inp, sh);

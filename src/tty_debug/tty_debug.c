@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/22 18:05:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 06:14:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	ft_bzero(buff, 2047);
 	ft_strcat(buff, "echo ");
 	ft_strcat(buff, " \"posy: ");
-	ft_strcat(buff, ft_itoa(sh->posy));
+	itoa = ft_itoa(sh->posy);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " width: ");
-	ft_strcat(buff, ft_itoa(sh->width));
+	itoa = ft_itoa(sh->width);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " prompt_len: ");
-	ft_strcat(buff, ft_itoa(sh->prompt_len));
+	itoa = ft_itoa(sh->prompt_len);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " retval: ");
-	ft_strcat(buff, ft_itoa(sh->retval));
+	itoa = ft_itoa(sh->retval);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " pos_at: ");
-	ft_strcat(buff, ft_itoa(sh->pos_at));
+	itoa = ft_itoa(sh->pos_at);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " inp_len: ");
-	ft_strcat(buff, ft_itoa(sh->inp_len));
+	itoa = ft_itoa(sh->inp_len);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " history_len: ");
-	ft_strcat(buff, ft_itoa(sh->history_len));
+	itoa = ft_itoa(sh->history_len);ft_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, " completion: ");
 	if (sh->comp_debug)
 		ft_strcat(buff, sh->comp_debug);
@@ -92,7 +92,12 @@ int			get_tty(t_sh *sh, char *av)
 	struct stat	st;
 
 	if (av && lstat(av, &st) > -1)
-		sh->tty = ft_strdup(av);
+	{
+		if (S_ISCHR(st.st_mode) && ft_strlen(av) == 12)
+			sh->tty = ft_strdup(av);
+		else
+			sh->tty = NULL;
+	}
 	else
 		sh->tty = NULL;
 	return (1);

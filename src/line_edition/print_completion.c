@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 02:01:15 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 02:46:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 09:04:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp)
 	if (ft_strlen(sh->comp_debug) == ft_strlen(fl->d_name))
 		return ((void)free_comp(3, sh));
 	write(1, "\e[2m", 5);
+	free_comp(1, sh);
 	sh->comp_remain = ft_strdup(&fl->d_name[ft_strlen(sh->comp_debug)]);
 	while (sh->comp_remain[++sh->dec])
 	{
@@ -77,7 +78,7 @@ void		not_found(t_sh *sh, t_inp *cp)
 	}
 	while (ret--)
 		custom_left(sh);
-	free_comp(1, sh);
+	free_comp(3, sh);
 }
 
 void		print_completion(t_sh *sh, t_inp **inp)
@@ -93,9 +94,16 @@ void		print_completion(t_sh *sh, t_inp **inp)
 	if (!(od = opendir(sh->comp_path)))
 		return ;
 	while ((fl = readdir(od)))
+	{
 		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug))
 				== 0)
-			return ((void)found(sh, od, fl, cp));
+		{
+			found(sh, od, fl, cp);
+			if (sh->comp_remain == NULL)
+				closedir(od);
+			return ;
+		}
+	}
 	if (sh->comp_remain)
 		not_found(sh, cp);
 	closedir(od);

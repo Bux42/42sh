@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 02:38:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 09:04:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,33 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 	}
 }
 
+int			left_word_len(int *slash, t_inp **cp)
+{
+	int		i;
+
+	i = 1;
+	while ((*cp)->previous && !is_space((*cp)->previous->c))
+	{
+		if ((*cp)->previous->c == '/')
+		{
+			(*slash)++;
+			break ;
+		}
+		i++;
+		(*cp) = (*cp)->previous;
+	}
+	return (i);
+}
+
 char		*get_left_word(t_inp *cp, t_sh *sh)
 {
 	char	*ret;
 	int		i;
 	int		slash;
 
-	i = 1;
 	slash = 0;
 	free_comp(6, sh);
-	while (cp->previous && !is_space(cp->previous->c))
-	{
-		if (cp->previous->c == '/' && (slash++) > -1)
-			break ;
-		i++;
-		cp = cp->previous;
-	}
+	i = left_word_len(&slash, &cp);
 	if (!(ret = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	if (slash)

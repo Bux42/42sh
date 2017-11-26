@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 03:05:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 05:41:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,18 @@ void		free_list_from_here(t_inp *cp)
 
 void		free_list_from_beginning(t_inp **inp)
 {
-	if (*inp)
+	t_inp	*cp;
+	t_inp	*tmp;
+
+	tmp = NULL;
+	if ((cp = (*inp)))
 	{
-		if ((*inp)->next)
-			free_list_from_here((*inp)->next);
-		free(*inp);
+		while (cp)
+		{
+			tmp = cp;
+			cp = cp->next;
+			free(tmp);
+		}
 		(*inp) = NULL;
 	}
 }
@@ -88,6 +95,7 @@ void		cut_after(t_sh *sh, t_inp **inp)
 
 void		check_shortcut(t_sh *sh)
 {
+	char	*inp;
 	if (sh->buff[0] != 9)
 		erase_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 11)
@@ -104,7 +112,11 @@ void		check_shortcut(t_sh *sh)
 		ft_putstr(tgetstr("cr", NULL));
 		if (sh->inpl->inp && check_empty_line(&sh->inpl->inp))
 		{
-			ft_putendl_fd(inp_to_char(&sh->inpl->inp, sh), sh->fd);
+			if ((inp = inp_to_char(&sh->inpl->inp, sh)))
+			{
+				ft_putendl_fd(inp, sh->fd);
+				free(inp);
+			}
 			history_push_front(&sh->history, sh->inpl->inp);
 		}
 		sh->history_len = history_len(&sh->history);
