@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:22:25 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 00:50:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 01:03:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,11 @@ void		free_null(char **str)
 
 void		print_spaces(int nb, t_sh *sh)
 {
-	char	buff[nb + 1];
-	int		cp;
-
-	buff[nb] = '\0';
-	cp = nb;
 	while (nb-- > 0)
 	{
+		ft_putchar(' ');
 		check_endline(sh);
-		buff[nb] = ' ';
 	}
-	write(1, buff, cp);
 }
 
 void		free_comp(int i, t_sh *sh)

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 00:52:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/26 01:03:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,8 +222,6 @@ void		erase_completion(t_sh *sh, t_inp **inp)
 	dec += ft_strlen(sh->comp_remain);
 	free_comp(1, sh);
 	print_spaces(dec, sh);
-	if (sh->posy == 1)
-		dec--;
 	while (dec--)
 		custom_left(sh);
 	overwrite_remaining(sh, inp);
