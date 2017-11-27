@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 08:36:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 11:07:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void		print_quote(char quote, t_sh *sh)
 	if (quote == '\'')
 	{
 		ft_putstr("quote> ");
-		sh->posy = ft_strlen("quote> ") + 2;
+		sh->posy = ft_strlen("quote> ") + 1;
 	}
 	else if (quote == '\"')
 	{
 		ft_putstr("dquote> ");
-		sh->posy = ft_strlen("dquote> ") + 2;
+		sh->posy = ft_strlen("dquote> ") + 1;
 	}
 	else if (quote == '`')
 	{
 		ft_putstr("bquote> ");
-		sh->posy = ft_strlen("bquote> ") + 2;
+		sh->posy = ft_strlen("bquote> ") + 1;
 	}
 }
 

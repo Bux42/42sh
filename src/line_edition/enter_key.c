@@ -6,22 +6,11 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 10:58:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 11:16:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
-
-t_inpl		*inpl_create(void)
-{
-	t_inpl	*ret;
-
-	if (!(ret = (t_inpl*)malloc(sizeof(t_inpl))))
-		return (NULL);
-	ret->inp = NULL;
-	ret->next = NULL;
-	return (ret);
-}
 
 void		custom_return(void)
 {
@@ -106,7 +95,6 @@ void		process_line(t_sh *sh)
 	}
 	custom_return();
 	print_prompt(sh);
-	
 }
 
 void		enter_key(t_sh *sh)
