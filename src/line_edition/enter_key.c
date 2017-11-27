@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 07:16:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 08:26:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		enter_key(t_sh *sh)
 
 	print = 1;
 	custom_return();
-	if (sh->inpl->inp && check_empty_line(&sh->inpl->inp))
+	if (sh->inpl)
 	{
 		if (sh->expected_quote == '\0')
 		{

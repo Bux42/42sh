@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 07:21:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 08:28:27 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ int			is_quote_or_slash(char c)
 	if (c == '`')
 		return (1);
 	return (0);
+}
+
+void		print_quote(char quote, t_sh *sh)
+{
+	if (quote == '\'')
+	{
+		ft_putstr("quote> ");
+		sh->posy = ft_strlen("quote> ") + 2;
+	}
+	else if (quote == '\"')
+	{
+		ft_putstr("dquote> ");
+		sh->posy = ft_strlen("dquote> ") + 2;
+	}
+	else if (quote == '`')
+	{
+		ft_putstr("bquote> ");
+		sh->posy = ft_strlen("bquote> ") + 2;
+	}
 }
 
 t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
@@ -48,21 +67,7 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 		}
 		if (tmp == '\0' || tmp != sh->expected_quote)
 		{
-			if (sh->expected_quote == '\'')
-			{
-				ft_putstr("quote> ");
-				sh->posy = ft_strlen("quote> ") + 2;
-			}
-			else if (sh->expected_quote == '\"')
-			{
-				ft_putstr("dquote> ");
-				sh->posy = ft_strlen("dquote> ") + 2;
-			}
-			else if (sh->expected_quote == '`')
-			{
-				ft_putstr("bquote> ");
-				sh->posy = ft_strlen("bquote> ") + 2;
-			}
+			print_quote(sh->expected_quote, sh);
 			return (NULL);
 		}
 		else if (tmp == sh->expected_quote)
@@ -71,6 +76,7 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 			return (cp);
 		}
 	}
+	print_quote(sh->expected_quote, sh);
 	return (NULL);
 }
 
@@ -100,24 +106,10 @@ t_inp		*cut_from_quote(t_sh *sh, t_inp **inpl)
 	if (tmp != '\0')
 	{
 		sh->expected_quote = tmp;
-		if (tmp == '\'')
-		{
-			ft_putstr("quote> ");
-			sh->posy = ft_strlen("quote> ") + 2;
-		}
-		else if (tmp == '\"')
-		{
-			ft_putstr("dquote> ");
-			sh->posy = ft_strlen("dquote> ") + 2;
-		}
-		else if (tmp == '`')
-		{
-			ft_putstr("bquote> ");
-			sh->posy = ft_strlen("bquote> ") + 2;
-		}
+		print_quote(tmp, sh);
 		return (cp);
 	}
-	if (cp->c == '\\')
+	if (cp && cp->c == '\\')
 	{
 		ft_putstr("> ");
 		sh->posy = ft_strlen("> ") + 2;
