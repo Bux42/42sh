@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 08:43:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 07:08:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void		treat_input(t_sh *sh)
 		delete_after(sh, &sh->inpl->inp);
 		autocompletion(&sh->inpl->inp, sh);
 	}
-	sh->inp_len = inp_list_len(&sh->inpl->inp);
+	if (sh->inpl)
+		sh->inp_len = inp_list_len(&sh->inpl->inp);
 	if (sh->tty)
 		tty_debug(sh, &sh->inpl->inp);
 	free_comp(4, sh);

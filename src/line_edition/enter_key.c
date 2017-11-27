@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 05:17:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 07:16:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void		print_all_inp(t_inp **inp)
 		while (cp)
 		{
 			ft_putchar(cp->c);
-			cp = cp->next;
+			if (cp->next)
+				cp = cp->next;
+			else
+				break;
 		}
 	}
 }
@@ -51,10 +54,13 @@ void		print_all_inpl(t_inpl **inpl)
 	{
 		while (cp)
 		{
-			print_all_inp(&cp->inp);
 			if (cp->next)
 				custom_return();
-			cp = cp->next;
+			print_all_inp(&cp->inp);
+			if (cp->next)
+				cp = cp->next;
+			else
+				break ;
 		}
 	}
 }
@@ -106,9 +112,23 @@ void		enter_key(t_sh *sh)
 		while (sh->inpl && sh->inpl->previous)
 			sh->inpl = sh->inpl->previous;
 		print_all_inpl(&sh->inpl);
-		history_push_front(&sh->history, sh->inpl->inp);
+		if (sh->inpl->inp)
+			history_push_front(&sh->history, sh->inpl->inp);
 		sh->history_len = history_len(&sh->history);
-		free_list_from_beginning(&sh->inpl->inp);
+		while (sh->inpl && sh->inpl->next)
+			sh->inpl = sh->inpl->next;
+		while (sh->inpl && sh->inpl->previous)
+		{
+			free_list_from_beginning(&sh->inpl->inp);
+			sh->inpl = sh->inpl->previous;
+			free(sh->inpl->next);
+			sh->inpl->next = NULL;
+		}
+		if (sh->inpl)
+		{
+			free_list_from_beginning(&sh->inpl->inp);
+			sh->inpl->next = NULL;
+		}
 		custom_return();
 		print_prompt(sh);
 	}
