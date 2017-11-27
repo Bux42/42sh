@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 10:49:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 10:58:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,38 @@ int			inpl_add_new(t_inpl **inpl, int print)
 	return (print);
 }
 
+void		process_line(t_sh *sh)
+{
+	while (sh->inpl && sh->inpl->previous)
+		sh->inpl = sh->inpl->previous;
+	print_all_inpl(&sh->inpl);
+	if (sh->inpl->inp)
+		history_push_front(&sh->history, sh->inpl->inp);
+	sh->history_len = history_len(&sh->history);
+	while (sh->inpl && sh->inpl->next)
+		sh->inpl = sh->inpl->next;
+	while (sh->inpl && sh->inpl->previous)
+	{
+		free_list_from_beginning(&sh->inpl->inp);
+		sh->inpl = sh->inpl->previous;
+		free(sh->inpl->next);
+		sh->inpl->next = NULL;
+	}
+	if (sh->inpl)
+	{
+		free_list_from_beginning(&sh->inpl->inp);
+		sh->inpl->next = NULL;
+	}
+	custom_return();
+	print_prompt(sh);
+	
+}
+
 void		enter_key(t_sh *sh)
 {
 	int		print;
-	t_inpl	*cp;
 
 	print = 1;
-	cp = NULL;
 	custom_return();
 	if (sh->expected_quote == '\0')
 	{
@@ -103,28 +128,5 @@ void		enter_key(t_sh *sh)
 			print = inpl_add_new(&sh->inpl, 0);
 	}
 	if (print)
-	{
-		while (sh->inpl && sh->inpl->previous)
-			sh->inpl = sh->inpl->previous;
-		print_all_inpl(&sh->inpl);
-		if (sh->inpl->inp)
-			history_push_front(&sh->history, sh->inpl->inp);
-		sh->history_len = history_len(&sh->history);
-		while (sh->inpl && sh->inpl->next)
-			sh->inpl = sh->inpl->next;
-		while (sh->inpl && sh->inpl->previous)
-		{
-			free_list_from_beginning(&sh->inpl->inp);
-			sh->inpl = sh->inpl->previous;
-			free(sh->inpl->next);
-			sh->inpl->next = NULL;
-		}
-		if (sh->inpl)
-		{
-			free_list_from_beginning(&sh->inpl->inp);
-			sh->inpl->next = NULL;
-		}
-		custom_return();
-		print_prompt(sh);
-	}
+		process_line(sh);
 }
