@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 09:04:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 03:59:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct			s_inpl
 {
 	struct s_inp		*inp;
 	struct s_inpl		*next;
+	struct s_inpl		*previous;
 }						t_inpl;
 
 typedef struct			s_his
@@ -59,6 +60,7 @@ typedef struct			s_sh
 	int					over;
 	int					dec;
 	char				buff[6];
+	char				expected_quote;
 	int					fd;
 	int					posy;
 	int					prompt_len;
@@ -138,6 +140,7 @@ int						pos_at(t_inp **inp, int len);
 int						inp_list_len(t_inp **inp);
 
 void					check_shortcut(t_sh *sh);
+void					enter_key(t_sh *sh);
 void					cut_after(t_sh *sh, t_inp **inp);
 void					cut_before(t_sh *sh, t_inp **inp);
 char					*get_clipboard(t_inp *inp, int *dec, t_sh *sh);
@@ -176,9 +179,18 @@ void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
 void					rewrite_beginning(t_sh *sh, t_inp *cp);
 
+/*						quotes_and_slash								*/
+
+t_inp					*cut_from_quote(t_sh *sh, t_inp **inp);
+t_inp					*get_closing_quote(t_sh *sh, t_inp **inp);
+int						is_quote_or_slash(char c);
+t_inpl					*inpl_create(void);
+
 /*						tty_debug										*/
 
 int						get_tty(t_sh *sh, char *av);
+char					*custom_strcat(char *s1, char *s2);
+int						special_char(char c);
 void					tty_debug(t_sh *sh, t_inp **inp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 09:13:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 03:12:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			main(int ac, char **av, char **env)
 	signal_init();
 	sh->inpl->inp = NULL;
 	sh->inpl->next = NULL;
+	sh->inpl->previous = NULL;
 	sh->clipboard = NULL;
 	sh->history_pos = NULL;
 	sh->history_len = 0;
@@ -48,6 +49,7 @@ int			main(int ac, char **av, char **env)
 	sh->comp_remain = NULL;
 	sh->comp_path = NULL;
 	sh->old_len = 0;
+	sh->expected_quote = '\0';
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
 		if (read(1, sh->buff, 5))

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 05:41:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 02:33:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		cut_after(t_sh *sh, t_inp **inp)
 
 void		check_shortcut(t_sh *sh)
 {
-	char	*inp;
 	if (sh->buff[0] != 9)
 		erase_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 11)
@@ -107,22 +106,5 @@ void		check_shortcut(t_sh *sh)
 	if (sh->buff[0] == 9)
 		insert_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 10)
-	{
-		ft_putstr(tgetstr("do", NULL));
-		ft_putstr(tgetstr("cr", NULL));
-		if (sh->inpl->inp && check_empty_line(&sh->inpl->inp))
-		{
-			if ((inp = inp_to_char(&sh->inpl->inp, sh)))
-			{
-				ft_putendl_fd(inp, sh->fd);
-				free(inp);
-			}
-			history_push_front(&sh->history, sh->inpl->inp);
-		}
-		sh->history_len = history_len(&sh->history);
-		free_list_from_beginning(&sh->inpl->inp);
-		ft_putstr(tgetstr("do", NULL));
-		ft_putstr(tgetstr("cr", NULL));
-		print_prompt(sh);
-	}
+		enter_key(sh);
 }
