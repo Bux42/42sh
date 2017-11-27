@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 04:15:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 05:05:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 			return (NULL);
 		}
 		else if (tmp == sh->expected_quote)
+		{
+			sh->expected_quote = '\0';
 			return (cp);
+		}
 	}
 	return (NULL);
 }
@@ -115,7 +118,7 @@ t_inp		*cut_from_quote(t_sh *sh, t_inp **inpl)
 		}
 		return (cp);
 	}
-	else if (cp->c == '\\')
+	if (cp->c == '\\')
 	{
 		ft_putstr("> ");
 		sh->posy = ft_strlen("> ") + 2;
