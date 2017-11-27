@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 05:50:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 10:37:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,10 @@ void					rewrite_beginning(t_sh *sh, t_inp *cp);
 
 t_inp					*cut_from_quote(t_sh *sh, t_inp **inp);
 t_inp					*get_closing_quote(t_sh *sh, t_inp **inp);
-int						is_quote_or_slash(char c);
 t_inpl					*inpl_create(void);
+int						inpl_add_new(t_inpl **inpl, int print);
+int						is_quote_or_slash(char c);
+void					custom_return(void);
 
 /*						tty_debug										*/
 

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 08:26:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/11/27 10:49:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,47 +65,42 @@ void		print_all_inpl(t_inpl **inpl)
 	}
 }
 
+int			inpl_add_new(t_inpl **inpl, int print)
+{
+	t_inpl	*new;
+	t_inpl	*cp;
+
+	if (!(new = (t_inpl*)malloc(sizeof(t_inpl))))
+		return (print);
+	new->inp = NULL;
+	new->next = NULL;
+	(*inpl)->next = new;
+	cp = (*inpl);
+	(*inpl) = (*inpl)->next;
+	cp->next = (*inpl);
+	(*inpl)->previous = cp;
+	return (print);
+}
+
 void		enter_key(t_sh *sh)
 {
 	int		print;
 	t_inpl	*cp;
 
 	print = 1;
+	cp = NULL;
 	custom_return();
-	if (sh->inpl)
+	if (sh->expected_quote == '\0')
 	{
-		if (sh->expected_quote == '\0')
-		{
-			if (cut_from_quote(sh, &sh->inpl->inp))
-			{
-				sh->inpl->next = inpl_create();
-				if (sh->inpl->next)
-				{
-					cp = sh->inpl;
-					sh->inpl = sh->inpl->next;
-					cp->next = sh->inpl;
-					sh->inpl->previous = cp;
-				}
-				print = 0;
-			}
-		}
+		if (cut_from_quote(sh, &sh->inpl->inp))
+			print = inpl_add_new(&sh->inpl, 0);
+	}
+	else
+	{
+		if (get_closing_quote(sh, &sh->inpl->inp))
+			print = 1;
 		else
-		{
-			if (get_closing_quote(sh, &sh->inpl->inp))
-				print = 1;
-			else
-			{
-				sh->inpl->next = inpl_create();
-				if (sh->inpl->next)
-				{
-					cp = sh->inpl;
-					sh->inpl = sh->inpl->next;
-					cp->next = sh->inpl;
-					sh->inpl->previous = cp;
-				}
-				print = 0;
-			}
-		}
+			print = inpl_add_new(&sh->inpl, 0);
 	}
 	if (print)
 	{
