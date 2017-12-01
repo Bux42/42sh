@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 11:16:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/01 07:44:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,10 @@ int						get_tty(t_sh *sh, char *av);
 char					*custom_strcat(char *s1, char *s2);
 int						special_char(char c);
 void					tty_debug(t_sh *sh, t_inp **inp);
+
+/*						parsing											*/
+
+void					parse(t_sh *sh);
+t_inp					*parse_backquotes(t_inpl **inpl, t_sh *sh);
 
 #endif

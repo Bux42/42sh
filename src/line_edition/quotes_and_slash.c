@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 11:07:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/01 13:01:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,24 @@ void		print_quote(char quote, t_sh *sh)
 	}
 }
 
+int			odd_slashes(t_inp **inp)
+{
+	t_inp	*cp;
+	int		count;
+
+	count = 0;
+	if ((cp = (*inp)))
+	{
+		while (cp->previous)
+		{
+			if (cp->previous->c == '\\')
+				count++;
+			cp = cp->previous;
+		}
+	}
+	return (count % 2);
+}
+
 t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 {
 	t_inp	*cp;
@@ -53,7 +71,7 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 	{
 		while (cp)
 		{
-			if (is_quote_or_slash(cp->c))
+			if (is_quote_or_slash(cp->c) && !odd_slashes(&cp))
 			{
 				if (tmp == '\0')
 					tmp = cp->c;
@@ -73,6 +91,12 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 		else if (tmp == sh->expected_quote)
 		{
 			sh->expected_quote = '\0';
+			if (cp->c == '\\' && !odd_slashes(&cp))
+			{
+				ft_putstr("> ");
+				sh->posy = ft_strlen("> ") + 2;
+				return (NULL);
+			}
 			return (cp);
 		}
 	}
@@ -109,7 +133,7 @@ t_inp		*cut_from_quote(t_sh *sh, t_inp **inpl)
 		print_quote(tmp, sh);
 		return (cp);
 	}
-	if (cp && cp->c == '\\')
+	if (cp && cp->c == '\\' && !odd_slashes(&cp))
 	{
 		ft_putstr("> ");
 		sh->posy = ft_strlen("> ") + 2;
