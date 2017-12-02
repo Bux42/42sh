@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/01 07:49:17 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/01 16:17:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,6 @@ void		custom_return(void)
 {
 	ft_putstr(tgetstr("do", NULL));
 	ft_putstr(tgetstr("cr", NULL));
-}
-
-void		print_all_inp(t_inp **inp)
-{
-	t_inp	*cp;
-
-	if ((cp = (*inp)))
-	{
-		while (cp)
-		{
-			ft_putchar(cp->c);
-			if (cp->next)
-				cp = cp->next;
-			else
-				break;
-		}
-	}
-}
-
-void		print_all_inpl(t_inpl **inpl)
-{
-	t_inpl	*cp;
-
-	if ((cp = (*inpl)))
-	{
-		while (cp)
-		{
-			if (cp->next)
-				custom_return();
-			print_all_inp(&cp->inp);
-			if (cp->next)
-				cp = cp->next;
-			else
-				break ;
-		}
-	}
 }
 
 int			inpl_add_new(t_inpl **inpl, int print)
@@ -75,7 +39,6 @@ void		process_line(t_sh *sh)
 {
 	while (sh->inpl && sh->inpl->previous)
 		sh->inpl = sh->inpl->previous;
-	//print_all_inpl(&sh->inpl);
 	if (sh->inpl->inp)
 		history_push_front(&sh->history, sh->inpl->inp);
 	sh->history_len = history_len(&sh->history);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/30 09:13:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/02 13:06:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			main(int ac, char **av, char **env)
 	sh->comp_path = NULL;
 	sh->old_len = 0;
 	sh->expected_quote = '\0';
+	sh->context = 0;
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
 		if (read(1, sh->buff, 5))

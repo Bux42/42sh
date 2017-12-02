@@ -6,13 +6,19 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/01 07:44:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/02 16:12:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
+# define DQUOTE 1
+# define QUOTE 2
+# define BQUOTE 4
+# define VARIABLE 8
+# define BINARY 16
+# define OPERATOR 32
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -61,6 +67,7 @@ typedef struct			s_sh
 	int					dec;
 	char				buff[6];
 	char				expected_quote;
+	int					context;
 	int					fd;
 	int					posy;
 	int					prompt_len;
@@ -198,6 +205,6 @@ void					tty_debug(t_sh *sh, t_inp **inp);
 /*						parsing											*/
 
 void					parse(t_sh *sh);
-t_inp					*parse_backquotes(t_inpl **inpl, t_sh *sh);
+t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
 
 #endif
