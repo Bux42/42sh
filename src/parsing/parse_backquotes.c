@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/02 16:46:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/03 10:35:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,11 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 		{
 			while (cp->inp)
 			{
-				if (!cp->inp->next)
-				{
-					if (cp->next)
-					{
-						if (cp->inp->c == '\\')
-							;
-						else if (cp->inp->c == '\"')
-							inp_insert_posat(&ret, '\n');
-						else if (cp->inp->c == '\'')
-							inp_insert_posat(&ret, '\n');
-						else
-							inp_insert_posat(&ret, cp->inp->c);
-					}
-					else
-						inp_insert_posat(&ret, cp->inp->c);
-					break ;
-				}
 				inp_insert_posat(&ret, cp->inp->c);
+				if (!cp->inp->next)
+					if (cp->next)
+						if (cp->inp->c != '\\')
+							inp_insert_posat(&ret, '\n');
 				cp->inp = cp->inp->next;
 			}
 			cp = cp->next;
@@ -76,21 +63,4 @@ void		parse(t_sh *sh)
 		clean = clean->next;
 	}
 	return ;
-	ft_putstr("zsh: command not found: ");
-	while (clean)
-	{
-		if (clean->c == '\"')
-			sh->context = update_context(sh->context, DQUOTE);
-		if (clean->c == '\'')
-			sh->context = update_context(sh->context, QUOTE);
-		if (clean->c == '`')
-			sh->context = update_context(sh->context, BQUOTE);
-		if (clean->c == '$')
-			;
-		if (clean->c == '<')
-			;
-		update_context_color(sh->context);
-		ft_putchar(clean->c);
-		clean = clean->next;
-	}
 }

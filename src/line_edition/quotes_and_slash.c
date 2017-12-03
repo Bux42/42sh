@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/02 16:39:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/03 09:54:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,23 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 					tmp = cp->c;
 				else if (cp->c == tmp)
 					tmp = '\0';
+				else
+					tmp = cp->c;
 			}
 			if (cp->next)
 				cp = cp->next;
 			else
 				break ;
 		}
-		if (tmp == '\0' || tmp != sh->expected_quote)
+		if (tmp == '\0')
 		{
 			print_quote(sh->expected_quote, sh);
+			return (NULL);
+		}
+		else if (tmp != sh->expected_quote)
+		{
+			sh->expected_quote = tmp;
+			print_quote(tmp, sh);
 			return (NULL);
 		}
 		else if (tmp == sh->expected_quote)
