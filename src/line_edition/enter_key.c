@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/01 16:17:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/08 20:24:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void		process_line(t_sh *sh)
 		free_list_from_beginning(&sh->inpl->inp);
 		sh->inpl->next = NULL;
 	}
-	custom_return();
 	print_prompt(sh);
 }
 

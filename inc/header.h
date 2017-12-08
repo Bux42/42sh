@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/02 16:12:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/08 20:23:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,7 @@ void					tty_debug(t_sh *sh, t_inp **inp);
 
 void					parse(t_sh *sh);
 t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
+void					contcat_inp(t_inp **inp, t_inp **ret);
+void					whats_going_on(t_inp **inp);
 
 #endif

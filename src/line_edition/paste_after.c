@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 05:39:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/07 23:18:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ void		free_list_before(t_inp **cp)
 
 	if ((cpp = (*cp)))
 	{
-		while (cpp->previous)
+		while (cpp)
 		{
 			tmp = cpp;
 			cpp = cpp->previous;
-			free(cpp);
+			free(tmp);
 		}
-		free(*cp);
-		(*cp) = NULL;
 	}
 }
 
@@ -95,7 +93,7 @@ void		cut_before(t_sh *sh, t_inp **inp)
 		if (cp->next)
 		{
 			cp = cp->next;
-			free_list_before(&cp);
+			free_list_before(&cp->previous);
 			cp->previous = NULL;
 			cp->pos = 2;
 			(*inp) = cp;

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/27 07:01:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/07 23:22:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ char		*get_clipboard(t_inp *inp, int *dec, t_sh *sh)
 
 void		free_list_from_here(t_inp *cp)
 {
-	if (cp->next)
-		free_list_from_here(cp->next);
-	else
-		free(cp);
+	t_inp	*tmp;
+	while (cp)
+	{
+		tmp = cp;
+		cp = cp->next;
+		free(tmp);
+	}
 }
 
 void		free_list_from_beginning(t_inp **inp)
