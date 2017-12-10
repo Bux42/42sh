@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/07 22:51:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 03:44:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ t_inp		*cut_from_quote(t_sh *sh, t_inp **inpl)
 				else if (cp->c == tmp)
 					tmp = '\0';
 			}
+			else if (tmp == '\'' && cp->c == tmp && odd_slashes(&cp))
+				tmp = '\0';
 			if (cp->next)
 				cp = cp->next;
 			else
