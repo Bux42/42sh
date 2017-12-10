@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/08 20:32:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 04:51:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		parse(t_sh *sh)
 	t_inp	*clean;
 
 	clean = concat_inpl(&sh->inpl, sh);
-	whats_going_on(&clean);
+	whats_going_on(&clean, sh);
 	free_list_from_beginning(&clean);
 	return ;
 }
