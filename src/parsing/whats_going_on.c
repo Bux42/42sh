@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 07:57:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/11 00:36:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,27 @@ int			working_context(int context, char c)
 		if (context & DQUOTE)
 			return (0);
 	}
+	if (c == '\0') // binary or option to binary
+	{
+		if (context & QUOTE)
+			return (0);
+		if (context & DQUOTE)
+			return (0);
+	}
 	return (1);
+}
+
+int			normal_char(char c)
+{
+	if (c > 96 && c < 123)
+		return (1);
+	if (c == 95)
+		return (1);
+	if (c > 64 && c < 91)
+		return (1);
+	if (c > 44 && c < 58)
+		return (1);
+	return (0);
 }
 
 void		whats_going_on(t_inp **inp, t_sh *sh)
@@ -171,9 +191,20 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 	{
 		while (cp)
 		{
-			if (cp->c == '\n')
-				while (1)
-					;
+			if (normal_char(cp->c) && working_context(sh->context, '\0'))
+			{
+				ft_putchar('|');
+				while (cp)
+				{
+					if (is_space(cp->c))
+						break ;
+					ft_putchar(cp->c);
+					cp = cp->next;
+				}
+				ft_putchar('|');
+			}
+			if (!cp)
+				break ;
 			if (cp->c == '\"' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 			{
 				ft_putchar('[');
