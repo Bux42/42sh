@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 04:51:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 07:01:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 		while (cp)
 		{
 			concat_inp(&cp->inp, &ret, cp);
-			/*while (cp->inp)
-			{
-				inp_insert_posat(&ret, cp->inp->c);
-				if (!cp->inp->next)
-					if (cp->next)
-						if (cp->inp->c != '\\')
-							inp_insert_posat(&ret, '\n');
-				cp->inp = cp->inp->next;
-			}*/
 			cp = cp->next;
 		}
 	}
@@ -77,6 +68,7 @@ void		parse(t_sh *sh)
 
 	clean = concat_inpl(&sh->inpl, sh);
 	whats_going_on(&clean, sh);
+	custom_return();
 	free_list_from_beginning(&clean);
 	return ;
 }

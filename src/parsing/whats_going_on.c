@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 05:08:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 07:03:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ char		*parse_variable_name(t_inp **inp)
 	return (ret);
 }
 
+int			valid_variable_char(char c)
+{
+	if (c == '\n')
+		return (0);
+	if (c == '\t')
+		return (0);
+	if (c == ' ')
+		return (0);
+	return (1);
+}
+
 void		print_variable(t_inp **cp, t_sh *sh)
 {
 	char	*variable;
@@ -61,7 +72,7 @@ void		print_variable(t_inp **cp, t_sh *sh)
 		ft_putstr(&get_variable[1]);
 	while (*cp)
 	{
-		if ((*cp)->c != '\n' && (*cp)->c != ' ' && (*cp)->c != '\t')
+		if (valid_variable_char((*cp)->c))
 		{
 			if (!get_variable)
 				ft_putchar((*cp)->c);
@@ -73,48 +84,87 @@ void		print_variable(t_inp **cp, t_sh *sh)
 	ft_putchar('}');
 }
 
+void		dquote_inp(t_inp **cp, t_sh *sh)
+{
+	t_inp	*delimiter;
+
+	delimiter = NULL;
+	while ((*cp))
+	{
+		if ((*cp)->c == '\"' && !odd_slashes(cp))
+		{
+			(*cp) = (*cp)->next;
+			break ;
+		}
+		else
+			inp_insert_posat(&delimiter, (*cp)->c);
+		(*cp) = (*cp)->next;
+	}
+	whats_going_on(&delimiter, sh);
+}
+
+void		quote_inp(t_inp **cp, t_sh *sh)
+{
+	t_inp	*delimiter;
+
+	delimiter = NULL;
+	while ((*cp))
+	{
+		if ((*cp)->c == '\'' && !odd_slashes(cp))
+		{
+			(*cp) = (*cp)->next;
+			break ;
+		}
+		else
+			inp_insert_posat(&delimiter, (*cp)->c);
+		(*cp) = (*cp)->next;
+	}
+	whats_going_on(&delimiter, sh);
+}
+
+int			working_context(int context, char c)
+{
+	if (c == '\"')
+	{
+		if (context & QUOTE)
+			return (0);
+	}
+	if (c == '$')
+	{
+		if (context & QUOTE)
+			return (0);
+	}
+	return (1);
+}
+
 void		whats_going_on(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
-	int		quote;
-	int		dquote;
 
-	quote = 0;
-	dquote = 0;
 	if ((cp = (*inp)))
 	{
 		while (cp)
 		{
-			if (cp->c == '\"' && !quote && !odd_slashes(&cp))
+			if (cp->c == '\n')
+				while (1)
+					;
+			if (cp->c == '\"' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 			{
-				if (dquote)
-				{
-					ft_putchar(']');
-					dquote = 0;
-				}
-				else
-				{
-					ft_putchar('[');
-					dquote = 1;
-				}
+				ft_putchar('[');
+				sh->context = update_context(sh->context, DQUOTE);
+				dquote_inp(&cp->next, sh);
+				sh->context = update_context(sh->context, DQUOTE);
+				ft_putchar(']');
 			}
-			else if (cp->c == '\'' && !dquote)
+			else if (cp->c == '\'')
 			{
-				if (quote)
-				{
-					ft_putchar(')');
-					quote = 0;
-				}
-				else
-				{
-					if (!odd_slashes(&cp))
-					{
-						ft_putchar('(');
-						quote = 1;
-					}
-				}
+				ft_putchar('(');
+				sh->context = update_context(sh->context, QUOTE);
+				quote_inp(&cp->next, sh);
+				sh->context = update_context(sh->context, QUOTE);
+				ft_putchar(')');
 			}
-			else if (cp->c == '$' && !quote && !odd_slashes(&cp))
+			else if (cp->c == '$' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 				print_variable(&cp, sh);
 			else
 				ft_putchar(cp->c);
@@ -123,6 +173,5 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 			else
 				break ;
 		}
-		custom_return();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 04:50:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 06:15:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,6 @@ void					parse(t_sh *sh);
 t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
 void					contcat_inp(t_inp **inp, t_inp **ret);
 void					whats_going_on(t_inp **inp, t_sh *sh);
+int						update_context(int context, int flag);
 
 #endif
