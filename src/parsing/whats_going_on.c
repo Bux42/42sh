@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 07:03:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/10 07:57:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,25 @@ void		quote_inp(t_inp **cp, t_sh *sh)
 	whats_going_on(&delimiter, sh);
 }
 
+void		bquote_inp(t_inp **cp, t_sh *sh)
+{
+	t_inp	*delimiter;
+
+	delimiter = NULL;
+	while ((*cp))
+	{
+		if ((*cp)->c == '`')
+		{
+			(*cp) = (*cp)->next;
+			break ;
+		}
+		else
+			inp_insert_posat(&delimiter, (*cp)->c);
+		(*cp) = (*cp)->next;
+	}
+	whats_going_on(&delimiter, sh);
+}
+
 int			working_context(int context, char c)
 {
 	if (c == '\"')
@@ -132,6 +151,13 @@ int			working_context(int context, char c)
 	if (c == '$')
 	{
 		if (context & QUOTE)
+			return (0);
+	}
+	if (c == ';')
+	{
+		if (context & QUOTE)
+			return (0);
+		if (context & DQUOTE)
 			return (0);
 	}
 	return (1);
@@ -164,8 +190,18 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 				sh->context = update_context(sh->context, QUOTE);
 				ft_putchar(')');
 			}
+			else if (cp->c == '`' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
+			{
+				ft_putchar('<');
+				sh->context = update_context(sh->context, BQUOTE);
+				bquote_inp(&cp->next, sh);
+				sh->context = update_context(sh->context, BQUOTE);
+				ft_putchar('>');
+			}
 			else if (cp->c == '$' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 				print_variable(&cp, sh);
+			else if (cp->c == ';' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
+				custom_return();
 			else
 				ft_putchar(cp->c);
 			if (cp)
