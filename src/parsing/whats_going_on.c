@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/11 00:36:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 00:56:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,25 +183,68 @@ int			normal_char(char c)
 	return (0);
 }
 
+int			is_sep(t_inp **inp, t_inp *cp, int context)
+{
+	t_inp	*tmp;
+
+	if ((tmp = (*inp)))
+	{
+		if (cp->c == ';')
+		{
+			if ((context & QUOTE) || (context & DQUOTE))
+				return (0);
+			else
+			{
+				ft_putchar(cp->c);
+				(*inp) = (*inp)->next;
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
 void		whats_going_on(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
+	int		i;
 
+	i = 0;
 	if ((cp = (*inp)))
 	{
 		while (cp)
 		{
 			if (normal_char(cp->c) && working_context(sh->context, '\0'))
 			{
-				ft_putchar('|');
+				if (i == 0)
+				{
+					ft_putchar('_');
+				}
+				else
+					ft_putchar('|');
 				while (cp)
 				{
 					if (is_space(cp->c))
 						break ;
+					else if (is_sep(&cp, cp, sh->context))
+					{
+						if (i == 0)
+							ft_putchar('_');
+						else
+							ft_putchar('|');
+						whats_going_on(&cp, sh);
+						return ;
+					}
 					ft_putchar(cp->c);
 					cp = cp->next;
 				}
-				ft_putchar('|');
+				if (i == 0)
+				{
+					i++;
+					ft_putchar('_');
+				}
+				else
+					ft_putchar('|');
 			}
 			if (!cp)
 				break ;
@@ -232,7 +275,10 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 			else if (cp->c == '$' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 				print_variable(&cp, sh);
 			else if (cp->c == ';' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
+			{
+				i = 0;
 				custom_return();
+			}
 			else
 				ft_putchar(cp->c);
 			if (cp)

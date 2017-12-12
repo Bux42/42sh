@@ -6,11 +6,34 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/08 21:48:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 02:08:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		check_pasted(t_sh *sh)
+{
+	int		i;
+	char	buff[5];
+
+	i = -1;
+	if (sh->buff[0] == 27 || sh->buff[1] == '\0')
+		treat_input(sh);
+	else
+	{
+		while (sh->buff[++i])
+			buff[i] = sh->buff[i];
+		buff[i] = '\0';
+		sh->buff[1] = '\0';
+		i = -1;
+		while (buff[++i])
+		{
+			sh->buff[0] = buff[i];
+			treat_input(sh);
+		}
+	}
+}
 
 int			main(int ac, char **av, char **env)
 {
@@ -53,7 +76,7 @@ int			main(int ac, char **av, char **env)
 	sh->context = 0;
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
-		if (read(1, sh->buff, 5))
-			treat_input(sh);
+		if ((sh->retval = read(1, sh->buff, 5)))
+			check_pasted(sh);
 	return (0);
 }

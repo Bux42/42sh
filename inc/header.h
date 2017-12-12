@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 06:15:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 01:38:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void					prompt_colors(int i);
 
 void					free_null(char **str);
 
+void					check_pasted(t_sh *sh);
 void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
 void					delete_letter(t_sh *sh, t_inp **inp);
