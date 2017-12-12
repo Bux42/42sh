@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 05:29:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 07:44:30 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ void		restaure_history_from_file(t_sh *sh)
 	t_inp	*inp;
 
 	inp = NULL;
+	sh->hist_res = 1;
 	while (get_next_line(sh->fd, &str))
 	{
 		i = -1;
 		while (str[++i] && str[i] > 31 && str[i] < 127)
 			inp_insert_posat(&inp, str[i]);
 		if (inp)
-			history_push_front(&sh->history, inp);
+			history_push_front(&sh->history, inp, sh);
 		free_list_from_beginning(&inp);
 		free(str);
 	}
+	sh->hist_res = 0;
 }
 
 void		clear_line(t_sh *sh, t_inp **inp)

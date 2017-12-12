@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 01:38:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 07:25:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct			s_sh
 	int					inp_len;
 	int					history_len;
 	struct s_his		*history_pos;
+	int					hist_res;
 	int					width;
 	int					retval;
 	char				pwd[2048];
@@ -159,8 +160,8 @@ void					free_list_before(t_inp **cp);
 
 void					paste_after(t_sh *sh, t_inp **inp);
 
-void					history_push_front(t_his **history, t_inp *inp);
-t_his					*history_new(t_inp *inp);
+void					history_push_front(t_his **history, t_inp *inp, t_sh *sh);
+t_his					*history_new(t_inp *inp, t_sh *sh);
 int						history_len(t_his **history);
 
 void					search_history_backward(t_sh *sh, t_his **history);

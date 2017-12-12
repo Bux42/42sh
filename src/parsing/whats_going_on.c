@@ -6,11 +6,18 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 00:56:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 07:18:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int			update_context(int context, int flag)
+{
+	if (context & flag)
+		return (context - flag);
+	return (context | flag);
+}
 
 char		*parse_variable_name(t_inp **inp)
 {
@@ -195,7 +202,8 @@ int			is_sep(t_inp **inp, t_inp *cp, int context)
 				return (0);
 			else
 			{
-				ft_putchar(cp->c);
+				custom_return();
+				ft_putstr("New Command Line: ");
 				(*inp) = (*inp)->next;
 				return (1);
 			}
@@ -216,22 +224,22 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 		{
 			if (normal_char(cp->c) && working_context(sh->context, '\0'))
 			{
+				custom_return();
 				if (i == 0)
-				{
-					ft_putchar('_');
-				}
+					ft_putstr("Exec Name: ");
 				else
-					ft_putchar('|');
+					ft_putstr("Argument to Exe: ");
 				while (cp)
 				{
 					if (is_space(cp->c))
 						break ;
 					else if (is_sep(&cp, cp, sh->context))
 					{
+						custom_return();
 						if (i == 0)
-							ft_putchar('_');
+							ft_putstr("Exec Name: ");
 						else
-							ft_putchar('|');
+							ft_putstr("Argument to Exe: ");
 						whats_going_on(&cp, sh);
 						return ;
 					}
@@ -239,17 +247,17 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 					cp = cp->next;
 				}
 				if (i == 0)
-				{
 					i++;
-					ft_putchar('_');
-				}
-				else
-					ft_putchar('|');
 			}
 			if (!cp)
 				break ;
 			if (cp->c == '\"' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 			{
+				if (i == 1)
+				{
+					custom_return();
+					ft_putstr("Argument to Exe: ");
+				}
 				ft_putchar('[');
 				sh->context = update_context(sh->context, DQUOTE);
 				dquote_inp(&cp->next, sh);

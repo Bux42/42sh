@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/11 00:41:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 07:44:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			history_len(t_his **history)
 	return (i);
 }
 
-t_his		*history_new(t_inp *inp)
+t_his		*history_new(t_inp *inp, t_sh *sh)
 {
 	t_his	*ret;
 	t_inp	*cp;
@@ -39,12 +39,16 @@ t_his		*history_new(t_inp *inp)
 		return (NULL);
 	while (inp)
 	{
+		if (!sh->hist_res)
+			write(sh->fd, &inp->c, 1);
 		inp_insert_posat(&cp, inp->c);
 		if (inp->next)
 			inp = inp->next;
 		else
 			break ;
 	}
+	if (!sh->hist_res)
+		write(sh->fd, "\n", 1);
 	while (inp->previous)
 		inp = inp->previous;
 	ret->next = NULL;
@@ -53,15 +57,15 @@ t_his		*history_new(t_inp *inp)
 	return (ret);
 }
 
-void		history_push_front(t_his **history, t_inp *inp)
+void		history_push_front(t_his **history, t_inp *inp, t_sh *sh)
 {
 	t_his	*first;
 
 	if (!(*history))
-		(*history) = history_new(inp);
+		(*history) = history_new(inp, sh);
 	else
 	{
-		first = history_new(inp);
+		first = history_new(inp, sh);
 		while ((*history)->previous)
 			(*history) = (*history)->previous;
 		(*history)->previous = first;

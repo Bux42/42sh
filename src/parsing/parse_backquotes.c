@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 23:14:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 04:36:43 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 	}
 	return (ret);
 }
-
-int			update_context(int context, int flag)
-{
-	if (context & flag)
-		return (context - flag);
-	return (context | flag);
-}
-
-void		update_context_color(int context)
-{
-	ft_putstr("\x1b[0m");
-	if (context & DQUOTE)
-		ft_putstr("\x1b[36m");
-}
-
 void		parse(t_sh *sh)
 {
 	t_inp	*clean;
