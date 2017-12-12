@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 04:36:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 08:44:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void		concat_inp(t_inp **inp, t_inp **ret, t_inpl *inpl)
 	{
 		while (cp)
 		{
-			inp_insert_posat(ret, cp->c);
+			if (cp->c == '\\' && !cp->next && inpl->next)
+				;
+			else
+				inp_insert_posat(ret, cp->c);
 			if (!cp->next)
 				if (inpl->next)
 					if (cp->c != '\\')

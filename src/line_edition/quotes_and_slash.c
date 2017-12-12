@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 23:28:18 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/10 04:25:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 08:48:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_inp		*get_closing_quote(t_sh *sh, t_inp **inpl)
 			else
 				break ;
 		}
-		if (tmp == '\0')
+		if (tmp != sh->expected_quote)
 		{
 			print_quote(sh->expected_quote, sh);
 			return (NULL);

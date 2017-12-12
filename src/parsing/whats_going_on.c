@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 07:18:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/12 08:50:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ void		bquote_inp(t_inp **cp, t_sh *sh)
 
 int			working_context(int context, char c)
 {
+	if (c == '\'')
+		if (context & DQUOTE)
+			return (0);
 	if (c == '\"')
 	{
 		if (context & QUOTE)
@@ -251,6 +254,8 @@ void		whats_going_on(t_inp **inp, t_sh *sh)
 			}
 			if (!cp)
 				break ;
+			if (redirection(&cp) && working_context(sh->context, cp->c))
+				;
 			if (cp->c == '\"' && !odd_slashes(&cp) && working_context(sh->context, cp->c))
 			{
 				if (i == 1)
