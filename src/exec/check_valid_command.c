@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 05:10:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 07:20:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char		*found_exec_path(char *path, char *command)
 		while ((fl = readdir(od)))
 			if (ft_strcmp(command, fl->d_name) == 0 && ++len)
 				break ;
+		closedir(od);
 		if (!len)
 			return (NULL);
 		len += ft_strlen(command);
@@ -36,10 +37,38 @@ char		*found_exec_path(char *path, char *command)
 		ft_strcat(full_path, path);
 		ft_strcat(full_path, "/");
 		ft_strcat(full_path, command);
-		closedir(od);
-		ft_putstr(full_path);
 	}
 	return (full_path);
+}
+
+char		*check_exec_path(char *command, t_env **env, int rep)
+{
+	char	*home;
+	int		len;
+	char	*tmp;
+
+	len = 0;
+	ft_putstr(command);
+	custom_return();
+	if (command[0] == '~' && command[1] == '/')
+	{
+		if ((home = get_specific_env("HOME=", env)))
+		{
+			len += ft_strlen(home);
+			len += ft_strlen(&command[1]);
+			if (!(tmp = (char*)malloc(sizeof(char) * (len + 1))))
+				return (NULL);
+			ft_bzero(tmp, len);
+			ft_strcat(tmp, home);
+			free(home);
+			ft_strcat(tmp, &command[1]);
+			if (rep)
+				free(command);
+			ft_putstr(tmp);
+			return (tmp);
+		}
+	}
+	return (command);
 }
 
 char		*existing_command(char *command, t_env **env)
@@ -52,9 +81,9 @@ char		*existing_command(char *command, t_env **env)
 	i = -1;
 	path_list = NULL;
 	exec_path = NULL;
-	if (command[0] == '/' || command[1] == '/')
-		;
-	else if ((path = get_specific_env("PATH=" ,env)))
+	if (command[0] == '/')
+		return (command);
+	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((path_list = ft_strsplit(path, ':')))
 		{
@@ -65,6 +94,7 @@ char		*existing_command(char *command, t_env **env)
 			while (path_list[++i])
 				free(path_list[i]);
 			free(path_list);
+			free(path);
 		}
 	}
 	return (exec_path);

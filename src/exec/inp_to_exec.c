@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 05:08:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 07:20:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char		*get_command(t_inp **inp, t_sh *sh)
 			(*inp) = (*inp)->next;
 			i++;
 		}
+		command = check_exec_path(command, &sh->env, 1);
 	}
 	return (command);
 }
@@ -112,15 +113,10 @@ void		exec_command(t_inp **inp, t_sh *sh)
 			for (int i = 0; env[i]; i++)
 				free(env[i]);
 			free(env);
-			free(path);
+			for (int i = 0; exec[i]; i++)
+				free(exec[i]);
+			free(exec);
 		}
-		i = 0;
-		while (i < sh->command_lenght)
-		{
-			free(exec[i]);
-			i++;
-		}
-		free(exec);
 	}
 }
 
