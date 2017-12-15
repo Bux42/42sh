@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 04:32:46 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 05:53:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 07:42:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ int		fork_command(char *path, char **exec, char **env)
 	pid_t	father;
 	int		status;
 
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 	father = fork();
 	if (father == 0)
 	{
-		custom_return();
-		tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 		execve(path, exec, env);
 		exit(0);
 	}

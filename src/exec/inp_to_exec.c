@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 07:20:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 08:15:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			command_length(t_inp **inp)
 	{
 		while (cp && is_space(cp->c))
 			cp = cp->next;
-		while (cp && cp->next && !is_space(cp->c) && ++i)
+		while (cp && !is_space(cp->c) && ++i)
 			cp = cp->next;
 	}
 	return (i);
@@ -35,13 +35,11 @@ char		*get_command(t_inp **inp, t_sh *sh)
 	char	*command;
 
 	command = NULL;
-	sh->posy = sh->posy;
 	i = 0;
 	if ((len = command_length(inp)))
 	{
 		if (!(command = (char*)malloc(sizeof(char) * (len + 1))))
 			return (NULL);
-		command[len] = '\0';
 		while ((*inp) && is_space((*inp)->c))
 			(*inp) = (*inp)->next;
 		while ((*inp) && !is_space((*inp)->c))
@@ -50,7 +48,9 @@ char		*get_command(t_inp **inp, t_sh *sh)
 			(*inp) = (*inp)->next;
 			i++;
 		}
-		command = check_exec_path(command, &sh->env, 1);
+		command[i] = '\0';
+		if (command[0] == '~')
+			command = check_exec_path(command, &sh->env, 1);
 	}
 	return (command);
 }
@@ -101,22 +101,32 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		{
 			if (!(exec[i] = get_command(&cp, sh)))
 				return ;
+			ft_putstr(exec[i]);
+			custom_return();
 			i++;
 		}
 		if (!(path = existing_command(exec[0], &sh->env)))
+		{
+			ft_putstr("zsh: no such file or directory: ");
+			ft_putstr(path);
 			sh->retval = 127;
+		}
 		else
 		{
 			env = env_list_to_char(&sh->env);
 			sh->retval = fork_command(path, exec, env);
-			ft_putnbr(sh->retval);
 			for (int i = 0; env[i]; i++)
 				free(env[i]);
 			free(env);
-			for (int i = 0; exec[i]; i++)
-				free(exec[i]);
-			free(exec);
+			free(path);
 		}
+		for (int i = 0; exec[i]; i++)
+		{
+			ft_putstr(exec[i]);
+			custom_return();
+			free(exec[i]);
+		}
+		free(exec);
 	}
 }
 

@@ -6,15 +6,17 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/12/15 07:06:42 by videsvau         ###   ########.fr        #
+#    Updated: 2017/12/15 07:45:33 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
+
+#-fsanitize=address
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
 

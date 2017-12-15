@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 07:20:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 08:16:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ char		*check_exec_path(char *command, t_env **env, int rep)
 	char	*tmp;
 
 	len = 0;
-	ft_putstr(command);
-	custom_return();
 	if (command[0] == '~' && command[1] == '/')
 	{
 		if ((home = get_specific_env("HOME=", env)))
@@ -64,7 +62,6 @@ char		*check_exec_path(char *command, t_env **env, int rep)
 			ft_strcat(tmp, &command[1]);
 			if (rep)
 				free(command);
-			ft_putstr(tmp);
 			return (tmp);
 		}
 	}
@@ -82,7 +79,7 @@ char		*existing_command(char *command, t_env **env)
 	path_list = NULL;
 	exec_path = NULL;
 	if (command[0] == '/')
-		return (command);
+		return (ft_strdup(command));
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((path_list = ft_strsplit(path, ':')))
