@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 02:08:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 03:54:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		check_pasted(t_sh *sh)
 {
 	int		i;
-	char	buff[5];
+	char	buff[6];
 
 	i = -1;
 	if (sh->buff[0] == 27 || sh->buff[1] == '\0')

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 08:33:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 04:36:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct			s_sh
 	char				buff[6];
 	char				expected_quote;
 	int					context;
+	int					command_lenght;
 	int					fd;
 	int					posy;
 	int					prompt_len;
@@ -210,9 +211,30 @@ void					tty_debug(t_sh *sh, t_inp **inp);
 void					parse(t_sh *sh);
 t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
 void					contcat_inp(t_inp **inp, t_inp **ret);
-void					whats_going_on(t_inp **inp, t_sh *sh);
+int						empty_inp(t_inp **inp);
+
+void					lexer_parser(t_inp **inp, t_sh *sh);
+int						working_context(int context, char c);
 int						update_context(int context, int flag);
+void					dquote_inp(t_inp **cp, t_sh *sh);
+void					quote_inp(t_inp **cp, t_sh *sh);
+void					bquote_inp(t_inp **cp, t_sh *sh);
 
 int						redirection(t_inp **inp);
+
+void					print_variable(t_inp **cp, t_sh *sh);
+int						valid_variable_char(char c);
+char					*parse_variable_name(t_inp **inp);
+
+/*						execution										*/
+
+void					valid_command(t_inp **inp, t_sh *sh);
+char					*existing_command(char *command, t_env **env);
+char					**get_full_command(t_inp **inp, t_sh *sh);
+char					*get_command(t_inp **inp, t_sh *sh);
+void					exec_command(t_inp **inp, t_sh *sh);
+
+void					fork_command(char *path, char **exec, char **env);
+char					**env_list_to_char(t_env **env);
 
 #endif

@@ -6,14 +6,14 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/12/12 08:32:44 by videsvau         ###   ########.fr        #
+#    Updated: 2017/12/15 04:39:50 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -51,8 +51,13 @@ line_edition/print_completion.c\
 line_edition/quotes_and_slash.c\
 line_edition/enter_key.c\
 parsing/parse_backquotes.c\
-parsing/whats_going_on.c\
+parsing/lexer_parser.c\
 parsing/redirections.c\
+parsing/variable.c\
+parsing/context_updater.c\
+exec/inp_to_exec.c\
+exec/check_valid_command.c\
+exec/fork_command.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\
