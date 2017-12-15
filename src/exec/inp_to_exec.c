@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 04:53:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 05:08:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		else
 		{
 			env = env_list_to_char(&sh->env);
-			fork_command(path, exec, env);
+			sh->retval = fork_command(path, exec, env);
+			ft_putnbr(sh->retval);
 			for (int i = 0; env[i]; i++)
 				free(env[i]);
 			free(env);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 02:12:01 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 04:07:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/15 05:09:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		print_prompt(t_sh *sh)
 		sh->posy += ft_strlen(sh->pwd);
 		ft_putstr(sh->pwd);
 	}
-	if (sh->retval == 1)
+	if (sh->retval == 0)
 		prompt_colors(2);
 	else
 		prompt_colors(3);
