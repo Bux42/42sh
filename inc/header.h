@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 11:09:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 12:35:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ char					**env_list_to_char(t_env **env);
 /*						builtins										*/
 
 void					*get_builtin_function(char *command);
+int						err_msg(char *message, char *name, int ret);
 
 int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
 

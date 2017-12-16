@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 08:25:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 12:11:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char		*found_exec_path(char *path, char *command)
 		ft_strcat(full_path, path);
 		ft_strcat(full_path, "/");
 		ft_strcat(full_path, command);
-		ft_putstr(full_path);
 	}
 	return (full_path);
 }
