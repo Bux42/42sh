@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 08:16:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 08:25:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*found_exec_path(char *path, char *command)
 		ft_strcat(full_path, path);
 		ft_strcat(full_path, "/");
 		ft_strcat(full_path, command);
+		ft_putstr(full_path);
 	}
 	return (full_path);
 }
@@ -79,6 +80,8 @@ char		*existing_command(char *command, t_env **env)
 	path_list = NULL;
 	exec_path = NULL;
 	if (command[0] == '/')
+		return (ft_strdup(command));
+	if (ft_strcmp(command, "cd") == 0)
 		return (ft_strdup(command));
 	if ((path = get_specific_env("PATH=", env)))
 	{

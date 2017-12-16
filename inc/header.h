@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 07:38:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:09:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,5 +237,17 @@ void					exec_command(t_inp **inp, t_sh *sh);
 char					*check_exec_path(char *command, t_env **env, int free);
 int						fork_command(char *path, char **exec, char **env);
 char					**env_list_to_char(t_env **env);
+
+/*						builtins										*/
+
+void					*get_builtin_function(char *command);
+
+int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
+
+int						change_dir(char **exec, t_env **env);
+int						parse_flag(char **exec);
+int						check_flag(int flag, char letter);
+
+void					set_env(t_env **env, char *name, char *value);
 
 #endif

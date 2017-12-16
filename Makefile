@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/12/15 07:45:33 by videsvau         ###   ########.fr        #
+#    Updated: 2017/12/16 08:59:28 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ parsing/context_updater.c\
 exec/inp_to_exec.c\
 exec/check_valid_command.c\
 exec/fork_command.c\
+builtin/check_builtin.c\
+builtin/change_dir.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\

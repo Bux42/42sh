@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/15 08:15:42 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:42:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 	char	*path;
 	int		i;
 	t_inp	*cp;
+	int		(*builtin_ptr)(char **, t_env **);
 
 	i = 0;
 	if ((cp = (*inp)) && (exec = get_full_command(inp, sh)))
@@ -101,31 +102,31 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		{
 			if (!(exec[i] = get_command(&cp, sh)))
 				return ;
-			ft_putstr(exec[i]);
-			custom_return();
 			i++;
 		}
-		if (!(path = existing_command(exec[0], &sh->env)))
-		{
-			ft_putstr("zsh: no such file or directory: ");
-			ft_putstr(path);
-			sh->retval = 127;
-		}
+		env = env_list_to_char(&sh->env);
+		if ((builtin_ptr = get_builtin_function(exec[0])))
+			sh->retval = builtin_ptr(exec, &sh->env);
 		else
 		{
-			env = env_list_to_char(&sh->env);
-			sh->retval = fork_command(path, exec, env);
-			for (int i = 0; env[i]; i++)
-				free(env[i]);
-			free(env);
-			free(path);
+			if (!(path = existing_command(exec[0], &sh->env)))
+			{
+				ft_putstr("zsh: command not found: ");
+				ft_putstr(path);
+				custom_return();
+				sh->retval = 127;
+			}
+			else
+			{
+				sh->retval = fork_command(path, exec, env);
+				free(path);
+			}
 		}
+		for (int i = 0; env[i]; i++)
+			free(env[i]);
+		free(env);
 		for (int i = 0; exec[i]; i++)
-		{
-			ft_putstr(exec[i]);
-			custom_return();
 			free(exec[i]);
-		}
 		free(exec);
 	}
 }
