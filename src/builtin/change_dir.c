@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 13:43:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/16 14:18:31 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			parse_flags(char **exec, int *index)
 	return (i);
 }
 
-int			custom_chdir(char *path)
+int			custom_chdir(char *path, int flag)
 {
 	struct stat		st;
 	int				rights;
@@ -76,7 +76,7 @@ int			custom_chdir(char *path)
 		return (err_msg("cd: no such file or directory: ", path, -1));
 	else
 	{
-		if (!(S_ISDIR(st.st_mode)))
+		if (!(S_ISDIR(st.st_mode)) && !(S_ISLNK(st.st_mode)))
 			return (err_msg("cd: not a directory: ", path, -1));
 		else
 		{
@@ -85,8 +85,13 @@ int			custom_chdir(char *path)
 			rights += (st.st_mode & S_IXUSR) ? 1 : 0;
 			if (!rights)
 				return (err_msg("cd: permission denied: ", path, -1));
-			else if (chdir(path) == -1)
-				return (err_msg("wtf have you done :", path, -1));
+			else
+			{
+				if (flag & 2)
+					;
+				if (chdir(path) == -1)
+					return (err_msg("wtf have you done :", path, -1));
+			}
 		}
 	}
 	return (1);
@@ -105,13 +110,13 @@ int			change_dir(char **exec, t_env **env)
 	{
 		if ((home = get_specific_env("HOME=", env)))
 		{
-			custom_chdir(home);
+			custom_chdir(home, flag);
 			free(home);
 		}
 		else
 			ft_putstr("HOME variable does not exist.");
 	}
 	else
-		custom_chdir(exec[index]);
+		custom_chdir(exec[index], flag);
 	return (0);
 }
