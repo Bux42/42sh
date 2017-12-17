@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 11:10:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 08:47:13 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,27 @@ void		env_push_back(t_env **envlist, char *env)
 void		set_env(t_env **env, char *name, char *value)
 {
 	t_env	*cp;
+	int		len;
+	char	*new_env;
 
+	len = ft_strlen(name) + ft_strlen(value);
+	if (!(new_env = (char*)malloc(sizeof(char) * (len + 1))))
+		return ;
+	ft_bzero(new_env, len);
+	ft_strcat(new_env, name);
+	ft_strcat(new_env, value);
 	if ((cp = (*env)))
 	{
-		if (value)
-			;
 		while (cp)
 		{
 			if (ft_strncmp(name, cp->env, ft_strlen(name)) == 0)
-				ft_putstr(cp->env);
+			{
+				free(cp->env);
+				cp->env = new_env;
+				return ;
+			}
 			cp = cp->next;
 		}
 	}
+	env_push_back(env, new_env);
 }

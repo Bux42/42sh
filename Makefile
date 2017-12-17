@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/12/16 12:07:42 by videsvau         ###   ########.fr        #
+#    Updated: 2017/12/17 08:47:36 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ exec/check_valid_command.c\
 exec/fork_command.c\
 builtin/check_builtin.c\
 builtin/change_dir.c\
+builtin/env.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\

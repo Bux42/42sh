@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 14:18:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 09:48:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int			parse_flags(char **exec, int *index)
 					return (-1);
 				else
 					tir++;
-				(*index)++;
+				if (exec[j][1])
+					(*index)++;
 			}
 			else
 				if (tir && (i = check_flag(i, exec[j][k])) == -1)
@@ -64,6 +65,27 @@ int			parse_flags(char **exec, int *index)
 		}
 	}
 	return (i);
+}
+
+int			check_link(char *path, int flag, struct stat st)
+{
+	char	buff[1024];
+	char	getpwd[1024];
+	int		ret;
+
+	if (S_ISLNK(st.st_mode))
+	{
+		if (!(flag & 1))
+		{
+			ft_bzero(buff, 1024);
+			getwd(getpwd);
+			ft_strcat(buff, getpwd);
+			ft_strcat(buff, "/");
+			ft_strcat(buff, path);
+		}
+	}
+	ret = chdir(path);
+	return (ret);
 }
 
 int			custom_chdir(char *path, int flag)
@@ -85,16 +107,28 @@ int			custom_chdir(char *path, int flag)
 			rights += (st.st_mode & S_IXUSR) ? 1 : 0;
 			if (!rights)
 				return (err_msg("cd: permission denied: ", path, -1));
-			else
-			{
-				if (flag & 2)
-					;
-				if (chdir(path) == -1)
-					return (err_msg("wtf have you done :", path, -1));
-			}
+			else if (check_link(path, flag, st) == -1)
+				return (err_msg("wtf have you done :", path, -1));
 		}
 	}
 	return (1);
+}
+
+void		update_env_chdir(char *cur_pwd, char *old_pwd, t_env **env)
+{
+	set_env(env, "PWD=", cur_pwd);
+	set_env(env, "OLDPWD=", old_pwd);
+}
+
+void		chdir_old_pwd(t_env **env, int flag)
+{
+	char	*old_pwd;
+
+	if ((old_pwd = get_specific_env("OLDPWD=", env)))
+	{
+		custom_chdir(old_pwd, flag);
+		free(old_pwd);
+	}
 }
 
 int			change_dir(char **exec, t_env **env)
@@ -102,10 +136,13 @@ int			change_dir(char **exec, t_env **env)
 	int		flag;
 	int		index;
 	char	*home;
+	char	old_pwd[2048];
+	char	cur_pwd[2048];
 
 	index = 1;
 	if ((flag = parse_flags(exec, &index)) == -1)
 		return (-1);
+	getwd(old_pwd);
 	if (!exec[index])
 	{
 		if ((home = get_specific_env("HOME=", env)))
@@ -114,9 +151,14 @@ int			change_dir(char **exec, t_env **env)
 			free(home);
 		}
 		else
-			ft_putstr("HOME variable does not exist.");
+			return (err_msg("cd: HOME not set", "", -1));
 	}
+	else if (exec[index][0] == '-' && !exec[index][1])
+		chdir_old_pwd(env, flag);
 	else
 		custom_chdir(exec[index], flag);
+	getwd(cur_pwd);
+	if (ft_strcmp(cur_pwd, old_pwd) != 0)
+		update_env_chdir(cur_pwd, old_pwd, env);
 	return (0);
 }

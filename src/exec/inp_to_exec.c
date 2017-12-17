@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 12:32:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 08:57:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 			if (!(path = existing_command(exec[0], &sh->env)))
 			{
 				ft_putstr("zsh: command not found: ");
-				ft_putstr(path);
+				ft_putstr(exec[0]);
 				custom_return();
 				sh->retval = 127;
 			}
