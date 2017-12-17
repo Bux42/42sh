@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 08:47:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:28:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,7 @@ int						parse_flag(char **exec);
 int						check_flag(int flag, char letter);
 
 void					set_env(t_env **env, char *name, char *value);
+int						set_env_cmd(char **exec, t_env **env);
 
 int						env(char **exec, t_env **env);
 

@@ -7,8 +7,11 @@
 ## How to use
 
 git clone https://github.com/Bux42/42sh.git
+
 cd 42sh
+
 make
+
 ./21sh
 
 ## Show debug

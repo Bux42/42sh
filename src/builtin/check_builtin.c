@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 08:47:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:28:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void			*get_builtin_function(char *command)
 		return (&change_dir);
 	if (ft_strcmp(command, "env") == 0)
 		return (&env);
+	if (ft_strcmp(command, "setenv") == 0)
+		return (&set_env_cmd);
 	return (NULL);
 }
 

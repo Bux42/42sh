@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/16 06:42:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:14:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		check_pasted(t_sh *sh)
 		i = -1;
 		while (buff[++i])
 		{
+			if (buff[i] == '\t')
+				buff[i] = ' ';
 			sh->buff[0] = buff[i];
 			treat_input(sh);
 		}

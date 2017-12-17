@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 08:44:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:18:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char		*existing_command(char *command, t_env **env)
 	if (ft_strcmp(command, "cd") == 0)
 		return (ft_strdup(command));
 	if (ft_strcmp(command, "env") == 0)
+		return (ft_strdup(command));
+	if (ft_strcmp(command, "setenv") == 0)
 		return (ft_strdup(command));
 	if ((path = get_specific_env("PATH=", env)))
 	{
