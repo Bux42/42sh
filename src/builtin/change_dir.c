@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 10:10:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/17 16:04:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void		update_env_chdir(char *cur_pwd, char *old_pwd, t_env **env)
 	set_env(env, "OLDPWD=", old_pwd);
 }
 
-void		chdir_old_pwd(t_env **env, int flag)
+int			chdir_old_pwd(t_env **env, int flag)
 {
 	char	*old_pwd;
 
@@ -128,7 +128,10 @@ void		chdir_old_pwd(t_env **env, int flag)
 	{
 		custom_chdir(old_pwd, flag);
 		free(old_pwd);
+		return (1);
 	}
+	else
+		return (err_msg("cd: OLDPWD not set", "", -1));
 }
 
 int			change_dir(char **exec, t_env **env)
@@ -154,7 +157,7 @@ int			change_dir(char **exec, t_env **env)
 			return (err_msg("cd: HOME not set", "", -1));
 	}
 	else if (exec[index][0] == '-' && !exec[index][1])
-		chdir_old_pwd(env, flag);
+		return (chdir_old_pwd(env, flag));
 	else
 		custom_chdir(exec[index], flag);
 	getwd(cur_pwd);
