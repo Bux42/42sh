@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 12:58:41 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/20 13:25:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct			s_env
 	char				*env;
 	struct s_env		*next;
 }						t_env;
+
+typedef struct			s_var
+{
+	char				*var;
+	struct s_var		*next;
+}						t_var;
 
 typedef struct			s_inp
 {

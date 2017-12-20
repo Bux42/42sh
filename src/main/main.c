@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 10:14:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/19 13:47:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			main(int ac, char **av, char **env)
 		return (0);
 	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
-	if (!(sh->fd = open("./.history", O_CREAT | O_RDWR)))
+	if (!(sh->fd = open("/tmp/.history", O_CREAT | O_RDWR)))
 		return (0);
 	if (fchmod(sh->fd, 00777) == -1)
 		return (0);

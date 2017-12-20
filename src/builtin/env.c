@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 08:45:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 15:28:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/18 08:27:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			set_env_cmd(char **exec, t_env **env)
 		}
 	}
 	if (!equal)
-		return (err_msg("setenv: missing ':'", "", -1));
+		return (err_msg("setenv: missing '='", "", -1));
 	return (parse_setenv(exec, env));
 }
 

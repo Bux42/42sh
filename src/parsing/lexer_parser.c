@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/13 03:16:11 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/20 17:04:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int			working_context(int context, char c)
 			return (0);
 	}
 	if (c == ';')
+	{
+		if (context & QUOTE)
+			return (0);
+		if (context & DQUOTE)
+			return (0);
+	}
+	if (c == '|')
 	{
 		if (context & QUOTE)
 			return (0);
@@ -69,8 +76,6 @@ int			is_sep(t_inp **inp, t_inp *cp, int context)
 				return (0);
 			else
 			{
-				custom_return();
-				ft_putstr("New Command Line: ");
 				(*inp) = (*inp)->next;
 				return (1);
 			}
@@ -83,17 +88,29 @@ void		lexer_parser(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
 
-	sh->posy = sh->posy;
 	if ((cp = (*inp)))
 	{
 		while (cp)
 		{
-			if (cp->c == '\'' && working_context(sh->context, cp->c))
-				;
-			if (cp->c == ';' && working_context(sh->context, cp->c))
+			if (cp && cp->c == '\'' && working_context(sh->context, cp->c))
+				sh->context = update_context(sh->context, QUOTE);
+			if (cp && cp->c == '\"' && working_context(sh->context, cp->c))
+				sh->context = update_context(sh->context, DQUOTE);
+			if (cp && cp->c == '$' && working_context(sh->context, cp->c))
+			{
+				print_variable(&cp, sh);
+			}
+			if (cp && cp->c == ';' && working_context(sh->context, cp->c))
+			{
 				custom_return();
-			ft_putchar(cp->c);
-			cp = cp->next;
+				lexer_parser(&cp->next, sh);
+				return ;
+			}
+			if (cp)
+			{
+				ft_putchar(cp->c);
+				cp = cp->next;
+			}
 		}
 	}
 }

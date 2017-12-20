@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 08:47:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/18 08:14:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void		set_env(t_env **env, char *name, char *value)
 		}
 	}
 	env_push_back(env, new_env);
+	free(new_env);
 }

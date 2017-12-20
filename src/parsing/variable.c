@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/13 02:06:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2017/12/20 16:23:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*parse_variable_name(t_inp **inp)
 	{
 		while (cp)
 		{
-			if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t')
+			if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t' && cp->c != ';')
 				len++;
 			else
 				break ;
@@ -32,14 +32,15 @@ char		*parse_variable_name(t_inp **inp)
 		if (!len)
 			return (NULL);
 	}
-	if (!(ret = (char*)malloc(sizeof(char) * (len + 1))))
+	if (!(ret = (char*)malloc(sizeof(char) * (len + 2))))
 		return (NULL);
-	ret[len] = '\0';
+	ret[len + 1] = '\0';
+	ret[len] = '=';
 	cp = (*inp);
 	len = 0;
 	while (cp)
 	{
-		if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t')
+		if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t' && cp->c != ';')
 			ret[len] = cp->c;
 		else
 			break ;
@@ -64,23 +65,17 @@ void		print_variable(t_inp **cp, t_sh *sh)
 {
 	char	*variable;
 	char	*get_variable;
+	int		i;
 
-	ft_putchar('{');
-	(*cp) = (*cp)->next;
-	variable = parse_variable_name(cp);
-	ft_putstr(variable);
-	if ((get_variable = get_specific_env(variable, &sh->env)))
-		ft_putstr(&get_variable[1]);
-	while (*cp)
+	if ((variable = parse_variable_name(&(*cp)->next)))
 	{
-		if (valid_variable_char((*cp)->c))
+		if ((get_variable = get_specific_env(variable, &sh->env)))
 		{
-			if (!get_variable)
-				ft_putchar((*cp)->c);
+			i = ft_strlen(variable);
+			while (i--)
+				(*cp) = (*cp)->next;
+			ft_putstr(&get_variable[1]);
 		}
-		else
-			break ;
-		(*cp) = (*cp)->next;
+		free(variable);
 	}
-	ft_putchar('}');
 }
