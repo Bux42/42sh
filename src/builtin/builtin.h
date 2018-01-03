@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/03 13:29:58 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/03 14:27:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 */
 int		unset_env_cmd(char **exec, t_env **env);
 int		builtin_echo(char **exec, t_env **env);
-/*int		builtin_exit(char **input);
+int		builtin_exit(char **exec, t_env **env);
+/*
 //C EST UN GROS BORDEL ENTRE DEUX CODES POUR LE MOMENT
 int		builtin_cd(chr **input, t_list **env);
 int		builtin_unsetenv(char **input, t_list **env);
