@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/20 10:25:41 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:43:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void		parse(t_sh *sh)
 		sh->context = 0;
 		lexer_parser(&clean, sh);
 		custom_return();
-		//valid_command(&clean, sh);
+		valid_command(&clean, sh);
 	}
 	free_list_from_beginning(&clean);
 }

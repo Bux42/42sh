@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/20 13:25:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:26:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,72 +24,9 @@
 # include <curses.h>
 # include <sys/stat.h>
 # include <dirent.h>
-# include "../libft/includes/libft.h"
-
-typedef struct			s_env
-{
-	char				*env;
-	struct s_env		*next;
-}						t_env;
-
-typedef struct			s_var
-{
-	char				*var;
-	struct s_var		*next;
-}						t_var;
-
-typedef struct			s_inp
-{
-	char				c;
-	int					pos;
-	struct s_inp		*next;
-	struct s_inp		*previous;
-}						t_inp;
-
-typedef struct			s_inpl
-{
-	struct s_inp		*inp;
-	struct s_inpl		*next;
-	struct s_inpl		*previous;
-}						t_inpl;
-
-typedef struct			s_his
-{
-	struct s_inp		*inp;
-	struct s_his		*next;
-	struct s_his		*previous;
-}						t_his;
-
-typedef struct			s_sh
-{
-	char				*tty;
-	char				*home_env;
-	char				*clipboard;
-	char				*comp_debug;
-	char				*comp_remain;
-	char				*comp_path;
-	int					old_len;
-	int					over;
-	int					dec;
-	char				buff[6];
-	char				expected_quote;
-	int					context;
-	int					command_lenght;
-	int					fd;
-	int					posy;
-	int					prompt_len;
-	int					pos_at;
-	int					inp_len;
-	int					history_len;
-	struct s_his		*history_pos;
-	int					hist_res;
-	int					width;
-	int					retval;
-	char				pwd[2048];
-	struct s_env		*env;
-	struct s_inpl		*inpl;
-	struct s_his		*history;
-}						t_sh;
+# include "typedef.h"
+//# include "../libft/includes/libft.h"
+//# include "../src/builtin/builtin.h"
 
 /*						initialize_term									*/
 
@@ -257,7 +194,7 @@ int						check_flag(int flag, char letter);
 
 void					set_env(t_env **env, char *name, char *value);
 int						set_env_cmd(char **exec, t_env **env);
-int						unset_env_cmd(char **exec, t_env **env);
+//int						unset_env_cmd(char **exec, t_env **env);
 
 int						env(char **exec, t_env **env);
 

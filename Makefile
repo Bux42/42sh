@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2017/12/18 09:46:23 by videsvau         ###   ########.fr        #
+#    Updated: 2018/01/03 13:32:03 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\
 env/get_env.c\
-pwd/print_prompt.c
+pwd/print_prompt.c\
+builtin/builtin_echo.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

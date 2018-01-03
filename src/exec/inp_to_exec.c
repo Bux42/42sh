@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/18 09:19:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:40:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "../builtin/builtin.h"
 
 int			command_length(t_inp **inp)
 {

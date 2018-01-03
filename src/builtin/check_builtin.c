@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 12:58:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:27:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "builtin.h"
 
 int				err_msg(char *message, char *name, int ret)
 {
@@ -30,6 +31,8 @@ void			*get_builtin_function(char *command)
 		return (&set_env_cmd);
 	if (ft_strcmp(command, "unsetenv") == 0)
 		return (&unset_env_cmd);
+	if (ft_strcmp(command, "echo") == 0)
+		return (&builtin_echo);
 	return (NULL);
 }
 
