@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/03 14:17:18 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/11 11:14:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			*get_builtin_function(char *command)
 	if (ft_strcmp(command, "setenv") == 0)
 		return (&set_env_cmd);
 	if (ft_strcmp(command, "unsetenv") == 0)
-		return (&unset_env_cmd);
+		return (&builtin_unsetenv);
 	if (ft_strcmp(command, "echo") == 0)
 		return (&builtin_echo);
 	if (ft_strcmp(command, "exit") == 0)

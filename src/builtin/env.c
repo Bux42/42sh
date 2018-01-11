@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 08:45:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/18 08:27:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/11 12:23:41 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,47 +39,6 @@ int			parse_setenv(char **exec, t_env **env)
 	free(name);
 	free(value);
 	return (1);
-}
-
-int			delete_env(t_env **tmp, t_env **cp, t_env **env)
-{
-	if (*tmp)
-	{
-		(*tmp)->next = (*cp)->next;
-		free((*cp)->env);
-		free(*cp);
-	}
-	else
-	{
-		(*tmp) = (*cp);
-		(*env) = (*env)->next;
-		free((*tmp)->env);
-		free(*tmp);
-	}
-	return (1);
-}
-
-int			unset_env_cmd(char **exec, t_env **env)
-{
-	t_env	*cp;
-	t_env	*tmp;
-
-	tmp = NULL;
-	if (!exec[1])
-		return (err_msg("unsetenv: missing argument", "", -1));
-	if (exec[2])
-		return (err_msg("unsetenv: too many arguments", "", -1));
-	if ((cp = (*env)))
-	{
-		while (cp)
-		{
-			if (ft_strncmp(exec[1], cp->env, ft_strlen(exec[1])) == 0)
-				return (delete_env(&tmp, &cp, env));
-			tmp = cp;
-			cp = cp->next;
-		}
-	}
-	return (err_msg("unsetenv: couldn't find env ", exec[1], -1));
 }
 
 int			set_env_cmd(char **exec, t_env **env)

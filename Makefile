@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/01/03 14:16:41 by drecours         ###   ########.fr        #
+#    Updated: 2018/01/11 11:15:03 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ env/env_list.c\
 env/get_env.c\
 pwd/print_prompt.c\
 builtin/builtin_echo.c\
-builtin/builtin_exit.c
+builtin/builtin_exit.c\
+builtin/builtin_unsetenv.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
