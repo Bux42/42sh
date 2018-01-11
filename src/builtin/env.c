@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 08:45:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/11 12:23:41 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/11 15:46:10 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ int			parse_setenv(char **exec, t_env **env)
 	return (1);
 }
 
+int	already_here(t_env **env, char **exec)
+{
+	t_env	*cp;
+	int		stop;
+
+	stop = 0;
+	while (exec[1][stop] != '=')
+		stop++;
+	cp = *env;
+	while (cp)
+	{
+		if ((ft_strncmp(exec[1], cp->env, stop)) == 0)
+			return (0);
+		cp = cp->next;
+	}
+	return (1);
+}
+
 int			set_env_cmd(char **exec, t_env **env)
 {
 	int		i;
@@ -50,7 +68,7 @@ int			set_env_cmd(char **exec, t_env **env)
 	equal = 0;
 	if (!exec[1])
 		return (err_msg("setenv: missing argument", "", -1));
-	if (exec[2])
+	if (exec[2] && exec[3])
 		return (err_msg("setenv: too many arguments", "", -1));
 	while (exec[1][++i])
 	{
@@ -61,6 +79,9 @@ int			set_env_cmd(char **exec, t_env **env)
 				return (err_msg("setenv: parse error near '='", "", -1));
 		}
 	}
+	if (exec[2] && exec[2][0] == '0' && exec[2][1] == '\0')
+		if (already_here(env, exec) == 0)
+			return (0);
 	if (!equal)
 		return (err_msg("setenv: missing '='", "", -1));
 	return (parse_setenv(exec, env));
