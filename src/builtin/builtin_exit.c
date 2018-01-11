@@ -6,13 +6,23 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 12:11:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/03 15:11:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/11 10:49:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
 //REMPLACER LOCALE->RET PAR DERNIERE VALEUR DE RETOUR OBTENUE
+
+int			quit(char **input)
+{
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
+	ft_putendl_fd("Bye!", STDOUT_FILENO);
+	if (!input[1])
+		exit(0);
+	exit(ft_atoi(input[1]));
+	return (0);
+}
 
 int			builtin_exit(char **input, t_env **env)
 {
@@ -34,11 +44,7 @@ int			builtin_exit(char **input, t_env **env)
 			}
 	}
 	if (flag == 0)
-		ft_putendl_fd("Bye!", STDOUT_FILENO);
-	if (!input[1])
-		exit(0);
-	if (flag == 0)
-		exit(ft_atoi(input[1]));
+		return (quit(input));
 	ft_putendl_fd((i == 0) ? "exit: Expression Syntax." :
 			"exit: Badly formed number.", STDOUT_FILENO);
 	return (1);
