@@ -6,11 +6,29 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 08:45:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/11 15:46:10 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/11 16:02:31 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "builtin.h"
+
+
+int			print_env(t_env **env)
+{
+	t_env	*cp;
+
+	if ((cp = (*env)))
+	{
+		while (cp)
+		{
+			ft_putstr(cp->env);
+			custom_return();
+			cp = cp->next;
+		}
+	}
+	return (1);
+}
 
 int			parse_setenv(char **exec, t_env **env)
 {
@@ -59,7 +77,7 @@ int	already_here(t_env **env, char **exec)
 	return (1);
 }
 
-int			set_env_cmd(char **exec, t_env **env)
+int			builtin_setenv(char **exec, t_env **env)
 {
 	int		i;
 	int		equal;
@@ -67,7 +85,7 @@ int			set_env_cmd(char **exec, t_env **env)
 	i = -1;
 	equal = 0;
 	if (!exec[1])
-		return (err_msg("setenv: missing argument", "", -1));
+		return (print_env(env));
 	if (exec[2] && exec[3])
 		return (err_msg("setenv: too many arguments", "", -1));
 	while (exec[1][++i])
@@ -85,21 +103,6 @@ int			set_env_cmd(char **exec, t_env **env)
 	if (!equal)
 		return (err_msg("setenv: missing '='", "", -1));
 	return (parse_setenv(exec, env));
-}
-
-void		print_env(t_env **env)
-{
-	t_env	*cp;
-
-	if ((cp = (*env)))
-	{
-		while (cp)
-		{
-			ft_putstr(cp->env);
-			custom_return();
-			cp = cp->next;
-		}
-	}
 }
 
 int			env(char **exec, t_env **env)
