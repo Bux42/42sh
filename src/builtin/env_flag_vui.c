@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:57:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 16:17:41 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 18:07:34 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 
 	i = 1;
 	x = 0;
-	while (exec[i] && (exec[i][0] == '-' || !ft_strchr(exec[i], '=')))
+	while (exec[i] && (exec[i][0] == '-' || (ft_strchr(exec[i], '=') &&
+					exec[i][0] != '=')))
 	{
 		if (exec[i][0] == '-')
 		{
@@ -57,7 +58,7 @@ int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 					ft_putstr("env: option requires an argument -- u");
 					custom_return();
 				}
-				else if (!ft_strchr("ivuP", exec[i][x]))
+				else if (!ft_strchr("ivuP-", exec[i][x]))
 				{
 					ft_putstr("env: illegal option -- ");
 					ft_putchar(exec[i][x]);

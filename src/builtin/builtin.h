@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 17:02:08 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 18:16:00 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int		print_env(t_env **env);
 void	set_env(t_env **env, char *name, char *value);
 int		flag_v_u_i(char ***tab, char **exec, int *verbose);
 char	**flag_i(char **tab, char **exec, int verbose);
+int		flag_equal(char ***tab, char **exec, int verbose);
 char	**unsetenv_tab(char **env, char *key);
 int 	env_free(char **env);
+char	*env_key(char *env_v);
 
 
 /*
