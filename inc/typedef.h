@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/03 13:20:25 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 19:58:27 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef struct			s_env
 	char				*env;
 	struct s_env		*next;
 }						t_env;
+
+typedef struct			s_loc
+{
+	char				*content;
+	struct s_env		*next;
+}						t_loc;
 
 typedef struct			s_var
 {
@@ -76,6 +82,7 @@ typedef struct			s_sh
 	int					retval;
 	char				pwd[2048];
 	struct s_env		*env;
+	struct s_loc		*loc;
 	struct s_inpl		*inpl;
 	struct s_his		*history;
 }						t_sh;

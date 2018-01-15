@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 18:16:00 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 20:09:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		builtin_unsetenv(char **exec, t_env **env);
 int		builtin_echo(char **exec, t_env **env);
 int		builtin_exit(char **exec, t_env **env);
 int		builtin_env(char **exec, t_env **env);
+int		builtin_set(char **exec, t_env **env, t_loc **loc);
 
 int		print_env(t_env **env);
 void	set_env(t_env **env, char *name, char *value);

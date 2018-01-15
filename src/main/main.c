@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/19 13:47:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/15 19:59:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			main(int ac, char **av, char **env)
 	sh->comp_debug = NULL;
 	sh->comp_remain = NULL;
 	sh->comp_path = NULL;
+	sh->loc = NULL;
 	sh->old_len = 0;
 	sh->expected_quote = '\0';
 	sh->context = 0;

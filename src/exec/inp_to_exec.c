@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/03 12:40:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 20:09:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char		**get_full_command(t_inp **inp, t_sh *sh)
 			}
 			if (cp)
 				cp = cp->next;
-		}
+	}
 		if (i == 0 || !(full_cmd = (char**)malloc(sizeof(char*) * (i + 1))))
 			return (NULL);
 		sh->command_lenght = i;
@@ -94,7 +94,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 	char	*path;
 	int		i;
 	t_inp	*cp;
-	int		(*builtin_ptr)(char **, t_env **);
+	int		(*builtin_ptr)(char **, t_env **, t_loc **);
 
 	i = 0;
 	if ((cp = (*inp)) && (exec = get_full_command(inp, sh)))
@@ -107,7 +107,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		}
 		env = env_list_to_char(&sh->env);
 		if ((builtin_ptr = get_builtin_function(exec[0])))
-			sh->retval = builtin_ptr(exec, &sh->env);
+			sh->retval = builtin_ptr(exec, &sh->env, &sh->loc);
 		else
 		{
 			if (!(path = existing_command(exec[0], &sh->env)))
