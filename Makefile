@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/01/11 11:15:03 by drecours         ###   ########.fr        #
+#    Updated: 2018/01/15 13:40:07 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ exec/check_valid_command.c\
 exec/fork_command.c\
 builtin/check_builtin.c\
 builtin/change_dir.c\
-builtin/env.c\
 signal/signal_event.c\
 launch_term/init_term.c\
 env/env_list.c\
@@ -70,7 +69,11 @@ env/get_env.c\
 pwd/print_prompt.c\
 builtin/builtin_echo.c\
 builtin/builtin_exit.c\
-builtin/builtin_unsetenv.c
+builtin/builtin_unsetenv.c\
+builtin/builtin_setenv.c\
+builtin/builtin_env.c\
+builtin/env_flag_vui.c\
+builtin/tab_builtin_.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

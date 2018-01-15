@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 12:11:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/11 10:49:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 12:55:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 int			quit(char **input)
 {
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-	ft_putendl_fd("Bye!", STDOUT_FILENO);
+	ft_putstr_fd("Bye!", STDOUT_FILENO);
+	custom_return();
 	if (!input[1])
 		exit(0);
 	exit(ft_atoi(input[1]));
@@ -45,7 +46,8 @@ int			builtin_exit(char **input, t_env **env)
 	}
 	if (flag == 0)
 		return (quit(input));
-	ft_putendl_fd((i == 0) ? "exit: Expression Syntax." :
+	ft_putstr_fd((i == 0) ? "exit: Expression Syntax." :
 			"exit: Badly formed number.", STDOUT_FILENO);
+	custom_return();
 	return (1);
 }

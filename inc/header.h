@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/03 13:26:28 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/11 16:20:26 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,5 @@ int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
 int						change_dir(char **exec, t_env **env);
 int						parse_flag(char **exec);
 int						check_flag(int flag, char letter);
-
-void					set_env(t_env **env, char *name, char *value);
-int						set_env_cmd(char **exec, t_env **env);
-//int						unset_env_cmd(char **exec, t_env **env);
-
-int						env(char **exec, t_env **env);
 
 #endif

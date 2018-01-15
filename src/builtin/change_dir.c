@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 16:04:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/11 15:57:52 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "builtin.h"
 
 int			check_flag(int flag, char letter)
 {

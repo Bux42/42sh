@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/17 08:45:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/11 16:02:31 by drecours         ###   ########.fr       */
+/*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
+/*   Updated: 2018/01/11 16:19:01 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,4 @@ int			builtin_setenv(char **exec, t_env **env)
 	if (!equal)
 		return (err_msg("setenv: missing '='", "", -1));
 	return (parse_setenv(exec, env));
-}
-
-int			env(char **exec, t_env **env)
-{
-	if (exec)
-		;
-	if (!exec[1])
-		print_env(env);
-	return (1);
 }
