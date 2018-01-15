@@ -6,22 +6,20 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:57:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 15:21:23 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 16:17:41 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
 
-int			flag_v_u_i(char ***tab, char **exec)
+int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 {
 	int		i;
-	int		verbose;
 	int		x;
 	char	*tmp;
 
 	i = 1;
-	verbose = 0;
 	x = 0;
 	while (exec[i] && (exec[i][0] == '-' || !ft_strchr(exec[i], '=')))
 	{
@@ -32,27 +30,27 @@ int			flag_v_u_i(char ***tab, char **exec)
 			{
 				if (exec[i][x] == 'v')
 				{
-					verbose++;
-					if (verbose > 1)
+					(*verbose)++;
+					if (*verbose > 1)
 					{
 						ft_putstr("#env verbosity now at ");
-						ft_putstr(ft_itoa(verbose));
+						ft_putstr(ft_itoa(*verbose));
 						custom_return();
 					}
 				}
 				else if (exec[i][x] == 'u' && (exec[i][x + 1] || exec[i + 1]))
 				{
-					if (verbose > 0)
+					tmp = (exec[i][x + 1]) ? &exec[i][x + 1] : exec[i + 1];
+					*tab = unsetenv_tab(*tab, tmp);
+					if (*verbose > 0)
 					{
 						ft_putstr("#env unset:    ");
-						tmp = (exec[i][x + 1]) ? &exec[i][x + 1] : exec[i + 1];
 						ft_putstr(tmp);
 						custom_return();
 					}
-					*tab = unsetenv_tab(*tab, tmp);
-					if (exec[i][x + 1])
-						return (0);
-					i++;
+					if (!exec[i][x + 1])
+						i++;
+					break ;
 				}
 				else if (exec[i][x] == 'u')
 				{
@@ -68,8 +66,8 @@ int			flag_v_u_i(char ***tab, char **exec)
 				}
 				x++;
 			}
-			i++;
 		}
+		i++;
 	}
 	return (1);
 }

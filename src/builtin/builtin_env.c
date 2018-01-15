@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 15:17:52 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 16:22:33 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,24 @@ int					builtin_env(char **exec, t_env **env)
 {
 	char	**tab;
 	int		i;
+	int		verbose;
 
 	i = 0;
+	verbose = 0;
 	if (exec[1])
 	{
 		if (!(tab = env_in_tab(env)))
 			return (-1);
-		if (flag_v_u_i(&tab, exec))
-		i = 0;
-		while (tab[i])
+		if (flag_v_u_i(&tab, exec, &verbose))
 		{
-			ft_putstr(tab[i]);
-			custom_return();
-			i++;
+			tab = flag_i(tab, exec, verbose);
+			i = 0;
+			while (tab[i])
+			{
+				ft_putstr(tab[i]);
+				custom_return();
+				i++;
+			}
 		}
 	}
 	if (!exec[1])

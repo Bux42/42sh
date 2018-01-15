@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/01/15 13:40:07 by drecours         ###   ########.fr        #
+#    Updated: 2018/01/15 15:54:48 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,8 @@ builtin/builtin_unsetenv.c\
 builtin/builtin_setenv.c\
 builtin/builtin_env.c\
 builtin/env_flag_vui.c\
-builtin/tab_builtin_.c
+builtin/env_flag_equal_i.c\
+builtin/tab_builtin.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
