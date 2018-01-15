@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 16:22:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:07:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int					builtin_env(char **exec, t_env **env)
 		if (flag_v_u_i(&tab, exec, &verbose))
 		{
 			tab = flag_i(tab, exec, verbose);
+		//	flag_equal(&tab, exec, &verbose);
 			i = 0;
 			while (tab[i])
 			{
