@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:51:01 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 18:14:39 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/15 19:00:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		flag_equal(char ***tab, char **exec, int verbose)
 
 	i = 0;
 	x = 0;
-	while (exec[++i] && (exec[i][0] == '-' || (ft_strchr(&exec[i][1], '=') &&
+	while (exec[++i] && (exec[i][0] == '-' || (ft_strchr(&exec[i][1], '=') && 
 					exec[i][0] != '=')))
 	{
 		if (exec[i][0] == '-')
