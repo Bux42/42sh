@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 14:52:14 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:25:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int		builtin_exit(char **exec, t_env **env);
 int		builtin_env(char **exec, t_env **env);
 int		builtin_set(char **exec, t_env **env, t_loc **loc);
 int		builtin_local(char **exec, t_env **env, t_loc **loc);
+int		builtin_unset(char **exec, t_env **env, t_loc **loc);
+
+
 
 int		print_env(t_env **env);
 void	set_env(t_env **env, char *name, char *value);
@@ -35,6 +38,7 @@ int		flag_equal(char ***tab, char **exec, int verbose);
 char	**unsetenv_tab(char **env, char *key);
 int 	env_free(char **env);
 char	*env_key(char *env_v);
+int		matching_name(char *env, char *name);
 
 
 /*
@@ -52,8 +56,8 @@ int		builtin_show(t_list **local);
 */
 /*
 int		lg_tab(char **input);
-int		maching_name(char *env, char *name);
-char	*new_env(char **input);
+*/
+/*char	*new_env(char **input);
 int		remove_first(t_list **env, t_list **cp);
 int		remove_between(t_list **cp, t_list **tmp);
 t_list	*chain_env(char **input);

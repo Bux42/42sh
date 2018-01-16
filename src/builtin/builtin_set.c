@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 19:52:33 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 16:09:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:35:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int			matching_name(char *env, char *name)
 	int		i;
 
 	i = 0;
-	while (env[i] == name[i] && name[i] && env[i] && name[i] != '=')
+	while (env[i] == name[i] && name[i] && env[i] && env[i] != '=')
 		i++;
-	if (name[i] == '=' || name[i] == '\0' || env[i] == '=')
+	if (name[i] == '=' || env[i] == '=' || env[i] == '\0')
 		return (1);
 	return (0);
 }
