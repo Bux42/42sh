@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/08 19:35:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/16 18:41:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "../builtin/builtin.h"
 
 int			pos_at(t_inp **inp, int prompt_size)
 {
@@ -87,6 +88,14 @@ void		treat_input(t_sh *sh)
 		}
 		else
 			check_shortcut(sh);
+	}
+	if (sh->buff[0] == 4 && !sh->buff[1])
+	{
+		char *tab[3];
+		tab[0] = "exit";
+		tab[1] = "0";
+		tab[2] = NULL;
+		builtin_exit(tab, &sh->env);
 	}
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
 		move_cursor(sh, &sh->inpl->inp, sh->buff[2]);
