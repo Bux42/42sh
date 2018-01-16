@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:37:40 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/12 03:41:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/16 18:45:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void		signal_event(int signo)
 {
-	if (signo == SIGINT)
-	{
-		tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-		exit(1);
-	}
+	(void)signo;
 }
 
 void		signal_init(void)
