@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/15 20:02:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:52:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void			*get_builtin_function(char *command)
 		return (&builtin_exit);
 	if (ft_strcmp(command, "set") == 0)
 		return (&builtin_set);
+	if (ft_strcmp(command, "local") == 0)
+		return (&builtin_local);
 	return (NULL);
 }
 

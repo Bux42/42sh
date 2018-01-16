@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 19:58:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:58:27 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct			s_env
 typedef struct			s_loc
 {
 	char				*content;
-	struct s_env		*next;
+	struct s_loc		*next;
 }						t_loc;
 
 typedef struct			s_var

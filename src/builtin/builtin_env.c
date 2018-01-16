@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 19:25:39 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:26:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static char			**env_in_tab(t_env **env)
 void				show_args(char **exec)
 {
 	int		i;
+	char	*j;
 
 	i = 0;
 	ft_putstr("#env executing: ");
@@ -87,7 +88,9 @@ void				show_args(char **exec)
 	while (exec[i])
 	{
 		ft_putstr("#env    arg[");
-		ft_putstr(ft_itoa(i));
+		j = ft_itoa(i);
+		ft_putstr(j);
+		free(j);
 		ft_putstr("]= '");
 		ft_putstr(exec[i]);
 		ft_putstr("'");
@@ -106,8 +109,8 @@ int					exec_cmd(t_env *new_env, char **tab,
 
 	i = 0;
 	j = 0;
-		if (verbose > 0)
-			show_args(exec);
+	if (verbose > 0)
+		show_args(exec);
 	if (!(path = existing_command(exec[0], &new_env)))
 	{
 		ft_putstr("env: ");
@@ -123,6 +126,26 @@ int					exec_cmd(t_env *new_env, char **tab,
 		free(path);
 	}
 	return (i);
+}
+
+void		free_list(t_env **env)
+{
+	t_env	*cp;
+	t_env	*tmp;
+
+	tmp = NULL;
+	if ((cp = (*env)))
+	{
+		while (cp)
+		{
+			if (cp->env)
+				free(cp->env);
+			tmp = cp;
+			cp = cp->next;
+			free(tmp);
+		}
+		(*env) = NULL;
+	}
 }
 
 int					builtin_env(char **exec, t_env **env)
@@ -150,8 +173,8 @@ int					builtin_env(char **exec, t_env **env)
 				new_env = tab_in_env(tab);
 				exec_cmd(new_env, tab, &(exec[i]), verbose);
 				env_free(tab);
+				free_list(env);
 				return (i);
-				//free new_env
 			}
 		}
 	}

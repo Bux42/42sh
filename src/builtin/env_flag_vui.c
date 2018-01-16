@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:57:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 18:07:34 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:28:06 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 {
 	int		i;
 	int		x;
+	char	*str;
 	char	*tmp;
 
 	i = 1;
@@ -35,7 +36,9 @@ int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 					if (*verbose > 1)
 					{
 						ft_putstr("#env verbosity now at ");
-						ft_putstr(ft_itoa(*verbose));
+						str = ft_itoa(*verbose);
+						ft_putstr(str);
+						free(str);
 						custom_return();
 					}
 				}
