@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/16 18:55:49 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/16 19:11:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		treat_input(t_sh *sh)
 		else
 			check_shortcut(sh);
 	}
-	if (sh->buff[0] == 4 && !sh->buff[1] && sh->pos_at == 8 && sh->posy == 8)
+	if (sh->buff[0] == 4 && !sh->buff[1] && sh->inp_len == 0)
 	{
 		char *tab[3];
 		tab[0] = "exit";
