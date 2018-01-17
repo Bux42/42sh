@@ -78,13 +78,52 @@ char		**get_full_command(t_inp **inp, t_sh *sh)
 			}
 			if (cp)
 				cp = cp->next;
-	}
+		}
 		if (i == 0 || !(full_cmd = (char**)malloc(sizeof(char*) * (i + 1))))
 			return (NULL);
 		sh->command_lenght = i;
 		full_cmd[i] = NULL;
 	}
 	return (full_cmd);
+}
+
+int			bin_error(const int error_no, char *exec)
+{
+	ft_putstr(exec);
+	ft_putstr(" : ");
+	if (error_no == -1)
+		ft_putstr("Command not found.");
+	if (error_no == -2)
+		ft_putstr("Permission denied.");
+			custom_return();
+	return (error_no);
+}
+
+int 		bin_exists(const char *path, char *exec, int *ret)
+{
+	struct stat		data;
+
+	if (access(path, F_OK) != 0)
+	{
+		*ret = -1;
+		return (bin_error(-1, exec));
+	}
+	if (access(path, X_OK) != 0)
+	{
+		*ret = -2;
+		return (bin_error(-2, exec));
+	}
+	if (stat(path, &data) == -1)
+	{
+		*ret = -1;
+	}
+		return (bin_error(-1, exec));
+	if (!(S_ISREG(data.st_mode)))
+	{
+		*ret = -1;
+		return (bin_error(-1, exec));
+	}
+	return (0);
 }
 
 void		exec_command(t_inp **inp, t_sh *sh)
@@ -117,7 +156,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 				custom_return();
 				sh->retval = 127;
 			}
-			else
+			else if (!bin_exists(path, exec[0], &sh->retval))
 			{
 				sh->retval = fork_command(path, exec, env);
 				free(path);
