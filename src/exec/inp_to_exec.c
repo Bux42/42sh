@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/15 20:09:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/18 15:23:01 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int 		bin_exists(const char *path, char *exec, int *ret)
 	if (stat(path, &data) == -1)
 	{
 		*ret = -1;
-	}
 		return (bin_error(-1, exec));
+	}
 	if (!(S_ISREG(data.st_mode)))
 	{
 		*ret = -1;
@@ -151,12 +151,12 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		{
 			if (!(path = existing_command(exec[0], &sh->env)))
 			{
-				ft_putstr("zsh: command not found: ");
+				ft_putstr("zsh: no such file or directory: ");
 				ft_putstr(exec[0]);
 				custom_return();
 				sh->retval = 127;
 			}
-			else if (!bin_exists(path, exec[0], &sh->retval))
+			else if (bin_exists(path, exec[0], &sh->retval) == 0)
 			{
 				sh->retval = fork_command(path, exec, env);
 				free(path);
