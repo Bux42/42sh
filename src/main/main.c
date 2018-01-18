@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/15 19:59:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/18 20:13:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int			main(int ac, char **av, char **env)
 		return (0);
 	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
-	if (!(sh->fd = open("/tmp/.history", O_CREAT | O_RDWR)))
-		return (0);
-	if (fchmod(sh->fd, 00777) == -1)
+	if (!(sh->fd = open("/tmp/.history", O_CREAT | O_RDWR, 0777)))
 		return (0);
 	get_env(env, sh);
 	sh->history = NULL;
@@ -79,7 +77,7 @@ int			main(int ac, char **av, char **env)
 	sh->context = 0;
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
-		if ((sh->retval = read(1, sh->buff, 5)))
+		if ((sh->retval = read(1, sh->buff, 4)))
 			check_pasted(sh);
 	return (0);
 }
