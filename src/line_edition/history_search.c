@@ -12,6 +12,35 @@
 
 #include "../../inc/header.h"
 
+void		switch_search_mode(t_sh *sh, t_inp **his_search)
+{
+	int		i;
+	t_inp	*cp;
+
+	i = 14;
+	while (i--)
+		custom_left(sh);
+	cp = *his_search;
+	while (cp)
+	{
+		cp = cp->next;
+		custom_left(sh);
+	}
+	if (sh->search == 1 && (sh->search = 2))
+		ft_putstr_endline("fwd", sh);
+	else if (sh->search == 2 && (sh->search = 1))
+		ft_putstr_endline("bck", sh);
+	i = 11;
+	while (i--)
+		custom_right(sh);
+	cp = *his_search;
+	while (cp)
+	{
+		cp = cp->next;
+		custom_right(sh);
+	}
+}
+
 void		erase_previous_search(t_sh *sh, t_inp **search_pos)
 {
 	t_inp	*cp;
