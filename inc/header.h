@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/26 06:50:36 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/27 05:15:38 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void					prompt_colors(int i);
 
 void					free_null(char **str);
 
+void					erase_inp_spaces(t_sh *sh, t_inp **inp);
 void					ft_putstr_endline(char *str, t_sh *sh);
 void					check_pasted(t_sh *sh);
 void					treat_input(t_sh *sh);
@@ -196,7 +197,18 @@ int						check_flag(int flag, char letter);
 /*						history_search									*/
 
 void					history_search(t_sh *sh);
+void					erase_inp(t_sh *sh, t_inp **inp);
+void					erase_previous_search(t_sh *sh, t_inp **search_pos);
 void					treat_input_search(t_sh *sh);
-void					print_search(t_sh *sh, t_inp **search1, t_his **search2, int rep);
+void					add_delete_letter_search(t_sh *sh);
+void					search_input(t_sh *sh);
+void					switch_search_mode(t_sh *sh, t_inp **his_search);
+void					print_search_forward(t_sh *sh, t_inp **his_search, t_his **his, int repeat);
+void					print_search_backward(t_sh *sh, t_inp **his_search, t_his **his, int repeat);
+void					print_match(t_sh *sh);
+void					insert_search(t_sh *sh, t_inp **his_search, t_inp **his_pos);
+void					hide_history_search(t_sh *sh, t_inp **his_search, t_inp **his_pos);
+void					insert_found_history(t_sh *sh, t_inp **search_pos);
+void					restaure_inp(t_sh *sh, t_inp **inp);
 
 #endif

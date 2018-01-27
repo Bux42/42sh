@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 00:30:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/27 04:18:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,10 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	ft_strcat(buff, "\n");
 	ft_strcat(buff, "search_his: ");
 	itoa = ft_itoa(sh->search);
+	ft_strcat(buff, itoa);
+	free(itoa);
+	ft_strcat(buff, "failed search?: ");
+	itoa = ft_itoa(sh->failed_search);
 	ft_strcat(buff, itoa);
 	free(itoa);
 	ft_strcat(buff, "\n");

@@ -6,11 +6,36 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 10:05:11 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 02:49:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/27 04:48:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		erase_previous_search(t_sh *sh, t_inp **search_pos)
+{
+	t_inp	*cp;
+	int		i;
+
+	i = 0;
+	if ((cp = (*search_pos)))
+	{
+		while (i++ < 3)
+			custom_right(sh);
+		erase_inp_spaces(sh, search_pos);
+		ft_putchar(' ');
+		check_endline(sh);
+		cp = (*search_pos);
+		while (cp)
+		{
+			custom_left(sh);
+			cp = cp->next;
+		}
+		i = 0;
+		while (i++ < 4)
+			custom_left(sh);
+	}
+}
 
 void		erase_inp(t_sh *sh, t_inp **inp)
 {
@@ -27,12 +52,7 @@ void		erase_inp(t_sh *sh, t_inp **inp)
 	}
 	if ((cp = (*inp)))
 	{
-		while (cp)
-		{
-			ft_putchar(' ');
-			check_endline(sh);
-			cp = cp->next;
-		}
+		erase_inp_spaces(sh, inp);
 		cp = (*inp);
 		while (cp)
 		{
