@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 14:58:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/27 02:40:38 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,15 @@ typedef struct			s_sh
 	int					hist_res;
 	int					width;
 	int					retval;
+	int					search;
+	int					failed_search;
 	char				pwd[2048];
 	struct s_env		*env;
 	struct s_loc		*loc;
 	struct s_inpl		*inpl;
 	struct s_his		*history;
+	struct s_his		*search_pos;
+	struct s_inp		*his_search;
 }						t_sh;
 
 #endif

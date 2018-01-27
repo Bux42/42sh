@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/18 20:13:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:55:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ void		check_pasted(t_sh *sh)
 
 	i = -1;
 	if (sh->buff[0] == 27 || sh->buff[1] == '\0')
-		treat_input(sh);
+	{
+		if (sh->search)
+			treat_input_search(sh);
+		else
+			treat_input(sh);
+	}
 	else
 	{
 		while (sh->buff[++i])
@@ -32,7 +37,10 @@ void		check_pasted(t_sh *sh)
 			if (buff[i] == '\t')
 				buff[i] = ' ';
 			sh->buff[0] = buff[i];
-			treat_input(sh);
+			if (sh->search)
+				treat_input_search(sh);
+			else
+				treat_input(sh);
 		}
 	}
 }
@@ -75,6 +83,9 @@ int			main(int ac, char **av, char **env)
 	sh->old_len = 0;
 	sh->expected_quote = '\0';
 	sh->context = 0;
+	sh->search = 0;
+	sh->his_search = NULL;
+	sh->search_pos = NULL;
 	ft_bzero(sh->buff, 6);
 	while (ac > -1)
 		if ((sh->retval = read(1, sh->buff, 4)))

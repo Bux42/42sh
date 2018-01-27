@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/11 16:20:26 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/26 06:50:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void					prompt_colors(int i);
 
 void					free_null(char **str);
 
+void					ft_putstr_endline(char *str, t_sh *sh);
 void					check_pasted(t_sh *sh);
 void					treat_input(t_sh *sh);
 void					add_delete_letter(t_sh *sh);
@@ -191,5 +192,11 @@ int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
 int						change_dir(char **exec, t_env **env);
 int						parse_flag(char **exec);
 int						check_flag(int flag, char letter);
+
+/*						history_search									*/
+
+void					history_search(t_sh *sh);
+void					treat_input_search(t_sh *sh);
+void					print_search(t_sh *sh, t_inp **search1, t_his **search2, int rep);
 
 #endif

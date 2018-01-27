@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/16 18:01:08 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/27 01:48:47 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,6 @@ void		check_shortcut(t_sh *sh)
 		insert_completion(sh, &sh->inpl->inp);
 	if (sh->buff[0] == 10)
 		enter_key(sh);
+	if (!sh->expected_quote && (sh->buff[0] == 18 || sh->buff[0] == 6))
+		history_search(sh);
 }
