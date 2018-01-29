@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 14:16:22 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:12:20 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		builtin_set(char **exec, t_env **env, t_loc **loc);
 int		builtin_local(char **exec, t_env **env, t_loc **loc);
 int		builtin_unset(char **exec, t_env **env, t_loc **loc);
 int		builtin_export(char **exec, t_env **env, t_loc **loc);
-int		builtin_myman(char **exec, t_env **env, t_sh *sh);
+int		builtin_myman(char **exec, t_env **env, t_loc **loc, t_sh *sh);
 
 
 
