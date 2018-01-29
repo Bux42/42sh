@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/22 12:55:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:03:14 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		check_pasted(t_sh *sh)
 int			main(int ac, char **av, char **env)
 {
 	t_sh	*sh;
-
+	
 	if (!(sh = (t_sh*)malloc(sizeof(t_sh))))
 		return (0);
 	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
@@ -87,6 +87,8 @@ int			main(int ac, char **av, char **env)
 	sh->his_search = NULL;
 	sh->search_pos = NULL;
 	ft_bzero(sh->buff, 6);
+
+	sh->man_path = find_man_path(av[0]);
 	while (ac > -1)
 		if ((sh->retval = read(1, sh->buff, 4)))
 			check_pasted(sh);

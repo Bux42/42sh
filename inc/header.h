@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 05:15:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:01:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,4 +211,8 @@ void					hide_history_search(t_sh *sh, t_inp **his_search, t_inp **his_pos);
 void					insert_found_history(t_sh *sh, t_inp **search_pos);
 void					restaure_inp(t_sh *sh, t_inp **inp);
 
+
+
+int						path_eval(char *path);
+char					*find_man_path(char *relativ);
 #endif

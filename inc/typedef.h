@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/27 02:40:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/01/29 13:47:22 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct			s_sh
 	struct s_his		*history;
 	struct s_his		*search_pos;
 	struct s_inp		*his_search;
+	char				*man_path;
 }						t_sh;
 
 #endif

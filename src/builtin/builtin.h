@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 17:17:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/29 13:52:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ char	**unsetenv_tab(char **env, char *key);
 int 	env_free(char **env);
 char	*env_key(char *env_v);
 int		matching_name(char *env, char *name);
+
+size_t	path_subcpy(const char *source, char *dest, size_t start, size_t len);
+size_t	path_trim(char *path, size_t size);
 
 
 /*
