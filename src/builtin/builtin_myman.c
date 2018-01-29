@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 15:14:50 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:16:57 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*checkman(char *path, char *file)
 
 int		builtin_myman(char **input, t_env **env, t_loc **loc, t_sh *sh)
 {
-	(void)env;
 	(void)loc;
 	char	*file;
 	char	*(tab[4]);
@@ -52,9 +51,10 @@ int		builtin_myman(char **input, t_env **env, t_loc **loc, t_sh *sh)
 		tab[2] = checkman(sh->man_path, file);
 	if (!tab[2])
 			ft_putstr("doesn't exists");
+	if (!tab[2])
+		custom_return();
 	else
 		builtin_env(tab, env);
-	custom_return();
 	if (input[1])
 		free(file);
 	free(tab[2]);
