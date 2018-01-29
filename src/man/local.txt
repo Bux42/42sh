@@ -1,0 +1,30 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       local /- print all variables locales
+
+
+SYNOPSIS
+       local - write locales variables to the standart output
+
+
+DESCRIPTION
+       This utility just writes all locales variables line by line
+
+
+OPTIONS
+       None.
+
+
+EXIT STATUS
+       The local utility exits 0 on success and >0 if error occurs.
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       January 25, 2018 		    BUILTIN(1)

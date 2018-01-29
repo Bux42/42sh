@@ -1,0 +1,37 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       export
+
+
+SYNOPSIS
+       export [KEY ...] export variable in environment
+
+
+DESCRIPTION
+       The  export utility remove a locale variable and add it to the environ-
+       ment.  If no key is specified, the builtin show all variables locale.
+
+
+OPTIONS
+       None.
+
+
+EXIT STATUS
+       This utility exists 0 on success and >0 if error occurs.
+
+
+EXAMPLE
+       To export the variable "MAN" wich as the value "old":
+
+       $export MAN
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       January 25, 2018 		    BUILTIN(1)

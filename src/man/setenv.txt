@@ -1,0 +1,43 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       setenv
+
+
+SYNOPSIS
+       setenv [KEY[=value]] [overwrite] - Add key to the environment
+
+
+DESCRIPTION
+       This  utility  add  one	KEY to the environment or modify it's value if
+       it's already exists. It also add a value to this key  if  this  one  is
+       specified.   If they are no argument, the environment is write on stan-
+       dart output.  If a "0" overwrite (int) is specified, the value  of  the
+       KEY doens't change if it already exists. If it doesn't exist, it's cre-
+       ate.  If the overwrite is different from "0", the comportement  of  the
+       builtin is the same as with no overwrite.
+
+
+OPTIONS
+       None.
+
+
+EXIT STATUS
+       The setenv utility exits 0 on success and >0 if error occurs.
+
+
+EXAMPLE
+       To add "CAT" to the environment with the key "Norminet" only if the key
+       doesn't already exists:
+
+       $setenv CAT=Norminet 0
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       January 25, 2018 		    BUILTIN(1)

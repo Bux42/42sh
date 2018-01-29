@@ -1,0 +1,28 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       exit -quit the shell
+
+
+SYNOPSIS
+       exit [status]
+
+
+DESCRIPTION
+       The echo utility exit the shell with the specify status.
+
+
+OPTIONS
+       The  status must be an integer number. Otherwise, an error is returned.
+       If the exit status is not provided, exit return the value that returned
+       the last function called.  If there is not, exit return 0.
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       January 24, 2018 		    BUILTIN(1)
