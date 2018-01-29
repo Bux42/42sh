@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:50:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 14:09:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:50:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ char	*find_man_path(char *relative)
 	path = ft_strjoin(getwd(buff), "/");
 	tmp = ft_strjoin(path, relative);
 	free(path);
-	path = ft_strjoin(tmp, "man");
+	path_eval(tmp);
+	path = ft_strjoin(tmp, "man/");
 	free(tmp);
 	i = ft_strlen(path);
-	path[i - 4] = '/';
-	path[i - 5] = 'c';
-	path[i - 6] = 'r';
-	path[i - 7] = 's';
-	path_eval(path);
+	path[i - 5] = '/';
+	path[i - 6] = 'c';
+	path[i - 7] = 'r';
+	path[i - 8] = 's';
 	return (path);
 }

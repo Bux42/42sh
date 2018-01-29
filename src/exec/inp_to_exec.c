@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/18 15:23:01 by drecours         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:25:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 	char	*path;
 	int		i;
 	t_inp	*cp;
-	int		(*builtin_ptr)(char **, t_env **, t_loc **);
+	int		(*builtin_ptr)(char **, t_env **, t_loc **, t_sh *);
 
 	i = 0;
 	if ((cp = (*inp)) && (exec = get_full_command(inp, sh)))
@@ -146,7 +146,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		}
 		env = env_list_to_char(&sh->env);
 		if ((builtin_ptr = get_builtin_function(exec[0])))
-			sh->retval = builtin_ptr(exec, &sh->env, &sh->loc);
+			sh->retval = builtin_ptr(exec, &sh->env, &sh->loc, sh);
 		else
 		{
 			if (!(path = existing_command(exec[0], &sh->env)))
