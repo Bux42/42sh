@@ -12,6 +12,14 @@
 
 #include "../../inc/header.h"
 
+int			check_key(char key, char bf)
+{
+	if (key == '\n'|| key == ' ' || key == '\t'|| ((key == ';' || key == '>'||
+			key == '<' || key == '&'|| key == '|') && !(bf && bf == '\\')))
+		return (0);
+	return (1);
+}
+
 char		*parse_variable_name(t_inp **inp)
 {
 	char	*ret;
@@ -23,7 +31,7 @@ char		*parse_variable_name(t_inp **inp)
 	{
 		while (cp)
 		{
-			if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t' && cp->c != ';')
+			if (check_key(cp->c, cp->previous->c))
 				len++;
 			else
 				break ;
@@ -40,13 +48,16 @@ char		*parse_variable_name(t_inp **inp)
 	len = 0;
 	while (cp)
 	{
-		if (cp->c != '\n' && cp->c != ' ' && cp->c != '\t' && cp->c != ';')
+		if (check_key(cp->c, cp->previous->c))
 			ret[len] = cp->c;
 		else
 			break ;
 		cp = cp->next;
 		len++;
 	}
+	ft_putstr("|");
+	ft_putstr(ret);
+	ft_putstr("|");
 	return (ret);
 }
 
