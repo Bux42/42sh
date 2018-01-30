@@ -55,9 +55,6 @@ char		*parse_variable_name(t_inp **inp)
 		cp = cp->next;
 		len++;
 	}
-	ft_putstr("|");
-	ft_putstr(ret);
-	ft_putstr("|");
 	return (ret);
 }
 
@@ -72,20 +69,24 @@ int			valid_variable_char(char c)
 	return (1);
 }
 
+
 void		print_variable(t_inp **cp, t_sh *sh)
 {
 	char	*variable;
 	char	*get_variable;
-	int		i;
 
 	if ((variable = parse_variable_name(&(*cp)->next)))
 	{
-		if ((get_variable = get_specific_env(variable, &sh->env)))
+		ft_putstr("|");
+		ft_putstr(variable);
+		ft_putstr("|");
+		if ( (get_variable = get_specific_loc(variable, &sh->loc)) || 
+				(get_variable = get_specific_env(variable, &sh->env)))
 		{
-			i = ft_strlen(variable);
-			while (i--)
-				(*cp) = (*cp)->next;
-			ft_putstr(&get_variable[1]);
+		//	replace_variable(cp, get_variable);
+		ft_putstr("|");
+			ft_putstr(&get_variable[0]);
+		ft_putstr("|");
 		}
 		free(variable);
 	}
