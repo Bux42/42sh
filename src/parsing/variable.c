@@ -15,7 +15,7 @@
 int			check_key(char key)
 {
 	if (key == '\n'|| key == ' ' || key == '\t'|| key == ';' || key == '>'||
-			key == '<' || key == '&'|| key == '|')
+			key == '<' || key == '&'|| key == '|' || key == '$')
 		return (0);
 	return (1);
 }
@@ -84,9 +84,11 @@ void		replace_variable(t_inp **cp, char *get_variable)
 	{
 		new = new_inp(get_variable[i]);
 		if (tmp == NULL)
-			(*cp)->previous = new;;
-		if (tmp == NULL)
 			new->next = (*cp);
+		if (tmp == NULL)
+			(*cp)->previous = new;
+		if (tmp == NULL)
+			(*cp) = new;
 		else
 			insert_middle(tmp, new);
 		tmp = new;
@@ -100,8 +102,6 @@ void		replace_variable(t_inp **cp, char *get_variable)
 		free(first);
 		first = tmp;
 	}*/
-	if (tmp->previous == NULL)
-	**cp = *tmp;
 }
 
 void		print_variable(t_inp **cp, t_sh *sh)
@@ -111,17 +111,9 @@ void		print_variable(t_inp **cp, t_sh *sh)
 
 	if ((variable = parse_variable_name(&(*cp)->next)))
 	{
-		ft_putstr("|");
-		ft_putstr(variable);
-		ft_putstr("|");
 		if ( (get_variable = get_specific_loc(variable, &sh->loc)) || 
 				(get_variable = get_specific_env(variable, &sh->env)))
-		{
 			replace_variable(cp, get_variable);
-		ft_putstr("|");
-			ft_putstr(&get_variable[0]);
-		ft_putstr("|");
-		}
 		if (variable)
 			free(variable);
 	}
