@@ -69,6 +69,32 @@ int			valid_variable_char(char c)
 	return (1);
 }
 
+void		remove_key(t_inp **cp, t_inp *key)
+{
+	t_inp	*tmp;
+
+	key = key->next;
+	while (check_key(key->c))
+	{
+		if (!key->previous)
+			(*cp) = (*cp)->next;
+		if (!key->previous)
+			key = key->next;
+		if (!key->previous)
+			free(key->previous);
+		if (!key->previous)
+			key->previous = NULL;
+		else
+		{
+			key->previous->next = key->next;
+			key = key->next;
+			tmp = key->previous->previous;
+			free(key->previous);
+			key->previous = tmp;
+		}
+	}
+}
+
 void		replace_variable(t_inp **cp, char *get_variable)
 {
 	int		i;
@@ -78,7 +104,7 @@ void		replace_variable(t_inp **cp, char *get_variable)
 
 	i = 0;
 	new = NULL;
-	first = ((*cp)->previous) ? (*cp)->previous : NULL;
+	first = *cp;
 	tmp = ((*cp)->previous) ? (*cp)->previous : NULL;
 	while (get_variable[i])
 	{
@@ -94,15 +120,8 @@ void		replace_variable(t_inp **cp, char *get_variable)
 		tmp = new;
 		i++;
 	}
-/*	while (check_key(first->c))
-	{
-		tmp = first->next;
-		first->previous->next = first->next;
-		first->next->previous = first->previous;
-		free(first);
-		first = tmp;
-	}*/
-}
+	remove_key(cp, first);
+
 
 void		print_variable(t_inp **cp, t_sh *sh)
 {
@@ -114,6 +133,8 @@ void		print_variable(t_inp **cp, t_sh *sh)
 		if ( (get_variable = get_specific_loc(variable, &sh->loc)) || 
 				(get_variable = get_specific_env(variable, &sh->env)))
 			replace_variable(cp, get_variable);
+		else
+			remove_key(cp, *cp);
 		if (variable)
 			free(variable);
 	}
