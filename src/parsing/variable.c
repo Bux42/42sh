@@ -121,7 +121,7 @@ void		replace_variable(t_inp **cp, char *get_variable)
 		i++;
 	}
 	remove_key(cp, first);
-
+}
 
 void		print_variable(t_inp **cp, t_sh *sh)
 {
@@ -137,5 +137,13 @@ void		print_variable(t_inp **cp, t_sh *sh)
 			remove_key(cp, *cp);
 		if (variable)
 			free(variable);
+		if ((*cp)->previous)
+		{
+			(*cp)->previous->next = (*cp)->next;
+			if ((*cp)->next)
+				(*cp)->next->previous = (*cp)->previous;
+		}
+		else
+			delete_beginning(cp, (*cp));
 	}
 }
