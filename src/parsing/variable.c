@@ -12,10 +12,10 @@
 
 #include "../../inc/header.h"
 
-int			check_key(char key, char bf)
+int			check_key(char key)
 {
-	if (key == '\n'|| key == ' ' || key == '\t'|| ((key == ';' || key == '>'||
-			key == '<' || key == '&'|| key == '|') && !(bf && bf == '\\')))
+	if (key == '\n'|| key == ' ' || key == '\t'|| key == ';' || key == '>'||
+			key == '<' || key == '&'|| key == '|')
 		return (0);
 	return (1);
 }
@@ -31,7 +31,7 @@ char		*parse_variable_name(t_inp **inp)
 	{
 		while (cp)
 		{
-			if (check_key(cp->c, cp->previous->c))
+			if (check_key(cp->c))
 				len++;
 			else
 				break ;
@@ -48,7 +48,7 @@ char		*parse_variable_name(t_inp **inp)
 	len = 0;
 	while (cp)
 	{
-		if (check_key(cp->c, cp->previous->c))
+		if (check_key(cp->c))
 			ret[len] = cp->c;
 		else
 			break ;
@@ -69,6 +69,40 @@ int			valid_variable_char(char c)
 	return (1);
 }
 
+void		replace_variable(t_inp **cp, char *get_variable)
+{
+	int		i;
+	t_inp	*new;
+	t_inp	*tmp;
+	t_inp	*first;
+
+	i = 0;
+	new = NULL;
+	first = ((*cp)->previous) ? (*cp)->previous : NULL;
+	tmp = ((*cp)->previous) ? (*cp)->previous : NULL;
+	while (get_variable[i])
+	{
+		new = new_inp(get_variable[i]);
+		if (tmp == NULL)
+			(*cp)->previous = new;;
+		if (tmp == NULL)
+			new->next = (*cp);
+		else
+			insert_middle(tmp, new);
+		tmp = new;
+		i++;
+	}
+/*	while (check_key(first->c))
+	{
+		tmp = first->next;
+		first->previous->next = first->next;
+		first->next->previous = first->previous;
+		free(first);
+		first = tmp;
+	}*/
+	if (tmp->previous == NULL)
+	**cp = *tmp;
+}
 
 void		print_variable(t_inp **cp, t_sh *sh)
 {
@@ -83,11 +117,12 @@ void		print_variable(t_inp **cp, t_sh *sh)
 		if ( (get_variable = get_specific_loc(variable, &sh->loc)) || 
 				(get_variable = get_specific_env(variable, &sh->env)))
 		{
-		//	replace_variable(cp, get_variable);
+			replace_variable(cp, get_variable);
 		ft_putstr("|");
 			ft_putstr(&get_variable[0]);
 		ft_putstr("|");
 		}
-		free(variable);
+		if (variable)
+			free(variable);
 	}
 }

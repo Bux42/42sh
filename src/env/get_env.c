@@ -28,6 +28,22 @@ char		*get_specific_env(char *env, t_env **envlist)
 	return (NULL);
 }
 
+char		*get_specific_loc(char *env, t_loc **envlist)
+{
+	t_loc	*cp;
+
+	if ((cp = (*envlist)))
+	{
+		while (cp)
+		{
+			if (ft_strncmp(env, cp->content, ft_strlen(env)) == 0)
+				return (ft_strdup(&cp->content[ft_strlen(env)]));
+			cp = cp->next;
+		}
+	}
+	return (NULL);
+}
+
 void		get_env(char **env, t_sh *sh)
 {
 	int		i;

@@ -40,6 +40,7 @@ void					signal_event(int signo);
 /*						environment										*/
 
 char					*get_specific_env(char *env, t_env **envlist);
+char					*get_specific_loc(char *env, t_loc **envlist);
 void					get_env(char **env, t_sh *sh);
 void					env_push_back(t_env **envlist, char *env);
 t_env					*new_env(char *env);

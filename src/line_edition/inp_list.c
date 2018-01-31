@@ -16,7 +16,7 @@ t_inp		*new_inp(char c)
 {
 	t_inp	*ret;
 
-	if (!(ret = (t_inp*)malloc(sizeof(t_inp))))
+if (!(ret = (t_inp*)malloc(sizeof(t_inp))))
 		return (NULL);
 	ret->next = NULL;
 	ret->previous = NULL;
