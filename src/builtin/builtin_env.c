@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 14:26:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/01 14:13:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ int					builtin_env(char **exec, t_env **env)
 				new_env = tab_in_env(tab);
 				exec_cmd(new_env, tab, &(exec[i]), verbose);
 				env_free(tab);
-				free_list(env);
+				free_list(&new_env);
 				return (i);
 			}
 		}
