@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/20 16:23:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/02 16:56:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,25 @@ int			valid_variable_char(char c)
 	return (1);
 }
 
-void		remove_key(t_inp **cp, t_inp *key)
+void		remove_key(t_inp **cp, int lg)
 {
-	t_inp	*tmp;
-
-	key = key->next;
-	while (check_key(key->c))
+	while (lg -- > 0)
 	{
-		if (!key->previous)
-			(*cp) = (*cp)->next;
-		if (!key->previous)
-			key = key->next;
-		if (!key->previous)
-			free(key->previous);
-		if (!key->previous)
-			key->previous = NULL;
+		ft_putchar('|');
+		ft_putchar((*cp)->c);
+		if ((*cp)->next)
+			*(*cp) = *(*cp)->next;
 		else
 		{
-			key->previous->next = key->next;
-			key = key->next;
-			tmp = key->previous->previous;
-			free(key->previous);
-			key->previous = tmp;
+			*(*cp) = *new_inp('\0');
+			break;
 		}
 	}
+	/*if (!key->previous)
+	{
+		key = key->next;
+		free(key->previous);
+	}*/
 }
 
 void		replace_variable(t_inp **cp, char *get_variable)
@@ -120,30 +115,24 @@ void		replace_variable(t_inp **cp, char *get_variable)
 		tmp = new;
 		i++;
 	}
-	remove_key(cp, first);
 }
 
 void		print_variable(t_inp **cp, t_sh *sh)
 {
 	char	*variable;
 	char	*get_variable;
+	int		i;
+	i = 0;
 
 	if ((variable = parse_variable_name(&(*cp)->next)))
 	{
-		if ( (get_variable = get_specific_loc(variable, &sh->loc)) || 
+		ft_putnbr(i);
+		i++;
+		if ((get_variable = get_specific_loc(variable, &sh->loc)) || 
 				(get_variable = get_specific_env(variable, &sh->env)))
 			replace_variable(cp, get_variable);
-		else
-			remove_key(cp, *cp);
+		remove_key(cp, ft_strlen(variable));
 		if (variable)
 			free(variable);
-		if ((*cp)->previous)
-		{
-			(*cp)->previous->next = (*cp)->next;
-			if ((*cp)->next)
-				(*cp)->next->previous = (*cp)->previous;
-		}
-		else
-			delete_beginning(cp, (*cp));
 	}
 }
