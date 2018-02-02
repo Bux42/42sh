@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 02:01:15 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 09:04:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/02 17:44:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,36 @@ void		print_completion(t_sh *sh, t_inp **inp)
 				closedir(od);
 			return ;
 		}
+	}
+	char	*path;
+	if ((path = get_specific_env("PATH=", &sh->env)))
+	{
+		char	**path_list;
+		if ((path_list = ft_strsplit(path, ':')))
+		{
+			for (int i = 0; path_list[i]; i++)
+			{
+				if ((od = opendir(path_list[i])))
+				{
+					while ((fl = readdir(od)))
+					{
+						if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug))
+								== 0)
+						{
+							found(sh, od, fl, cp);
+							if (sh->comp_remain == NULL)
+								closedir(od);
+							return ;
+						}
+					}
+					closedir(od);
+				}
+			}
+			for (int i = 0; path_list[i]; i++)
+				free(path_list[i]);
+			free(path_list);
+		}
+		free(path);
 	}
 	if (sh->comp_remain)
 		not_found(sh, cp);
