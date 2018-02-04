@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/03 13:43:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/04 18:35:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void		parse(t_sh *sh)
 	t_inp	*clean;
 
 	clean = concat_inpl(&sh->inpl, sh);
+	history_push_front(&sh->history, clean, sh);
 	if (empty_inp(&clean))
 	{
 		convert_backslashes(&clean, sh);

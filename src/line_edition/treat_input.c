@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/26 05:37:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/04 18:32:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void		treat_input(t_sh *sh)
 		jump_words(sh, sh->buff[3]);
 	if (sh->buff[3] == 126 && sh->buff[2] == 51)
 	{
+		erase_completion(sh, &sh->inpl->inp);
 		delete_after(sh, &sh->inpl->inp);
 		autocompletion(&sh->inpl->inp, sh);
 	}

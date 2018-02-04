@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 07:44:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/04 18:37:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ t_his		*history_new(t_inp *inp, t_sh *sh)
 		return (NULL);
 	while (inp)
 	{
-		if (!sh->hist_res)
-			write(sh->fd, &inp->c, 1);
-		inp_insert_posat(&cp, inp->c);
+		if (inp->c != '\n')
+		{
+			if (!sh->hist_res)
+				write(sh->fd, &inp->c, 1);
+			inp_insert_posat(&cp, inp->c);
+		}
 		if (inp->next)
 			inp = inp->next;
 		else
