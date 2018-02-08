@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 05:36:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/04 19:00:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 		custom_strcat(buff, " Clipboard: ");
 		custom_strcat(buff, sh->clipboard);
 	}
+	ft_strcat(buff, " diff: ");
+	itoa = ft_itoa(sh->diff);
+	ft_strcat(buff, itoa);
+	free(itoa);
 	ft_strcat(buff, "\n");itoa = ft_itoa(sh->buff[0]);custom_strcat(buff, itoa);free(itoa);
 	custom_strcat(buff, " ");itoa = ft_itoa(sh->buff[1]);custom_strcat(buff, itoa);free(itoa);
 	custom_strcat(buff, " ");itoa = ft_itoa(sh->buff[2]);custom_strcat(buff, itoa);free(itoa);

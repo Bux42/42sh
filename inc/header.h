@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/29 14:01:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/08 22:29:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void					overwrite_remaining(t_sh *sh, t_inp **inp);
 void					overwrite_deleted(t_sh *sh, t_inp **inp);
 int						check_dimentions(t_sh *sh);
 void					check_endline(t_sh *sh);
+int						print_inp(t_inp *cp, t_sh *sh);
 
 void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);

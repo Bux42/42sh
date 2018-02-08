@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/04 18:32:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/08 20:11:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ void		autocompletion(t_inp **inp, t_sh *sh)
 		else
 			free_comp(3, sh);
 	}
-	else
+	else if (sh->comp_remain)
 		rewrite_beginning(sh, cp);
 }

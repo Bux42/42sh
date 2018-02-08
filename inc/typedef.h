@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 13:47:22 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/08 22:35:33 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct			s_sh
 	int					command_lenght;
 	int					fd;
 	int					posy;
+	int					diff;
 	int					prompt_len;
 	int					pos_at;
 	int					inp_len;

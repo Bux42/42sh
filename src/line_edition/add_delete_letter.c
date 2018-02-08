@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:31:34 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/23 21:35:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/08 22:34:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void		overwrite_remaining(t_sh *sh, t_inp **inp)
 	nb = 0;
 	if ((cp = get_to_pos(inp)))
 	{
-		while (cp->next && (nb++ > -1))
+		nb += print_inp(cp, sh);
+		while (nb > sh->width)
 		{
-			ft_putchar(cp->next->c);
-			check_endline(sh);
-			cp = cp->next;
+			nb -= sh->width;
+			ft_putstr(tgetstr("up", NULL));
 		}
 		while (nb--)
 			custom_left(sh);
@@ -40,17 +40,20 @@ void		overwrite_deleted(t_sh *sh, t_inp **inp)
 	if ((cp = get_to_pos(inp)))
 	{
 		if (cp->pos == 2 && (dec++ > -1))
-			custom_right(sh);
-		while (cp->next && (dec++ > -1))
 		{
-			ft_putchar(cp->next->c);
+			ft_putchar(cp->c);
 			check_endline(sh);
-			cp = cp->next;
 		}
+		dec += print_inp(cp, sh);
 	}
 	ft_putchar(' ');
 	check_endline(sh);
 	custom_left(sh);
+	while (dec > sh->width)
+	{
+		dec -= sh->width;
+		ft_putstr(tgetstr("up", NULL));
+	}
 	while (dec--)
 		custom_left(sh);
 }
