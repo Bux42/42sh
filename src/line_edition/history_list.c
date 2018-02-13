@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/04 18:37:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 00:01:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,14 @@ void		search_history_inp(t_sh *sh, t_inp **inp)
 	dec = 0;
 	if ((cp = (*inp)))
 	{
-		home_end(sh, &sh->inpl->inp, 1);
 		diff = sh->pos_at - sh->prompt_len;
 		while (sh->pos_at-- > sh->prompt_len && (dec++) > -1)
 			custom_left(sh);
+		inp_insert_chain(&cp, sh);
 		while (cp)
 		{
 			ft_putchar(cp->c);
 			check_endline(sh);
-			inp_insert_posat(&sh->inpl->inp, cp->c);
 			cp = cp->next;
 			dec--;
 			diff--;

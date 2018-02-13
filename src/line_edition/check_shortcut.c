@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 06:36:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 01:48:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 03:34:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void		cut_after(t_sh *sh, t_inp **inp)
 				sh->clipboard = get_clipboard(cp, &dec, sh);
 				free_list_from_beginning(inp);
 			}
-			while (dec--)
-				custom_left(sh);
+			restore_cursor_pos(dec, sh);
 		}
 	}
 }

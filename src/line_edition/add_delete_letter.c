@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:31:34 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/08 22:34:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:26:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ void		overwrite_remaining(t_sh *sh, t_inp **inp)
 	if ((cp = get_to_pos(inp)))
 	{
 		nb += print_inp(cp, sh);
-		while (nb > sh->width)
-		{
-			nb -= sh->width;
-			ft_putstr(tgetstr("up", NULL));
-		}
-		while (nb--)
-			custom_left(sh);
+		restore_cursor_pos(nb, sh);
 	}
 }
 

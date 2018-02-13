@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:22:25 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/08 21:08:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:26:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,27 @@ void		free_null(char **str)
 
 void		print_spaces(int nb, t_sh *sh)
 {
+	char	buff[sh->width + 1];
+	int		i;
+
+	i = -1;
+	ft_bzero(buff, sh->width + 1);
 	while (nb-- > 0)
 	{
-		ft_putchar(' ');
-		check_endline(sh);
+		buff[++i] = ' ';
+		if (sh->posy == sh->width)
+		{
+			ft_putstr(buff);
+			ft_putchar(' ');
+			ft_putstr(tgetstr("le", NULL));
+			ft_bzero(buff, sh->width + 1);
+			i = -1;
+			sh->posy = 1;
+		}
+		else
+			sh->posy++;
 	}
+	ft_putstr(buff);
 }
 
 void		free_comp(int i, t_sh *sh)

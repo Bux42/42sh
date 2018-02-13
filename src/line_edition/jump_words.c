@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:55:17 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 00:17:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:34:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int			is_space(char c)
 void		jump_left(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
+	int		dec;
 
+	dec = 1;
 	if ((cp = get_to_pos(inp)))
 	{
 		if (cp->pos == 1 && !cp->previous && (cp->pos = 2))
@@ -54,12 +56,12 @@ void		jump_left(t_sh *sh, t_inp **inp)
 		else if (cp->pos != 2)
 		{
 			cp->pos = 0;
-			custom_left(sh);
 			cp = cp->previous;
-			while (is_space(cp->c) && cp->previous && custom_left(sh))
+			while (is_space(cp->c) && cp->previous && dec++)
 				cp = cp->previous;
-			while (!is_space(cp->c) && cp->previous && custom_left(sh))
+			while (!is_space(cp->c) && cp->previous && dec++)
 				cp = cp->previous;
+			restore_cursor_pos(dec, sh);
 			if (cp->previous)
 				cp->pos = 1;
 			else if (custom_left(sh))
@@ -71,7 +73,9 @@ void		jump_left(t_sh *sh, t_inp **inp)
 void		jump_right(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
+	int		dec;
 
+	dec = 1;
 	if ((cp = get_to_pos(inp)))
 	{
 		if (cp->pos == 2 && custom_right(sh))
@@ -79,10 +83,11 @@ void		jump_right(t_sh *sh, t_inp **inp)
 		if (cp->next)
 		{
 			cp->pos = 0;
-			while (cp->next && !is_space(cp->next->c) && custom_right(sh))
+			while (cp->next && !is_space(cp->next->c) && dec++)
 				cp = cp->next;
-			while (cp->next && is_space(cp->next->c) && custom_right(sh))
+			while (cp->next && is_space(cp->next->c) && dec++)
 				cp = cp->next;
+			restore_cursor_right(dec - 1, sh);
 			cp->pos = 1;
 		}
 	}

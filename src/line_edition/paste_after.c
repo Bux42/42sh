@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 09:34:40 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/08 20:02:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:28:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ char		*get_clipboard_before(t_inp *inp, int *dec, t_sh *sh)
 	int		cp;
 
 	(*dec) = 0;
+	cp = 0;
 	while (inp)
 	{
-		custom_left(sh);
 		(*dec)++;
+		cp++;
 		if (inp->previous)
 			inp = inp->previous;
 		else
 			break ;
 	}
+	restore_cursor_pos(cp, sh);
 	if (!(ret = (char*)malloc(sizeof(char) * (*dec) + 1)))
 		return (NULL);
 	ret[(*dec)] = '\0';
@@ -74,10 +76,8 @@ void		update_cut_before(int dec, t_inp **inp, t_sh *sh)
 	}
 	decp = dec;
 	print_spaces(dec, sh);
-	while (decp--)
-		custom_left(sh);
-	while (remaining--)
-		custom_left(sh);
+	decp += remaining;
+	restore_cursor_pos(decp, sh);
 }
 
 void		cut_before(t_sh *sh, t_inp **inp)
@@ -110,14 +110,20 @@ void		cut_before(t_sh *sh, t_inp **inp)
 void		paste_after(t_sh *sh, t_inp **inp)
 {
 	int		i;
+	t_inp	*cp;
 
 	i = -1;
-	while (sh->clipboard[++i])
+	if (sh->clipboard[++i])
+		inp_insert_posat(&sh->inpl->inp, sh->clipboard[i]);
+	if ((cp = get_to_pos(inp)))
 	{
-		ft_putchar(sh->clipboard[i]);
-		check_endline(sh);
-		inp_insert_posat(inp, sh->clipboard[i]);
+		while (sh->clipboard[++i])
+		{
+			inp_insert_posat(&cp, sh->clipboard[i]);
+			cp = cp->next;
+		}
 	}
+	print_str(sh->clipboard, sh);
 	if (i > 0)
 		overwrite_remaining(sh, inp);
 }

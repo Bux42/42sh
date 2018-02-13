@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/08 22:29:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:40:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void					overwrite_deleted(t_sh *sh, t_inp **inp);
 int						check_dimentions(t_sh *sh);
 void					check_endline(t_sh *sh);
 int						print_inp(t_inp *cp, t_sh *sh);
+void					inp_insert_chain(t_inp **src, t_sh *sh);
+void					print_str(char *str, t_sh *sh);
+void					restore_cursor_pos(int nb, t_sh *sh);
+void					restore_cursor_right(int nb, t_sh *sh);
 
 void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);
