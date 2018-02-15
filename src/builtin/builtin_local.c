@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:49:26 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 15:12:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:16:02 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		builtin_local(char **exec, t_env **env, t_loc **loc)
 	{
 		ft_putstr("local: Too many arguments.");
 		custom_return();
-		return (0);
+		return (1);
 	}
 	cp = *loc;
 	while (cp)
@@ -32,5 +32,5 @@ int		builtin_local(char **exec, t_env **env, t_loc **loc)
 		custom_return();
 		cp = cp->next;
 	}
-	return (1);
+	return (0);
 }

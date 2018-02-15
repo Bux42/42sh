@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 19:52:33 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 16:35:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:17:23 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int			builtin_set(char **exec, t_env **env, t_loc **loc)
 		{
 			ft_putstr("set: Variable name must begin with a letter.");
 			custom_return();
-			return (-1);
+			return (1);
 		}
 		new_local(exec[i], loc);
 		i++;
 	}
-	return (1);
+	return (0);
 }

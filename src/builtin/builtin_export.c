@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:39:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 17:43:30 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:15:29 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int			export_it(t_env **env, t_loc **loc, char *key, char *name)
 	tab[1] = key;
 	builtin_setenv(tab, env);
 	tab[1] = name;
-	builtin_unset(tab, env, loc);
-	return (1);
+	return (builtin_unset(tab, env, loc));
 }
 
 int			builtin_export(char **exec, t_env **env, t_loc **loc)
@@ -38,7 +37,7 @@ int			builtin_export(char **exec, t_env **env, t_loc **loc)
 	if (!exec[1])
 		return (builtin_local(exec, env, loc));
 	if (cp == NULL)
-		return (1);
+		return (0);
 	while (exec[++i])
 	{
 		while (cp)
@@ -52,5 +51,5 @@ int			builtin_export(char **exec, t_env **env, t_loc **loc)
 		}
 		cp = *loc;
 	}
-	return (1);
+	return (0);
 }

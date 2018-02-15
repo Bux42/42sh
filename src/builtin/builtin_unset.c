@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/16 16:38:25 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:24:00 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int		builtin_unset(char **exec, t_env **env, t_loc **loc)
 	{
 		ft_putstr("Usage: unset [KEY ...]");
 		custom_return();
-		return (0);
+		return (1);
 	}
 	while (exec[++i])
 		if (remove_loc_if(exec[i], loc) == 1)
-			return (0);
-	return (1);
+			return (2);
+	return (0);
 }

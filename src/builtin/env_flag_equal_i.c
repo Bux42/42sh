@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:51:01 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 19:00:03 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:27:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		flag_equal(char ***tab, char **exec, int verbose)
 				custom_return();
 			}
 			if (!(*tab = env_error(*tab, exec[i])))
-				return (-1);
+				return (0);
 		}
 	}
 	return (i);

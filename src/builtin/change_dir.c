@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/11 15:57:52 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:42:27 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ int			chdir_old_pwd(t_env **env, int flag)
 	{
 		custom_chdir(old_pwd, flag);
 		free(old_pwd);
-		return (1);
+		return (0);
 	}
 	else
-		return (err_msg("cd: OLDPWD not set", "", -1));
+		return (err_msg("cd: OLDPWD not set", "", 3));
 }
 
 int			change_dir(char **exec, t_env **env)
@@ -145,7 +145,7 @@ int			change_dir(char **exec, t_env **env)
 
 	index = 1;
 	if ((flag = parse_flags(exec, &index)) == -1)
-		return (-1);
+		return (1);
 	getwd(old_pwd);
 	if (!exec[index])
 	{
@@ -155,7 +155,7 @@ int			change_dir(char **exec, t_env **env)
 			free(home);
 		}
 		else
-			return (err_msg("cd: HOME not set", "", -1));
+			return (err_msg("cd: HOME not set", "", 2));
 	}
 	else if (exec[index][0] == '-' && !exec[index][1])
 		return (chdir_old_pwd(env, flag));

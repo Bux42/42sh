@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/11 16:19:01 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:19:20 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			print_env(t_env **env)
 			cp = cp->next;
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int			parse_setenv(char **exec, t_env **env)
@@ -44,22 +44,22 @@ int			parse_setenv(char **exec, t_env **env)
 	while (exec[1][len] && exec[1][len] != '=')
 		len++;
 	if (!(name = (char*)malloc(sizeof(char) * (++len + 1))))
-		return (-1);
+		return (1);
 	ft_bzero(name, len);
 	ft_strncat(name, exec[1], len);
 	while (exec[1][len])
 		len++;
 	if (!(value = (char*)malloc(sizeof(char) * (len - ft_strlen(name) + 1))))
-		return (-1);
+		return (1);
 	ft_bzero(value, ++len - ft_strlen(name));
 	ft_strcat(value, &exec[1][ft_strlen(name)]);
 	set_env(env, name, value);
 	free(name);
 	free(value);
-	return (1);
+	return (0);
 }
 
-int	already_here(t_env **env, char **exec)
+int			already_here(t_env **env, char **exec)
 {
 	t_env	*cp;
 	int		stop;

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/11 12:23:22 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:25:18 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ int					builtin_unsetenv(char **exec, t_env **env)
 
 	i = 1;
 	if (!exec[1])
-		return (err_msg("unsetenv: missing argument", "", -1));
+		return (err_msg("unsetenv: missing argument", "", 1));
 	while (exec[i])
 	{
 		delete_env(env, exec[i]);
 		i++;
 	}
-	return (1);
+	return (0);
 }
-
-
