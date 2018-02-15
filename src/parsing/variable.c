@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/02 16:56:43 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:14:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		remove_key(t_inp **cp, int lg)
 {
 	while (lg -- > 0)
 	{
-		ft_putchar('|');
 		ft_putchar((*cp)->c);
 		if ((*cp)->next)
 			*(*cp) = *(*cp)->next;
@@ -83,11 +82,6 @@ void		remove_key(t_inp **cp, int lg)
 			break;
 		}
 	}
-	/*if (!key->previous)
-	{
-		key = key->next;
-		free(key->previous);
-	}*/
 }
 
 void		replace_variable(t_inp **cp, char *get_variable)
@@ -121,18 +115,21 @@ void		print_variable(t_inp **cp, t_sh *sh)
 {
 	char	*variable;
 	char	*get_variable;
-	int		i;
-	i = 0;
 
-	if ((variable = parse_variable_name(&(*cp)->next)))
+	variable = ((*cp)->next->c == '?') ? ft_strdup("??")
+		: parse_variable_name(&(*cp)->next);
+	if (variable)
 	{
-		ft_putnbr(i);
-		i++;
-		if ((get_variable = get_specific_loc(variable, &sh->loc)) || 
+		if ((*cp)->next->c == '?') 
+		{
+			get_variable = ft_itoa(sh->retval);
+			replace_variable(cp, get_variable);
+			free(get_variable);
+		}
+		else if ((get_variable = get_specific_loc(variable, &sh->loc)) || 
 				(get_variable = get_specific_env(variable, &sh->env)))
 			replace_variable(cp, get_variable);
 		remove_key(cp, ft_strlen(variable));
-		if (variable)
-			free(variable);
+		free(variable);
 	}
 }
