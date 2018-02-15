@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/14 00:11:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:18:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int			main(int ac, char **av, char **env)
 	get_env(env, sh);
 	sh->history = NULL;
 	restaure_history_from_file(sh);
-	sh->retval = 0;
 	if (!init_term() || !get_tty(sh, av[1]))
 		return (0);
 	print_prompt(sh);
@@ -84,13 +83,14 @@ int			main(int ac, char **av, char **env)
 	sh->expected_quote = '\0';
 	sh->context = 0;
 	sh->search = 0;
+	sh->retval = 0;
 	sh->his_search = NULL;
 	sh->search_pos = NULL;
 	ft_bzero(sh->buff, 6);
 
 	sh->man_path = find_man_path(av[0]);
 	while (ac > -1)
-		if ((sh->retval = read(1, sh->buff, 4)))
+		if (read(1, sh->buff, 4))
 			check_pasted(sh);
 	return (0);
 }
