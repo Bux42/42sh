@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/04 18:34:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:30:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			inpl_add_new(t_inpl **inpl, int print)
 
 void		process_line(t_sh *sh)
 {
+	custom_return();
 	while (sh->inpl && sh->inpl->previous)
 		sh->inpl = sh->inpl->previous;
 	if (sh->inpl->inp)
@@ -66,14 +67,14 @@ void		enter_key(t_sh *sh)
 
 	print = 1;
 	custom_return();
-	if (sh->expected_quote == '\0')
+	if (!sh->close)
 	{
-		if (cut_from_quote(sh, &sh->inpl->inp))
+		if (!line_is_closed(sh, &sh->inpl->inp))
 			print = inpl_add_new(&sh->inpl, 0);
 	}
 	else
 	{
-		if (get_closing_quote(sh, &sh->inpl->inp))
+		if (line_is_closed(sh, &sh->inpl->inp))
 			print = 1;
 		else
 			print = inpl_add_new(&sh->inpl, 0);

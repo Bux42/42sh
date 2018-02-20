@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:33:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/13 05:49:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 15:27:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ void		dquote_inp(t_inp **cp, t_sh *sh)
 	delimiter = NULL;
 	while ((*cp))
 	{
-		if ((*cp)->c == '\"' && !odd_slashes(cp))
-		{
-			(*cp) = (*cp)->next;
-			break ;
-		}
-		else
-			inp_insert_posat(&delimiter, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	lexer_parser(&delimiter, sh);
@@ -45,13 +38,6 @@ void		quote_inp(t_inp **cp, t_sh *sh)
 	delimiter = NULL;
 	while ((*cp))
 	{
-		if ((*cp)->c == '\'' && !odd_slashes(cp))
-		{
-			(*cp) = (*cp)->next;
-			break ;
-		}
-		else
-			inp_insert_posat(&delimiter, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	lexer_parser(&delimiter, sh);

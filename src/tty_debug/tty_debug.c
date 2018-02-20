@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 02:52:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:48:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,31 @@ char		*custom_strcat(char *s1, char *s2)
 	}
 	s1[i] = '\0';
 	return (s1);
+}
+
+void		add_close(char *buff, t_close **close)
+{
+	t_close *cp;
+
+	cp = *close;
+	while (cp)
+	{
+		if (cp->flag & QUOTE)
+			ft_strcat(buff, "quote, ");
+		if (cp->flag & DQUOTE)
+			ft_strcat(buff, "dquote, ");
+		if (cp->flag & BQUOTE)
+			ft_strcat(buff, "bquote, ");
+		if (cp->flag & HERE)
+			ft_strcat(buff, "here, ");
+		if (cp->flag & PIPE)
+			ft_strcat(buff, "pipe, ");
+		if (cp->flag & AND)
+			ft_strcat(buff, "and, ");
+		if (cp->flag & OR)
+			ft_strcat(buff, "or, ");
+		cp = cp->next;
+	}
 }
 
 void		tty_debug(t_sh *sh, t_inp **inp)
@@ -101,10 +126,8 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	custom_strcat(buff, " ");itoa = ft_itoa(sh->buff[4]);custom_strcat(buff, itoa);free(itoa);
 	ft_strcat(buff, "\n");
 	ft_strcat(buff, "expected esc char: ");
-	if (sh->expected_quote == '\0')
-		ft_strcat(buff, "None");
-	else
-		custom_strcat(buff, &sh->expected_quote);
+	if (sh->close)
+		add_close(buff, &sh->close);
 	ft_strcat(buff, "\n");
 	if ((cp = (*inp)))
 	{

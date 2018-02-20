@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/15 12:18:21 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/20 16:42:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,28 @@ void		check_pasted(t_sh *sh)
 	}
 }
 
+void		init_variables(t_sh *sh)
+{
+	sh->inpl->inp = NULL;
+	sh->inpl->next = NULL;
+	sh->inpl->previous = NULL;
+	sh->clipboard = NULL;
+	sh->history_pos = NULL;
+	sh->history_len = 0;
+	sh->comp_debug = NULL;
+	sh->comp_remain = NULL;
+	sh->comp_path = NULL;
+	sh->loc = NULL;
+	sh->old_len = 0;
+	sh->context = 0;
+	sh->search = 0;
+	sh->retval = 0;
+	sh->his_search = NULL;
+	sh->search_pos = NULL;
+	sh->close = NULL;
+	ft_bzero(sh->buff, 6);
+}
+
 int			main(int ac, char **av, char **env)
 {
 	t_sh	*sh;
@@ -68,26 +90,8 @@ int			main(int ac, char **av, char **env)
 		ft_putchar(' ');
 		ft_putstr(tgetstr("le", NULL));
 	}
+	init_variables(sh);
 	signal_init();
-	sh->inpl->inp = NULL;
-	sh->inpl->next = NULL;
-	sh->inpl->previous = NULL;
-	sh->clipboard = NULL;
-	sh->history_pos = NULL;
-	sh->history_len = 0;
-	sh->comp_debug = NULL;
-	sh->comp_remain = NULL;
-	sh->comp_path = NULL;
-	sh->loc = NULL;
-	sh->old_len = 0;
-	sh->expected_quote = '\0';
-	sh->context = 0;
-	sh->search = 0;
-	sh->retval = 0;
-	sh->his_search = NULL;
-	sh->search_pos = NULL;
-	ft_bzero(sh->buff, 6);
-
 	sh->man_path = find_man_path(av[0]);
 	while (ac > -1)
 		if (read(1, sh->buff, 4))

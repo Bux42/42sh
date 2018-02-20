@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/02/08 22:04:05 by videsvau         ###   ########.fr        #
+#    Updated: 2018/02/20 16:58:23 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ line_edition/auto_completion.c\
 line_edition/auto_completion_clear.c\
 line_edition/completion_path.c\
 line_edition/print_completion.c\
-line_edition/quotes_and_slash.c\
+line_edition/line_is_closed.c\
+line_edition/s_close_list.c\
+line_edition/closing_context.c\
 line_edition/enter_key.c\
 line_edition/history_search.c\
 line_edition/treat_input_search.c\

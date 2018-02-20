@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/05 16:06:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:11:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,9 @@ void		parse(t_sh *sh)
 	t_inp	*clean;
 
 	clean = concat_inpl(&sh->inpl, sh);
-	history_push_front(&sh->history, clean, sh);
 	if (empty_inp(&clean))
 	{
+		history_push_front(&sh->history, clean, sh);
 		convert_backslashes(&clean, sh);
 		sh->context = 0;
 		lexer_parser(&clean, sh);

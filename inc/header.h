@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 04:40:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:25:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # define DQUOTE 1
 # define QUOTE 2
 # define BQUOTE 4
-# define VARIABLE 8
-# define BINARY 16
-# define OPERATOR 32
+# define HERE 8
+# define PIPE 16
+# define AND 32
+# define OR 64
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -34,6 +35,7 @@ struct termios			g_old_term;
 struct termios			g_new_term;
 
 int						init_term(void);
+void					init_variables(t_sh *sh);
 void					signal_init(void);
 void					signal_event(int signo);
 
@@ -142,12 +144,12 @@ void					rewrite_beginning(t_sh *sh, t_inp *cp);
 
 /*						quotes_and_slash								*/
 
-t_inp					*cut_from_quote(t_sh *sh, t_inp **inp);
-t_inp					*get_closing_quote(t_sh *sh, t_inp **inp);
-int						odd_slashes(t_inp **inp);
+int						line_is_closed(t_sh *sh, t_inp **inp);
+void					s_close_add(int flag, t_close **close);
+void					delete_last_close(t_close **close);
+t_close					*new_close(int flag);
 int						inpl_add_new(t_inpl **inpl, int print);
 void					process_line(t_sh *sh);
-int						is_quote_or_slash(char c);
 void					custom_return(void);
 
 /*						tty_debug										*/

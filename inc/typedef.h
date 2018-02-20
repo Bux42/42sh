@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/12 23:35:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/20 15:43:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define TYPEDEF_H
 
 # include "../libft/includes/libft.h"
+
+typedef struct			s_close
+{
+	int					flag;
+	struct s_close		*next;
+}						t_close;
 
 typedef struct			s_env
 {
@@ -90,6 +96,7 @@ typedef struct			s_sh
 	struct s_his		*history;
 	struct s_his		*search_pos;
 	struct s_inp		*his_search;
+	struct s_close		*close;
 	char				*man_path;
 }						t_sh;
 
