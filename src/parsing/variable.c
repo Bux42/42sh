@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/15 17:14:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/22 18:29:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,116 +20,100 @@ int			check_key(char key)
 	return (1);
 }
 
-char		*parse_variable_name(t_inp **inp)
+char		*get_variable_name(t_inp **inp)
 {
-	char	*ret;
+	char	*ret = NULL;
 	int		len;
 	t_inp	*cp;
 
-	len = 0;
-	if ((cp = (*inp)))
-	{
-		while (cp)
-		{
-			if (check_key(cp->c))
-				len++;
-			else
-				break ;
-			cp = cp->next;
-		}
-		if (!len)
-			return (NULL);
-	}
-	if (!(ret = (char*)malloc(sizeof(char) * (len + 2))))
-		return (NULL);
-	ret[len + 1] = '\0';
-	ret[len] = '=';
 	cp = (*inp);
 	len = 0;
-	while (cp)
+	while (cp->next && check_key(cp->next->c))
 	{
-		if (check_key(cp->c))
-			ret[len] = cp->c;
-		else
-			break ;
 		cp = cp->next;
 		len++;
+	}
+	if (!len || !(ret = (char*)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	ret[len] = '\0';
+	len = 0;
+	cp = (*inp);
+	while (cp->next && check_key(cp->next->c))
+	{
+		ret[len] = cp->next->c;
+		len++;
+		cp = cp->next;
 	}
 	return (ret);
 }
 
-int			valid_variable_char(char c)
+t_inp		*replace_inp(t_inp **inp, char *content)
 {
-	if (c == '\n')
-		return (0);
-	if (c == '\t')
-		return (0);
-	if (c == ' ')
-		return (0);
-	return (1);
-}
+	t_inp	*ret;
+	t_inp	*del;
+	int		len;
 
-void		remove_key(t_inp **cp, int lg)
-{
-	while (lg -- > 0)
+	ret = NULL;
+	len = -1;
+	while (content[++len])
+		inp_insert_posat(&ret, content[len]);
+	while ((*inp)->next && check_key((*inp)->next->c))
 	{
-		ft_putchar((*cp)->c);
-		if ((*cp)->next)
-			*(*cp) = *(*cp)->next;
-		else
-		{
-			*(*cp) = *new_inp('\0');
-			break;
-		}
+		del = (*inp);
+		(*inp) = (*inp)->next;
+		free(del);
 	}
+	free(*inp);
+	return (ret);
 }
 
-void		replace_variable(t_inp **cp, char *get_variable)
+t_inp		*get_end(t_inp **inp)
 {
-	int		i;
-	t_inp	*new;
-	t_inp	*tmp;
-	t_inp	*first;
+	t_inp	*ret;
 
-	i = 0;
-	new = NULL;
-	first = *cp;
-	tmp = ((*cp)->previous) ? (*cp)->previous : NULL;
-	while (get_variable[i])
-	{
-		new = new_inp(get_variable[i]);
-		if (tmp == NULL)
-			new->next = (*cp);
-		if (tmp == NULL)
-			(*cp)->previous = new;
-		if (tmp == NULL)
-			(*cp) = new;
-		else
-			insert_middle(tmp, new);
-		tmp = new;
-		i++;
-	}
+	ret = (*inp);
+	while (ret->next && check_key(ret->next->c))
+		ret = ret->next;
+	return (ret->next);
 }
 
-void		print_variable(t_inp **cp, t_sh *sh)
+t_inp		*relink_inp(t_inp *before, t_inp *after, t_inp *new)
+{
+	if (before)
+		before->next = new;
+	new->previous = before;
+	while (new->next)
+		new = new->next;
+	if (after)
+		after->previous = new;
+	new->next = after;
+	return (new);
+}
+
+void		try_insert_variable(t_inp **inp, t_sh *sh)
 {
 	char	*variable;
-	char	*get_variable;
+	char	*content;
+	t_inp	*before;
+	t_inp	*after;
+	t_inp	*new;
 
-	variable = ((*cp)->next->c == '?') ? ft_strdup("??")
-		: parse_variable_name(&(*cp)->next);
-	if (variable)
+	before = NULL;
+	after = NULL;
+	if ((*inp)->next && (variable = get_variable_name(inp)))
 	{
-		if ((*cp)->next->c == '?') 
+		if ((content = get_specific_loc(variable, &sh->loc)) ||
+				(content = get_specific_env(variable, &sh->env)))
 		{
-			get_variable = ft_itoa(sh->retval);
-			replace_variable(cp, get_variable);
-			free(get_variable);
+			before = (*inp)->previous;
+			after = get_end(inp);
+			new = replace_inp(inp, &content[1]);
+			*inp = relink_inp(before, after, new);
+			custom_return();
+			free(content);
 		}
-		else if ((get_variable = get_specific_loc(variable, &sh->loc)) || 
-				(get_variable = get_specific_env(variable, &sh->env)))
-			replace_variable(cp, get_variable);
-		remove_key(cp, ft_strlen(variable));
 		free(variable);
 	}
+	else
+		return ;
 }

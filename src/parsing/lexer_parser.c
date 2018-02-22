@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/20 17:04:42 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/22 18:28:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void		lexer_parser(t_inp **inp, t_sh *sh)
 				sh->context = update_context(sh->context, DQUOTE);
 			if (cp && cp->c == '$' && working_context(sh->context, cp->c))
 			{
-				print_variable(&cp, sh);
 			}
 			if (cp && cp->c == ';' && working_context(sh->context, cp->c))
 			{

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 17:30:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:58:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			inpl_add_new(t_inpl **inpl, int print)
 
 void		process_line(t_sh *sh)
 {
-	custom_return();
 	while (sh->inpl && sh->inpl->previous)
 		sh->inpl = sh->inpl->previous;
 	if (sh->inpl->inp)

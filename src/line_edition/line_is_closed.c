@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:26:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 18:54:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:20:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	check_context_quote(t_sh *sh)
 		s_close_add(QUOTE, &sh->close);
 	else if (sh->close->flag == QUOTE)
 		delete_last_close(&sh->close);
-	else if (sh->close->flag == BQUOTE)
-		s_close_add(QUOTE, &sh->close);
 }
 
 void	check_context_bquote(t_sh *sh)
@@ -28,7 +26,7 @@ void	check_context_bquote(t_sh *sh)
 		s_close_add(BQUOTE, &sh->close);
 	else if (sh->close->flag == BQUOTE)
 		delete_last_close(&sh->close);
-	else if (sh->close->flag == DQUOTE)
+	else if (sh->close->flag == DQUOTE && !sh->close->next)
 		s_close_add(BQUOTE, &sh->close);
 }
 
@@ -38,8 +36,38 @@ void	check_context_dquote(t_sh *sh)
 		s_close_add(DQUOTE, &sh->close);
 	else if (sh->close->flag == DQUOTE)
 		delete_last_close(&sh->close);
-	else if (sh->close->flag == BQUOTE)
+	else if (sh->close->flag == BQUOTE && !sh->close->next)
 		s_close_add(DQUOTE, &sh->close);
+}
+
+int		print_expected_prompt(t_sh *sh, t_close **close)
+{
+	t_close		*cp;
+
+	sh->posy = 1;
+	if ((cp = *close))
+	{
+		while (cp->next)
+			cp = cp->next;
+		while (cp)
+		{
+			if (cp->flag & QUOTE)
+				print_str("quote", sh);
+			if (cp->flag & DQUOTE)
+				print_str("dquote", sh);
+			if (cp->flag & BQUOTE)
+				print_str("bquote", sh);
+			if (cp->previous)
+			{
+				print_str(" ", sh);
+				cp = cp->previous;
+			}
+			else
+				break ;
+		}
+	}
+	print_str("> ", sh);
+	return (0);
 }
 
 int		line_is_closed(t_sh *sh, t_inp **inp)
@@ -60,7 +88,7 @@ int		line_is_closed(t_sh *sh, t_inp **inp)
 						return (1);
 				}
 				else
-					return (0);
+					return (print_expected_prompt(sh, &sh->close));
 			}
 			if (cp->c == '\'')
 				check_context_quote(sh);
@@ -72,6 +100,6 @@ int		line_is_closed(t_sh *sh, t_inp **inp)
 		}
 	}
 	if (sh->close)
-		return (0);
+		return (print_expected_prompt(sh, &sh->close));
 	return (1);
 }

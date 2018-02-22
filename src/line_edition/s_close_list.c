@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:39:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 18:18:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/21 12:38:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_close		*new_close(int flag)
 	if (!(ret = (t_close*)malloc(sizeof(t_close))))
 		return (NULL);
 	ret->next = NULL;
+	ret->previous = NULL;
 	ret->flag = flag;
 	return (ret);
 }
@@ -36,6 +37,7 @@ void		delete_last_close(t_close **close)
 	{
 		cp = *close;
 		*close = (*close)->next;
+		(*close)->previous = NULL;
 		free(cp);
 		cp = NULL;
 	}
@@ -51,6 +53,7 @@ void		s_close_add(int flag, t_close **close)
 	{
 		cp = new_close(flag);
 		cp->next = *close;
+		(*close)->previous = cp;
 		*close = cp;
 	}
 }

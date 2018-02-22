@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 18:11:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:42:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,20 @@ int			empty_inp(t_inp **inp)
 	return (i);
 }
 
+void		print_xx(t_inp **inp)
+{
+	t_inp	*cp;
+
+	if ((cp = *inp))
+	{
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			cp = cp->next;
+		}
+	}
+}
+
 void		parse(t_sh *sh)
 {
 	t_inp	*clean;
@@ -141,11 +155,15 @@ void		parse(t_sh *sh)
 	if (empty_inp(&clean))
 	{
 		history_push_front(&sh->history, clean, sh);
-		convert_backslashes(&clean, sh);
+		//convert_backslashes(&clean, sh);
+		convert_line_content(&clean, sh);
+		print_xx(&clean);
+		custom_return();
 		sh->context = 0;
-		lexer_parser(&clean, sh);
+		/*lexer_parser(&clean, sh);
 		custom_return();
 		valid_command(&clean, sh);
+		*/
 	}
 	free_list_from_beginning(&clean);
 }

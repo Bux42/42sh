@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/20 15:43:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/21 12:35:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct			s_close
 {
 	int					flag;
 	struct s_close		*next;
+	struct s_close		*previous;
 }						t_close;
 
 typedef struct			s_env

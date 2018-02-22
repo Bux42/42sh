@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 00:01:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:23:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ t_his		*history_new(t_inp *inp, t_sh *sh)
 {
 	t_his	*ret;
 	t_inp	*cp;
+	int		maxlen;
 
 	cp = NULL;
+	maxlen = 500;
 	if (!(ret = (t_his*)malloc(sizeof(t_his))))
 		return (NULL);
-	while (inp)
+	while (inp && maxlen--)
 	{
 		if (inp->c != '\n')
 		{

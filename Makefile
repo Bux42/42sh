@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/02/20 16:58:23 by videsvau         ###   ########.fr        #
+#    Updated: 2018/02/22 14:53:09 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ line_edition/treat_input_search.c\
 line_edition/insert_search_history_result.c\
 line_edition/print_search.c\
 line_edition/optimized_tools.c\
+parsing/convert_line_content.c\
 parsing/parse_backquotes.c\
 parsing/lexer_parser.c\
 parsing/redirections.c\
