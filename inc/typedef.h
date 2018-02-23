@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/21 12:35:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/23 16:33:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define TYPEDEF_H
 
 # include "../libft/includes/libft.h"
+
+typedef struct			s_tok
+{
+	int					is_redir;
+	int					fd[2];
+	int					is_cond;
+	int					flag;
+	char				**cont;
+	void				*func;
+}						t_tok;
 
 typedef struct			s_close
 {

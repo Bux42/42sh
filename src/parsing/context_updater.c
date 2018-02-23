@@ -6,11 +6,37 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:33:43 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 15:27:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/23 18:42:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int			try_update_context(char c, int flag)
+{
+	if (c == '\'')
+	{
+		if (flag & QUOTE)
+			return (flag - QUOTE);
+		else if (!flag)
+			return (flag | QUOTE);
+	}
+	if (c == '\"')
+	{
+		if (flag & DQUOTE)
+			return (flag - DQUOTE);
+		else if (!flag)
+			return (flag | DQUOTE);
+	}
+	if (c == '`')
+	{
+		if (flag & BQUOTE)
+			return (flag - BQUOTE);
+		else if (!flag)
+			return (flag | BQUOTE);
+	}
+	return (flag);
+}
 
 int			update_context(int context, int flag)
 {

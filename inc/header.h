@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/22 15:53:11 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/23 18:42:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,10 @@ void					custom_return(void);
 
 /*						line_conversion									*/
 
-void					convert_line_content(t_inp **inp, t_sh *sh);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
+void					split_line(t_inpl *inpl, t_inp **clean, t_sh *sh);
+int						check_key(char key);
+int						try_update_context(char c, int flag);
 
 /*						tty_debug										*/
 
