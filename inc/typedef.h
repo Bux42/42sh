@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/23 16:33:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:18:38 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct			s_inp
 
 typedef struct			s_inpl
 {
+	int					type;
 	struct s_inp		*inp;
 	struct s_inpl		*next;
 	struct s_inpl		*previous;

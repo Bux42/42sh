@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/23 19:22:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:01:50 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && !check_key((*cp)->c))
 			break ;
-		ft_putchar((*cp)->c);
 		inp_insert_posat(&(*inpl)->inp, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
@@ -57,7 +56,6 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 	(*inpl) = (*inpl)->next;
 	custom_return();
 }
-// base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'"
 
 void		add_special_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 {
@@ -72,7 +70,6 @@ void		add_special_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 				(*cp) = (*cp)->next->next;
 		if ((*cp)->c == ' ')
 			break ;
-		ft_putchar((*cp)->c);
 		inp_insert_posat(&(*inpl)->inp, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
@@ -96,6 +93,14 @@ int			special_tok(char c)
 	return (0);
 }
 
+int			redir(t_inp *cp)
+{
+	if (cp->c > 47 && cp->c < 58)
+		if (cp->next && cp->next->c == '>')
+			return (1);
+	return (0);
+}
+
 void		split_line(t_inpl *inpl, t_inp **clean, t_sh *sh)
 {
 	t_inp	*cp;
@@ -105,7 +110,9 @@ void		split_line(t_inpl *inpl, t_inp **clean, t_sh *sh)
 	{
 		while (cp && cp->c == ' ')
 			cp = cp->next;
-		if (special_tok(cp->c))
+		if (!cp)
+			break ;
+		if (special_tok(cp->c) || redir(cp))
 			add_special_token(&inpl, &cp, sh);
 		else
 			add_token(&inpl, &cp, sh);
