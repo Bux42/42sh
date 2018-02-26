@@ -7,12 +7,12 @@ NAME
 
 
 SYNOPSIS
-       export [KEY ...] export variable in environment
+       export [KEY ...] export variable in the environment
 
 
 DESCRIPTION
-       The  export utility remove a locale variable and add it to the environ-
-       ment.  If no key is specified, the builtin show all variables locale.
+       The export utility removes a local variable and add it to the environ-
+       ment.  If no key is specified, the builtin show all local variables.
 
 
 OPTIONS
@@ -20,11 +20,11 @@ OPTIONS
 
 
 EXIT STATUS
-       This utility exists 0 on success and >0 if error occurs.
+       This utility exits 0 on success and >0 if error occurs.
 
 
 EXAMPLE
-       To export the variable "MAN" wich as the value "old":
+       To export the variable "MAN" which has the value "old":
 
        $export MAN
 

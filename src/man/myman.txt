@@ -1,0 +1,36 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       myman
+
+
+SYNOPSIS
+       myman [BUILTIN]
+
+
+DESCRIPTION
+       The  myman  utility  displays  the  manual pages of the builtins of the
+       project.
+
+       Those builtins are:
+       - myman
+       - exit
+       - cd
+       - echo
+       - setenv
+       - unsetenv
+       - env
+       - set
+       - unset
+       - export
+       - local
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       February 26, 2018		    BUILTIN(1)

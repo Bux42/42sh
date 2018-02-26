@@ -11,7 +11,7 @@ SYNOPSIS
 
 
 DESCRIPTION
-       The echo utility exit the shell with the specify status.
+       The exit utility exit the shell with the specified status.
 
 
 OPTIONS

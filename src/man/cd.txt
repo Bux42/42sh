@@ -1,0 +1,46 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       cd - change the working directory
+
+
+SYNOPSIS
+       cd [-L | -P] [- | <DIR>]
+
+
+DESCRIPTION
+       The  cd	utility  change  the  current  directory to DIR.  If no DIR is
+       given, the default DIR value is the HOME  variable.   By  defualt,  the
+       utility follow symbolic links, as if the option '-L' were specified.
+
+
+OPTIONS
+       -L force symbolic links to be followed
+
+
+       -P  Use	the  physical  directory  structure without following symbolic
+       links
+
+
+DETAILS
+       ~ is consider as the HOME variable, and - as the OLDPWD
+
+
+EXIT STATUS
+       The cd utility exits 0 on success and >0 if error occurs
+
+
+EXAMPLE
+       To return to the directory above the current one:
+
+       $cd ..
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0		       February 26, 2018		    BUILTIN(1)

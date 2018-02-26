@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 19:52:33 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 14:17:23 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:47:23 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int			new_local(char *str, t_loc **local)
 	return (1);
 }
 
-int			builtin_set(char **exec, t_env **env, t_loc **loc)
+int			builtin_set(char **exec, t_sh *sh)
 {
 	int		i;
 
 	i = 1;
 	if (!exec[1])
-		return (builtin_local(exec, env, loc));
+		return (builtin_local(exec, sh));
 	while (exec[i])
 	{
 		if (exec[i][0] == '=')
@@ -81,7 +81,7 @@ int			builtin_set(char **exec, t_env **env, t_loc **loc)
 			custom_return();
 			return (1);
 		}
-		new_local(exec[i], loc);
+		new_local(exec[i], &sh->loc);
 		i++;
 	}
 	return (0);

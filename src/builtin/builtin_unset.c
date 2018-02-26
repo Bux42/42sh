@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 14:24:00 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:42:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ static int	remove_loc_if(char *key, t_loc **local)
 	ft_putstr_fd("unset: ",STDERR_FILENO);
 	ft_putstr_fd(key, STDERR_FILENO);
 	ft_putstr_fd(" key doesn't exist.", STDERR_FILENO);
+	custom_return();
 	return (1);
 }
 
-int		builtin_unset(char **exec, t_env **env, t_loc **loc)
+int		builtin_unset(char **exec, t_sh *sh)
 {
 	int		i;
-	(void)env;
 
 	i = 0;
 	if (!exec[1])
@@ -80,7 +80,7 @@ int		builtin_unset(char **exec, t_env **env, t_loc **loc)
 		return (1);
 	}
 	while (exec[++i])
-		if (remove_loc_if(exec[i], loc) == 1)
+		if (remove_loc_if(exec[i], &sh->loc) == 1)
 			return (2);
 	return (0);
 }

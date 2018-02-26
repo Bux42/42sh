@@ -7,14 +7,13 @@ NAME
 
 
 SYNOPSIS
-       unsetenv [KEY ...] - remove varirable from enviromentn
+       unsetenv [KEY ...] - remove variables from environment
 
 
 DESCRIPTION
-       The  unset  utility remove variable from the environment.  We can chain
-       the number of variables that we want to remove in one command.	If  no
-       argument  is specified, the variables from the environment are print on
-       the shell.
+       The  unset utility remove variables from the environment. Multiple var-
+       -iables can be specified in one command. If no  argument  is  provided,
+       the variables from the environment are print to the shell.
 
 
 OPTIONS
@@ -22,7 +21,7 @@ OPTIONS
 
 
 EXIT STATUS
-       This utility exits 0 on success and >0 if error occurs.
+       This utility exits 0 on success and >0 if an error occurs.
 
 
 EXAMPLE

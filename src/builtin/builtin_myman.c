@@ -6,12 +6,22 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 15:16:57 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:54:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
+
+int		man_error(int err)
+{
+	if (err == 1)
+		ft_putstr_fd("myman: Too many arguments.", STDERR_FILENO);
+	else if (err == 2)
+		ft_putstr_fd("myman: This builtin doesn't exists.", STDERR_FILENO);
+	custom_return();
+	return (err);
+}
 
 char	*checkman(char *path, char *file)
 {
@@ -32,9 +42,8 @@ char	*checkman(char *path, char *file)
 	return (str);
 }
 
-int		builtin_myman(char **input, t_env **env, t_loc **loc, t_sh *sh)
+int		builtin_myman(char **input, t_sh *sh)
 {
-	(void)loc;
 	char	*file;
 	char	*(tab[4]);
 
@@ -42,19 +51,16 @@ int		builtin_myman(char **input, t_env **env, t_loc **loc, t_sh *sh)
 	tab[1] = "less";
 	tab[3] = NULL;
 	if (input[1] && input[2])
-		return (1);
+		return (man_error(1));
 	if (input[1])
 		file = ft_strjoin(input[1], ".txt");
 	if (!input[1])
-		tab[2] = checkman(sh->man_path, "man.txt");
+		tab[2] = checkman(sh->man_path, "myman.txt");
 	else
 		tab[2] = checkman(sh->man_path, file);
 	if (!tab[2])
-			ft_putstr("doesn't exists");
-	if (!tab[2])
-		custom_return();
-	else
-		builtin_env(tab, env);
+		return (man_error(2));
+	builtin_env(tab, sh);
 	if (input[1])
 		free(file);
 	free(tab[2]);

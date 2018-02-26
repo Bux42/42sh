@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:35:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 05:24:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 16:48:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		add_delete_letter_search(t_sh *sh)
 	else if (sh->buff[0] == 4)
 	{
 		ft_putstr(tgetstr("ve", NULL));
-		builtin_exit(tab, &sh->env);
+		builtin_exit(tab, sh);
 	}
 }
 

@@ -3,7 +3,7 @@ BUILTIN(1)			  42sh Manual			    BUILTIN(1)
 
 
 NAME
-       unset -remove locale from the locale environement
+       unset -remove local variable from the local environement
 
 
 SYNOPSIS
@@ -11,8 +11,8 @@ SYNOPSIS
 
 
 DESCRIPTION
-       The  unset  utility show all locales variables if no argument is speci-
-       fied.  Otherwise, this utility remove the variables specified in  argu-
+       The  unset  utility show all local variables if  no  argument is speci-
+       fied. Otherwise, this utility removes the variables specified as  argu-
        ments from the variable environnement.
 
 
@@ -21,7 +21,7 @@ OPTIONS
 
 
 EXIT STATUS
-       This utility exits 0 on success and >0 if error occurs.
+       This utility exits 0 on success and >0 if an error occurs.
 
 
 EXAMPLE
@@ -31,8 +31,8 @@ EXAMPLE
 
 
 NOTE
-       Remove  a  variable  from the local environement doesn't remove it from
-       the environ.
+       Remove  a  variable from the local environement does not remove it from
+       the environment.
 
 
 AUTHOR

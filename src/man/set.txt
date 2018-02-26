@@ -3,7 +3,7 @@ BUILTIN(1)			  42sh Manual			    BUILTIN(1)
 
 
 NAME
-       set - add variable to the local environment
+       set - add a variable to the local environment
 
 
 SYNOPSIS
@@ -11,9 +11,9 @@ SYNOPSIS
 
 
 DESCRIPTION
-       The set utility show all locales variables if no argument is specified.
-       Otherwise, this utility create a new locale variable or change it if it
-       already exists.	The value isn't a mandatory.
+       The set utility show all local variables if no argument  is  specified.
+       Otherwise, this utility creates a new locale variable or change  it  if
+       one already exists. Specifying a value is not mandatory.
 
 
 OPTIONS
@@ -21,11 +21,11 @@ OPTIONS
 
 
 EXIT STATUS
-       This utility exits 0 on success and >0 if error occurs.
+       This utility exits 0 on success and >0 if an error occurs.
 
 
 EXAMPLE
-       To add the variables "SKIRT" and "MAN" with the respective values "red"
+       To add  the variable "SKIRT" and "MAN" with the respective values "red"
        and "":
 
        $set SKIRT=red MAN

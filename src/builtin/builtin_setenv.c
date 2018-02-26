@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 14:19:20 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:49:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int			parse_setenv(char **exec, t_env **env)
 	int		len;
 
 	len = 0;
-	if (env)
-		;
 	value = NULL;
 	name = NULL;
 	while (exec[1][len] && exec[1][len] != '=')
@@ -77,13 +75,15 @@ int			already_here(t_env **env, char **exec)
 	return (1);
 }
 
-int			builtin_setenv(char **exec, t_env **env)
+int			builtin_setenv(char **exec, t_sh *sh)
 {
 	int		i;
 	int		equal;
+	t_env	**env;
 
 	i = -1;
 	equal = 0;
+	env = &sh->env;
 	if (!exec[1])
 		return (print_env(env));
 	if (exec[2] && exec[3])
@@ -91,11 +91,10 @@ int			builtin_setenv(char **exec, t_env **env)
 	while (exec[1][++i])
 	{
 		if (exec[1][i] == '=')
-		{
 			equal++;
+		if (exec[1][i] == '=')
 			if (i < 1)
 				return (err_msg("setenv: parse error near '='", "", -1));
-		}
 	}
 	if (exec[2] && exec[2][0] == '0' && exec[2][1] == '\0')
 		if (already_here(env, exec) == 0)

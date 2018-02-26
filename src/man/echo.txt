@@ -3,7 +3,7 @@ BUILTIN(1)			  42sh Manual			    BUILTIN(1)
 
 
 NAME
-       echo - write arguments to the standart output
+       echo - write arguments to the standard output
 
 
 SYNOPSIS
@@ -11,10 +11,10 @@ SYNOPSIS
 
 
 DESCRIPTION
-       The echo utilty	writes arguments on the standart output.
+       The echo utility	writes arguments on the standard output.
 
-       quotes  aren't print and args have differents comportments according to
-       the quotes they are in: none, simple or double.
+       Quotes aren't printed and args have different behaviors according
+       to the quotes they have: none, simple or double.
 
 
 OPTIONS
@@ -22,7 +22,7 @@ OPTIONS
 
 
 EXIT STATUS
-       The echo utility exits 0 on succes and >0 if error occurs.
+       The echo utility exits 0 on success and >0 if an error occurs.
 
 
 EXAMPLE

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 14:25:18 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:51:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ static int			delete_env(t_env **env, char *input)
 	return (1);
 }
 
-int					builtin_unsetenv(char **exec, t_env **env)
+int					builtin_unsetenv(char **exec, t_sh *sh)
 {
 	int		i;
+	t_env	**env;
 
 	i = 1;
+	env = &sh->env;
 	if (!exec[1])
 		return (err_msg("unsetenv: missing argument", "", 1));
 	while (exec[i])

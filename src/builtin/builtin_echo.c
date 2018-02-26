@@ -6,18 +6,18 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:09:24 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 12:55:59 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:52:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-int			builtin_echo(char **input, t_env **env)
+int			builtin_echo(char **input, t_sh *sh)
 {
 	int	 	i;
 	int		flag;
 
-	(void)env;
+	(void)sh;
 	i = 1;
 	flag = 0;
 	if (input[i] && !ft_strcmp(input[i], "-n"))

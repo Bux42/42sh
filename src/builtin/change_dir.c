@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/15 14:42:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:56:01 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int			chdir_old_pwd(t_env **env, int flag)
 		return (err_msg("cd: OLDPWD not set", "", 3));
 }
 
-int			change_dir(char **exec, t_env **env)
+int			builtin_cd(char **exec, t_sh *sh)
 {
 	int		flag;
 	int		index;
@@ -149,7 +149,7 @@ int			change_dir(char **exec, t_env **env)
 	getwd(old_pwd);
 	if (!exec[index])
 	{
-		if ((home = get_specific_env("HOME=", env)))
+		if ((home = get_specific_env("HOME=", &sh->env)))
 		{
 			custom_chdir(home, flag);
 			free(home);
@@ -158,11 +158,11 @@ int			change_dir(char **exec, t_env **env)
 			return (err_msg("cd: HOME not set", "", 2));
 	}
 	else if (exec[index][0] == '-' && !exec[index][1])
-		return (chdir_old_pwd(env, flag));
+		return (chdir_old_pwd(&sh->env, flag));
 	else
 		custom_chdir(exec[index], flag);
 	getwd(cur_pwd);
 	if (ft_strcmp(cur_pwd, old_pwd) != 0)
-		update_env_chdir(cur_pwd, old_pwd, env);
+		update_env_chdir(cur_pwd, old_pwd, &sh->env);
 	return (0);
 }

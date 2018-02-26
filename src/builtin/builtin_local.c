@@ -6,16 +6,15 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:49:26 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 14:16:02 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:48:49 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
 
-int		builtin_local(char **exec, t_env **env, t_loc **loc)
+int		builtin_local(char **exec, t_sh *sh)
 {
-	(void)env;
 	(void)exec;
 	t_loc	*cp;
 
@@ -25,7 +24,7 @@ int		builtin_local(char **exec, t_env **env, t_loc **loc)
 		custom_return();
 		return (1);
 	}
-	cp = *loc;
+	cp = sh->loc;
 	while (cp)
 	{
 		ft_putstr(cp->content);

@@ -3,15 +3,15 @@ BUILTIN(1)			  42sh Manual			    BUILTIN(1)
 
 
 NAME
-       local /- print all variables locales
+       local /- print all local variables
 
 
 SYNOPSIS
-       local - write locales variables to the standart output
+       local - write local variables to the standard output
 
 
 DESCRIPTION
-       This utility just writes all locales variables line by line
+       This utility writes all local variables line by line
 
 
 OPTIONS
@@ -19,7 +19,7 @@ OPTIONS
 
 
 EXIT STATUS
-       The local utility exits 0 on success and >0 if error occurs.
+       The local utility exits 0 on success and >0 if an error occurs.
 
 
 AUTHOR

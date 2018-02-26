@@ -7,17 +7,17 @@ NAME
 
 
 SYNOPSIS
-       setenv [KEY[=value]] [overwrite] - Add key to the environment
+       setenv [KEY[=value]] [overwrite] - Add KEY to the environment
 
 
 DESCRIPTION
-       This  utility  add  one	KEY to the environment or modify it's value if
-       it's already exists. It also add a value to this key  if  this  one  is
-       specified.   If they are no argument, the environment is write on stan-
-       dart output.  If a "0" overwrite (int) is specified, the value  of  the
-       KEY doens't change if it already exists. If it doesn't exist, it's cre-
-       ate.  If the overwrite is different from "0", the comportement  of  the
-       builtin is the same as with no overwrite.
+       This  utility  add  one	KEY to the environment or modify its  value if
+       it already exists. It also add a value to this key if one is specified.
+       If no argument provided, the environment is written on standard output.
+       If a "0" overwrite  (int)  is  specified,  the value of the KEY doesn't
+       change if it already exists. If it doesn't exist, the value is created.
+       If the overwrite is different from "0", the behavior of  the builtin is
+       the same as without overwrite.
 
 
 OPTIONS
@@ -25,7 +25,7 @@ OPTIONS
 
 
 EXIT STATUS
-       The setenv utility exits 0 on success and >0 if error occurs.
+       The setenv utility exits 0 on success and >0 if an error occurs.
 
 
 EXAMPLE

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/04 18:32:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 16:48:35 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		treat_input(t_sh *sh)
 		tab[0] = "exit";
 		tab[1] = "0";
 		tab[2] = NULL;
-		builtin_exit(tab, &sh->env);
+		builtin_exit(tab, sh);
 	}
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
 		move_cursor(sh, &sh->inpl->inp, sh->buff[2]);
