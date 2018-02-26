@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 13:59:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 23:32:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int		builtin_unset(char **exec, t_sh *sh);
 int		builtin_export(char **exec, t_sh *sh);
 int		builtin_myman(char **exec, t_sh *sh);
 int		builtin_cd(char **exec, t_sh *sh);
+int		builtin_history(char **exec, t_sh *sh);
+
+int		ft_isnum(char c);
 
 int		print_env(t_env **env);
 void	set_env(t_env **env, char *name, char *value);

@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/02/26 22:05:23 by videsvau         ###   ########.fr        #
+#    Updated: 2018/02/26 23:30:08 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ launch_term/init_term.c\
 env/env_list.c\
 env/get_env.c\
 pwd/print_prompt.c\
+builtin/builtin_history.c\
 builtin/builtin_echo.c\
 builtin/builtin_exit.c\
 builtin/builtin_unsetenv.c\
