@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/24 15:58:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:52:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 # define DQUOTE 1
 # define QUOTE 2
 # define BQUOTE 4
-# define HERE 8
-# define PIPE 16
-# define AND 32
-# define OR 64
+
+# define HERE 1
+# define PIPE 2
+# define AND 4
+# define OR 8
+# define TOFILE 16
+# define ATOFILE 32
+# define ARGUMENT 64
+# define TOEXE 128
+# define COMMAND 256
+# define BUILTIN 512
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -76,6 +83,9 @@ void					inp_insert_chain(t_inp **src, t_sh *sh);
 void					print_str(char *str, t_sh *sh);
 void					restore_cursor_pos(int nb, t_sh *sh);
 void					restore_cursor_right(int nb, t_sh *sh);
+
+t_inpl					*new_inpl(t_inp **inp, int type);
+void					inpl_push_back(t_inpl **inpl, t_inp **inp, int type);
 
 void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);

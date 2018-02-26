@@ -1,55 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_splitted.c                                 :+:      :+:    :+:   */
+/*   inpl_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 15:47:32 by videsvau         ###   ########.fr       */
+/*   Created: 2018/02/26 15:21:14 by videsvau          #+#    #+#             */
+/*   Updated: 2018/02/26 15:59:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void		convert_content(t_inp **inp, t_sh *sh)
+t_inpl		*new_inpl(t_inp **inp, int type)
 {
-	t_inp	*cp;
+	t_inpl	*ret;
 
-	sh->posy = sh->posy;
-	if ((cp = (*inp)))
-	{
-		while (cp)
-			cp = cp->next;
-	}
+	if (!(ret = (t_inpl*)malloc(sizeof(t_inpl))))
+		return (NULL);
+	ret->inp = *inp;
+	ret->type = type;
+	ret->previous = NULL;
+	ret->next = NULL;
+	return (ret);
 }
 
-int			identify_tok(t_inp **inp)
-{
-	int		type;
-	t_inp	*cp;
-
-	type = 0;
-	if ((cp = (*inp)))
-	{
-		while (cp)
-			cp = cp->next;
-	}
-	return (type);
-}
-
-void		convert_splitted(t_inpl **inpl, t_sh *sh)
+void		inpl_push_back(t_inpl **inpl, t_inp **inp, int type)
 {
 	t_inpl	*cp;
+	t_inpl	*tmp;
 
-	sh->posy = sh->posy;
-	if ((cp = (*inpl)))
+	if (!(*inpl))
+		*inpl = new_inpl(inp, type);
+	else
 	{
-		while (cp)
-		{
-			convert_content(&cp->inp, sh);
-			cp->type = identify_tok(&cp->inp);
+		cp = *inpl;
+		while (cp->next)
 			cp = cp->next;
-		}
+		cp->next = new_inpl(inp, type);
+		tmp = cp;
+		cp = cp->next;
+		cp->previous = tmp;
 	}
 }

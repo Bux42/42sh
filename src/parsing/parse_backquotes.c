@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/24 15:59:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:58:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,14 +142,10 @@ void		parse(t_sh *sh)
 	if (empty_inp(&clean))
 	{
 		history_push_front(&sh->history, clean, sh);
-		if (!(splitted = (t_inpl*)malloc(sizeof(t_inpl))))
-			return ;
-		splitted->next = NULL;
-		splitted->previous = NULL;
-		splitted->inp = NULL;
+		splitted = NULL;
 		sh->context = 0;
 		split_line(splitted, &clean, sh);
-		convert_splitted(&splitted, sh);
+		//convert_splitted(&splitted, sh);
 		custom_return();
 		sh->context = 0;
 	}

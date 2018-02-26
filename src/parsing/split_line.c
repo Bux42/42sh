@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/24 16:01:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:58:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,28 @@ int			check_quoting(char c)
 	return (0);
 }
 
+int			ending_char(char c)
+{
+	if (c == ' ')
+		return (1);
+	if (c == '\t')
+		return (1);
+	if (c == '|')
+		return (1);
+	if (c == '&')
+		return (1);
+	if (c == '>')
+		return (1);
+	if (c == '<')
+		return (1);
+	return (0);
+}
+
 void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 {
-	if (!((*inpl)->inp = (t_inp*)malloc(sizeof(t_inp))))
-		return ;
+	t_inp	*add;
+
+	add = NULL;
 	while (*cp)
 	{
 		if (!(sh->context & QUOTE) && (*cp)->c == '\\')
@@ -45,24 +63,22 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 				(*cp) = (*cp)->next->next;
 		if (check_quoting((*cp)->c))
 			sh->context = try_update_context((*cp)->c, sh->context);
-		if (right_context(sh->context) && !check_key((*cp)->c))
+		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;
-		inp_insert_posat(&(*inpl)->inp, (*cp)->c);
+		ft_putchar((*cp)->c);
+		inp_insert_posat(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
-	if (!((*inpl)->next = (t_inpl*)malloc(sizeof(t_inpl))))
-		return ;
-	(*inpl)->next->previous = (*inpl);
-	(*inpl) = (*inpl)->next;
 	custom_return();
+	if (add)
+		inpl_push_back(inpl, &add, 0);
 }
 
-void		add_special_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
+void		add_special_token(t_inpl **inpl, t_inp **cp)
 {
-	if (!((*inpl)->inp = (t_inp*)malloc(sizeof(t_inp))))
-		return ;
-	if (inpl && cp &&sh)
-		;
+	t_inp	*add;
+
+	add = NULL;
 	while (*cp)
 	{
 		if ((*cp)->c == '\\')
@@ -70,14 +86,11 @@ void		add_special_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 				(*cp) = (*cp)->next->next;
 		if ((*cp)->c == ' ')
 			break ;
-		inp_insert_posat(&(*inpl)->inp, (*cp)->c);
+		inp_insert_posat(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
-	if (!((*inpl)->next = (t_inpl*)malloc(sizeof(t_inpl))))
-		return ;
-	(*inpl)->next->previous = (*inpl);
-	(*inpl) = (*inpl)->next;
-	custom_return();
+	if (add)
+		inpl_push_back(inpl, &add, 1);
 }
 
 int			special_tok(char c)
@@ -101,6 +114,21 @@ int			redir(t_inp *cp)
 	return (0);
 }
 
+void		print_xx(t_inp **inp)
+{
+	t_inp	*cp;
+
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			cp = cp->next;
+		}
+		custom_return();
+	}
+}
+
 void		split_line(t_inpl *inpl, t_inp **clean, t_sh *sh)
 {
 	t_inp	*cp;
@@ -113,9 +141,10 @@ void		split_line(t_inpl *inpl, t_inp **clean, t_sh *sh)
 		if (!cp)
 			break ;
 		if (special_tok(cp->c) || redir(cp))
-			add_special_token(&inpl, &cp, sh);
+			add_special_token(&inpl, &cp);
 		else
 			add_token(&inpl, &cp, sh);
+		//print_xx(&cp);
 		if (cp && cp->next)
 			cp = cp->next;
 	}
