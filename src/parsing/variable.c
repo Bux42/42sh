@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 15:58:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 22:47:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int			check_key(char key)
 {
 	if (key == '\n'|| key == ' ' || key == '\t'|| key == ';' || key == '>'||
-			key == '<' || key == '&'|| key == '|' || key == '$')
+			key == '<' || key == '&'|| key == '|' || key == '$' ||
+			key == '\'' || key == '`' || key == '\"')
 		return (0);
 	return (1);
 }
@@ -109,7 +110,6 @@ void		try_insert_variable(t_inp **inp, t_sh *sh)
 			after = get_end(inp);
 			new = replace_inp(inp, &content[1]);
 			*inp = relink_inp(before, after, new);
-			custom_return();
 			free(content);
 		}
 		free(variable);

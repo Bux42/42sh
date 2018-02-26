@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 15:58:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 18:30:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ void		parse(t_sh *sh)
 		history_push_front(&sh->history, clean, sh);
 		splitted = NULL;
 		sh->context = 0;
-		split_line(splitted, &clean, sh);
-		//convert_splitted(&splitted, sh);
+		split_line(&splitted, &clean, sh);
+		convert_splitted(&splitted, sh);
 		custom_return();
 		sh->context = 0;
 	}

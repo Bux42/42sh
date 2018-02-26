@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 15:52:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/26 23:17:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # define OR 8
 # define TOFILE 16
 # define ATOFILE 32
-# define ARGUMENT 64
-# define TOEXE 128
+# define TOEXE 64
+# define ARGUMENT 128
 # define COMMAND 256
 # define BUILTIN 512
+# define _FILE 1024
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -170,6 +171,15 @@ int						check_key(char key);
 int						try_update_context(char c, int flag);
 
 void					convert_splitted(t_inpl **inpl, t_sh *sh);
+void					convert_quote(t_inp **inp);
+void					convert_dquote(t_inp **inp, t_sh *sh);
+void					convert_bquote(t_inp **inp, t_sh *sh);
+
+void					special_error(t_inp **inp);
+int						check_right_arrow(t_inp **inp);
+int						check_left_arrow(t_inp **inp);
+int						check_pipe_or(t_inp **inp);
+int						check_and(t_inp **inp);
 
 /*						tty_debug										*/
 
