@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 13:58:44 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 17:28:00 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void			*get_builtin_function(char *command)
 		return (&builtin_export);
 	if (ft_strcmp(command, "myman") == 0)
 		return (&builtin_myman);
+	if (ft_strcmp(command, "history") == 0)
+		return (&builtin_history);
 	return (NULL);
 }
 

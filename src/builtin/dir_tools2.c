@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:50:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 12:45:21 by drecours         ###   ########.fr       */
+/*   Updated: 2018/02/26 18:45:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ char	*find_man_path(char *relative)
 	path[i - 7] = 'r';
 	path[i - 8] = 's';
 	return (path);
+}
+
+int		ft_isnum(char c)
+{
+	if (c <= '9' && c >= '0')
+		return (1);
+	return (0);
 }
