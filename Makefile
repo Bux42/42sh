@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/02/26 23:30:08 by videsvau         ###   ########.fr        #
+#    Updated: 2018/02/27 16:35:28 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ line_edition/insert_search_history_result.c\
 line_edition/print_search.c\
 line_edition/optimized_tools.c\
 line_edition/inpl_list.c\
+parsing/tokenize_splitted.c\
 parsing/convert_quotes.c\
 parsing/check_special.c\
 parsing/convert_splitted.c\

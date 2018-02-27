@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 23:23:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/27 21:19:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,16 +170,18 @@ void					split_line(t_inpl **inpl, t_inp **clean, t_sh *sh);
 int						check_key(char key);
 int						try_update_context(char c, int flag);
 
-void					convert_splitted(t_inpl **inpl, t_sh *sh);
+void					*convert_splitted(t_inpl **inpl, t_sh *sh);
 void					convert_quote(t_inp **inp);
 void					convert_dquote(t_inp **inp, t_sh *sh);
 void					convert_bquote(t_inp **inp, t_sh *sh);
 
-void					special_error(t_inp **inp);
+void*					special_error(t_inp **inp);
 int						check_right_arrow(t_inp **inp);
 int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
+
+int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok *tok);
 
 /*						tty_debug										*/
 

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 23:02:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:25:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void		print_xx(t_inp **inp, int type)
 	}
 }
 
-void		convert_splitted(t_inpl **inpl, t_sh *sh)
+void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 {
 	t_inpl	*cp;
 
@@ -161,10 +161,11 @@ void		convert_splitted(t_inpl **inpl, t_sh *sh)
 			else if (cp->type == 1)
 			{
 				if ((cp->type = check_special(&cp->inp)) == -1)
-					return ((void)special_error(&cp->inp));
+					return (special_error(&cp->inp));
 			}
 			print_xx(&cp->inp, cp->type);
 			cp = cp->next;
 		}
 	}
+	return (inpl);
 }

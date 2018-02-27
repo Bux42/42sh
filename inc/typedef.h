@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/24 16:18:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:35:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct			s_tok
 	int					flag;
 	char				**cont;
 	void				*func;
+	struct s_tok		*next;
+	struct s_tok		*previous;
 }						t_tok;
 
 typedef struct			s_close

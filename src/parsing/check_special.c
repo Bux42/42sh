@@ -6,13 +6,13 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 22:54:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:37:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void		special_error(t_inp **inp)
+void		*special_error(t_inp **inp)
 {
 	t_inp	*cp;
 
@@ -25,6 +25,7 @@ void		special_error(t_inp **inp)
 			cp = cp->next;
 		}
 	}
+	return (NULL);
 }
 
 int			check_and(t_inp **inp)
