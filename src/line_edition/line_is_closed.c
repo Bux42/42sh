@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:26:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/22 14:20:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/01 00:00:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		line_is_closed(t_sh *sh, t_inp **inp)
 	{
 		while (cp)
 		{
-			if (cp->c == '\\')
+			/*if (cp->c == '\\')
 			{
 				if (cp->next)
 				{
@@ -89,13 +89,20 @@ int		line_is_closed(t_sh *sh, t_inp **inp)
 				}
 				else
 					return (print_expected_prompt(sh, &sh->close));
-			}
+			}*/
 			if (cp->c == '\'')
 				check_context_quote(sh);
 			if (cp->c == '`')
 				check_context_bquote(sh);
 			if (cp->c == '\"')
 				check_context_dquote(sh);
+			if (cp->c == '\\')
+			{
+				if (cp->next)
+					cp = cp->next;
+				else
+					return (print_expected_prompt(sh, &sh->close));
+			}
 			cp = cp->next;
 		}
 	}

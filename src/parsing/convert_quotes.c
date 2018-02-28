@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:25:37 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 23:38:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 23:59:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,30 @@ void		convert_bquote(t_inp **inp, t_sh *sh)
 		;
 }
 
-void		convert_backslash(t_inp **inp)
+void		convert_backslash_quote(t_inp **inp)
+{
+	char	c;
+	t_inp	*after;
+
+	c = '\0';
+	if ((*inp)->next)
+	{
+		if ((*inp)->next->c == '\n')
+			c = '\n';
+		if ((*inp)->next->c == '\t')
+			c = '\t';
+		if (c)
+		{
+			after = (*inp)->next->next;;
+			(*inp)->c = c;
+			free((*inp)->next);
+			(*inp)->next = after;
+			after->previous = (*inp);
+		}
+	}
+}
+
+void		convert_backslash_dquote(t_inp **inp)
 {
 	char	c;
 	t_inp	*before;
@@ -67,7 +90,7 @@ void		convert_dquote(t_inp **inp, t_sh *sh)
 		if ((*inp)->c == '$')
 			try_insert_variable(inp, sh);
 		if ((*inp)->c == '\\')
-			convert_backslash(inp);
+			convert_backslash_dquote(inp);
 		(*inp) = (*inp)->next;
 	}
 	after = (*inp)->next;
@@ -90,7 +113,11 @@ void		convert_quote(t_inp **inp)
 		previous->next = (*inp);
 	(*inp)->previous = previous;
 	while ((*inp)->c != '\'')
+	{
+		if ((*inp)->c == '\\')
+			convert_backslash_quote(inp);
 		(*inp) = (*inp)->next;
+	}
 	after = (*inp)->next;
 	(*inp) = (*inp)->previous;
 	if (after)

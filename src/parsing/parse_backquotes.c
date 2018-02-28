@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 22:32:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/01 00:07:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			empty_inp(t_inp **inp)
 	{
 		while (cp)
 		{
+			ft_putchar(cp->c);
 			if (!is_space(cp->c))
 				i++;
 			cp = cp->next;
