@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 20:49:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 22:39:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,24 @@ int			concat_content(t_inpl **inpl, t_tok **tok, int type)
 	return (1);
 }
 
+int			valid_file(t_inpl **inpl)
+{
+	int		fd;
+	char	*file;
+
+	fd = -1;
+	if ((*inpl)->previous && (*inpl)->next)
+	{
+		if ((*inpl)->previous && (*inpl)->previous->type > 64 && (*inpl)->previous->type < 1024)
+			if ((*inpl)->next->type & _FILE)
+				if ((file = inp_to_cont(&(*inpl)->next->inp)))
+					fd = open(file, O_RDONLY);
+	}
+	else
+		return (-1);
+	return (fd);
+}
+
 int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 {
 	t_inpl	*cp;
@@ -183,6 +201,15 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 				}
 				else
 					return (0);
+			}
+			if (cp->type & TOEXE)
+			{
+				if ((settings[1] = valid_file(&cp)) != -1)
+				{
+					settings[0] = 1;
+					settings[2] = 0;
+				}
+				tok_push_back(tok, settings, NULL, NULL);
 			}
 			if (cp->type & COMMAND || cp->type & BUILTIN)
 				if (!concat_content(&cp, tok, cp->type))
