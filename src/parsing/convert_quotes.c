@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:25:37 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 21:58:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 23:38:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,39 @@ void		convert_bquote(t_inp **inp, t_sh *sh)
 {
 	if (*inp && sh)
 		;
+}
+
+void		convert_backslash(t_inp **inp)
+{
+	char	c;
+	t_inp	*before;
+	t_inp	*after;
+
+	c = '\0';
+	before = (*inp)->previous;
+	if ((*inp)->next)
+	{
+		if ((*inp)->next->c == 'n')
+			c = '\n';
+		if ((*inp)->next->c == 't')
+			c = '\t';
+		if (c)
+		{
+			after = (*inp)->next->next;
+			(*inp)->c = c;
+			(*inp)->next = after;
+			free(after->previous);
+			after->previous = (*inp);
+		}
+		else
+		{
+			(*inp) = (*inp)->next;
+			free((*inp)->previous);
+			if (before)
+				before->next = (*inp);
+			(*inp)->previous = before;
+		}
+	}
 }
 
 void		convert_dquote(t_inp **inp, t_sh *sh)
@@ -33,6 +66,8 @@ void		convert_dquote(t_inp **inp, t_sh *sh)
 	{
 		if ((*inp)->c == '$')
 			try_insert_variable(inp, sh);
+		if ((*inp)->c == '\\')
+			convert_backslash(inp);
 		(*inp) = (*inp)->next;
 	}
 	after = (*inp)->next;

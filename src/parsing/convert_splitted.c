@@ -6,11 +6,34 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 22:29:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 23:20:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		remove_backslash(t_inp **inp)
+{
+	t_inp	*previous;
+
+	previous = (*inp)->previous;
+	if (!(*inp)->next)
+	{
+		if (previous)
+		{
+			free(previous->next);
+			previous->next = NULL;
+		}
+	}
+	else
+	{
+		(*inp) = (*inp)->next;
+		if (previous)
+			previous->next = (*inp);
+		free((*inp)->previous);
+		(*inp)->previous = previous;
+	}
+}
 
 void		convert_regular(t_inp **inp, t_sh *sh)
 {
@@ -20,13 +43,15 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 	{
 		while (cp)
 		{
-			if (cp->c == '\'')
+			if (cp->c == '\\')
+				remove_backslash(&cp);
+			else if (cp && cp->c == '\'')
 				convert_quote(&cp);
-			else if (cp->c == '\"')
+			else if (cp && cp->c == '\"')
 				convert_dquote(&cp, sh);
-			else if (cp->c == '`')
+			else if (cp && cp->c == '`')
 				convert_bquote(&cp, sh);
-			else if (cp->c == '$')
+			else if (cp && cp->c == '$')
 				try_insert_variable(&cp, sh);
 			if (!cp)
 				break ;
@@ -115,15 +140,18 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 			if (cp->type == 0)
 			{
 				convert_regular(&cp->inp, sh);
-				cp->type = idenfity_regular(&cp->inp);
-				if (cp->previous && cp->previous->type > 64)
-					cp->type = ARGUMENT;
-				if (cp->previous && cp->previous->type & TOEXE)
-					cp->type = _FILE;
-				if (cp->previous && (cp->previous->type & ATOFILE))
-					cp->type = _FILE;
-				if (cp->previous && (cp->previous->type & TOFILE))
-					cp->type = _FILE;
+				if (cp)
+				{
+					cp->type = idenfity_regular(&cp->inp);
+					if (cp->previous && cp->previous->type > 64)
+						cp->type = ARGUMENT;
+					if (cp->previous && cp->previous->type & TOEXE)
+						cp->type = _FILE;
+					if (cp->previous && (cp->previous->type & ATOFILE))
+						cp->type = _FILE;
+					if (cp->previous && (cp->previous->type & TOFILE))
+						cp->type = _FILE;
+				}
 			}
 			else if (cp->type == 1)
 				if ((cp->type = check_special(&cp->inp)) == -1)
