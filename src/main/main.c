@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/20 16:42:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 16:41:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,21 @@ void		init_variables(t_sh *sh)
 	ft_bzero(sh->buff, 6);
 }
 
+int			find_hist_file(char *man_path)
+{
+	int		fd;
+	char	*cp;
+	char	name[] = ".history";
+
+	fd = -1;
+	cp = ft_strdup(man_path);
+	cp[21] = '\0';
+	ft_strcat(cp, name);
+	fd = open(cp, O_CREAT | O_RDWR, 0777);
+	free(cp);
+	return (fd);
+}
+
 int			main(int ac, char **av, char **env)
 {
 	t_sh	*sh;
@@ -75,7 +90,8 @@ int			main(int ac, char **av, char **env)
 		return (0);
 	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
-	if (!(sh->fd = open("/tmp/.history", O_CREAT | O_RDWR, 0777)))
+	sh->man_path = find_man_path(av[0]);
+	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
 		return (0);
 	get_env(env, sh);
 	sh->history = NULL;
@@ -92,7 +108,6 @@ int			main(int ac, char **av, char **env)
 	}
 	init_variables(sh);
 	signal_init();
-	sh->man_path = find_man_path(av[0]);
 	while (ac > -1)
 		if (read(1, sh->buff, 4))
 			check_pasted(sh);

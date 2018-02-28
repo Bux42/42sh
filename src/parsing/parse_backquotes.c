@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/27 21:51:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:47:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,25 @@ void		execute_tokens(t_tok **tok, t_sh *sh)
 				ft_putnbr(cp->fd[1]);
 				custom_return();
 			}
+			else if (cp->is_cond)
+			{
+				ft_putstr("Condition: ");
+				if (cp->flag & OR)
+					ft_putstr("OR");
+				if (cp->flag & AND)
+					ft_putstr("AND");
+				custom_return();
+			}
+			else
+			{
+				ft_putstr("Executing ");
+				if (cp->func)
+					ft_putstr("Builtin: ");
+				else
+					ft_putstr(": ");
+				ft_putstr(cp->cont[0]);
+				custom_return();
+			}
 			cp = cp->next;
 		}
 	}
@@ -168,14 +187,16 @@ void		parse(t_sh *sh)
 	if (empty_inp(&clean))
 	{
 		history_push_front(&sh->history, clean, sh);
+		sh->history_len = history_len(&sh->history);
 		splitted = NULL;
 		sh->context = 0;
 		split_line(&splitted, &clean, sh);
 		if (convert_splitted(&splitted, sh) != NULL)
 		{
+			print_splitted(&splitted);
 			ft_putstr("Creating Token List");
 			custom_return();
-			if (tokenize_splitted(&splitted, sh, tok))
+			if (tokenize_splitted(&splitted, sh, &tok))
 				execute_tokens(&tok, sh);
 		}
 		custom_return();

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/27 18:25:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:25:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,41 +104,6 @@ int			check_special(t_inp **inp)
 	return (type);
 }
 
-void		print_xx(t_inp **inp, int type)
-{
-	t_inp	*cp;
-
-	if ((cp = (*inp)))
-	{
-		while (cp)
-		{
-			ft_putchar(cp->c);
-			cp = cp->next;
-		}
-		if (type & PIPE)
-			ft_putstr(" <= PIPE");
-		if (type & AND)
-			ft_putstr(" <= AND");
-		if (type & OR)
-			ft_putstr(" <= OR");
-		if (type & TOFILE)
-			ft_putstr(" <= TOFILE");
-		if (type & ATOFILE)
-			ft_putstr(" <= ATOFILE");
-		if (type & TOEXE)
-			ft_putstr(" <= TOEXE");
-		if (type & ARGUMENT)
-			ft_putstr(" <= ARGUMENT");
-		if (type & COMMAND)
-			ft_putstr(" <= COMMAND");
-		if (type & BUILTIN)
-			ft_putstr(" <= BUILTIN");
-		if (type & _FILE)
-			ft_putstr(" <= FILE");
-		custom_return();
-	}
-}
-
 void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 {
 	t_inpl	*cp;
@@ -159,11 +124,8 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 					cp->type = _FILE;
 			}
 			else if (cp->type == 1)
-			{
 				if ((cp->type = check_special(&cp->inp)) == -1)
 					return (special_error(&cp->inp));
-			}
-			print_xx(&cp->inp, cp->type);
 			cp = cp->next;
 		}
 	}

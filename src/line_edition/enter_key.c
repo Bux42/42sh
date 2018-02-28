@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/22 14:58:42 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 16:44:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void		process_line(t_sh *sh)
 {
 	while (sh->inpl && sh->inpl->previous)
 		sh->inpl = sh->inpl->previous;
-	if (sh->inpl->inp)
-		history_push_front(&sh->history, sh->inpl->inp, sh);
-	sh->history_len = history_len(&sh->history);
 	parse(sh);
 	while (sh->inpl && sh->inpl->next)
 		sh->inpl = sh->inpl->next;

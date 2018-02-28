@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/27 21:19:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:44:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 # include "typedef.h"
 //# include "../libft/includes/libft.h"
 //# include "../src/builtin/builtin.h"
+
+/*						debug											*/
+
+void					print_splitted(t_inpl **inpl);
+void					print_converted(t_inp **inp, int type);
 
 /*						initialize_term									*/
 
@@ -181,7 +186,8 @@ int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
 
-int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok *tok);
+int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok);
+char					*inp_to_cont(t_inp **inp);
 
 /*						tty_debug										*/
 

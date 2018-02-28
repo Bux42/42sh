@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/27 22:07:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:49:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,43 @@ int			valid_tofile(t_inpl **inpl)
 	return (-1);
 }
 
-int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok *tok)
+int			concat_content(t_inpl **inpl, t_tok **tok, int type)
+{
+	int		len;
+	t_inpl	*cp;
+	char	**cont;
+	int		settings[5];
+	void	*func;
+
+	func = NULL;
+	len = 1;
+	cp = (*inpl);
+	settings[0] = 0;
+	settings[3] = 0;
+	while (cp && cp->type < 1024 && cp->type > 64)
+	{
+		len++;
+		cp = cp->next;
+	}
+	if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
+		return (0);
+	cont[len] = NULL;
+	len = 0;
+	while ((*inpl) && (*inpl)->type < 1024 && (*inpl)->type > 64)
+	{
+		if (!(cont[len++] = inp_to_cont(&(*inpl)->inp)))
+			return (0);
+		(*inpl) = (*inpl)->next;
+	}
+	if (type & BUILTIN)
+		func = get_builtin_function(cont[0]);
+	tok_push_back(tok, settings, func, cont);
+	if ((*inpl) && (*inpl)->previous)
+		(*inpl) = (*inpl)->previous;
+	return (1);
+}
+
+int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 {
 	t_inpl	*cp;
 	int		settings[5];
@@ -129,9 +165,10 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok *tok)
 						settings[0] = 1;
 						settings[1] = 1;
 						settings[2] = 0;
+						settings[3] = 0;
 					}
 					settings[4] = cp->type;
-					tok_push_back(&tok, settings, NULL, NULL);
+					tok_push_back(tok, settings, NULL, NULL);
 				}
 				else
 					return ((int)special_error(&cp->inp));
@@ -142,11 +179,16 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok *tok)
 				{
 					settings[0] = 1;
 					settings[1] = 1;
-					tok_push_back(&tok, settings, NULL, NULL);
+					tok_push_back(tok, settings, NULL, NULL);
 				}
 				else
 					return (0);
 			}
+			if (cp->type & COMMAND || cp->type & BUILTIN)
+				if (!concat_content(&cp, tok, cp->type))
+					return (0);
+			if (!cp)
+				break ;
 			cp = cp->next;
 		}
 	}
