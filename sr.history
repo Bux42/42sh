@@ -1,8 +1,0 @@
-cat -e | ls
-cat -e cwcr cw | ls
-cat -e cwcr cw || ls
-cat -e cwcr cw || ls ib k
-ls | cat | trtwe > ewcw
-ls
-!!
-history
