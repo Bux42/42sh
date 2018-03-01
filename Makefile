@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/02/28 19:26:01 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/01 19:58:53 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,8 @@ builtin/builtin_unset.c\
 builtin/builtin_export.c\
 builtin/dir_tools.c\
 builtin/dir_tools2.c\
-builtin/builtin_myman.c
+builtin/builtin_myman.c\
+builtin/history_tools.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
