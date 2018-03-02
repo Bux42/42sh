@@ -6,14 +6,14 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/01 19:58:53 by drecours         ###   ########.fr        #
+#    Updated: 2018/03/02 12:23:13 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -71,6 +71,7 @@ parsing/lexer_parser.c\
 parsing/redirections.c\
 parsing/variable.c\
 parsing/context_updater.c\
+exec/execute_tokens.c\
 exec/inp_to_exec.c\
 exec/check_valid_command.c\
 exec/fork_command.c\

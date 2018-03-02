@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 20:44:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/02 09:43:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,8 @@ int						valid_variable_char(char c);
 char					*parse_variable_name(t_inp **inp);
 
 /*						execution										*/
+
+void					execute_tokens(t_tok **tok, t_sh *sh);
 
 void					valid_command(t_inp **inp, t_sh *sh);
 char					*existing_command(char *command, t_env **env);

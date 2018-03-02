@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 22:39:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/02 11:45:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,15 @@ int			concat_content(t_inpl **inpl, t_tok **tok, int type)
 	}
 	if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (0);
-	cont[len] = NULL;
 	len = 0;
 	while ((*inpl) && (*inpl)->type < 1024 && (*inpl)->type > 64)
 	{
-		if (!(cont[len++] = inp_to_cont(&(*inpl)->inp)))
+		if (!(cont[len] = inp_to_cont(&(*inpl)->inp)))
 			return (0);
+		len++;
 		(*inpl) = (*inpl)->next;
 	}
+	cont[len] = NULL;
 	if (type & BUILTIN)
 		func = get_builtin_function(cont[0]);
 	tok_push_back(tok, settings, func, cont);
