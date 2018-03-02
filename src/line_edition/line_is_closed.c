@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:26:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/01 00:00:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/02 09:24:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		print_expected_prompt(t_sh *sh, t_close **close)
 {
 	t_close		*cp;
 
-	sh->posy = 1;
 	if ((cp = *close))
 	{
 		while (cp->next)
@@ -70,6 +69,13 @@ int		print_expected_prompt(t_sh *sh, t_close **close)
 	return (0);
 }
 
+int		check_context_backslash(t_sh *sh)
+{
+	if (sh->close && sh->close->flag & QUOTE)
+		return (0);
+	return (1);
+}
+
 int		line_is_closed(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
@@ -78,25 +84,13 @@ int		line_is_closed(t_sh *sh, t_inp **inp)
 	{
 		while (cp)
 		{
-			/*if (cp->c == '\\')
-			{
-				if (cp->next)
-				{
-					if (cp->next->next)
-						cp = cp->next->next;
-					else
-						return (1);
-				}
-				else
-					return (print_expected_prompt(sh, &sh->close));
-			}*/
 			if (cp->c == '\'')
 				check_context_quote(sh);
 			if (cp->c == '`')
 				check_context_bquote(sh);
 			if (cp->c == '\"')
 				check_context_dquote(sh);
-			if (cp->c == '\\')
+			if (cp->c == '\\' && check_context_backslash(sh))
 			{
 				if (cp->next)
 					cp = cp->next;
