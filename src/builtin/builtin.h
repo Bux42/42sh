@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 15:02:11 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:17:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	nb_verb(int *verbose);
 int		illegal_opt(char c);
 void	unset_verb(int verbose, char *str, char *next, char ***tab);
 int		check_arg(char **exec, int i);
+void	show_line(char c, int nb, t_inp *cp);
 t_env	*tab_in_env(char **tab);
 void	show_args(char **exec);
 

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 14:59:25 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:22:36 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,19 @@ int		check_arg(char **exec, int i)
 	if (exec[i + 1] && exec[i + 2])
 		return (show_err(1, '0'));
 	return (0);
+}
+
+void	show_line(char c, int nb, t_inp *cp)
+{
+	if (c == 'n')
+	{
+		ft_putnbr(nb);
+		ft_putstr(": ");
+	}
+	while (cp)
+	{
+		ft_putchar(cp->c);
+		cp = cp->next;
+	}
+	custom_return();
 }

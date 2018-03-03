@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 15:00:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:22:35 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,39 +80,25 @@ int		builtin_hist(int i, t_his **hist, int lg, char *fg)
 	int		len;
 	int		max;
 	int		pos;
-	t_inp	*cp;
-	t_his	*new;
+	t_his	*his;
 
 	len = 0;
-	new = *hist;
+	his = *hist;
 	pos = (i < 0) ? 1 : 0;
 	i = (i < 0) ? -i : i;
 	if (fg[1] == 'C')
 		return (history_clean(fg[2], hist));
 	if (i == 0 || lg == 0)
 		return (0);
-	while (new->next)
-		new = new->next;
+	while (his->next)
+		his = his->next;
 	max = history_len(hist);
-	while (new->previous)
+	while (his->previous)
 	{
 		if ((len >= i && len < i + lg && pos == 1)
 				|| (len >= (max - i) && len < (max - i + lg) && pos == 0))
-		{
-			if (fg[2] == 'n')
-			{
-				ft_putnbr(len);
-				ft_putstr(": ");
-			}
-			cp = new->inp;
-			while (cp)
-			{
-				ft_putchar(cp->c);
-				cp = cp->next;
-			}
-			custom_return();
-		}
-		new = new->previous;
+			show_line(fg[2], len, his->inp);
+		his = his->previous;
 		len++;
 	}
 	return (0);
@@ -134,7 +120,7 @@ int		builtin_history(char **exec, t_sh *sh)
 		return (show_err(4, '0'));
 	}
 	lg = -1;
-	if (!(err = get_beg(&i, &sh->history, exec)) && 
+	if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{
 		i = (fg[0] == 'A') ? -1 : i;
