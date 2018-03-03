@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 13:42:32 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:22:19 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			remove_first(t_loc **env, t_loc **cp)
 	return (1);
 }
 
-int                     match_name(char *env, char *name)
+int			match_name(char *env, char *name)
 {
 	int		i;
 
@@ -61,14 +61,14 @@ static int	remove_loc_if(char *key, t_loc **local)
 		tmp = cp;
 		cp = cp->next;
 	}
-	ft_putstr_fd("unset: ",STDERR_FILENO);
+	ft_putstr_fd("unset: ", STDERR_FILENO);
 	ft_putstr_fd(key, STDERR_FILENO);
 	ft_putstr_fd(" key doesn't exist.", STDERR_FILENO);
 	custom_return();
 	return (1);
 }
 
-int		builtin_unset(char **exec, t_sh *sh)
+int			builtin_unset(char **exec, t_sh *sh)
 {
 	int		i;
 

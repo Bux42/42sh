@@ -6,13 +6,12 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:51:01 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/15 12:27:32 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 12:22:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
-
 
 char	**env_add(char **env, const char *env_val)
 {
@@ -95,11 +94,10 @@ int		flag_equal(char ***tab, char **exec, int verbose)
 {
 	int		i;
 	int		x;
-	(void)tab;
 
 	i = 0;
 	x = 0;
-	while (exec[++i] && (exec[i][0] == '-' || (ft_strchr(&exec[i][1], '=') && 
+	while (exec[++i] && (exec[i][0] == '-' || (ft_strchr(&exec[i][1], '=') &&
 					exec[i][0] != '=')))
 	{
 		if (exec[i][0] == '-')
@@ -113,17 +111,9 @@ int		flag_equal(char ***tab, char **exec, int verbose)
 					break ;
 				}
 		}
-		else
-		{
-			if (verbose > 0)
-			{
-				ft_putstr("#env: setenv    ");
-				ft_putstr(exec[i]);
-				custom_return();
-			}
-			if (!(*tab = env_error(*tab, exec[i])))
-				return (0);
-		}
+		else if (env_verbose(verbose, exec[i])
+				&& !(*tab = env_error(*tab, exec[i])))
+			return (0);
 	}
 	return (i);
 }
@@ -149,18 +139,7 @@ char	**flag_i(char **tab, char **exec, int verbose)
 					break ;
 				}
 				if (exec[i][x] == 'i' || exec[i][x] == '-')
-				{
-					if (verbose > 0)
-					{
-						ft_putstr("#env clearing environ");
-						custom_return();
-					}
-					env_free(tab);
-					if (!(tab = (char**)malloc(sizeof(char*) * 1)))
-						return (NULL);
-					tab[0] = NULL;
-					return (tab);
-				}
+					return (clear_realloc(verbose, tab));
 				x++;
 			}
 		}

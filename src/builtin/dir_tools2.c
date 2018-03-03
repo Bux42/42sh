@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:50:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 18:45:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:21:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t		path_trim(char *path, size_t size)
 	return (len);
 }
 
-char	*find_man_path(char *relative)
+char		*find_man_path(char *relative)
 {
 	char	buff[2048];
 	char	*path;
@@ -63,7 +63,7 @@ char	*find_man_path(char *relative)
 	return (path);
 }
 
-int		ft_isnum(char c)
+int			ft_isnum(char c)
 {
 	if (c <= '9' && c >= '0')
 		return (1);

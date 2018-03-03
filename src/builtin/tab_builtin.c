@@ -6,31 +6,12 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:18:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/15 13:39:41 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 12:24:58 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
-
-char	*env_key(char *env_v)
-{
-	char	*key;
-	size_t	i;
-
-	i = 0;
-	while (env_v[i] != '=' && env_v[i] != '\0')
-		++i;
-	if (!(key = malloc((i + 1) * sizeof(char))))
-		return (NULL);
-	key[i] = '\0';
-	while (i != 0)
-	{
-		--i;
-		key[i] = env_v[i];
-	}
-	return (key);
-}
 
 char	**manage_env(char *key, char **env, int i)
 {
@@ -118,7 +99,7 @@ char	*env_read(char **env, const char *key)
 	return (NULL);
 }
 
-char			**unsetenv_tab(char **env, char *key)
+char	**unsetenv_tab(char **env, char *key)
 {
 	char		**new_env;
 	char		*tmp;

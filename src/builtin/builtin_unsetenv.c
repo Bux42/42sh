@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/20 17:51:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:23:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int			remove_first(t_env **env, t_env **cp)
 
 static int			delete_env(t_env **env, char *input)
 {
-	t_env  *cp;
-	t_env  *tmp;
+	t_env	*cp;
+	t_env	*tmp;
 
 	tmp = NULL;
 	cp = (*env);

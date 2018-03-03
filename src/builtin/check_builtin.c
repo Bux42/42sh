@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 17:28:00 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:21:57 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void			*get_builtin_function(char *command)
 	return (NULL);
 }
 
-int				fork_builtin(int (*ptr)(char**, char**), char **exec, char **env)
+int				fork_builtin(int (*ptr)(char**, char**),
+		char **exec, char **env)
 {
 	pid_t	father;
 	int		status;

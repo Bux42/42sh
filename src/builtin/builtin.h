@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/01 14:21:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:19:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,12 @@ int		get_beg(int *i, t_his **history, char **exec);
 int		get_lg(int *lg, char **exec);
 int		history_clean(char c, t_his **hist);
 int		show_err(int err, char c);
+int		env_verbose(int verb, char *exec);
+char	**clear_realloc(int verb, char **tab);
+char	*env_key(char *env_v);
+void	hist_verbose(int i);
+void	nb_verb(int *verbose);
+int		illegal_opt(char c);
+void	unset_verb(int verbose, char *str, char *next, char ***tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/02 12:30:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/03 12:37:33 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,25 @@ int			get_beg(int *first, t_his **history, char **exec)
 	int		i;
 	int		ite;
 
-	i = 1;
+	i = 0;
 	ite = -1;
-	while (exec[i] && exec[i][0] == '-')
-	{
+	while (exec[++i] && exec[i][0] == '-')
 		if (ft_strcmp(exec[i], "--") == 0)
 		{
 			i++;
 			break ;
 		}
-		i++;
-	}
 	if (!exec[i])
-	{
 		*first = 10;
+	if (!exec[i])
 		return (0);
-	}
 	while (exec[i][++ite])
 		if (ft_isnum(exec[i][ite]) == 0)
 			return (show_err(3, '0'));
 	if (exec[i])
 		*first = (exec[i][0] == '0') ? ft_atoi(&exec[i][1]) : ft_atoi(exec[i]);
 	if (!exec[i] || *first > history_len(history))
-			*first = 0;
+		*first = 0;
 	*first = (exec[i][0] == '0') ? -(*first) : *first;
 	return (0);
 }
@@ -72,7 +68,6 @@ int			get_lg(int *lg, char **exec)
 	*lg = ft_atoi(exec[i + 1]);
 	*lg = (*lg < 0) ? *lg * -1 : *lg;
 	return (0);
-
 }
 
 int			history_clean(char c, t_his **hist)
@@ -82,12 +77,7 @@ int			history_clean(char c, t_his **hist)
 	ft_putstr("Cleared");
 	custom_return();
 	if (c == 'n')
-	{
-		ft_putstr("Removed ");
-		ft_putnbr(history_len(hist));
-		ft_putstr("entries from the history.");
-		custom_return();
-	}
+		hist_verbose(history_len(hist));
 	while ((*hist))
 	{
 		tmp = (*hist)->previous;
@@ -101,8 +91,8 @@ int			history_clean(char c, t_his **hist)
 	}
 	if (tmp)
 	{
-			free_list_from_beginning(&tmp->inp);
-			free(tmp);
+		free_list_from_beginning(&tmp->inp);
+		free(tmp);
 	}
 	(*hist) = NULL;
 	return (0);

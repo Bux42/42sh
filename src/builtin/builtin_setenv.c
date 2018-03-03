@@ -6,13 +6,12 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/20 17:49:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:22:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
-
 
 int			print_env(t_env **env)
 {

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 12:19:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 13:25:19 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_env				*tab_in_env(char **tab)
 	env = first;
 	while (tab[i])
 	{
-		env->next  = new_env(tab[i]);
+		env->next = new_env(tab[i]);
 		i++;
 		env = env->next;
 	}
@@ -74,7 +74,7 @@ static char			**env_in_tab(t_env **env)
 		cp = cp->next;
 	}
 	return (tab);
-}	
+}
 
 void				show_args(char **exec)
 {
@@ -105,7 +105,6 @@ int					exec_cmd(t_env *new_env, char **tab,
 	int		i;
 	int		j;
 	char	*path;
-	(void)verbose;
 
 	i = 0;
 	j = 0;
