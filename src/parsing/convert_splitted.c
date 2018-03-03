@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/02 09:39:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:49:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ int			idenfity_regular(t_inp **inp)
 	if (inp_cmp(inp, "env") || inp_cmp(inp, "unsetenv") || inp_cmp(inp, "echo"))
 		return (type | BUILTIN);
 	if (inp_cmp(inp, "cd") || inp_cmp(inp, "setenv") || inp_cmp(inp, "export"))
+		return (type | BUILTIN);
+	if (inp_cmp(inp, "exit") || inp_cmp(inp, "set") || inp_cmp(inp, "unset"))
+		return (type | BUILTIN);
+	if (inp_cmp(inp, "local") || inp_cmp(inp, "myman")
+			|| inp_cmp(inp, "history"))
 		return (type | BUILTIN);
 	if ((cp = (*inp)))
 	{
