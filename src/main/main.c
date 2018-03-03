@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 16:41:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/03 16:10:49 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			find_hist_file(char *man_path)
 
 	fd = -1;
 	cp = ft_strdup(man_path);
-	cp[21] = '\0';
+	cp[19] = '\0';
 	ft_strcat(cp, name);
 	fd = open(cp, O_CREAT | O_RDWR, 0777);
 	free(cp);
