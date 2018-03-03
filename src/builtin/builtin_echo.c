@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:09:24 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/20 17:52:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:37:31 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			builtin_echo(char **input, t_sh *sh)
 {
-	int	 	i;
-	int		flag;
+	int	i;
+	int	flag;
 
 	(void)sh;
 	i = 1;

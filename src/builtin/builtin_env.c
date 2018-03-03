@@ -6,14 +6,14 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:25:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:55:12 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
 
-static int			print_env_tab(char **tab)
+static int	print_env_tab(char **tab)
 {
 	int		i;
 
@@ -28,27 +28,7 @@ static int			print_env_tab(char **tab)
 	return (0);
 }
 
-t_env				*tab_in_env(char **tab)
-{
-	t_env	*env;
-	t_env	*first;
-	int		i;
-
-	i = 0;
-	first = NULL;
-	if (tab[0])
-		first = new_env(tab[0]);
-	env = first;
-	while (tab[i])
-	{
-		env->next = new_env(tab[i]);
-		i++;
-		env = env->next;
-	}
-	return (first);
-}
-
-static char			**env_in_tab(t_env **env)
+static char	**env_in_tab(t_env **env)
 {
 	int		i;
 	t_env	*cp;
@@ -76,31 +56,7 @@ static char			**env_in_tab(t_env **env)
 	return (tab);
 }
 
-void				show_args(char **exec)
-{
-	int		i;
-	char	*j;
-
-	i = 0;
-	ft_putstr("#env executing: ");
-	ft_putstr(exec[i]);
-	custom_return();
-	while (exec[i])
-	{
-		ft_putstr("#env    arg[");
-		j = ft_itoa(i);
-		ft_putstr(j);
-		free(j);
-		ft_putstr("]= '");
-		ft_putstr(exec[i]);
-		ft_putstr("'");
-		custom_return();
-		i++;
-	}
-}
-
-int					exec_cmd(t_env *new_env, char **tab,
-		char **exec, int verbose)
+int			exec_cmd(t_env *new_env, char **tab, char **exec, int verbose)
 {
 	int		i;
 	int		j;
@@ -147,7 +103,7 @@ void		free_list(t_env **env)
 	}
 }
 
-int					builtin_env(char **exec, t_sh *sh)
+int			builtin_env(char **exec, t_sh *sh)
 {
 	char	**tab;
 	int		i;
@@ -156,28 +112,22 @@ int					builtin_env(char **exec, t_sh *sh)
 
 	i = 0;
 	verbose = 0;
-	if (exec[1])
-	{
-		if (!(tab = env_in_tab(&sh->env)))
-			return (1);
-		if (flag_v_u_i(&tab, exec, &verbose))
-		{
-			tab = flag_i(tab, exec, verbose);
-			if (!(i = flag_equal(&tab, exec, verbose)))
-				return (2);
-			if (!exec[i])
-				return (print_env_tab(tab));
-			else
-			{
-				new_env = tab_in_env(tab);
-				i = exec_cmd(new_env, tab, &(exec[i]), verbose);
-				env_free(tab);
-				free_list(&new_env);
-				return (i);
-			}
-		}
-	}
 	if (!exec[1])
-		print_env(&sh->env);
+		return (print_env(&sh->env));
+	if (!(tab = env_in_tab(&sh->env)))
+		return (1);
+	if (flag_v_u_i(&tab, exec, &verbose))
+	{
+		tab = flag_i(tab, exec, verbose);
+		if (!(i = flag_equal(&tab, exec, verbose)))
+			return (2);
+		if (!exec[i])
+			return (print_env_tab(tab));
+		new_env = tab_in_env(tab);
+		i = exec_cmd(new_env, tab, &(exec[i]), verbose);
+		env_free(tab);
+		free_list(&new_env);
+		return (i);
+	}
 	return (0);
 }

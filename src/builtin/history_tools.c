@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 12:37:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:59:25 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,12 @@ int			history_clean(char c, t_his **hist)
 		free(tmp);
 	}
 	(*hist) = NULL;
+	return (0);
+}
+
+int		check_arg(char **exec, int i)
+{
+	if (exec[i + 1] && exec[i + 2])
+		return (show_err(1, '0'));
 	return (0);
 }

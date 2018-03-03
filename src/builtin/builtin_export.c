@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:39:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 13:47:13 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:38:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int			export_it(t_sh *sh, char *key, char *name)
 {
 	char	*tab[3];
-	(void)name;
 
 	tab[0] = "export";
 	tab[2] = NULL;

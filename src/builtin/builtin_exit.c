@@ -6,13 +6,13 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 12:11:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 11:45:26 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:38:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void			quit(char **input, int ret)
+void	quit(char **input, int ret)
 {
 	ft_putstr_fd("Bye!", STDOUT_FILENO);
 	custom_return();
@@ -22,7 +22,7 @@ void			quit(char **input, int ret)
 	exit(ft_atoi(input[1]));
 }
 
-int				 quit_error(int i, int flag)
+int		quit_error(int i, int flag)
 {
 	if (flag == 1)
 	{
@@ -41,7 +41,7 @@ int				 quit_error(int i, int flag)
 	return (3);
 }
 
-int			builtin_exit(char **input, t_sh *sh)
+int		builtin_exit(char **input, t_sh *sh)
 {
 	int		i;
 	int		flag;

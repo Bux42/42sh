@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/02/26 15:54:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 14:40:49 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ char	*checkman(char *path, char *file)
 	str = ft_strjoin(path, file);
 	if (access(str, F_OK) != 0)
 		x = -1;
-	if (access(str, R_OK) != 0)	
+	if (access(str, R_OK) != 0)
 		x = -1;
-	if (stat(str, &data) == -1)	
+	if (stat(str, &data) == -1)
 		x = -1;
 	if (!(S_ISREG(data.st_mode)))
-	if (x == -1)
-		return (NULL);
+		if (x == -1)
+			return (NULL);
 	return (str);
 }
 

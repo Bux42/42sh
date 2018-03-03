@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:19:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:02:11 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		flag_v_u_i(char ***tab, char **exec, int *verbose);
 char	**flag_i(char **tab, char **exec, int verbose);
 int		flag_equal(char ***tab, char **exec, int verbose);
 char	**unsetenv_tab(char **env, char *key);
-int 	env_free(char **env);
+int		env_free(char **env);
 char	*env_key(char *env_v);
 int		matching_name(char *env, char *name);
 int		ft_isnum(char c);
@@ -55,5 +55,8 @@ void	hist_verbose(int i);
 void	nb_verb(int *verbose);
 int		illegal_opt(char c);
 void	unset_verb(int verbose, char *str, char *next, char ***tab);
+int		check_arg(char **exec, int i);
+t_env	*tab_in_env(char **tab);
+void	show_args(char **exec);
 
 #endif

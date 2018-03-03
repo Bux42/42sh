@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/01 16:22:54 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/03 15:00:16 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		built_err(char **exec, char *fg)
 {
 	int			i;
 	int			j;
-	const char 	*flag = "ACn";
+	const char	*flag = "ACn";
 
 	i = 0;
 	j = 0;
@@ -69,10 +69,8 @@ int		built_err(char **exec, char *fg)
 					return (show_err(2, exec[i][j]));
 			j = 0;
 		}
-		else if (exec[i + 1]  && exec[i + 2])
-			return (show_err(1, '0'));
 		else
-			return (0);
+			return (check_arg(exec, i));
 	}
 	return (0);
 }
