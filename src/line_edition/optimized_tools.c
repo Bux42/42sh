@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 21:58:15 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 04:40:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:20:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		inp_insert_chain(t_inp **src, t_sh *sh)
 		if (!(sh->inpl->inp))
 		{
 			sh->inpl->inp = new_inp(cp->c);
-			sh->inpl->inp->pos = 2;
+			sh->inpl->inp->pos = 1;
 		}
 		else
 		{

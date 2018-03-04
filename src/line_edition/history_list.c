@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/22 14:23:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:21:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		search_history_inp(t_sh *sh, t_inp **inp)
 {
 	t_inp	*cp;
 	int		dec;
-	int		diff;
+	int		diff = 0;
 
 	dec = 0;
 	if ((cp = (*inp)))
