@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/02 11:45:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/04 09:40:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		is_a_directory(char *str)
 	ft_putstr(str);
 }
 
-int			valid_tofile(t_inpl **inpl)
+int			valid_tofile(t_inpl **inpl, int type)
 {
 	int			fd;
 	int			len;
@@ -94,11 +94,15 @@ int			valid_tofile(t_inpl **inpl)
 		}
 		file[len - 1] = (*inpl)->inp->c;
 		(*inpl) = (*inpl)->previous;
-		fd = open(file, O_WRONLY | O_CREAT, 0666);
+		if (type & TOFILE)
+			fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else
+			fd = open(file, O_APPEND | O_CREAT,  0666);
 		if (fd == -1)
 			if ((lstat(file, &st)) != -1)
 				if (S_ISDIR(st.st_mode))
 					is_a_directory(file);
+		free(file);
 		return (fd);
 	}
 	return (-1);
@@ -194,7 +198,7 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 			}
 			if (cp->type & TOFILE || cp->type & ATOFILE)
 			{
-				if ((settings[2] = valid_tofile(&cp)) != -1)
+				if ((settings[2] = valid_tofile(&cp, cp->type)) != -1)
 				{
 					settings[0] = 1;
 					settings[1] = 1;

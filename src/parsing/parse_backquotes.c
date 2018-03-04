@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/02 10:17:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/04 09:32:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,13 +193,13 @@ void		parse(t_sh *sh)
 		split_line(&splitted, &clean, sh);
 		if (convert_splitted(&splitted, sh) != NULL)
 		{
-			//print_splitted(&splitted);
+			print_splitted(&splitted);
 			ft_putstr("Creating Token List");
 			custom_return();
 			if (tokenize_splitted(&splitted, sh, &tok))
 			{
 				show_tokens(&tok, sh);
-				execute_tokens(&tok, sh);
+				//execute_tokens(&tok, sh);
 			}
 		}
 		custom_return();
