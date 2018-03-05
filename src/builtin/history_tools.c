@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 12:26:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:34:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int			get_lg(int *lg, char **exec)
 	return (0);
 }
 
-int			history_clean(char c, t_his **hist)
+int			history_clean(char c, t_his **hist, t_sh *sh)
 {
 	ft_putstr("Cleared");
 	custom_return();
@@ -88,7 +88,7 @@ int			history_clean(char c, t_his **hist)
 		free(*hist);
 		*hist = NULL;
 	}
-	return (0);
+	return (change_fd(sh, sh->man_path));
 }
 
 int		check_arg(char **exec, int i)

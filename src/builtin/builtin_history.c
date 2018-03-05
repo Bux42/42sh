@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 15:22:35 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:45:16 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int		builtin_hist(int i, t_his **hist, int lg, char *fg)
 	his = *hist;
 	pos = (i < 0) ? 1 : 0;
 	i = (i < 0) ? -i : i;
-	if (fg[1] == 'C')
-		return (history_clean(fg[2], hist));
 	if (i == 0 || lg == 0)
 		return (0);
 	while (his->next)
@@ -119,10 +117,12 @@ int		builtin_history(char **exec, t_sh *sh)
 		free(fg);
 		return (show_err(4, '0'));
 	}
-	lg = -1;
-	if (!(err = get_beg(&i, &sh->history, exec)) &&
+	if (fg[1] == 'C')
+		err = history_clean(fg[2], &sh->history, sh);
+	else if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{
+		lg = -1;
 		i = (fg[0] == 'A') ? -1 : i;
 		lg = (lg == -1 || fg[0] == 'A') ? history_len(&sh->history) : lg;
 		i = (i == 0) ? -1 : i;

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 15:17:28 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:35:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ size_t	path_subcpy(const char *source, char *dest, size_t start, size_t len);
 size_t	path_trim(char *path, size_t size);
 int		get_beg(int *i, t_his **history, char **exec);
 int		get_lg(int *lg, char **exec);
-int		history_clean(char c, t_his **hist);
+int		history_clean(char c, t_his **hist, t_sh *sh);
 int		show_err(int err, char c);
 int		env_verbose(int verb, char *exec);
 char	**clear_realloc(int verb, char **tab);
 char	*env_key(char *env_v);
 void	hist_verbose(int i);
+int		change_fd(t_sh *sh, char *path);
 void	nb_verb(int *verbose);
 int		illegal_opt(char c);
 void	unset_verb(int verbose, char *str, char *next, char ***tab);
