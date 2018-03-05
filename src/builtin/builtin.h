@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 12:35:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 14:09:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ int		check_arg(char **exec, int i);
 void	show_line(char c, int nb, t_inp *cp);
 t_env	*tab_in_env(char **tab);
 void	show_args(char **exec);
+int		erase_fg(char *fg, int i);
 
 #endif

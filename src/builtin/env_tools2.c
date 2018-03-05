@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 14:42:12 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 12:46:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 14:13:08 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				show_args(char **exec)
 	}
 }
 
-int		erase_file(char *new_path, t_sh *sh)
+int					erase_file(char *new_path, t_sh *sh)
 {
 	if ((sh->fd = open(new_path, O_TRUNC | O_RDWR, 0777)) == -1)
 	{
@@ -76,7 +76,7 @@ int		erase_file(char *new_path, t_sh *sh)
 	return (0);
 }
 
-int		change_fd(t_sh *sh, char *path)
+int					change_fd(t_sh *sh, char *path)
 {
 	char	*new_path;
 	int		err;
@@ -86,12 +86,12 @@ int		change_fd(t_sh *sh, char *path)
 	{
 		ft_putstr("Could'nt close .history correctly.");
 		custom_return();
-		sh->fd = 0;
+		sh->fd = -1;
 		free(new_path);
 		return (11);
 	}
 	if ((err = erase_file(new_path, sh)))
-			return (err);
+		return (err);
 	if ((sh->fd = open(new_path, O_CREAT | O_RDWR, 0777)) == -1)
 	{
 		ft_putstr("Couldn't open .history correctly");
@@ -103,8 +103,10 @@ int		change_fd(t_sh *sh, char *path)
 	return (0);
 }
 
-int		erase_fg(char *fg)
+int					erase_fg(char *fg, int i)
 {
 	free(fg);
-	return (0);
+	if (i == 4)
+		return (show_err(4, '0'));
+	return (i);
 }

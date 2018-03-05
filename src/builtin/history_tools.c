@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 12:34:21 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 14:14:50 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ int			history_clean(char c, t_his **hist, t_sh *sh)
 	return (change_fd(sh, sh->man_path));
 }
 
-int		check_arg(char **exec, int i)
+int			check_arg(char **exec, int i)
 {
 	if (exec[i + 1] && exec[i + 2])
 		return (show_err(1, '0'));
 	return (0);
 }
 
-void	show_line(char c, int nb, t_inp *cp)
+void		show_line(char c, int nb, t_inp *cp)
 {
 	if (c == 'n')
 	{

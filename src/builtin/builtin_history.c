@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 12:45:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 14:14:29 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,25 +110,21 @@ int		builtin_history(char **exec, t_sh *sh)
 	int		lg;
 
 	fg = ft_strdup("000");
+	lg = -1;
 	if ((err = built_err(exec, fg)) > 0)
 		return (err);
 	if (fg[0] == 'A' && fg[1] == 'C')
-	{
-		free(fg);
-		return (show_err(4, '0'));
-	}
+		return (erase_fg(fg, 4));
 	if (fg[1] == 'C')
 		err = history_clean(fg[2], &sh->history, sh);
 	else if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{
-		lg = -1;
 		i = (fg[0] == 'A') ? -1 : i;
 		lg = (lg == -1 || fg[0] == 'A') ? history_len(&sh->history) : lg;
 		i = (i == 0) ? -1 : i;
 		i = (i > 0) ? i + 1 : i;
 		err = builtin_hist(i, &sh->history, lg, fg);
 	}
-	free(fg);
-	return (err);
+	return (erase_fg(fg, 0));
 }
