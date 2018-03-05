@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 15:22:36 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:26:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,22 @@ int			get_lg(int *lg, char **exec)
 
 int			history_clean(char c, t_his **hist)
 {
-	t_his	*tmp;
-
 	ft_putstr("Cleared");
 	custom_return();
 	if (c == 'n')
 		hist_verbose(history_len(hist));
-	while ((*hist))
+	while ((*hist) && (*hist)->next)
 	{
-		tmp = (*hist)->previous;
-		if (tmp)
-		{
-			free_list_from_beginning(&tmp->inp);
-			free(tmp);
-			tmp = NULL;
-		}
 		(*hist) = (*hist)->next;
+		free_list_from_beginning(&(*hist)->previous->inp);
+		free((*hist)->previous);
 	}
-	if (tmp)
+	if (*hist)
 	{
-		free_list_from_beginning(&tmp->inp);
-		free(tmp);
+		free_list_from_beginning(&(*hist)->inp);
+		free(*hist);
+		*hist = NULL;
 	}
-	(*hist) = NULL;
 	return (0);
 }
 
