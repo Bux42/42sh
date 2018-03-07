@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/07 17:53:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:15:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		erase_fg(char *fg, int i);
 /**/
 int		resolve_relative_path(char *bin_path);
 int		path_val(char *path);
-int		custom_chdir(char *path);
+int		custom_chdir(char *path, int flag);
 char	*path_join(const char *path, const char *bin);
 /**/
 
