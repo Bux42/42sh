@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/07 18:07:31 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:24:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		history_exclaim(t_inp **inp, t_sh *sh)
 		if (!quote && cp->c == '!' && !(cp->previous &&
 					cp->previous->c == '\\'))
 		{
-			if (history_parsing(inp, &cp, sh) == -1);
+			if (history_parsing(inp, &cp, sh) == -1)
 			return (-1);
 		}
 		cp = cp->next;

@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/05 12:43:15 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:22:01 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "../builtin/builtin.h"
 
 void		concat_inp(t_inp **inp, t_inp **ret, t_inpl *inpl)
 {
@@ -48,6 +49,7 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 			cp = cp->next;
 		}
 	}
+	history_exclaim(&ret, sh);
 	return (ret);
 }
 
