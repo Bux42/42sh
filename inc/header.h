@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 13:21:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:39:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define COMMAND 256
 # define BUILTIN 512
 # define _FILE 1024
+# define SEMICOLON 2048
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
@@ -185,6 +186,7 @@ int						check_right_arrow(t_inp **inp);
 int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
+int						check_semicolon(t_inp **inp);
 
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok);
 char					*inp_to_cont(t_inp **inp);

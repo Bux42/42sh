@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/03 15:49:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:39:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ int			check_special(t_inp **inp)
 			type = check_pipe_or(&cp);
 		if (cp->c == '&')
 			type = check_and(&cp);
+		if (cp->c == ';')
+			type = check_semicolon(&cp);
 	}
 	return (type);
 }

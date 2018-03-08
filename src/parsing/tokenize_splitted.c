@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/04 09:40:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:52:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int			valid_condition(t_inpl **inpl)
 			return (0);
 		if ((*inpl)->next->type < 128)
 			return (0);
+		if ((*inpl)->previous->type & SEMICOLON)
+			return (0);
+		if ((*inpl)->next->type & SEMICOLON)
+			return (0);
 		return (1);
 	}
 	return (0);
@@ -77,6 +81,8 @@ int			valid_tofile(t_inpl **inpl, int type)
 	len = 1;
 	if ((*inpl)->previous && (*inpl)->next)
 	{
+		if ((*inpl)->previous->type == 2048 || (*inpl)->next->type == 2048)
+			return (-1);
 		(*inpl) = (*inpl)->next;
 		while ((*inpl)->inp->next)
 		{
@@ -153,6 +159,10 @@ int			valid_file(t_inpl **inpl)
 	fd = -1;
 	if ((*inpl)->previous && (*inpl)->next)
 	{
+		if ((*inpl)->previous->type == 2048)
+			return (-1);
+		if ((*inpl)->next->type == 2048)
+			return (-1);
 		if ((*inpl)->previous && (*inpl)->previous->type > 64 && (*inpl)->previous->type < 1024)
 			if ((*inpl)->next->type & _FILE)
 				if ((file = inp_to_cont(&(*inpl)->next->inp)))
@@ -205,15 +215,18 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 					tok_push_back(tok, settings, NULL, NULL);
 				}
 				else
-					return (0);
+					return ((int)special_error(&cp->inp));
 			}
 			if (cp->type & TOEXE)
 			{
 				if ((settings[1] = valid_file(&cp)) != -1)
 				{
+					ft_putnbr(settings[1]);
 					settings[0] = 1;
 					settings[2] = 0;
 				}
+				else
+					return ((int)special_error(&cp->inp));
 				tok_push_back(tok, settings, NULL, NULL);
 			}
 			if (cp->type & COMMAND || cp->type & BUILTIN)

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 13:33:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:36:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,8 @@ void		parse(t_sh *sh)
 			custom_return();
 			if (tokenize_splitted(&splitted, sh, &tok))
 			{
-				show_tokens(&tok, sh);
-				execute_tokens(&tok, sh);
+				//show_tokens(&tok, sh);
+				//execute_tokens(&tok, sh);
 			}
 		}
 		custom_return();

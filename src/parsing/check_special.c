@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/27 17:37:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:38:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void		*special_error(t_inp **inp)
 		}
 	}
 	return (NULL);
+}
+
+int			check_semicolon(t_inp **inp)
+{
+	int		type;
+
+	type = 0;
+	if (!(*inp)->next)
+		return (type | SEMICOLON);
+	return (-1);
 }
 
 int			check_and(t_inp **inp)

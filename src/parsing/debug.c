@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 19:26:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:40:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void		print_converted(t_inp **inp, int type)
 			ft_putstr(" <= BUILTIN");
 		if (type & _FILE)
 			ft_putstr(" <= FILE");
+		if (type & SEMICOLON)
+			ft_putstr(" <= SEMICOLON");
 		custom_return();
 	}
 }
