@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/08 18:49:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 20:25:54 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		history_exclaim(t_inp **inp, t_sh *sh)
 	cp = *inp;
 	while (inp && cp)
 	{
-		ft_putstr("Dans la boucle");
 		if (cp->c == '\'')
 			quote = (quote) ? 0 : 1;
 		if (!quote && cp->c == '!' && !(cp->previous &&
