@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:52:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:06:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,47 +71,16 @@ void		is_a_directory(char *str)
 	ft_putstr(str);
 }
 
-int			valid_tofile(t_inpl **inpl, int type)
+int			valid_tofile(t_inpl **inpl)
 {
-	int			fd;
-	int			len;
-	char		*file;
-	struct stat	st;
-
-	len = 1;
 	if ((*inpl)->previous && (*inpl)->next)
 	{
+		if ((*inpl)->previous->type < 128)
+			return (-1);
 		if ((*inpl)->previous->type == 2048 || (*inpl)->next->type == 2048)
 			return (-1);
-		(*inpl) = (*inpl)->next;
-		while ((*inpl)->inp->next)
-		{
-			(*inpl)->inp = (*inpl)->inp->next;
-			len++;
-		}
-		if (!(file = (char*)malloc(sizeof(char) * (len + 1))))
-			return (-1);
-		file[len] = '\0';
-		while ((*inpl)->inp->previous)
-		{
-			len--;
-			file[len] = (*inpl)->inp->c;
-			(*inpl)->inp = (*inpl)->inp->previous;
-		}
-		file[len - 1] = (*inpl)->inp->c;
-		(*inpl) = (*inpl)->previous;
-		if (type & TOFILE)
-			fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		else
-			fd = open(file, O_APPEND | O_CREAT,  0666);
-		if (fd == -1)
-			if ((lstat(file, &st)) != -1)
-				if (S_ISDIR(st.st_mode))
-					is_a_directory(file);
-		free(file);
-		return (fd);
 	}
-	return (-1);
+	return (1);
 }
 
 int			concat_content(t_inpl **inpl, t_tok **tok, int type)
@@ -154,7 +123,6 @@ int			concat_content(t_inpl **inpl, t_tok **tok, int type)
 int			valid_file(t_inpl **inpl)
 {
 	int		fd;
-	char	*file;
 
 	fd = -1;
 	if ((*inpl)->previous && (*inpl)->next)
@@ -165,8 +133,7 @@ int			valid_file(t_inpl **inpl)
 			return (-1);
 		if ((*inpl)->previous && (*inpl)->previous->type > 64 && (*inpl)->previous->type < 1024)
 			if ((*inpl)->next->type & _FILE)
-				if ((file = inp_to_cont(&(*inpl)->next->inp)))
-					fd = open(file, O_RDONLY);
+				return (1);
 	}
 	else
 		return (-1);
@@ -208,7 +175,7 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok)
 			}
 			if (cp->type & TOFILE || cp->type & ATOFILE)
 			{
-				if ((settings[2] = valid_tofile(&cp, cp->type)) != -1)
+				if ((settings[2] = valid_tofile(&cp)) != -1)
 				{
 					settings[0] = 1;
 					settings[1] = 1;

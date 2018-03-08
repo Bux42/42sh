@@ -66,3 +66,18 @@ ls < ;
 ls > ;
 ls > ;
 ; > ls
+ls ; ls
+ls ; ls
+cd ..;
+cd ..;
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+cat<brewfix
+cat<brewfix
+ls || > file
+ls > ls
+ls > ;
+ls > ;
+ls > ee
+ls > | ee
+ls > file
+ls
