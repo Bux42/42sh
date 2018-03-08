@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/08 13:31:45 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 18:49:19 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int		history_parsing(t_inp **that, t_inp **cp, t_sh *sh)
 	else if (inp->next->c == '!')
 		return (last_command(&inp, sh, that));
 	else if (inp->next->c == '-')
-		by_last(cp, sh);
+		return (by_last(cp, sh, that, 1));
 	else if (inp->next->c <= '9' && inp->next->c >= '0')
-		by_first(cp, sh);
+		return (by_last(cp, sh, that, 2));
 	else if (inp->next->c == '?')
 		search_that(cp, sh);
 	else
@@ -44,6 +44,7 @@ int		history_exclaim(t_inp **inp, t_sh *sh)
 	cp = *inp;
 	while (inp && cp)
 	{
+		ft_putstr("Dans la boucle");
 		if (cp->c == '\'')
 			quote = (quote) ? 0 : 1;
 		if (!quote && cp->c == '!' && !(cp->previous &&
