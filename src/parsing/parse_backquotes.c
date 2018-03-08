@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/07 18:22:01 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:33:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 			cp = cp->next;
 		}
 	}
-	history_exclaim(&ret, sh);
 	return (ret);
 }
 
@@ -117,11 +116,13 @@ void		convert_backslashes(t_inp **inp, t_sh *sh)
 	}
 }
 
-int			empty_inp(t_inp **inp)
+int			empty_inp(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
 	int		i;
 
+	if (history_exclaim(inp, sh))
+		return (0);
 	i = 0;
 	if ((cp = (*inp)))
 	{
@@ -186,7 +187,7 @@ void		parse(t_sh *sh)
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
-	if (empty_inp(&clean))
+	if (empty_inp(&clean, sh))
 	{
 		history_push_front(&sh->history, clean, sh);
 		sh->history_len = history_len(&sh->history);

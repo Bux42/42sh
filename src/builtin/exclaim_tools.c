@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/07 18:08:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:46:38 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,42 @@ void	suppr_letter(t_inp **c)
 	tmp = NULL;
 }
 
+t_inp	*insert_inp(t_inp **inp, char c)
+{
+	t_inp	*tmp;
+
+	tmp = (*inp)->next;
+	(*inp)->next = new_inp(c);
+	(*inp)->next->previous = (*inp);
+	(*inp)->next->next = tmp;
+	if (tmp)
+		tmp->previous = (*inp)->next;
+	return ((*inp)->next);
+}
+
 int		last_command(t_inp **inp, t_sh *sh, t_inp **t)
 {
 	t_inp	*input;
+	t_inp	*tmp;
 
 	if (!(sh->history && sh->history->next))
 	{
 		ft_putstr("!!: No history.");
 		custom_return();
-		return (-1);
+		if (!((*inp)->next->next) && !((*inp)->previous))
+			return (-1);
 	}
-	input = sh->history->inp;
-	while (input)
+	else
 	{
-		inp_insert_posat(inp, input->c);
-		input = input->next;
+		tmp = (*inp)->next;
+		input = sh->history->inp;
+		//ft_putchar((*inp)->c);
+		//ft_putchar((*inp)->next->c);
+		while (input)
+		{
+			tmp = insert_inp(&tmp, input->c);
+			input = input->next;
+		}
 	}
 	if (!(*inp)->previous && (*inp)->next->next)
 		*t = (*inp)->next->next;
