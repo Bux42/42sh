@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 15:30:11 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 17:05:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,10 @@ int		get_lg(int *lg, char **exec);
 int		get_beg(int *i, t_his **history, char **exec);
 int		last_command(t_inp **inp, t_sh *sh, t_inp **t);
 int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos);
-int		search_that(t_inp **inp, t_sh *sh);
-int		search(t_inp **inp, t_sh *sh);
 int		history_exclaim(t_inp **inp, t_sh *sh);
 int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input);
 
 #endif

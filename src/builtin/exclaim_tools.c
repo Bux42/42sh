@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 16:22:48 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 17:05:35 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int		get_his(t_inp **inp, t_sh *sh, t_inp **input, int pos)
 	if (pos == 3)
 		return (get_by_beg((*inp)->next, sh, input));
 	if (pos == 4)
-		return(-1);
+		return (get_by_name((*inp)->next, sh, input));
 	return (-1);
 }
 
@@ -163,26 +163,5 @@ int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 	else if (!((*inp)->previous))
 		pt_next(t, i);
 	suppr_exclaim(&(*inp), i);
-	return (0);
-}
-
-int		search_that(t_inp **inp, t_sh *sh)
-{
-	(void)inp;
-	t_inp	*c;
-
-	c = sh->history->inp;
-	ft_putchar('d');
-
-	return (0);
-}
-
-int		search(t_inp **inp, t_sh *sh)
-{
-	(void)inp;
-	t_inp	*c;
-
-	c = sh->history->inp;
-	//ft_putchar('e');
 	return (0);
 }
