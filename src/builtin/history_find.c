@@ -6,22 +6,14 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 17:08:50 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 17:45:22 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
 
-int		no_event(int i)
-{
-	ft_putstr("!: No such event: ");
-	ft_putnbr(i);
-	custom_return();
-	return (-1);
-}
-
-int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
+int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 {
 	char	str[20];
 	int		i;
@@ -33,13 +25,9 @@ int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 	i = 0;
 	*input = NULL;
 	inp = inp->next;
-	while (inp && inp->c && inp->c >= '0' && inp->c <= '9' && i < 19)
-	{
-		str[i] = inp->c;
-		inp = inp->next;
-		i++;
-	}
+	fill_str(inp, &str);
 	i = ft_atoi(str);
+	ft_putnbr(i);
 	j = i;
 	if (his && his->inp)
 	{
@@ -52,7 +40,7 @@ int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 	return ((ft_strlen(str) + 1));
 }
 
-int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
+int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 {
 	char	str[20];
 	int		i;
@@ -63,13 +51,9 @@ int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 	ft_bzero(&str, 20);
 	i = 0;
 	*input = NULL;
-	while (inp && inp->c && inp->c >= '0' && inp->c <= '9')
-	{
-		str[i] = inp->c;
-		inp = inp->next;
-		i++;
-	}
+	fill_str(inp, &str);
 	i = ft_atoi(str);
+	ft_putnbr(i);
 	j = i;
 	if (his && his->inp)
 	{
@@ -127,10 +111,7 @@ int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input)
 		}
 		his = his->next;
 	}
-	ft_putstr("!: No such event: ");
-	find_in_his(inp, inp, &i, 3);
-	custom_return();
-	return (-1);
+	return (name_no_event(i, inp, 3));
 }
 
 int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input)
@@ -158,8 +139,5 @@ int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input)
 		}
 		his = his->next;
 	}
-	ft_putstr("!: No such event: ");
-	find_in_his(inp, inp, &i, 4);
-	custom_return();
-	return (-1);
+	return (name_no_event(i, inp, 4));
 }

@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/08 20:01:10 by drecours         ###   ########.fr        #
+#    Updated: 2018/03/09 17:49:43 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,9 @@ builtin/verbose.c\
 builtin/env_tools2.c\
 builtin/history_exclaim.c\
 builtin/exclaim_tools.c\
-builtin/history_find.c
+builtin/history_find.c\
+builtin/exclaim_tools2.c\
+builtin/exclaim_misc.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

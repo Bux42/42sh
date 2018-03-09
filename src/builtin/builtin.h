@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 17:05:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 17:49:12 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,14 @@ int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input);
+void	fill_str(t_inp *inp, char (*str)[20]);
+int		no_event(int i);
+int		name_no_event(int i, t_inp *inp, int pos);
+int		find_in_his(t_inp *his, t_inp *inp, int *i, int flag);
+int		nothing_front_back(t_inp **input, int i);
+void	pt_next(t_inp **input, int i);
+void	suppr_exclaim(t_inp **inp, int i);
+t_inp	*insert_inp(t_inp **inp, char c);
+void	suppr_letter(t_inp **c);
 
 #endif
