@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 15:20:52 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 16:22:46 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 	his = sh->history;
 	ft_bzero(&str, 20);
 	i = 0;
-		*input = NULL;
+	*input = NULL;
 	while (inp && inp->c && inp->c >= '0' && inp->c <= '9')
 	{
 		str[i] = inp->c;
@@ -101,4 +101,61 @@ int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 		ft_putchar((*input)->c);
 	}
 	return (ft_strlen(str));
+}
+
+int		find_in_his(t_inp *his, t_inp *inp, int *i)
+{
+	static char	*stop = ";:-*^$%\'\"`";
+	static char	*last = "@#!";
+
+	while (inp && inp->c && his && his->c)
+	{
+		if (ft_strchr(stop, inp->c))
+			return (0);
+		else if (ft_strchr(last, inp->c))
+			return ((inp->c == his->c) ? 0 : 1);
+		else if (inp->c == '\\' && !(inp->next || ft_isalnum(inp->next->c)))
+		{
+			if (inp->c == his->c)
+				return (0);
+			else
+				return (-1);
+		}
+		else if (inp->c != his->c)
+				return (-1);
+		*i = *i + 1;
+		inp = inp->next;
+		his = his->next;
+	}
+	return (0);
+}
+
+int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input)
+{
+	int		i;
+	t_his	*his;
+//	t_inp	*cp;
+//	t_inp	*h;
+
+	//cp = inp;
+	his = sh->history;
+	while (his && his->inp)
+	{
+		//h = his->inp;
+		i = 0;
+		if (find_in_his(his->inp, inp, &i) == 0)
+		{
+			*input = (his)->inp;
+			return (i);
+		}
+	//		return (no_event(0));
+	//	while (cp && cp->c)
+	//	{
+	//		
+	//		i++;	
+	//	}
+		his = his->next;
+	//	cp = inp;
+	}
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 15:20:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 16:22:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,6 @@ int		nothing_front_back(t_inp **input, int i)
 	inp = (*input);
 	if (inp->previous)
 		return (0);
-/*	if (inp->next->c == '-')
-		inp = inp->next->next;
-	else
-		inp = inp->next;
-	while (inp && inp->c <= '9' && inp->c >= '0')
-		inp = inp->next;
-	if (!inp || (inp->c <= '9' && inp->c >= '0'))
-		return (-1);*/
 	while (inp && inp->c && i--)
 		inp = inp->next;
 	if (!inp)
@@ -138,6 +130,10 @@ int		get_his(t_inp **inp, t_sh *sh, t_inp **input, int pos)
 			return (get_by_last((*inp)->next, sh, input));
 	if (pos == 2)
 		return (get_by_first((*inp)->next, sh, input));
+	if (pos == 3)
+		return (get_by_beg((*inp)->next, sh, input));
+	if (pos == 4)
+		return(-1);
 	return (-1);
 }
 
@@ -153,8 +149,6 @@ int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 	if (!(sh->history && sh->history->inp && sh->history->inp->c))
 		if (nothing_front_back(inp, i) == -1)
 			return (no_history());
-//	if ((i = get_his(inp, sh, &input, pos)) == -1)
-//		return (-1);
 	if (input && input->c)
 	{
 		tmp = get_start(&(*inp), i);
