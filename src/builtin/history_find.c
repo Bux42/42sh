@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/08 19:55:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 14:58:29 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		no_event(int i)
 	return (-1);
 }
 
-int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input, int *lg)
+int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 {
 	char	str[20];
 	int		i;
@@ -57,11 +57,10 @@ int		 get_by_last(t_inp *inp, t_sh *sh, t_inp **input, int *lg)
 		ft_putstr("give");
 		ft_putchar((*input)->c);
 	}
-	*lg = ft_strlen(str) + 1;
-	return (0);
+	return ((ft_strlen(str) + 1));
 }
 
-int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input, int *lg)
+int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 {
 	char	str[20];
 	int		i;
@@ -101,6 +100,5 @@ int		 get_by_first(t_inp *inp, t_sh *sh, t_inp **input, int *lg)
 		ft_putstr("give");
 		ft_putchar((*input)->c);
 	}
-	*lg = ft_strlen(str);
-	return (0);
+	return (ft_strlen(str));
 }

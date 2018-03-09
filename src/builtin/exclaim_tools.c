@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/08 19:48:52 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 14:58:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,26 +130,27 @@ void	pt_next(t_inp **input, int pos)
 		(*input) = (*input)->next;
 }
 
+int		get_his(t_inp **inp, t_sh *sh, t_inp **input, int pos)
+{
+	if (pos == 1)
+			return (get_by_last((*inp)->next, sh, input));
+	if (pos == 2)
+		return (get_by_first((*inp)->next, sh, input));
+	return (-1);
+}
+
 int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 {
 	t_inp	*input;
 	t_inp	*tmp;
-	(void)t;
 	int		i;
 
 	i = 0;
-	ft_putstr("ici");
 	if (!(sh->history && sh->history->inp && sh->history->inp->c))
-	{
-		ft_putstr("coin");
 		if (nothing_front_back(inp) == -1)
 			return (no_history());
-	}
-	ft_putstr("je rentre");
-	if ((pos == 1 && get_by_last((*inp)->next, sh, &input, &i) == -1)
-			|| (pos == 2 && get_by_first((*inp)->next, sh, &input, &i)))
+	if ((i = get_his(inp, sh, &input, pos)) == -1)
 		return (-1);
-	ft_putstr("Historique cherche");
 	if (input && input->c)
 	{
 		tmp = get_start(&(*inp), i);
@@ -164,40 +165,8 @@ int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 	else if (!((*inp)->previous))
 		pt_next(t, pos);
 	suppr_exclaim(&(*inp), i);
-	ft_putstr("je sors");
 	return (0);
 }
-/*
-int		by_first(t_inp **inp, t_sh *sh, t_inp **t)
-{
-	t_inp	*input;
-	t_inp	*tmp;
-	int		i;
-
-	i = 0;
-	if (!(sh->history && sh->history->next))
-	{
-		if (nothing_front_back(inp) == -1)
-			return (no_history());
-	}
-	if (get_by_last((*inp)->next, sh, &input, &i) == -1)
-		return (-1);
-	if (sh->history && sh->history->next)
-	{
-		tmp = get_start(&(*inp), i);
-		while (input)
-		{
-			tmp = insert_inp(&tmp, input->c);
-			input = input->next;
-		}
-	}
-	if (nothing_front_back(inp))
-		t = NULL;
-	else if (!((*inp)->previous))
-		pt_next(t);
-	suppr_exclaim(&(*inp), i);
-	return (0);
-}*/
 
 int		search_that(t_inp **inp, t_sh *sh)
 {

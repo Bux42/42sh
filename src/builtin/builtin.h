@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/08 17:32:25 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 14:58:31 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		by_first(t_inp **inp, t_sh *sh);
 int		search_that(t_inp **inp, t_sh *sh);
 int		search(t_inp **inp, t_sh *sh);
 int		history_exclaim(t_inp **inp, t_sh *sh);
-int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input, int *lg);
-int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input, int *lg);
+int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
 
 #endif
