@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 14:58:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 15:03:14 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		history_parsing(t_inp **that, t_inp **cp, t_sh *sh)
 		return (by_last(cp, sh, that, 1));
 	else if (inp->next->c <= '9' && inp->next->c >= '0')
 		return (by_last(cp, sh, that, 2));
-	else if (inp->next->c)
 	else if (inp->next->c == '?')
 		search_that(cp, sh);
 	else

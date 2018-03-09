@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 14:58:28 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/09 15:20:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,30 +103,32 @@ t_inp	*get_start(t_inp **inp, int i)
 	return (tmp);
 }
 
-int		nothing_front_back(t_inp **input)
+int		nothing_front_back(t_inp **input, int i)
 {
 	t_inp	*inp;
 
 	inp = (*input);
 	if (inp->previous)
 		return (0);
-	if (inp->next->c == '-')
+/*	if (inp->next->c == '-')
 		inp = inp->next->next;
 	else
 		inp = inp->next;
 	while (inp && inp->c <= '9' && inp->c >= '0')
 		inp = inp->next;
 	if (!inp || (inp->c <= '9' && inp->c >= '0'))
+		return (-1);*/
+	while (inp && inp->c && i--)
+		inp = inp->next;
+	if (!inp)
 		return (-1);
 	return (0);
 }
 
-void	pt_next(t_inp **input, int pos)
+void	pt_next(t_inp **input, int i)
 {
 	(*input) = (*input)->next;
-	if (pos == 1)
-		(*input) = (*input)->next;
-	while (*input && (*input)->c <= '9' && (*input)->c >= '0')
+	while (i-- > 0)
 		(*input) = (*input)->next;
 }
 
@@ -146,11 +148,13 @@ int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 	int		i;
 
 	i = 0;
-	if (!(sh->history && sh->history->inp && sh->history->inp->c))
-		if (nothing_front_back(inp) == -1)
-			return (no_history());
 	if ((i = get_his(inp, sh, &input, pos)) == -1)
 		return (-1);
+	if (!(sh->history && sh->history->inp && sh->history->inp->c))
+		if (nothing_front_back(inp, i) == -1)
+			return (no_history());
+//	if ((i = get_his(inp, sh, &input, pos)) == -1)
+//		return (-1);
 	if (input && input->c)
 	{
 		tmp = get_start(&(*inp), i);
@@ -160,10 +164,10 @@ int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos)
 			input = input->next;
 		}
 	}
-	if (nothing_front_back(inp))
+	if (nothing_front_back(inp, i))
 		t = NULL;
 	else if (!((*inp)->previous))
-		pt_next(t, pos);
+		pt_next(t, i);
 	suppr_exclaim(&(*inp), i);
 	return (0);
 }
