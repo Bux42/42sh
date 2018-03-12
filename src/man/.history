@@ -204,3 +204,23 @@ cd -
 cd /Users
 cd /tmp
 cd -
+cd ././././.
+pwd
+ls
+cd ..
+ls
+chmod 000 25sh
+cd -
+chmod 744 25sh
+cd 25sh
+cd ..
+ls
+ls
+chmod 766 
+pwd
+ls
+ls
+cd ..
+chmod 000 25sh
+cd -
+chmod 744 25sh

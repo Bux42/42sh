@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 18:52:15 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/12 19:03:59 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int				dir_exists(char *path)
 	struct stat		data;
 
 	if (access(path, F_OK) != 0)
-		return (-1);
+		return (err_msg("cd: permission denied: ", path, -1));
 	if (access(path, X_OK) != 0)
-		return (-2);
+		return (err_msg("cd: permission denied: ", path, -1));
 	if (stat(path, &data) == -1)
-		return (-4);
+		return (err_msg("cd: permission denied: ", path, -1));
 	if (!(S_ISDIR(data.st_mode)))
-		return (-5);
+		return (err_msg("cd: permission denied: ", path, -1));
 	return (0);
 }
 
