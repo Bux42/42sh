@@ -224,3 +224,5 @@ cd ..
 chmod 000 25sh
 cd -
 chmod 744 25sh
+ls 'qefqef'
+salut

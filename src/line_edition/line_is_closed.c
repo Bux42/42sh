@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:26:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/02 09:24:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:05:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,6 @@ void	check_context_dquote(t_sh *sh)
 		delete_last_close(&sh->close);
 	else if (sh->close->flag == BQUOTE && !sh->close->next)
 		s_close_add(DQUOTE, &sh->close);
-}
-
-int		print_expected_prompt(t_sh *sh, t_close **close)
-{
-	t_close		*cp;
-
-	if ((cp = *close))
-	{
-		while (cp->next)
-			cp = cp->next;
-		while (cp)
-		{
-			if (cp->flag & QUOTE)
-				print_str("quote", sh);
-			if (cp->flag & DQUOTE)
-				print_str("dquote", sh);
-			if (cp->flag & BQUOTE)
-				print_str("bquote", sh);
-			if (cp->previous)
-			{
-				print_str(" ", sh);
-				cp = cp->previous;
-			}
-			else
-				break ;
-		}
-	}
-	print_str("> ", sh);
-	return (0);
 }
 
 int		check_context_backslash(t_sh *sh)

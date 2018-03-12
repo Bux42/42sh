@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:39:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:04:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void					paste_after(t_sh *sh, t_inp **inp);
 
 void					history_push_front(t_his **history, t_inp *inp, t_sh *sh);
 t_his					*history_new(t_inp *inp, t_sh *sh);
+t_inp					*inp_insert_chain_his(t_inp **src, t_sh *sh, int nb);
 int						history_len(t_his **history);
 
 void					search_history_backward(t_sh *sh, t_his **history);
@@ -162,6 +163,7 @@ void					rewrite_beginning(t_sh *sh, t_inp *cp);
 /*						quotes_and_slash								*/
 
 int						line_is_closed(t_sh *sh, t_inp **inp);
+int						print_expected_prompt(t_sh *sh, t_close **close);
 void					s_close_add(int flag, t_close **close);
 void					delete_last_close(t_close **close);
 t_close					*new_close(int flag);

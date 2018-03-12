@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/04 11:22:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:02:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,12 @@ t_his		*history_new(t_inp *inp, t_sh *sh)
 {
 	t_his	*ret;
 	t_inp	*cp;
-	int		maxlen;
 
-	cp = NULL;
-	maxlen = 500;
 	if (!(ret = (t_his*)malloc(sizeof(t_his))))
 		return (NULL);
-	while (inp && maxlen--)
-	{
-		if (inp->c != '\n')
-		{
-			if (!sh->hist_res)
-				write(sh->fd, &inp->c, 1);
-			inp_insert_posat(&cp, inp->c);
-		}
-		if (inp->next)
-			inp = inp->next;
-		else
-			break ;
-	}
+	cp = inp_insert_chain_his(&inp, sh, 1000);
 	if (!sh->hist_res)
 		write(sh->fd, "\n", 1);
-	while (inp->previous)
-		inp = inp->previous;
 	ret->next = NULL;
 	ret->previous = NULL;
 	ret->inp = cp;

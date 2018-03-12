@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/12 18:31:21 by drecours         ###   ########.fr        #
+#    Updated: 2018/03/12 21:02:19 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ line_edition/jump_up_down.c\
 line_edition/home_end.c\
 line_edition/inp_list.c\
 line_edition/history_list.c\
+line_edition/history_tools.c\
 line_edition/list_to_char.c\
 line_edition/search_history_forward.c\
 line_edition/auto_completion.c\
@@ -52,7 +53,6 @@ line_edition/completion_path.c\
 line_edition/print_completion.c\
 line_edition/line_is_closed.c\
 line_edition/s_close_list.c\
-line_edition/closing_context.c\
 line_edition/enter_key.c\
 line_edition/history_search.c\
 line_edition/treat_input_search.c\
