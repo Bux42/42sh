@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:38:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 03:28:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:21:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_inp		*new_inp(char c)
 {
 	t_inp	*ret;
 
-if (!(ret = (t_inp*)malloc(sizeof(t_inp))))
+	if (!(ret = (t_inp*)malloc(sizeof(t_inp))))
 		return (NULL);
 	ret->next = NULL;
 	ret->previous = NULL;

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 11:27:36 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/05 21:27:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:20:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,34 @@ void		home_end_shortcut(t_sh *sh, int len, int active)
 	}
 }
 
+void		home(t_sh *sh, t_inp *cp)
+{
+	int		len;
+
+	len = 0;
+	if (cp->pos != 2)
+		custom_left(sh);
+	cp->pos = 0;
+	while (cp->previous && (len++ > -1))
+		cp = cp->previous;
+	home_end_shortcut(sh, len, 0);
+	cp->pos = 2;
+}
+
+void		end(t_sh *sh, t_inp *cp)
+{
+	int		len;
+
+	len = 0;
+	if (cp->pos == 2)
+		custom_right(sh);
+	cp->pos = 0;
+	while (cp->next && (len++ > -1))
+		cp = cp->next;
+	home_end_shortcut(sh, len, 1);
+	cp->pos = 1;
+}
+
 void		home_end(t_sh *sh, t_inp **inp, int active)
 {
 	t_inp	*cp;
@@ -45,24 +73,8 @@ void		home_end(t_sh *sh, t_inp **inp, int active)
 	if ((cp = get_to_pos(inp)))
 	{
 		if (active == 1)
-		{
-			if (cp->pos == 2)
-				custom_right(sh);
-			cp->pos = 0;
-			while (cp->next && (len++ > -1))
-				cp = cp->next;
-			home_end_shortcut(sh, len, active);
-			cp->pos = 1;
-		}
+			end(sh, cp);
 		else
-		{
-			if (cp->pos != 2)
-				custom_left(sh);
-			cp->pos = 0;
-			while (cp->previous && (len++ > -1))
-				cp = cp->previous;
-			home_end_shortcut(sh, len, active);
-			cp->pos = 2;
-		}
+			home(sh, cp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 21:04:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/12 21:18:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void					jump_words(t_sh *sh, char c);
 void					jump_left(t_sh *sh, t_inp **inp);
 void					jump_right(t_sh *sh, t_inp **inp);
 void					home_end(t_sh *sh, t_inp **inp, int active);
+void					end(t_sh *sh, t_inp *cp);
+void					home(t_sh *sh, t_inp *cp);
 
 void					jump_up(t_sh *sh, t_inp **inp);
 void					jump_down(t_sh *sh, t_inp **inp);
