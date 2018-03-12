@@ -164,3 +164,43 @@ cd -P /tmp
 env
 cd -L /tmp
 env
+env
+cd /tmp
+pwd
+cd -L /tmp
+pwd
+cd -P /tmp
+pwd
+cd
+cd /tmp
+pwd
+cd -P /tmp
+pwd
+cd -L /tmp
+pwd
+cd /tmp
+pwd
+cd -P /tmp
+pwd
+cd /tmp
+cd -L /tmp
+pwd
+cd /
+cd ~
+env
+cd -PPPPPPPPPPPPPPPP
+cd -P
+env
+cd -
+cd /tmp
+cd /Users
+cd -
+pwd
+cd ..
+pwd
+cd -
+cd /Users
+cd -
+cd /Users
+cd /tmp
+cd -

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 17:53:20 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/12 18:52:15 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,49 +24,6 @@ int			check_flag(int flag, char letter)
 	custom_return();
 	return (-1);
 }
-
-/*int			parse_flags(char **exec, int *index)
-  {
-  int		i;
-  int		j;
-  int		k;
-  int		tir;
-  int		file;
-
-  i = 0;
-  j = 0;
-  file = 0;
-  while (exec[++j])
-  {
-  k = -1;
-  tir = 0;
-  if (exec[j][0] != '-')
-  {
-  if (file + 1 > 1)
-  return (err_msg("cd: string not in pwd: ", exec[1], -1));
-  else
-  file++;
-  }
-  while (exec[j][++k])
-  {
-  if (exec[j][k] == '-')
-  {
-  if (file)
-  return (err_msg("cd: string not in pwd: ", exec[1], -1));
-  if (tir)
-  return (-1);
-  else
-  tir++;
-  if (exec[j][1])
-  (*index)++;
-  }
-  else
-  if (tir && (i = check_flag(i, exec[j][k])) == -1)
-  return (-1);
-  }
-  }
-  return (i);
-  }*/
 
 int			parse_flags(char **exec, int *index)
 {
@@ -120,76 +77,44 @@ int				dir_exists(char *path)
 	return (0);
 }
 
-/*void    error_case1(char *path)
-{
-	ft_putstr("Error: ");
-	if (path)
-		ft_putstr(path);
-	ft_putstr("no such file or directory");
-}
-*/
 int			check_link(char *path, int flag, struct stat st, t_env **env)
 {
-	/*char	buff[2048];
-	  char	*tmp;
-	  char	getpwd[2048];
-	  int		ret;
+	char	buff[2048];
+	char	*tmp;
+	char	getpwd[2048];
+	int		ret;
+	char			*oldpwd;
 
-	  if (S_ISLNK(st.st_mode))
-	  {
-	  if (path[0] == '/')
-	  path_subcpy(path, buff, 0, ft_strlen(path));
-	  else
-	  {
-	  getwd(getpwd);
-	  tmp = path_join(getpwd, path);
-	  path_subcpy(tmp, buff, 0, ft_strlen(tmp));
-	  free(tmp);
-	  }
-	  path_eval(buff);
-	  resolve_relative_path(env, buff);
-	  if (fix_root(buff) == 0 && dir_exists(buff) != 0)
-	  return (err_msg("cd: no such file or directory: ", getpwd, -1));
-	  ft_putstr(path);
-	  custom_return();
-	  }
-	  ret = chdir(path);
-	  if (flag & 1)
-	  set_env(env, "PWD=", getcwd(getpwd, 2048));
-	  else
-	  {
-
-	  set_env(env, "PWD=", path);
-	  }
-	  return (ret);*/
-	(void)st;
-	(void)flag;
-	char    *tmp;
-	char    *path_tmp;
-	char    buff[200];
-
-	tmp = NULL;
-	path_tmp = NULL;
-	set_env(env, "OLDPWD=", getcwd(buff, 200)); 
-	if (path)
+	oldpwd = get_specific_env("PWD=", env);
+	if (S_ISLNK(st.st_mode))
 	{
-		path_tmp = ft_strdup(path);
-		if (chdir(path_tmp) == -1)
-			error_case1(path_tmp);
-		set_env(env, "PWD=", getcwd(buff, 2048)); 
+		if (path[0] == '/')
+			path_subcpy(path, buff, 0, ft_strlen(path));
+		else
+		{
+			getwd(getpwd);
+			tmp = path_join(getpwd, path);
+			path_subcpy(tmp, buff, 0, ft_strlen(tmp));
+			free(tmp);
+		}
+		path_eval(buff);
+		resolve_relative_path(env, buff);
+		if (fix_root(buff) == 0 && dir_exists(buff) != 0)
+			return (err_msg("cd: no such file or directory: ", getpwd, -1));
+		ft_putstr(path);
+		custom_return();
 	}
+	if (flag & 1)
+		set_env(env, "OLDPWD=", getcwd(getpwd, 2048));
 	else
-	{
-		if ((tmp = get_specific_env("HOME=", env)) == 0)
-			tmp = ft_strdup("/");
-		path_tmp = ft_strdup(tmp);
-		if (chdir(path_tmp) == -1)
-			error_case1(path_tmp);
-		set_env(env, "PWD=", getcwd(buff, 2048)); 
-	}
-	ft_strdel(&tmp);
-	ft_strdel(&path_tmp);
-	return (0);
+		set_env(env, "OLDPWD=", oldpwd);
+	ret = chdir(path);
+	if (flag & 1)
+		set_env(env, "PWD=", getcwd(getpwd, 2048));
+	else
+		set_env(env, "PWD=", path);
+	free(oldpwd);
+	return (ret);
 }
 
 int			custom_chdir(char *path, int flag, t_env **env)
@@ -232,42 +157,15 @@ int			chdir_old_pwd(t_env **env, int flag)
 		return (err_msg("cd: OLDPWD not set", "", 3));
 }
 
-/*void    cd_l_bis(t_env **env, char **path, char *buff)
-{
-	char    *tmp;
-	char    *tmp2;
-	int             free;
-
-	free = 0;
-	tmp = NULL;
-	buff = NULL;
-	if ((*path)[0] != '/')
-	{
-		tmp = getcwd(tmp, 200);
-		tmp = ft_strjoin(tmp, "/");
-		tmp2 = ft_strdup(*path);
-		ft_strdel(path);
-		*path = ft_strjoin(tmp, tmp2 );
-		free = 1;
-		ft_strdel(&tmp2);
-	}
-	tmp2 = getcwd(buff, 200);
-	chdir(*path);
-	set_env(env, "PWD=", *path);
-	ft_strdel(&tmp2);
-}
-*/
 int			builtin_cd(char **exec, t_sh *sh)
 {
 	int		flag;
 	int		index;
 	char	*home;
-	char	*old_pwd;
 
 	index = 1;
 	if ((flag = parse_flags(exec, &index)) == -1)
 		return (1);
-	old_pwd = get_specific_env("PWD=", &sh->env);
 	if (!exec[index])
 	{
 		if ((home = get_specific_env("HOME=", &sh->env)))
@@ -281,35 +179,7 @@ int			builtin_cd(char **exec, t_sh *sh)
 	else if (ft_strcmp(exec[index], "-") == 0 &&
 			chdir_old_pwd(&sh->env, flag) == 3)
 		return (3);
-	if (flag & 2)
-	{
-		ft_putstr("LLL");
-		char    *tmp;
-		char    *path_tmp;
-		char    buff[200];
-
-		tmp = NULL;
-		path_tmp = NULL;
-		if (exec[index])
-			path_tmp = ft_strdup(exec[index]);
-		else
-		{
-			if ((tmp = get_specific_env("HOME=", &sh->env)) == 0)
-				tmp = ft_strdup("/");
-			path_tmp = ft_strdup(tmp);
-		}
-		cd_l_bis(&sh->env, &path_tmp, buff);
-		ft_strdel(&path_tmp);
-		if (tmp)
-			ft_strdel(&tmp);
-	}
-	else
+	else if (!(ft_strcmp(exec[index], "-") == 0))
 		custom_chdir(exec[index], flag, &sh->env);
-		//set_env(&sh->env, "OLDPWD=", old_pwd); 
-		//free(old_pwd);}
-		home = get_specific_env("PWD=", &sh->env);
-		ft_putstr("||");
-		ft_putstr(home);
-		ft_putstr("||");
-		return (0);
+	return (0);
 }

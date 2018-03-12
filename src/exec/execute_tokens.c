@@ -6,11 +6,12 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/05 12:39:10 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/12 18:25:45 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "../builtin/builtin.h"
 
 char		*concat_command_path(char *path, char *command)
 {
@@ -80,8 +81,10 @@ void		check_command(t_tok *tok, t_sh *sh)
 	int		i;
 	pid_t	pid;
 	char	*path;
+	char	**tab;
 
 	i = -1;
+	tab = env_in_tab(&sh->env);
 	while (tok->cont[0][++i])
 		if (tok->cont[0][i] == '/')
 			break ;
@@ -94,7 +97,8 @@ void		check_command(t_tok *tok, t_sh *sh)
 				if (pid == 0)
 				{
 					tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-					execve(path, tok->cont, NULL);
+					execve(path, tok->cont, tab);
+					env_free(tab);
 					exit(1);
 				}
 				else
