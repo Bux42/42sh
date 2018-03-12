@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/09 17:49:43 by drecours         ###   ########.fr        #
+#    Updated: 2018/03/12 17:32:08 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,15 @@ builtin/history_exclaim.c\
 builtin/exclaim_tools.c\
 builtin/history_find.c\
 builtin/exclaim_tools2.c\
-builtin/exclaim_misc.c
+builtin/exclaim_misc.c\
+builtin/dir_tools3.c\
+builtin/cd/ft_cd.c\
+builtin/cd/ft_cd_bis.c\
+builtin/cd/ft_cd_del.c\
+builtin/cd/ft_cd_error.c\
+builtin/cd/ft_cd_option_bis.c\
+builtin/cd/ft_cd_options.c\
+builtin/cd/ft_cd_return.c\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

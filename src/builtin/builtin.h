@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 17:49:12 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/12 17:50:44 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ t_env	*tab_in_env(char **tab);
 void	show_args(char **exec);
 int		erase_fg(char *fg, int i);
 /**/
-int		resolve_relative_path(char *bin_path);
+int		resolve_relative_path(t_env **env, char *bin_path);
 int		path_val(char *path);
-int		custom_chdir(char *path, int flag);
+int		custom_chdir(char *path, int flag, t_env **env);
 char	*path_join(const char *path, const char *bin);
 /**/
 
@@ -90,5 +90,28 @@ void	pt_next(t_inp **input, int i);
 void	suppr_exclaim(t_inp **inp, int i);
 t_inp	*insert_inp(t_inp **inp, char c);
 void	suppr_letter(t_inp **c);
+
+
+/*
+** TEST
+*/
+int	ft_cd(char **stock, t_sh *sh);
+int	return_dot(char *path, char *option);
+int	error_environ(t_env **env, char *path, char *option);
+//void	ft_set_path(&tmp, &path, &option, t_env **env);
+int		return_usage(char *path, char *option);
+int		return_cd_bis(char *path, char *option, t_env **env, char buff[]);
+void	check_cd(char *path, t_env **env, char *buff);
+void	error_case1(char *path);
+void	error_case2(char *path);
+void	cd(t_env **env, char **path, char *buff);
+void	set_old_dir(char *tmp2, char **path, t_env **env);
+void	cd_l_bis(t_env **env, char **path, char *buff);
+int		ft_cd_bis(char *path, char *option, t_env **env, char *buff);
+int		cd_back(t_env **env);
+int		cd_less(t_env **env, char *buff);
+int		cd_l(t_env **env, char *option);
+int		cd_p(t_env **env, char *option, char *buff);
+
 
 #endif

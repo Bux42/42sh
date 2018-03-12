@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/03 13:21:57 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/12 16:55:49 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int				err_msg(char *message, char *name, int ret)
 void			*get_builtin_function(char *command)
 {
 	if (ft_strcmp(command, "cd") == 0)
-		return (&builtin_cd);
+		//return (&builtin_cd);
+		return (&ft_cd);
 	if (ft_strcmp(command, "env") == 0)
 		return (&builtin_env);
 	if (ft_strcmp(command, "setenv") == 0)
