@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/13 21:27:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/13 22:12:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,8 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok, int type)
 			if (cp->next->type & PIPE || cp->next->type & AND || cp->next->type & OR || cp->next->type & SEMICOLON)
 			{
 				add->sep_type = cp->next->type;
-				return ;
+				ft_putnbr(add->sep_type);
+				return ((void)tok_push_back(tok, add));
 			}
 			cp = cp->next;
 		}

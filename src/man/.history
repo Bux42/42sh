@@ -285,3 +285,24 @@ cd >> file
 cd < file
 cd < file
 cd < file ; ls
+ls
+ls ; ls
+ls && ls
+ls && ls
+ls && ls && ls
+ls ; ls ; ls
+ls
+ls
+ls ; ls
+ls && ls
+ls && ls
+ls && ls
+cat < Makefile > file
+ls && ls
+ls && ls
+ls && ls || ls
+ls > file && ls || ls
+ls > file | wc && ls || ls
+ls >> file ; ls
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
