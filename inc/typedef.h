@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/12 15:26:20 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:52:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 
 # include "../libft/includes/libft.h"
 
-typedef struct			s_tok
+typedef struct			s_redir
 {
-	int					is_redir;
-	int					fd[2];
-	int					is_cond;
-	int					flag;
+	int					redir[3];
+	char				*file;
+	struct s_redir		*next;
+}						t_redir;
+
+typedef struct			s_list_c
+{
+	int					sep_type;
 	char				**cont;
 	void				*func;
-	struct s_tok		*next;
-	struct s_tok		*previous;
-}						t_tok;
+	int					nb_arg;
+	t_redir				*redirs;
+	struct s_list_c		*prev;
+	struct s_list_c		*next;
+}						t_listc;
 
 typedef struct			s_close
 {

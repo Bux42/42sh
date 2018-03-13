@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 18:25:45 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/13 18:28:29 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,59 +74,4 @@ char		*command_path(t_env **env, char *command)
 	else
 		return (NULL);
 	return (ret);
-}
-
-void		check_command(t_tok *tok, t_sh *sh)
-{
-	int		i;
-	pid_t	pid;
-	char	*path;
-	char	**tab;
-
-	i = -1;
-	tab = env_in_tab(&sh->env);
-	while (tok->cont[0][++i])
-		if (tok->cont[0][i] == '/')
-			break ;
-	if (!tok->cont[0][i])
-	{
-		if ((path = command_path(&sh->env, tok->cont[0])))
-		{
-			if ((pid = fork()) != -1)
-			{
-				if (pid == 0)
-				{
-					tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-					execve(path, tok->cont, tab);
-					env_free(tab);
-					exit(1);
-				}
-				else
-					waitpid(pid, &sh->retval, 0);
-				tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
-			}
-			free(path);
-		}
-	}
-}
-
-void		execute_tokens(t_tok **tok, t_sh *sh)
-{
-	t_tok	*cp;
-	int		(*func)(char**, t_sh *);
-
-	if ((cp = (*tok)))
-	{
-		if (cp->is_redir)
-			;
-		else if (cp->is_cond)
-			;
-		else if (cp->func)
-		{
-			func = get_builtin_function(cp->cont[0]);
-			sh->retval = func(cp->cont, sh);
-		}
-		else
-			check_command(cp, sh);
-	}
 }

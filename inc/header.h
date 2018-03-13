@@ -6,37 +6,43 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 21:18:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:04:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
-# define DQUOTE 1
-# define QUOTE 2
-# define BQUOTE 4
+# define DQUOTE			1
+# define QUOTE			2
+# define BQUOTE			4
 
-# define HERE 1
-# define PIPE 2
-# define AND 4
-# define OR 8
-# define TOFILE 16
-# define ATOFILE 32
-# define TOEXE 64
-# define ARGUMENT 128
-# define COMMAND 256
-# define BUILTIN 512
-# define _FILE 1024
-# define SEMICOLON 2048
+# define IN				0
+# define OUT			1
+# define AOUT			3
+# define ERR_OUT		2
+# define READ_END		0
+# define WRITE_END		1
+
+# define HERE			1
+# define PIPE			2
+# define AND			4
+# define OR				8
+# define TOFILE			16
+# define ATOFILE		32
+# define TOEXE			64
+# define ARGUMENT		128
+# define COMMAND		256
+# define BUILTIN		512
+# define _FILE			1024
+# define SEMICOLON		2048
+
 # include <termcap.h>
 # include <termios.h>
 # include <curses.h>
 # include <sys/stat.h>
 # include <dirent.h>
 # include "typedef.h"
-//# include "../libft/includes/libft.h"
-//# include "../src/builtin/builtin.h"
 
 /*						debug											*/
 
@@ -192,7 +198,6 @@ int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
 int						check_semicolon(t_inp **inp);
 
-int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_tok **tok);
 char					*inp_to_cont(t_inp **inp);
 
 /*						tty_debug										*/
@@ -223,8 +228,6 @@ int						valid_variable_char(char c);
 char					*parse_variable_name(t_inp **inp);
 
 /*						execution										*/
-
-void					execute_tokens(t_tok **tok, t_sh *sh);
 
 void					valid_command(t_inp **inp, t_sh *sh);
 char					*existing_command(char *command, t_env **env);

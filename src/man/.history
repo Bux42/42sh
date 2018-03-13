@@ -226,3 +226,62 @@ cd -
 chmod 744 25sh
 ls 'qefqef'
 salut
+cat < Makefile | wc -c > file && ls >> file ; cd ..
+ls 1>&2
+ls 10>&2
+ls >>>>>> tamer
+ls
+echo "nothing\ta"  a\ta 'a\ta'
+cat < Makefile > file && ls
+echo
+echo '\b' "\b" \b
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls -l
+echo
+ls
+ls -l
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+:w
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+ls > 
+cat < Makefile
+cat < Makefile
+ls > file
+ls > file
+ls > file
+ls > file
+ls > file
+cd > file
+cd > file
+cd > file
+cd >> file
+cd < file
+cd < file
+cd < file ; ls

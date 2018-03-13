@@ -6,14 +6,14 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/12 21:02:19 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/13 19:42:47 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address

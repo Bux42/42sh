@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/09 14:35:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/13 19:51:50 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,54 +136,13 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	return (i);
 }
 
-void		show_tokens(t_tok **tok, t_sh *sh)
-{
-	t_tok	*cp;
-
-	ft_putstr("Beginning execution");
-	custom_return();
-	sh->posy = sh->posy;
-	if ((cp = (*tok)))
-	{
-		while (cp)
-		{
-			if (cp->is_redir)
-			{
-				ft_putstr("Redirecting ");
-				ft_putnbr(cp->fd[0]);
-				ft_putstr(" into ");
-				ft_putnbr(cp->fd[1]);
-				custom_return();
-			}
-			else if (cp->is_cond)
-			{
-				ft_putstr("Condition: ");
-				if (cp->flag & OR)
-					ft_putstr("OR");
-				if (cp->flag & AND)
-					ft_putstr("AND");
-				custom_return();
-			}
-			else
-			{
-				ft_putstr("Executing ");
-				if (cp->func)
-					ft_putstr("Builtin: ");
-				else
-					ft_putstr(": ");
-				ft_putstr(cp->cont[0]);
-				custom_return();
-			}
-			cp = cp->next;
-		}
-	}
-}
+int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 
 void		parse(t_sh *sh)
 {
 	t_inp	*clean;
 	t_inpl	*splitted;
-	t_tok	*tok;
+	t_listc	*tok;
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
@@ -198,12 +157,7 @@ void		parse(t_sh *sh)
 		{
 			print_splitted(&splitted);
 			ft_putstr("Creating Token List");
-			custom_return();
-			if (tokenize_splitted(&splitted, sh, &tok))
-			{
-				show_tokens(&tok, sh);
-				execute_tokens(&tok, sh);
-			}
+			tokenize_splitted(&splitted, sh, &tok);
 		}
 		custom_return();
 		sh->context = 0;
