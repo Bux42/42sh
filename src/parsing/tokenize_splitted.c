@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/13 22:12:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/13 22:29:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,10 +202,6 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 
 int			is_redirection(int type)
 {
-	if (type & ARGUMENT)
-		return (1);
-	if (type & PIPE)
-		return (1);
 	if (type & TOFILE)
 		return (1);
 	if (type & ATOFILE)
@@ -262,7 +258,7 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok)
 			if (cp->type & BUILTIN || cp->type & COMMAND)
 			{
 				add_listc_token(&cp, tok, cp->type);
-				ft_putendl(" <=SEP_TYPE");
+				ft_putstr(" <= SEP_TYPE");
 			}
 			cp = cp->next;
 		}

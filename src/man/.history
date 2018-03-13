@@ -306,3 +306,21 @@ ls > file | wc && ls || ls
 ls >> file ; ls
 cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
 cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+cd ..
+echo oui > file
+echo oui > file
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+echo yes > file | wc
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z | sort | wc  && ls | wc >> file;cd 21sh
+ls && ls -z | sort | wc  && ls | wc >> file
+ls -z | sort | wc 
+ls -z | sort | wc 
+ls -z > file | sort | wc 
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z | sort | wc  && ls | wc >> file;cd 21sh
+cat < file > file2
+cat < file > file2 ; ls
+cat < file > file2 ; ls | wc
+$HOME
+$HOME && $USER
+env

@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/13 19:42:47 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/13 22:33:13 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ parsing/convert_quotes.c\
 parsing/check_special.c\
 parsing/convert_splitted.c\
 parsing/split_line.c\
-parsing/parse_backquotes.c\
+parsing/parse_line.c\
 parsing/lexer_parser.c\
 parsing/redirections.c\
 parsing/variable.c\
