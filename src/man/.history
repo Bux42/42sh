@@ -327,3 +327,17 @@ env
 vf
 cd
 cd ..
+ls
+history
+ls
+ls
+ls
+ls
+ls
+cd
+cd
+cd -
+ls
+ls
+ls -l
+cat Makefile

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/13 21:46:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/14 18:31:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,10 @@ void					print_variable(t_inp **cp, t_sh *sh);
 int						valid_variable_char(char c);
 char					*parse_variable_name(t_inp **inp);
 
+/*						tokenization									*/
+
+int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+
 /*						execution										*/
 
 void					valid_command(t_inp **inp, t_sh *sh);
@@ -238,6 +242,8 @@ void					exec_command(t_inp **inp, t_sh *sh);
 char					*check_exec_path(char *command, t_env **env, int free);
 int						fork_command(char *path, char **exec, char **env);
 char					**env_list_to_char(t_env **env);
+
+void					execute_tokens_debo(t_listc **tok, t_sh *sh);
 
 /*						builtins										*/
 
