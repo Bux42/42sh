@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:22:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:11:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			builtin_unset(char **exec, t_sh *sh)
 	i = 0;
 	if (!exec[1])
 	{
-		ft_putstr("Usage: unset [KEY ...]");
+		ft_putstr_fd("Usage: unset [KEY ...]", 2);
 		custom_return();
 		return (1);
 	}

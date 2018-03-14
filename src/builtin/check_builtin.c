@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 12:37:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:12:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int				err_msg(char *message, char *name, int ret)
 {
-	ft_putstr(message);
-	ft_putstr(name);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd(name, 2);
 	custom_return();
 	return (ret);
 }
