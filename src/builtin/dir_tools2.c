@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:50:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:21:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:07:52 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,20 @@ int			ft_isnum(char c)
 {
 	if (c <= '9' && c >= '0')
 		return (1);
+	return (0);
+}
+
+int			dir_exists(char *path)
+{
+	struct stat		data;
+
+	if (access(path, F_OK) != 0)
+		return (err_msg("cd: Command not found: ", path, -1));
+	if (access(path, X_OK) != 0)
+		return (err_msg("cd: Permission denied: ", path, -1));
+	if (stat(path, &data) == -1)
+		return (err_msg("cd: Command not found: ", path, -1));
+	if (!(S_ISDIR(data.st_mode)))
+		return (err_msg("cd: Command not found: ", path, -1));
 	return (0);
 }

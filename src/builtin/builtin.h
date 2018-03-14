@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/12 18:31:02 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:02:33 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int		env_free(char **env);
 char	*env_key(char *env_v);
 int		matching_name(char *env, char *name);
 int		ft_isnum(char c);
-size_t	path_subcpy(const char *source, char *dest, size_t start, size_t len);
-size_t	path_trim(char *path, size_t size);
 int		env_verbose(int verb, char *exec);
 char	**clear_realloc(int verb, char **tab);
 char	*env_key(char *env_v);
@@ -58,12 +56,21 @@ void	show_line(char c, int nb, t_inp *cp);
 t_env	*tab_in_env(char **tab);
 void	show_args(char **exec);
 int		erase_fg(char *fg, int i);
-/**/
+
+/*
+** CD TOOLS
+*/
+
 int		resolve_relative_path(t_env **env, char *bin_path);
+size_t	path_trim(char *path, size_t size);
+size_t	path_subcpy(const char *source, char *dest, size_t start, size_t len);
 int		path_val(char *path);
 int		custom_chdir(char *path, int flag, t_env **env);
 char	*path_join(const char *path, const char *bin);
-/**/
+int		check_flag(int flag, char letter);
+int		parse_flags(char **exec, int *index);
+int		fix_root(char *path);
+int		dir_exists(char *path);
 
 /*
 ** HISTORY TOOLS

@@ -6,14 +6,14 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/12 18:25:57 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:36:49 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
 
-static int	print_env_tab(char **tab)
+int			print_env_tab(char **tab)
 {
 	int		i;
 
@@ -28,7 +28,7 @@ static int	print_env_tab(char **tab)
 	return (0);
 }
 
- char	**env_in_tab(t_env **env)
+char		**env_in_tab(t_env **env)
 {
 	int		i;
 	t_env	*cp;

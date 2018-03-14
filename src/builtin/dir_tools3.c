@@ -6,14 +6,14 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 15:08:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/12 15:13:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:03:38 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
 
-int				resolve_relative_path(t_env **env, char *bin_path)
+int			resolve_relative_path(t_env **env, char *bin_path)
 {
 	char correct_path[2048];
 	char *home;
@@ -50,4 +50,51 @@ char		*path_join(const char *path, const char *bin)
 	path_full = ft_strjoin(path_part, bin);
 	free(path_part);
 	return (path_full);
+}
+
+int			check_flag(int flag, char letter)
+{
+	if (letter == 'P')
+		return (flag | 1);
+	if (letter == 'L')
+		return (flag | 2);
+	ft_putstr_fd("cd: no such file or directory: -", 2);
+	ft_putchar_fd(letter, 2);
+	custom_return();
+	return (-1);
+}
+
+int			parse_flags(char **exec, int *index)
+{
+	int		i;
+	int		j;
+	int		flag;
+
+	i = 0;
+	j = 0;
+	flag = 0;
+	while (exec[i] && exec[++i] && exec[i][0] == '-')
+	{
+		if (ft_strcmp(exec[i], "-") == 0 || ft_strcmp(exec[i], "--") == 0)
+			break ;
+		while (exec[i][++j])
+			if ((flag = check_flag(flag, exec[i][j])) == -1)
+				return (-1);
+		j = 0;
+	}
+	if (!exec[i])
+		return (flag);
+	*index = (ft_strcmp(exec[i], "--") == 0) ? i + 1 : i;
+	if (ft_strcmp(exec[i], "--") == 0 && exec[i + 1] && exec[i + 2])
+		return (err_msg("cd: string not in pwd: ", exec[i + 1], -1));
+	if (exec[i] && exec[i + 1])
+		return (err_msg("cd: string not in pwd: ", exec[i], -1));
+	return (flag);
+}
+
+int			fix_root(char *path)
+{
+	if (ft_strlen(path) == 0)
+		path_subcpy("/", path, 0, 1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/26 16:47:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:08:02 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ char		**get_full_command(t_inp **inp, t_sh *sh)
 
 int			bin_error(const int error_no, char *exec)
 {
-	ft_putstr(exec);
-	ft_putstr(" : ");
+	ft_putstr_fd(exec, 2);
+	ft_putstr_fd(" : ", 2);
 	if (error_no == -1)
-		ft_putstr("Command not found.");
+		ft_putstr_fd("Command not found.", 2);
 	if (error_no == -2)
-		ft_putstr("Permission denied.");
+		ft_putstr_fd("Permission denied.", 2);
 			custom_return();
 	return (error_no);
 }
@@ -163,11 +163,12 @@ void		exec_command(t_inp **inp, t_sh *sh)
 			}
 		}
 		if (env)
-		{
+			env_free(env);
+	/*	{
 			for (int i = 0; env[i]; i++)
 				free(env[i]);
 			free(env);
-		}
+		}*/
 		for (int i = 0; exec[i]; i++)
 			free(exec[i]);
 		free(exec);

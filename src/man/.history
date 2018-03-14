@@ -324,3 +324,6 @@ cat < file > file2 ; ls | wc
 $HOME
 $HOME && $USER
 env
+vf
+cd
+cd ..
