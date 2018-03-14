@@ -1,0 +1,55 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       !
+
+
+SYNOPSIS
+       !! | ![-]n | ![?]word[?]]  -- execute a command of the history
+
+
+DESCRIPTION
+       The ! utillity search in the history the command specified in the argu-
+       ment and execute it.  There are 4 ways to specify a command  to	search
+       that are explained in the options.  In the history, the utility will be
+       replace by the command found.
+
+
+OPTIONS
+       !!
+
+       The last command will be executed.
+
+       ![-]n (int)
+
+       The utility will search the n last command if "-" (minus) is specified.
+       If  '-'	is not specified, the utility will search the n command begin-
+       ning by the first in the history
+
+       !word
+
+       The utility will search the last command beginning by "word".
+
+       !?word?
+
+       The utility will search the last command containing "word".
+
+
+EXIT STATUS
+       This utility exits 0 on success and >0 if an error occurs.
+
+
+EXAMPLE
+       To execute the last command beginning by "echo":
+
+       $!echo
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0			March 14, 2018			    BUILTIN(1)
