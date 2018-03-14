@@ -341,3 +341,25 @@ ls
 ls
 ls -l
 cat Makefile
+ls
+env
+/usr/bin/env
+/bin/env
+env
+echo $PATH
+ls /usr/sbin
+echo $PATH
+ls /usr/local/bin
+/usr/bin/env
+/usr/bin/env
+ls /usr/bin/
+ls /usr/bin/env
+/usr/bin/env
+env
+/usr/bin/env
+/usr/bin/env
+/usr/bin/env
+/usr/bin/env
+/usr/bin/env
+setenv PROUT=caca
+/usr/bin/env

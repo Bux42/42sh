@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 18:54:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/14 19:12:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char		*command_path(t_env **env, char *command)
 	char	**split;
 
 	ret = NULL;
+	if (command[0] == '/')
+		return (ft_strdup(command));
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((split = ft_strsplit(path, ':')))
@@ -76,10 +78,26 @@ char		*command_path(t_env **env, char *command)
 	return (ret);
 }
 
+void		free_char_array(char **array)
+{
+	int		i;
+
+	i = -1;
+	if (array)
+	{
+		while (array[++i])
+			free(array[i]);
+		if (array)
+			free(array);
+		array = NULL;
+	}
+}
+
 void		execute_tokens_debo(t_listc **tok, t_sh *sh)
 {
 	t_listc	*cp;
 	char	*path;
+	char	**env;
 	int		(*func)(char **, t_sh*);
 	pid_t	pid;
 
@@ -96,15 +114,17 @@ void		execute_tokens_debo(t_listc **tok, t_sh *sh)
 			}
 			else if ((path = command_path(&sh->env, cp->cont[0])))
 			{
+				env = env_list_to_char(&sh->env);
 				if ((pid = fork()) != -1)
 				{
 					if (pid == 0)
 					{
-						execve(path, cp->cont, NULL);
+						execve(path, cp->cont, env);
 					}
 					else
 						waitpid(pid, &sh->retval, 0);
 				}
+				free_char_array(env);
 				free(path);
 			}
 			else
