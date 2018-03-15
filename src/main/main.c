@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/04 11:00:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/15 22:01:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			find_hist_file(char *man_path)
 	char	*cp;
 
 	fd = -1;
-	if (!(cp = (char*)malloc(sizeof(char) * (ft_strlen(man_path + 8)))))
+	if (!(cp = (char*)malloc(sizeof(char) * (ft_strlen(man_path) + 8))))
 		return (0);
 	ft_bzero(cp, ft_strlen(man_path) + 8);
 	ft_strcat(cp, man_path);

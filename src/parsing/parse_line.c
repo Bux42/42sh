@@ -6,12 +6,29 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/15 20:32:34 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/15 22:21:27 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "../builtin/builtin.h"
+
+void		inp_insert_posat_remake(t_inp **ret, char c)
+{
+	t_inp	*tmp;
+
+	if (!*ret)
+		*ret = new_inp(c);
+	else
+	{
+		if ((tmp = new_inp(c)))
+		{
+			tmp->previous = *ret;
+			(*ret)->next = tmp;
+			(*ret) = (*ret)->next;
+		}
+	}
+}
 
 void		concat_inp(t_inp **inp, t_inp **ret, t_inpl *inpl)
 {
@@ -24,11 +41,11 @@ void		concat_inp(t_inp **inp, t_inp **ret, t_inpl *inpl)
 			if (cp->c == '\\' && !cp->next && inpl->next)
 				;
 			else
-				inp_insert_posat(ret, cp->c);
+				inp_insert_posat_remake(ret, cp->c);
 			if (!cp->next)
 				if (inpl->next)
 					if (cp->c != '\\')
-						inp_insert_posat(ret, '\n');
+						inp_insert_posat_remake(ret, '\n');
 			cp = cp->next;
 		}
 	}
@@ -49,6 +66,8 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 			cp = cp->next;
 		}
 	}
+	while (ret && ret->previous)
+		ret = ret->previous;
 	return (ret);
 }
 

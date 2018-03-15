@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:21:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 20:45:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/15 22:29:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		inpl_push_back(t_inpl **inpl, t_inp **inp, int type)
 	t_inpl	*cp;
 	t_inpl	*tmp;
 
+	while (*inp && (*inp)->previous)
+		(*inp) = (*inp)->previous;
 	if (!(*inpl))
 		*inpl = new_inpl(inp, type);
 	else

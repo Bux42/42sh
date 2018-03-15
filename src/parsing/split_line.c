@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:55:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/15 22:31:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;
-		inp_insert_posat(&add, (*cp)->c);
+		inp_insert_posat_remake(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	if (add)
@@ -93,7 +93,7 @@ void		add_special_token(t_inpl **inpl, t_inp **cp)
 	{
 		if (ending_special_char((*cp)->c))
 			break ;
-		inp_insert_posat(&add, (*cp)->c);
+		inp_insert_posat_remake(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	if (add)
