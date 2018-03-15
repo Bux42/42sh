@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/15 19:59:39 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:32:34 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,10 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
 	int		i;
-//(void)sh;
+
 	if (history_exclaim(inp, sh))
 		return (0);
 	i = 0;
-	if (inp)
-		ft_putchar ('C');
-//	if (inp && *inp && (*inp)->c)
-//		ft_putchar((*inp)->c);
 	if ((cp = (*inp)))
 	{
 		while (cp && cp->c)
@@ -137,7 +133,6 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 			cp = cp->next;
 		}
 	}
-//	while(1);
 	return (i);
 }
 
