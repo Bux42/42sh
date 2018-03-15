@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 19:59:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:43:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		last_command(t_sh *sh, t_inp **inp)
 	t_inp	*input;
 	t_inp	*tmp;
 
-	ft_putstr("pute");
 	tmp = NULL;
 	if (!(sh->history && sh->history->next))
 	{
@@ -42,29 +41,11 @@ int		last_command(t_sh *sh, t_inp **inp)
 			input = input->next;
 		}
 	}
-//	(void)t;
-	ft_putchar((*inp)->c);
 	suppr_exclaim(inp, 1, sh);
 	if (!(sh->history && sh->history->next))
 		tmp = (*inp)->next;
 	suppr_letter(inp);
 	*inp = tmp;
-//	t = inp;
-/*	if (!(*inp)->previous && (*inp)->next->next)
-		*t = (*inp)->next->next;
-	else if (!(*inp)->previous)
-		t = NULL;*/
-//	ft_putchar((*t)->c);
-//	suppr_exclaim(&(*t), 1);
-//	ft_putchar((*inp)->c);
-//	ft_putstr("pute");
-	ft_putstr("PUTE");
-	//ft_putchar((*inp)->c);
-	ft_putstr("bipbip");
-	ft_putchar((*inp)->c);
-	ft_putstr("bipbip");
-	ft_putstr("eh ouai on sort");
-
 	return (0);
 }
 
@@ -98,15 +79,11 @@ int		by_last(t_sh *sh, t_inp **inp, int pos)
 	int		i;
 
 	i = 0;
-	ft_putstr("pute");
-	tmp = NULL;
 	if ((i = get_his(inp, sh, &input, pos)) == -1)
 		return (-1);
-	ft_putstr("pute");
 	if (!(sh->history && sh->history->inp && sh->history->inp->c))
 		if (nothing_front_back(inp, i) == -1)
 			return (no_history());
-	ft_putstr("CODE");
 	if (input && input->c)
 	{
 		tmp = get_start(&(*inp), i);
@@ -116,19 +93,9 @@ int		by_last(t_sh *sh, t_inp **inp, int pos)
 			input = input->next;
 		}
 	}
-	ft_putstr("bipbip");
-/*	if (nothing_front_back(inp, i))
-		t = NULL;
-	else if (!((*inp)->previous))
-		pt_next(t, i);*/
 	suppr_exclaim(&(*inp), i, sh);
-	if (!(sh->history && sh->history->next))
-		tmp = (*inp)->next;
+	tmp = (!(sh->history && sh->history->inp)) ? (*inp)->next : NULL;
 	suppr_letter(inp);
 	*inp = tmp;
-	ft_putstr("bipbip");
-	ft_putchar((*inp)->c);
-	ft_putstr("bipbip");
-	ft_putstr("eh ouai on sort");
 	return (0);
 }
