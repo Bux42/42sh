@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 20:43:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/15 20:57:58 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		by_last(t_sh *sh, t_inp **inp, int pos)
 		}
 	}
 	suppr_exclaim(&(*inp), i, sh);
-	tmp = (!(sh->history && sh->history->inp)) ? (*inp)->next : NULL;
+	tmp = (!(sh->history && sh->history->inp)) ? (*inp)->next : tmp;
 	suppr_letter(inp);
 	*inp = tmp;
 	return (0);
