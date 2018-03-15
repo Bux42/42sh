@@ -378,3 +378,9 @@ cat \<<
 cat `""`
 ls -z | sort | wc 
 ls ''`""`
+ls ''`""`
+ls
+ls
+ls!
+ls!s
+ls ''`""`

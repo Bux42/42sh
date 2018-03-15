@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/14 13:02:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:24:08 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int		history_clean(char c, t_his **hist, t_sh *sh);
 int		show_err(int err, char c);
 int		get_lg(int *lg, char **exec);
 int		get_beg(int *i, t_his **history, char **exec);
-int		last_command(t_inp **inp, t_sh *sh, t_inp **t);
-int		by_last(t_inp **inp, t_sh *sh, t_inp **t, int pos);
+int		last_command(t_sh *sh, t_inp **t);
+int		by_last(t_sh *sh, t_inp **t, int pos);
 int		history_exclaim(t_inp **inp, t_sh *sh);
 int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
 int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
@@ -94,7 +94,7 @@ int		name_no_event(int i, t_inp *inp, int pos);
 int		find_in_his(t_inp *his, t_inp *inp, int *i, int flag);
 int		nothing_front_back(t_inp **input, int i);
 void	pt_next(t_inp **input, int i);
-void	suppr_exclaim(t_inp **inp, int i);
+void	suppr_exclaim(t_inp **inp, int i, t_sh *sh);
 t_inp	*insert_inp(t_inp **inp, char c);
 void	suppr_letter(t_inp **c);
 char	**env_in_tab(t_env **env);

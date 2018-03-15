@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 19:31:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:59:39 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,28 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 {
 	t_inp	*cp;
 	int		i;
-
+//(void)sh;
 	if (history_exclaim(inp, sh))
 		return (0);
 	i = 0;
+	if (inp)
+		ft_putchar ('C');
+//	if (inp && *inp && (*inp)->c)
+//		ft_putchar((*inp)->c);
 	if ((cp = (*inp)))
 	{
-		while (cp)
+		while (cp && cp->c)
 		{
 			if (!is_space(cp->c))
 				i++;
 			cp = cp->next;
 		}
 	}
+//	while(1);
 	return (i);
 }
+
+int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 
 void		parse(t_sh *sh)
 {
@@ -153,9 +160,9 @@ void		parse(t_sh *sh)
 		split_line(&splitted, &clean, sh);
 		if (convert_splitted(&splitted, sh) != NULL)
 		{
+			//print_splitted(&splitted);
 			ft_putstr("Creating Token List");
 			tokenize_splitted(&splitted, sh, &tok);
-			execute_tokens_debo(&tok, sh);
 		}
 		custom_return();
 		sh->context = 0;
