@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:55:17 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 04:34:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/16 00:04:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ int			is_space(char c)
 	if (c == '\t')
 		return (1);
 	if (c == '\n')
-		return (1);
-	if (c == '\"')
-		return (1);
-	if (c == '\'')
 		return (1);
 	return (0);
 }

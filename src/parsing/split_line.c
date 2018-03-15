@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/15 22:31:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/16 00:31:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,41 @@ int			ending_special_char(char c)
 	return (0);
 }
 
+void		print_add(t_inp **inp)
+{
+	t_inp	*cp;
+
+	if ((cp = (*inp)))
+	{
+		while (cp->previous)
+			cp = cp->previous;
+		ft_putchar('[');
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			cp = cp->next;
+		}
+		ft_putchar(']');
+	}
+}
+
+int			empty_quote(int context, t_inp **inp)
+{
+	t_inp	*cp;
+
+	cp = *inp;
+	if (cp->c == '\'' && context & QUOTE)
+		if (cp->next && cp->next->c == '\'')
+			return (1);
+	if (cp->c == '\"' && context & DQUOTE)
+		if (cp->next && cp->next->c == '\"')
+			return (1);
+	if (cp->c == '`' && context & BQUOTE)
+		if (cp->next && cp->next->c == '`')
+			return (1);
+	return (0);
+}
+
 void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 {
 	t_inp	*add;
@@ -77,7 +112,15 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;
-		inp_insert_posat_remake(&add, (*cp)->c);
+		if (empty_quote(sh->context, cp))
+		{
+			(*cp) = (*cp)->next->next;
+			sh->context = 0;
+		}
+		if (!*cp)
+			break ;
+		if (!check_quoting((*cp)->c))
+			inp_insert_posat_remake(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	if (add)
