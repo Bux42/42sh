@@ -20,7 +20,7 @@ void		add_delete_letter_search(t_sh *sh)
 	tab[0] = "exit";
 	tab[1] = "0";
 	tab[2] = NULL;
-	if (sh->buff[0] > 31 && sh->buff[0] <= 127)
+	if (sh->buff[0] > 31)
 	{
 		if (sh->buff[0] != 127)
 		{
@@ -72,7 +72,7 @@ void		treat_input_search(t_sh *sh)
 	sh->width = tgetnum("co");
 	if (!sh->buff[1])
 	{
-		if ((sh->buff[0] > 31 && sh->buff[0] <= 127) || sh->buff[0] == 4)
+		if (sh->buff[0] > 31 || sh->buff[0] == 4)
 			add_delete_letter_search(sh);
 		else if (sh->buff[0] == 27)
 		{

@@ -34,9 +34,6 @@ int		show_err(int err, char c)
 
 int		put(char c, char *fg)
 {
-	int			i;
-
-	i = 0;
 	if (c == 'A')
 		fg[0] = 'A';
 	if (c == 'C')

@@ -164,12 +164,8 @@ void		exec_command(t_inp **inp, t_sh *sh)
 		}
 		if (env)
 			env_free(env);
-	/*	{
-			for (int i = 0; env[i]; i++)
-				free(env[i]);
-			free(env);
-		}*/
-		for (int i = 0; exec[i]; i++)
+		i = -1;
+		while (exec[++i])
 			free(exec[i]);
 		free(exec);
 	}

@@ -59,11 +59,9 @@ char		**env_in_tab(t_env **env)
 int			exec_cmd(t_env *new_env, char **tab, char **exec, int verbose)
 {
 	int		i;
-	int		j;
 	char	*path;
 
 	i = 0;
-	j = 0;
 	if (verbose > 0)
 		show_args(exec);
 	if (!(path = existing_command(exec[0], &new_env)))

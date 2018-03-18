@@ -47,19 +47,14 @@ int			valid_tofile(t_inpl **inpl)
 	return (1);
 }
 
-char		**concat_content(t_inpl **inpl, int type)
+char		**concat_content(t_inpl **inpl)
 {
 	int		len;
 	t_inpl	*cp;
 	char	**cont;
-	int		settings[5];
-	void	*func;
 
-	func = NULL;
 	len = 1;
 	cp = (*inpl);
-	settings[0] = 0;
-	settings[3] = 0;
 	while (cp && cp->type < 1024 && cp->type > 64)
 	{
 		len++;
@@ -77,8 +72,6 @@ char		**concat_content(t_inpl **inpl, int type)
 		cp = cp->next;
 	}
 	cont[len] = NULL;
-	if (type & BUILTIN)
-		func = get_builtin_function(cont[0]);
 	return (cont);
 }
 
@@ -174,10 +167,25 @@ char		*get_file_name(t_inp **inp)
 	return (ret);
 }
 
+t_redir		*new_redir(int *redir_type, char *file)
+{
+	t_redir	*redir;
+
+	if (!(redir = (t_redir*)malloc(sizeof(t_redir))))
+		return (NULL);
+	redir->file = file;
+	redir->redir[0] = redir_type[0];
+	redir->redir[1] = redir_type[1];
+	redir->redir[2] = redir_type[2];
+	redir->next = NULL;
+	return (redir);
+}
+
 void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 {
 	char	*file;
 	int		redir_type[3];
+	t_redir	*last;
 
 	file = NULL;
 	if (type & TOFILE || type & ATOFILE || type & TOEXE)
@@ -192,8 +200,15 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		redir_type[0] = 1;
 		redir_type[2] = 0;
 	}
-	if (redir)
-		;
+	if (!*redir)
+		*redir = new_redir(redir_type, file);
+	else
+	{
+		last = *redir;
+		while (last->next)
+			last = last->next;
+		last->next = new_redir(redir_type, file);
+	}
 	ft_putstr("[REDIR TYPE:");ft_putnbr(redir_type[1]);
 	ft_putstr(" FD1:");ft_putnbr(redir_type[0]);
 	ft_putstr(" FD2:");ft_putnbr(redir_type[2]);
@@ -216,10 +231,11 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok, int type)
 	t_listc	*add;
 	t_inpl	*cp;
 
+	type++;
 	if ((add = new_token()))
 	{
 		custom_return();
-		add->cont = concat_content(inpl, type);
+		add->cont = concat_content(inpl);
 		ft_putstr(add->cont[0]);
 		add->func = get_builtin_function(add->cont[0]);
 		ft_putstr(" is a ");

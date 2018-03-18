@@ -67,9 +67,7 @@ void		end(t_sh *sh, t_inp *cp)
 void		home_end(t_sh *sh, t_inp **inp, int active)
 {
 	t_inp	*cp;
-	int		len;
 
-	len = 0;
 	if ((cp = get_to_pos(inp)))
 	{
 		if (active == 1)

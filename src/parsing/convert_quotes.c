@@ -14,8 +14,8 @@
 
 void		convert_bquote(t_inp **inp, t_sh *sh)
 {
-	if (*inp && sh)
-		;
+	*inp = *inp;
+	sh->posy = sh->posy;
 }
 
 void		convert_backslash_quote(t_inp **inp)

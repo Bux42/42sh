@@ -49,10 +49,7 @@ t_inp	*insert_inp(t_inp **inp, char c)
 
 void	suppr_exclaim(t_inp **inp, int i, t_sh *sh)
 {
-	t_inp	*tmp;
-
 	(void)sh;
-	tmp = *inp;
 	while (--i >= 0 && (*inp)->next)
 	{
 		ft_putchar((*inp)->next->c);

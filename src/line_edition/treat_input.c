@@ -81,7 +81,7 @@ void		treat_input(t_sh *sh)
 	sh->width = tgetnum("co");
 	if (!sh->buff[1])
 	{
-		if (sh->buff[0] > 31 && sh->buff[0] <= 127)
+		if (sh->buff[0] > 31)
 		{
 			add_delete_letter(sh);
 			autocompletion(&sh->inpl->inp, sh);

@@ -42,6 +42,10 @@
 # include <curses.h>
 # include <sys/stat.h>
 # include <dirent.h>
+# include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 # include "typedef.h"
 
 /*						debug											*/

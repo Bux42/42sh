@@ -50,7 +50,7 @@ int			check_link(char *path, int flag, struct stat st, t_env **env)
 			path_subcpy(path, buff, 0, ft_strlen(path));
 		else
 		{
-			getwd(getpwd);
+			getcwd(getpwd, 2048);
 			tmp = path_join(getpwd, path);
 			path_subcpy(tmp, buff, 0, ft_strlen(tmp));
 			free(tmp);

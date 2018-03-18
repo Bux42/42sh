@@ -48,8 +48,8 @@ char		*find_man_path(char *relative)
 	char	*tmp;
 	int		i;
 
-	getwd(buff);
-	path = ft_strjoin(getwd(buff), "/");
+	getcwd(buff, 2048);
+	path = ft_strjoin(getcwd(buff, 2048), "/");
 	tmp = ft_strjoin(path, relative);
 	free(path);
 	path_eval(tmp);

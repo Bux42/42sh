@@ -501,3 +501,11 @@ ls ''a""
 ls ''d""
 ls 's'd""
 ls 's'd""``
+ls
+Makefile 
+cat Makefile
+exit
+exit
+cd
+cd ..
+ls

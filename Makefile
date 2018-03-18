@@ -13,7 +13,7 @@
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address

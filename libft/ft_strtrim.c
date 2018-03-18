@@ -46,12 +46,10 @@ char			*ft_strtrim(const char *s)
 {
 	char	*str;
 	size_t	i;
-	size_t	let;
 
 	if (!s)
 		return (NULL);
 	i = ft_begsp(s);
-	let = ft_strlen(s) - 1 - ft_begsp(s) - ft_endsp(s);
 	if (!(str = (char*)malloc(sizeof(char) * ft_letter(s) + 1)))
 		return (0);
 	if (ft_letter(s) > 0)
