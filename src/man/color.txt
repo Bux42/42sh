@@ -1,0 +1,28 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       color
+
+
+SYNOPSIS
+       color [arg]
+
+
+DESCRIPTION
+       The  color utility put the color on or off.  If there is no argument or
+       if the argument is "on", the color is put on.  Otherwise, the  color is
+       put off.
+
+
+EXIT STATUS
+       This utility returns 0 on success and >0 if error occurs.
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0			March 19, 2018			    BUILTIN(1)
