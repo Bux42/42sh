@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 12:57:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:19:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:36:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,30 @@ int			flag_v_u_i(char ***tab, char **exec, int *verbose)
 			}
 		}
 	return (1);
+}
+
+int			flag_v(char **exec)
+{
+	int		i;
+	int		x;
+
+	i = 0;
+	while (exec[++i] && (exec[i][0] == '-' || (ft_strchr(exec[i], '=') &&
+					exec[i][0] != '=')))
+		if (exec[i][0] == '-')
+		{
+			x = 0;
+			while (exec[i][++x])
+			{
+				if (exec[i][x] == 'v')
+					return (1);
+				else if (exec[i][x] == 'u' && (exec[i][x + 1] || exec[i + 1]))
+				{
+					if (!exec[i][x + 1])
+						i++;
+					break ;
+				}
+			}
+		}
+	return (0);
 }

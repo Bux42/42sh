@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 11:29:50 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:26:31 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 #include <sys/wait.h>
 
 # include "typedef.h"
+# include "hash.h"
 
 /*						debug											*/
 
@@ -242,7 +243,7 @@ int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 /*						execution										*/
 
 void					valid_command(t_inp **inp, t_sh *sh);
-char					*existing_command(char *command, t_env **env);
+char					*existing_command(char *command, t_env **env, t_sh *sh);
 char					**get_full_command(t_inp **inp, t_sh *sh);
 char					*get_command(t_inp **inp, t_sh *sh);
 void					exec_command(t_inp **inp, t_sh *sh);

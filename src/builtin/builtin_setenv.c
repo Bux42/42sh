@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 13:22:43 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:38:31 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ int			print_env(t_env **env)
 	return (0);
 }
 
-int			parse_setenv(char **exec, t_env **env)
+void		new_hash(t_sh *sh, char *value)
+{
+	hash_del(&sh->hash, sh);
+	sh->hash = hash_table(value, sh);
+}
+
+int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 {
 	char	*name;
 	char	*value;
@@ -51,6 +57,8 @@ int			parse_setenv(char **exec, t_env **env)
 	ft_bzero(value, ++len - ft_strlen(name));
 	ft_strcat(value, &exec[1][ft_strlen(name)]);
 	set_env(env, name, value);
+	if (ft_strcmp(name, "PATH=") == 0)
+		new_hash(sh, value);
 	free(name);
 	free(value);
 	return (0);
@@ -100,5 +108,5 @@ int			builtin_setenv(char **exec, t_sh *sh)
 			return (0);
 	if (!equal)
 		return (err_msg("setenv: missing '='", "", -1));
-	return (parse_setenv(exec, env));
+	return (parse_setenv(exec, env, sh));
 }

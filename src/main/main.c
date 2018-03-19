@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/15 22:01:17 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:00:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void		init_variables(t_sh *sh)
 	sh->his_search = NULL;
 	sh->search_pos = NULL;
 	sh->close = NULL;
+	sh->hash = NULL;
+	sh->hash_size = 0;
 	ft_bzero(sh->buff, 6);
 }
 
@@ -95,6 +97,7 @@ int			main(int ac, char **av, char **env)
 	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
 		return (0);
 	get_env(env, sh);
+	sh->hash = hash_table(get_specific_env("PATH=", &sh->env), sh);
 	sh->history = NULL;
 	restaure_history_from_file(sh);
 	if (!init_term() || !get_tty(sh, av[1]))

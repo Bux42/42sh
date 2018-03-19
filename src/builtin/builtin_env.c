@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/14 13:10:24 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:35:16 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ char		**env_in_tab(t_env **env)
 	return (tab);
 }
 
-int			exec_cmd(t_env *new_env, char **tab, char **exec, int verbose)
+int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
 {
 	int		i;
 	char	*path;
 
 	i = 0;
-	if (verbose > 0)
+	if (flag_v(exec))
 		show_args(exec);
-	if (!(path = existing_command(exec[0], &new_env)))
+	if (!(path = existing_command(exec[0], &new_env, sh)))
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(exec[0], 2);
@@ -122,7 +122,7 @@ int			builtin_env(char **exec, t_sh *sh)
 		if (!exec[i])
 			return (print_env_tab(tab));
 		new_env = tab_in_env(tab);
-		i = exec_cmd(new_env, tab, &(exec[i]), verbose);
+		i = exec_cmd(new_env, tab, &(exec[i]), sh);
 		env_free(tab);
 		free_list(&new_env);
 		return (i);

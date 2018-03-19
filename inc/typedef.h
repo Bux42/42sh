@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/13 20:52:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/19 14:41:35 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct			s_sh
 	int					failed_search;
 	char				pwd[2048];
 	char				*man_path;
+	unsigned int		hash_size;
 	struct s_env		*env;
 	struct s_loc		*loc;
 	struct s_inpl		*inpl;
@@ -118,6 +119,7 @@ typedef struct			s_sh
 	struct s_his		*search_pos;
 	struct s_inp		*his_search;
 	struct s_close		*close;
+	struct s_hash       **hash;
 }						t_sh;
 
 #endif

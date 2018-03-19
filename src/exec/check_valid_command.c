@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/17 12:57:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:36:27 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		*check_exec_path(char *command, t_env **env, int rep)
 	return (command);
 }
 
-char		*existing_command(char *command, t_env **env)
+char		*existing_command(char *command, t_env **env, t_sh *sh)
 {
 	char	*path;
 	char	*exec_path;
@@ -88,6 +88,8 @@ char		*existing_command(char *command, t_env **env)
 		return (ft_strdup(command));
 	if (ft_strcmp(command, "unsetenv") == 0)
 		return (ft_strdup(command));
+	if ((exec_path = get_hash_path(&sh->hash, command, sh)))
+		return (exec_path);
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((path_list = ft_strsplit(path, ':')))

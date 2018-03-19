@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 19:12:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:22:19 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*find_command_path(char **path, char *command)
 	return (ret);
 }
 
-char		*command_path(t_env **env, char *command)
+char		*command_path(t_env **env, char *command, t_sh *sh)
 {
 	char	*path;
 	char	*ret;
@@ -66,6 +66,8 @@ char		*command_path(t_env **env, char *command)
 	ret = NULL;
 	if (command[0] == '/')
 		return (ft_strdup(command));
+	if ((ret = get_hash_path(&sh->hash, command, sh)))
+		return (concat_command_path(ret, command));
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((split = ft_strsplit(path, ':')))
@@ -112,7 +114,7 @@ void		execute_tokens_debo(t_listc **tok, t_sh *sh)
 				func = cp->func;
 				sh->retval = func(cp->cont, sh);
 			}
-			else if ((path = command_path(&sh->env, cp->cont[0])))
+			else if ((path = command_path(&sh->env, cp->cont[0], sh)))
 			{
 				env = env_list_to_char(&sh->env);
 				if ((pid = fork()) != -1)

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 13:13:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:35:11 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ void	show_line(char c, int nb, t_inp *cp);
 t_env	*tab_in_env(char **tab);
 void	show_args(char **exec);
 int		erase_fg(char *fg, int i);
+void	free_list(t_env **env);
+int		flag_v(char **exec);
 
 /*
 ** CD TOOLS
 */
-
 int		resolve_relative_path(t_env **env, char *bin_path);
 size_t	path_trim(char *path, size_t size);
 size_t	path_subcpy(const char *source, char *dest, size_t start, size_t len);

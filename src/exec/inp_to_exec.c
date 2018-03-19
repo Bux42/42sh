@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 05:49:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 13:08:02 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:40:00 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void		exec_command(t_inp **inp, t_sh *sh)
 			sh->retval = builtin_ptr(exec, sh);
 		else
 		{
-			if (!(path = existing_command(exec[0], &sh->env)))
+			if (!(path = existing_command(exec[0], &sh->env, sh)))
 			{
 				ft_putstr("zsh: no such file or directory: ");
 				ft_putstr(exec[0]);
