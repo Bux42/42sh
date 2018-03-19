@@ -6,12 +6,24 @@
 /*   By: ibouchla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:13:02 by ibouchla          #+#    #+#             */
-/*   Updated: 2018/03/19 14:34:32 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:04:22 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
-#include <math.h>
+
+unsigned int 	ft_pow(int x, unsigned int y)
+{
+	int temp;
+
+	if (y == 0)
+		return (1);
+	temp = ft_pow(x, y / 2);
+	if (y % 2 == 0)
+		return (temp * temp);
+	else
+		return (x * temp * temp);
+}
 
 unsigned int	hash_algo(char *key, int nb)
 {
@@ -23,7 +35,7 @@ unsigned int	hash_algo(char *key, int nb)
 	if (!(key) || nb <= 0)
 		return (0);
 	while (key[++i])
-		hash += key[i] * (unsigned int)pow(5.0, i);
+		hash += key[i] * (unsigned int)ft_pow(5, i);
 	return (hash %= nb);
 }
 
