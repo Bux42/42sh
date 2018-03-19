@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/16 00:27:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/19 11:29:00 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 				convert_bquote(&cp, sh);
 			else if (cp && cp->c == '$')
 				try_insert_variable(&cp, sh);
+			else if (cp && cp->c == '~')
+				try_insert_home(&cp, sh);
 			if (!cp)
 				break ;
 			(*inp) = cp;

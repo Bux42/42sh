@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/13 22:33:13 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/19 11:30:31 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ parsing/parse_line.c\
 parsing/lexer_parser.c\
 parsing/redirections.c\
 parsing/variable.c\
+parsing/insert_home.c\
 parsing/context_updater.c\
 exec/execute_tokens.c\
 exec/inp_to_exec.c\

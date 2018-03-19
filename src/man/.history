@@ -509,3 +509,12 @@ exit
 cd
 cd ..
 ls
+echo $USER
+$USER
+\$USER
+unsetenv HOME
+$HOME
+echo ~
+~
+~
+\~
