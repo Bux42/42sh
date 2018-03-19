@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 16:24:08 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:13:06 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		builtin_export(char **exec, t_sh *sh);
 int		builtin_myman(char **exec, t_sh *sh);
 int		builtin_cd(char **exec, t_sh *sh);
 int		builtin_history(char **exec, t_sh *sh);
+int		builtin_color(char **exec, t_sh *sh);
 
 /*
 ** BUILTIN TOOLS

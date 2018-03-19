@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 13:12:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:03:41 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ int				err_msg(char *message, char *name, int ret)
 	ft_putstr_fd(name, 2);
 	custom_return();
 	return (ret);
+}
+
+void			*get_other_function(char *command)
+{
+	if (ft_strcmp(command, "local") == 0)
+		return (&builtin_local);
+	if (ft_strcmp(command, "myman") == 0)
+		return (&builtin_myman);
+	if (ft_strcmp(command, "color") == 0)
+		return (&builtin_color);
+	return (NULL);
 }
 
 void			*get_builtin_function(char *command)
@@ -37,17 +48,13 @@ void			*get_builtin_function(char *command)
 		return (&builtin_exit);
 	if (ft_strcmp(command, "set") == 0)
 		return (&builtin_set);
-	if (ft_strcmp(command, "local") == 0)
-		return (&builtin_local);
 	if (ft_strcmp(command, "unset") == 0)
 		return (&builtin_unset);
 	if (ft_strcmp(command, "export") == 0)
 		return (&builtin_export);
-	if (ft_strcmp(command, "myman") == 0)
-		return (&builtin_myman);
 	if (ft_strcmp(command, "history") == 0)
 		return (&builtin_history);
-	return (NULL);
+	return (get_other_function(command));
 }
 
 int				fork_builtin(int (*ptr)(char**, char**),
