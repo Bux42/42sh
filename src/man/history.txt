@@ -1,0 +1,65 @@
+BUILTIN(1)			  42sh Manual			    BUILTIN(1)
+
+
+
+NAME
+       history
+
+
+SYNOPSIS
+       history [-n] [-C | [-]NUMBER [LG] | -A] -- print history
+
+
+DESCRIPTION
+       The history utility writes commands of the history on the standard out-
+       put.  It can also erase all commands of the history with the flag -C.
+
+
+OPTIONS
+       -C
+
+       All commands of the history are erased.
+
+       -n
+
+       The number of the commands is printed next to them.
+
+       [-]NUMBER
+
+       The first command that is printed on the standart output is the	NUMBER
+       command (the command 1 is the first entered in the history).  If '-' is
+       speficied, the command 1 will be the last in the  history.   If	LG  is
+       specified,  LG commands will be displayed on the standart output.  Oth-
+       erwise, 10 commands will be displayed.
+
+       -A
+
+       All commands are displayed on the standart output.
+
+
+SPECIFICITY
+       If the flag -n is specified with the -C one, the number of erased  com-
+       mands will be shown on the shell.
+
+
+EXIT STATUS
+       The history utility exists 0 on success and >0 if an errors occurs.
+
+
+EXAMPLE
+       To show the all commands of the history with their number:
+
+       $history -An
+
+       To show the penultimate command of the history with its number:
+
+       $history -n -2 1
+
+
+
+AUTHOR
+       Deborah Recourse and Virgile Desvaux
+
+
+
+Version 1.0			March 19, 2018			    BUILTIN(1)

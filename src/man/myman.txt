@@ -26,6 +26,8 @@ DESCRIPTION
        - unset
        - export
        - local
+	   - history
+	   - exclaim
 
 
 AUTHOR

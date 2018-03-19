@@ -37,9 +37,6 @@ OPTIONS
        The utility will search the last command containing "word".
 
 
-EXIT STATUS
-       This utility exits 0 on success and >0 if an error occurs.
-
 
 EXAMPLE
        To execute the last command beginning by "echo":
