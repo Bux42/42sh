@@ -6,13 +6,13 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:08:14 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 16:08:18 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 12:52:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-unsigned int 	ft_pow(int x, unsigned int y)
+unsigned int		ft_pow(int x, unsigned int y)
 {
 	int temp;
 
@@ -25,7 +25,7 @@ unsigned int 	ft_pow(int x, unsigned int y)
 		return (x * temp * temp);
 }
 
-unsigned int	hash_algo(char *key, int nb)
+unsigned int		hash_algo(char *key, int nb)
 {
 	int				i;
 	unsigned int	hash;
@@ -39,7 +39,7 @@ unsigned int	hash_algo(char *key, int nb)
 	return (hash %= nb);
 }
 
-char			*get_hash_path(t_hash ***hash_addr, char *bin, t_sh *sh)
+char				*get_hash_path(t_hash ***hash_addr, char *bin, t_sh *sh)
 {
 	unsigned int	id;
 	t_hash			*hash;
@@ -58,7 +58,7 @@ char			*get_hash_path(t_hash ***hash_addr, char *bin, t_sh *sh)
 	return (NULL);
 }
 
-void			hash_del(t_hash ***hash, t_sh *sh)
+void				hash_del(t_hash ***hash, t_sh *sh)
 {
 	unsigned int	i;
 	t_hash			*tmp;

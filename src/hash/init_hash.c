@@ -6,13 +6,13 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:17:29 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 14:56:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 12:53:18 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-static char		*storage_path(char *path, char *name)
+static char			*storage_path(char *path, char *name)
 {
 	size_t	end;
 	char	*path_file;
@@ -35,7 +35,7 @@ static char		*storage_path(char *path, char *name)
 	return (path_file);
 }
 
-static t_hash	*add_new_node(char *bin, char *path)
+static t_hash		*add_new_node(char *bin, char *path)
 {
 	t_hash	*new_node;
 
@@ -47,7 +47,7 @@ static t_hash	*add_new_node(char *bin, char *path)
 	return (new_node);
 }
 
-static void		get_dir_elem(t_hash **addr, DIR *directory, char *path)
+static void			get_dir_elem(t_hash **addr, DIR *directory, char *path)
 {
 	t_hash			*new_node;
 	struct dirent	*elem;
@@ -72,7 +72,7 @@ static void		get_dir_elem(t_hash **addr, DIR *directory, char *path)
 	}
 }
 
-void		ft_tabdel(char **t)
+void				ft_tabdel(char **t)
 {
 	int		i;
 
@@ -86,7 +86,7 @@ void		ft_tabdel(char **t)
 	}
 }
 
-void			init_bin_list(t_hash **addr, char *path)
+void				init_bin_list(t_hash **addr, char *path)
 {
 	char		**all_path;
 	int			i;

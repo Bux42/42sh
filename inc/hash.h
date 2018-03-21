@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:41:43 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 15:21:39 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 12:32:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,5 @@ unsigned int			hash_algo(char *key, int nb);
 char					*get_hash_path(t_hash ***hash_addr, char *bin, t_sh *sh);
 void					hash_del(t_hash ***hash, t_sh *sh);
 void					init_bin_list(t_hash **addr, char *path);
-/*void					set_redir_inside2_bis(t_set_redir *t, char *r);
-void					set_redir_inside_bis(t_set_redir *t, t_av **pcmd);
-t_exec					exec_ret_err(t_exec e, char *msg, char *cmd);
-*/
+
 #endif
