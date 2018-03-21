@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 07:46:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/21 14:01:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,10 @@ int						fork_command(char *path, char **exec, char **env);
 char					**env_list_to_char(t_env **env);
 
 void					execute_tokens_debo(t_listc **tok, t_sh *sh);
+
+/*						real_execution									*/
+
+void					execute_tokens(t_listc **tok, t_sh *sh);
 
 /*						builtins										*/
 

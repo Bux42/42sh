@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/19 14:23:20 by drecours         ###   ########.fr        #
+#    Updated: 2018/03/21 13:56:14 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ parsing/variable.c\
 parsing/insert_home.c\
 parsing/context_updater.c\
 exec/execute_tokens.c\
+exec/execute_tokens_old.c\
 exec/inp_to_exec.c\
 exec/check_valid_command.c\
 exec/fork_command.c\
