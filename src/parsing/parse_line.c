@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_backquotes.c                                 :+:      :+:    :+:   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 15:39:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:33:23 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,16 @@ void		parse(t_sh *sh)
 		sh->history_len = history_len(&sh->history);
 		splitted = NULL;
 		sh->context = 0;
-		/*split_line(&splitted, &clean, sh);
+		split_line(&splitted, &clean, sh);
 		if (convert_splitted(&splitted, sh) != NULL)
 		{
 			print_splitted(&splitted);
 			ft_putstr("Creating Token List");
 			tokenize_splitted(&splitted, sh, &tok);
+			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 			execute_tokens(&tok, sh);
-		}*/
+			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
+		}
 		custom_return();
 		sh->context = 0;
 	}

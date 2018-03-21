@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_tokens.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 15:09:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:35:41 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		execute_tokens(t_listc **tok, t_sh *sh)
 				exec_cli(cp->cont[0], cp, sh);
 			else if (cp->sep_type & PIPE)
 			{
-				//prepare_pipe(cp);
+				prepare_pipe(cp);
 				exec_cli(cp->cont[0], cp, sh);
 				while (cp->next && cp->sep_type & PIPE)
 					cp = cp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 15:10:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:11:11 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,13 @@ void					execute_tokens_debo(t_listc **tok, t_sh *sh);
 
 void					execute_tokens(t_listc **tok, t_sh *sh);
 void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
+void                    prepare_pipe(t_listc *cmd);
+void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
+int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
+void				    signal_handler(int inp);
+void				    signal_newline(int inp);
+void                    errExit(char *str);
+char		            *command_path(t_env **env, char *command, t_sh *sh);
 
 /*						builtins										*/
 

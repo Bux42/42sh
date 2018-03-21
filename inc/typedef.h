@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 14:41:35 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:02:52 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define TYPEDEF_H
 
 # include "../libft/includes/libft.h"
+
+// Structure qui gère les pipes
+typedef struct 				s_pipe
+{
+	int 					cote[2];    // Cotés du tube 0 = WRITE 1 = READ
+}							t_pipe;
 
 typedef struct			s_redir
 {
@@ -29,6 +35,7 @@ typedef struct			s_list_c
 	void				*func;
 	int					nb_arg;
 	t_redir				*redirs;
+	int					status;
 	struct s_list_c		*prev;
 	struct s_list_c		*next;
 }						t_listc;

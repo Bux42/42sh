@@ -535,3 +535,32 @@ ls
 ls | wc
 cat < Makefile > file | wc
 cat < Makefile >> file | wc
+ls
+ls < auteur
+ls
+cat auteur
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+ls
+exit
+ls
+ls | cat -e
+ls src 
+ls src | grep k_ | rev | cut -c3- | rev | cat -e
+ls | grep M | rev | cut -c3- | rev | cat -e
+ls
+cd src
+ls
+ls src
+ls src/exec
+ls src/exec | grep ex | rev | cut -c3- | rev | cat -e
+cat | ls src/exec | grep ex | rev | cut -c3- | rev | cat -e
+ls > file >> lol | cat -e lol
+cat lol
+ls
+exit

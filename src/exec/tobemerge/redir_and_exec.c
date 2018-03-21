@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_cli.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/21 14:39:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 16:34:15 by jamerlin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../inc/header.h"
 
 /*void		exec_cli(char *cli, t_listc *tok, t_sh *sh)
@@ -256,7 +244,6 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	father = getpid();
 	/*if ((bin = filter_cli(full_detail->cont, fullpath, cli, &i_env->env)) < 0)
 		return ;*/
-	printf("lol\n");
     if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
     if (!(fullpath = command_path(&i_env->env, cli, i_env)))
