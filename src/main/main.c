@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 15:00:28 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 13:43:59 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int			main(int ac, char **av, char **env)
 	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
 		return (0);
 	get_env(env, sh);
-	sh->hash = hash_table(get_specific_env("PATH=", &sh->env), sh);
 	sh->history = NULL;
 	restaure_history_from_file(sh);
 	if (!init_term() || !get_tty(sh, av[1]))
@@ -111,6 +110,7 @@ int			main(int ac, char **av, char **env)
 		ft_putstr(tgetstr("le", NULL));
 	}
 	init_variables(sh);
+	sh->hash = hash_table(get_specific_env("PATH=", &sh->env), sh);
 	signal_init();
 	while (ac > -1)
 		if (read(1, sh->buff, 4))
