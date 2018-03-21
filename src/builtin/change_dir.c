@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/14 13:02:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 13:29:58 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,26 @@ int			change_pwd(int flag, t_env **env, char *path, int err)
 	return (ret);
 }
 
-int			check_link(char *path, int flag, struct stat st, t_env **env)
+int			check_link(char *path, int flag, t_env **env)
 {
 	char	buff[2048];
 	char	*tmp;
 	char	getpwd[2048];
 
-	if (S_ISLNK(st.st_mode))
+	if (path[0] == '/')
+		path_subcpy(path, buff, 0, ft_strlen(path));
+	else
 	{
-		if (path[0] == '/')
-			path_subcpy(path, buff, 0, ft_strlen(path));
-		else
-		{
-			getcwd(getpwd, 2048);
-			tmp = path_join(getpwd, path);
-			path_subcpy(tmp, buff, 0, ft_strlen(tmp));
-			free(tmp);
-		}
-		path_eval(buff);
-		resolve_relative_path(env, buff);
-		if (fix_root(buff) == 0 && dir_exists(buff) != 0)
-			return (change_pwd(flag, env, path, 1));
+		getcwd(getpwd, 2048);
+		tmp = path_join(getpwd, path);
+		path_subcpy(tmp, buff, 0, ft_strlen(tmp));
+		free(tmp);
 	}
-	return (change_pwd(flag, env, path, 2));
+	path_eval(buff);
+	resolve_relative_path(env, buff);
+	if (fix_root(buff) == 0 && dir_exists(buff) != 0)
+		return (change_pwd(flag, env, buff, 1));
+	return (change_pwd(flag, env, buff, 2));
 }
 
 int			custom_chdir(char *path, int flag, t_env **env)
@@ -82,7 +79,7 @@ int			custom_chdir(char *path, int flag, t_env **env)
 			rights += (st.st_mode & S_IXUSR) ? 1 : 0;
 			if (!rights)
 				return (err_msg("cd: permission denied: ", path, -1));
-			else if (check_link(path, flag, st, env) == -1)
+			else if (check_link(path, flag, env) == -1)
 				return (err_msg("cd: permission denied :", path, -1));
 		}
 	}
