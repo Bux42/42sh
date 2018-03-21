@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 15:26:31 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 07:46:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void					custom_return(void);
 
 /*						line_conversion									*/
 
+int						ending_char(char c);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
 void					try_insert_home(t_inp **inp, t_sh *sh);
 t_inp					*relink_inp(t_inp *before, t_inp *after, t_inp *new);

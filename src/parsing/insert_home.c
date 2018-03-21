@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 11:21:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 11:31:31 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 07:46:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	try_insert_home(t_inp **inp, t_sh *sh)
 	t_inp	*after;
 	t_inp	*new;
 
-	if ((variable = get_specific_env("HOME=", &sh->env)))
+	if (!(*inp)->previous || ending_char((*inp)->previous->c))
 	{
-		before = (*inp)->previous;
-		after = (*inp)->next;
-		new = replace_inp(inp, variable);
-		*inp = relink_inp(before, after, new);
-		free(variable);
+		if ((variable = get_specific_env("HOME=", &sh->env)))
+		{
+			before = (*inp)->previous;
+			after = (*inp)->next;
+			new = replace_inp(inp, variable);
+			*inp = relink_inp(before, after, new);
+			free(variable);
+		}
 	}
 }

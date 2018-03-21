@@ -524,3 +524,8 @@ env
 env
 setenv
 setenv xqeqw=xqwxwq; top
+cat Makefile
+cat ~/21sh/Makefile
+cat ~/21sh/Makefile
+cat ../~/21sh/Makefile
+cat ../~/21sh/Makefile
