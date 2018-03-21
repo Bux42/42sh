@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/21 13:56:14 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/21 14:38:05 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ parsing/redirections.c\
 parsing/variable.c\
 parsing/insert_home.c\
 parsing/context_updater.c\
+exec/exec_cli.c\
 exec/execute_tokens.c\
 exec/execute_tokens_old.c\
 exec/inp_to_exec.c\

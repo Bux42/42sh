@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 14:01:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:10:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void					execute_tokens_debo(t_listc **tok, t_sh *sh);
 /*						real_execution									*/
 
 void					execute_tokens(t_listc **tok, t_sh *sh);
+void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
 
 /*						builtins										*/
 

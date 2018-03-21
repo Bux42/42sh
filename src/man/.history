@@ -530,3 +530,8 @@ cat ~/21sh/Makefile
 cat ../~/21sh/Makefile
 cat ../~/21sh/Makefile
 fqe
+ls
+ls
+ls | wc
+cat < Makefile > file | wc
+cat < Makefile >> file | wc

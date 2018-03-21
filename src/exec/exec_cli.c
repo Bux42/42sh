@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_tokens.c                                   :+:      :+:    :+:   */
+/*   exec_cli.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 15:09:06 by videsvau         ###   ########.fr       */
+/*   Created: 2018/03/21 14:39:54 by videsvau          #+#    #+#             */
+/*   Updated: 2018/03/21 14:42:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-void		execute_tokens(t_listc **tok, t_sh *sh)
+void		exec_cli(char *cli, t_listc *tok, t_sh *sh)
 {
-	t_listc	*cp;
-
-	if ((cp = (*tok)))
-	{
-		while (cp)
-		{
-			if (cp->sep_type & SEMICOLON || !cp->sep_type)
-				exec_cli(cp->cont[0], cp, sh);
-			else if (cp->sep_type & PIPE)
-			{
-				//prepare_pipe(cp);
-				exec_cli(cp->cont[0], cp, sh);
-				while (cp->next && cp->sep_type & PIPE)
-					cp = cp->next;
-			}
-			cp = cp->next;
-		}
-	}
+	if (cli && tok && sh)
+		;
 }
