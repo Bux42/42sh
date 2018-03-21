@@ -564,3 +564,213 @@ ls > file >> lol | cat -e lol
 cat lol
 ls
 exit
+ls > file >> lol | cat -e
+cat lol
+rm lol file
+ls
+ls
+exit
+ls
+ls
+cat < auteur > file | grep v | cat -e file
+cat file
+ls
+rm file
+ls
+cat < Ma > file | grep v | cat -e file
+cat < Makefile > file | grep v | cat -e file
+ls
+touch lol
+exit
+cat < lol > file | grep v | cat -e file
+rm file
+ls
+cat < lol > file | grep 21 | cat -e
+cat file
+cat < lol > file | grep v | cat -e file
+exit
+cd
+cd ..
+ls
+exit
+ls
+cd ..
+ls
+cd 42sh
+ls
+exit
+ls
+unsetenv PATH ; ls
+env
+echo 
+echo lol
+exit
+ls
+exit
+ls
+echo "lol" > file
+cat file
+echo "mdr" > file
+cat file
+exit
+echo "dfsd" > file
+cat file
+exit
+ls 
+echo "lol" > file
+catr file
+cat file
+rm file
+ls
+exit
+exit
+eixt
+ls
+exit
+base64 /dev/urand
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+ls
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+exit
+ls | sort | cat -e
+ls -l && ls
+ls -l || ls
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+exit
+ls -l || ls
+ls || ls
+ls -l || ls
+ls -a || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+./21sh
+exit
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls -la || ls
+ls || ls
+ls || ls
+ls || ls
+ls || ls
+ls || ls
+ls || ls
+ls || ls
+ls
+ls -la
+exit
+ls -la || ls
+ls || lks
+ls
+exit
+exit
+ls -la || ls
+exit
+ls || ls
+ls
+ls && ls
+exit
+ls || ls
+ls
+ls && ls
+ls
+ls
+ls || ls
+exit
+ls
+ls || ls
+ls
+ls && ls
+ls
+exit
+ls || ls
+exit
+ls || ls
+ls && ls
+exit
+ls || ls
+exit
+ls || ls
+exit
+ls || ls
+ls && ls
+exit
+ls || ls
+ls && ls
+cat | ls && ls
+exit
+colord
+color
+ls
+exit
+color blue
+ls
+color on
+ls
+color [on]
+ls
+color on
+color "on"
+ls
+exit

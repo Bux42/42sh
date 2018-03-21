@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:39:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 16:34:15 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:49:15 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirectio
             right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
         else if (cmd->redirs && cmd->redirs->redir[1] == 3)
                double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
-        dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
+       //dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
         
         if (cmd->redirs->redir[1] != 0)
             dup2(tabTube[i].cote[0], STDOUT_FILENO);
@@ -100,7 +100,7 @@ void    prepare_pipe(t_listc *cmd)
     {
         cpy->nb_arg = nb_cmd;
         i++;
-        cpy->prev = cpy;
+        //cpy->prev = cpy;
 		cpy = cpy->next;
     }
 }
@@ -252,11 +252,12 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	pid_t			father;
 	static int		status;
 	t_pipe			*tabTube;
+	//int				(*func)(char **, t_sh*);
 
 	father = getpid();
 	/*if ((bin = filter_cli(full_detail->cont, fullpath, cli, &i_env->env)) < 0)
 		return ;*/
-	printf("lol\n");
+	//printf("\n");
     if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
     if (!(fullpath = command_path(&i_env->env, cli, i_env)))

@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 16:33:23 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:09:20 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void		parse(t_sh *sh)
 			ft_putstr("Creating Token List");
 			tokenize_splitted(&splitted, sh, &tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
+			ft_putchar('\n');
 			execute_tokens(&tok, sh);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}
