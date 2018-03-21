@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 15:41:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/21 13:50:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,7 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok)
 			{
 				add_listc_token(&cp, tok, cp->type);
 				ft_putstr(" <= SEP_TYPE");
+			//	execute_tokens_debo(tok, sh);
 			}
 			cp = cp->next;
 		}
