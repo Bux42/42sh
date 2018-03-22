@@ -87,32 +87,32 @@ int			find_hist_file(char *man_path)
 
 int			main(int ac, char **av, char **env)
 {
-	if (!(sh = (t_sh*)malloc(sizeof(t_sh))))
+	if (!(g_sh = (t_sh*)malloc(sizeof(t_sh))))
 		return (0);
-	if (!(sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
+	if (!(g_sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
-	sh->man_path = find_man_path(av[0]);
-	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
+	g_sh->man_path = find_man_path(av[0]);
+	if ((g_sh->fd = find_hist_file(g_sh->man_path)) == -1)
 		return (0);
-	get_env(env, sh);
-	sh->history = NULL;
-	restore_history_from_file(sh);
-	if (!init_term() || !get_tty(sh, av[1]))
+	get_env(env, g_sh);
+	g_sh->history = NULL;
+	restore_history_from_file(g_sh);
+	if (!init_term() || !get_tty(g_sh, av[1]))
 		return (0);
-	sh->retval = 0;
-	print_prompt(sh);
-	sh->width = tgetnum("co");
-	if (sh->posy - 1 == sh->width)
+	g_sh->retval = 0;
+	print_prompt(g_sh);
+	g_sh->width = tgetnum("co");
+	if (g_sh->posy - 1 == g_sh->width)
 	{
-		sh->posy = 1;
+		g_sh->posy = 1;
 		ft_putchar(' ');
 		ft_putstr(tgetstr("le", NULL));
 	}
-	init_variables(sh);
-	sh->hash = hash_table(get_specific_env("PATH=", &sh->env), sh);
+	init_variables(g_sh);
+	g_sh->hash = hash_table(get_specific_env("PATH=", &g_sh->env), g_sh);
 	signal_init();
 	while (ac > -1)
-		if (read(1, sh->buff, 4))
-			check_pasted(sh);
+		if (read(1, g_sh->buff, 4))
+			check_pasted(g_sh);
 	return (0);
 }

@@ -58,7 +58,7 @@ void					print_converted(t_inp **inp, int type);
 
 struct termios			g_old_term;
 struct termios			g_new_term;
-struct s_sh				*sh;
+struct s_sh				*g_sh;
 
 int						init_term(void);
 void					init_variables(t_sh *sh);

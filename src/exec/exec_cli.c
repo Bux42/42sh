@@ -230,19 +230,6 @@ int		init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env)
 
 /******************************--MAIN_EXEC--**************************/
 
-void				signal_newline(int inp)
-{
-	(void)inp;
-	write(1, "\n", 1);
-}
-
-void				signal_handler(int inp)
-{
-	(void)inp;
-	write(1, "\n", 1);
-	//write_prompt(g_backup_env);
-}
-
 void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 {
 	//char			fullpath[MAXPATHLEN * 2 + 1];

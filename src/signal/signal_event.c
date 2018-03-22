@@ -12,9 +12,22 @@
 
 #include "../../inc/header.h"
 
+void		signal_newline(int inp)
+{
+	(void)inp;
+	write(1, "\n", 1);
+}
+
+void		signal_print_prompt(int inp)
+{
+	(void)inp;
+	write(1, "\n", 1);
+	print_prompt(g_sh);
+}
+
 void		signal_init(void)
 {
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, &signal_print_prompt);
 	signal(SIGHUP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGILL, SIG_IGN);
