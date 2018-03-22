@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 10:39:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:27:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void					print_converted(t_inp **inp, int type);
 
 struct termios			g_old_term;
 struct termios			g_new_term;
+struct s_sh				*sh;
 
 int						init_term(void);
 void					init_variables(t_sh *sh);
