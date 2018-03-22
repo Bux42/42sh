@@ -21,7 +21,7 @@ void		signal_newline(int inp)
 void		signal_print_prompt(int inp)
 {
 	(void)inp;
-	write(1, "\n", 1);
+	custom_return();
 	print_prompt(g_sh);
 }
 
