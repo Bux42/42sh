@@ -26,3 +26,18 @@ void		signal_init(void)
 	signal(SIGSTOP, SIG_IGN);
 	signal(SIGCONT, SIG_IGN);
 }
+
+void		signal_exec(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGHUP, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGILL, SIG_DFL);
+	signal(SIGTRAP, SIG_DFL);
+	signal(SIGABRT, SIG_DFL);
+	signal(SIGKILL, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGSTOP, SIG_DFL);
+	signal(SIGCONT, SIG_DFL);
+}
