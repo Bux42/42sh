@@ -275,6 +275,7 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	}
 	(fullpath[0]) ? signal(SIGINT, &signal_newline) : 0;
 	waitpid(father, &status, WUNTRACED);
+	signal_init();
 	for(int i = 0; i < full_detail->nb_arg; i++)
 	{
 		if (tabTube[i].cote[0] > 2)

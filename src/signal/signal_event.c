@@ -15,7 +15,7 @@
 void		signal_newline(int inp)
 {
 	(void)inp;
-	write(1, "\n", 1);
+	custom_return();
 }
 
 void		free_closing(t_sh *sh, t_close **close)
