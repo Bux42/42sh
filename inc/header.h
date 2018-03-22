@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 16:11:11 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/22 08:31:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void					free_list_before(t_inp **cp);
 
 void					paste_after(t_sh *sh, t_inp **inp);
 
+int						inp_to_inp_cmp(t_inp **inp1, t_inp **inp2);
 void					history_push_front(t_his **history, t_inp *inp, t_sh *sh);
 t_his					*history_new(t_inp *inp, t_sh *sh);
 t_inp					*inp_insert_chain_his(t_inp **src, t_sh *sh, int nb);

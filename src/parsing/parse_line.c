@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 17:09:20 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/22 08:39:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void		parse(t_sh *sh)
 			execute_tokens(&tok, sh);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}
-		custom_return();
 		sh->context = 0;
 	}
 	free_list_from_beginning(&clean);
