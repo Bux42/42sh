@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 11:05:43 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:07:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int			main(int ac, char **av, char **env)
 	restore_history_from_file(sh);
 	if (!init_term() || !get_tty(sh, av[1]))
 		return (0);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
+	return (0);
 	sh->retval = 0;
 	print_prompt(sh);
 	sh->width = tgetnum("co");
