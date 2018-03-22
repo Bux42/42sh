@@ -80,7 +80,7 @@ void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirectio
 void    prepare_pipe(t_listc *cmd)
 {
     t_listc *cpy;
-    t_listc *last;
+//    t_listc *last;
     int nb_cmd;
     int i;
 
@@ -89,7 +89,7 @@ void    prepare_pipe(t_listc *cmd)
     i = 0;
     while (cpy->sep_type == PIPE) 
     {
-        last = cpy;
+  //      last = cpy;
         if (cpy->sep_type == PIPE)
             nb_cmd++;
         cpy = cpy->next;
@@ -258,10 +258,10 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	/*if ((bin = filter_cli(full_detail->cont, fullpath, cli, &i_env->env)) < 0)
 		return ;*/
 	//printf("\n");
-    if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
+	if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
-    if (!(fullpath = command_path(&i_env->env, cli, i_env)))
-        return ;
+	if (!(fullpath = command_path(&i_env->env, cli, i_env)))
+		return ;
 	if (/*!bin && */fullpath[0] && full_detail->sep_type == PIPE)
 		status = init_pipe(full_detail, tabTube, i_env);
 	else if (/*!bin && */fullpath[0] && (father = fork()) == 0)

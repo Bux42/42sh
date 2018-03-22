@@ -12,22 +12,17 @@
 
 #include "../../inc/header.h"
 
-void		signal_event(int signo)
-{
-	(void)signo;
-}
-
 void		signal_init(void)
 {
-	signal(SIGINT, signal_event);
-	signal(SIGHUP, signal_event);
-	signal(SIGQUIT, signal_event);
-	signal(SIGILL, signal_event);
-	signal(SIGTRAP, signal_event);
-	signal(SIGABRT, signal_event);
-	signal(SIGKILL, signal_event);
-	signal(SIGTERM, signal_event);
-	signal(SIGTSTP, signal_event);
-	signal(SIGSTOP, signal_event);
-	signal(SIGCONT, signal_event);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGHUP, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGILL, SIG_IGN);
+	signal(SIGTRAP, SIG_IGN);
+	signal(SIGABRT, SIG_IGN);
+	signal(SIGKILL, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGSTOP, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
 }
