@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:37:40 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/16 18:45:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/22 13:55:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,50 @@ void		signal_newline(int inp)
 	write(1, "\n", 1);
 }
 
+void		free_closing(t_sh *sh, t_close **close)
+{
+	t_close	*cp;
+	t_close *tmp;
+
+	if ((cp = (*close)))
+	{
+		while (g_sh->inpl && g_sh->inpl->previous)
+		{
+			free_list_from_beginning(&g_sh->inpl->inp);
+			g_sh->inpl = g_sh->inpl->previous;
+			free(g_sh->inpl->next);
+			g_sh->inpl->next = NULL;
+		}
+		free_list_from_beginning(&g_sh->inpl->inp);
+		while (cp)
+		{
+			tmp = cp;
+			cp = cp->next;
+			free(tmp);
+		}
+		sh->close = NULL;
+	}
+}
+
 void		signal_print_prompt(int inp)
 {
 	(void)inp;
 	custom_return();
+	g_sh->retval = 1;
 	print_prompt(g_sh);
+	free_comp(11, g_sh);
+	g_sh->context = 0;
+	if (g_sh->search)
+	{
+		free_list_from_beginning(&g_sh->inpl->inp);
+		g_sh->search = 0;
+		ft_putstr(tgetstr("ve", NULL));
+	}
+	else if (!g_sh->close)
+		free_list_from_beginning(&g_sh->inpl->inp);
+	else
+		free_closing(g_sh, &g_sh->close);
+	tty_debug(g_sh, &g_sh->inpl->inp);
 }
 
 void		signal_init(void)

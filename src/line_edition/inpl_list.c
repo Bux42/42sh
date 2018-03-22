@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:21:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:51:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 13:23:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		free_inpl(t_inpl **inpl)
 			cp = cp->next;
 			free_list_from_beginning(&tmp->inp);
 			free(tmp);
-			tmp = NULL;
 		}
 	}
 }

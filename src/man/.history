@@ -15,3 +15,6 @@ qefqef
 ls
 ls -la
 ls
+qefqef
+ls -la && ls > file
+ls
