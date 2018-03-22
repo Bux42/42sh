@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:49:39 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:56:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 09:51:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		free_tokens(t_listc **tok)
 				free_char_array(tmp->cont);
 			if (tmp->redirs)
 				free_redirs(&tmp->redirs);
+			free(tmp);
+			tmp = NULL;
 		}
 	}
 }
