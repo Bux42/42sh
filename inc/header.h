@@ -62,6 +62,7 @@ struct termios			g_new_term;
 int						init_term(void);
 void					init_variables(t_sh *sh);
 void					signal_init(void);
+void					signal_exec(void);
 void					signal_event(int signo);
 
 /*						environment										*/

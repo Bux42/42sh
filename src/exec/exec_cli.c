@@ -266,7 +266,7 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 		status = init_pipe(full_detail, tabTube, i_env);
 	else if (/*!bin && */fullpath[0] && (father = fork()) == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		signal_exec();
 		env = env_list_to_char(&i_env->env);
 		if (full_detail->sep_type == 0 || full_detail->sep_type == SEMICOLON)
 			redirect(full_detail, tabTube, 0);
