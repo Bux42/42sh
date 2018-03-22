@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/04 11:02:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 10:39:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			check_empty_line(t_inp **inp)
 	return (letters);
 }
 
-void		restaure_history_from_file(t_sh *sh)
+void		restore_history_from_file(t_sh *sh)
 {
 	char	*str;
 	int		i;

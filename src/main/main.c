@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 10:36:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 10:53:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ int			main(int ac, char **av, char **env)
 	sh->man_path = find_man_path(av[0]);
 	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
 		return (0);
-	return (0);
 	get_env(env, sh);
 	sh->history = NULL;
-	restaure_history_from_file(sh);
+	restore_history_from_file(sh);
 	if (!init_term() || !get_tty(sh, av[1]))
 		return (0);
+	return (0);
 	print_prompt(sh);
 	sh->width = tgetnum("co");
 	if (sh->posy - 1 == sh->width)

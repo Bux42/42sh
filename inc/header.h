@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:54:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 10:39:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void					search_history_inp(t_sh *sh, t_inp **inp);
 void					clear_line(t_sh *sh, t_inp **inp);
 
 char					*inp_to_char(t_inp **inp, t_sh *sh);
-void					restaure_history_from_file(t_sh *sh);
+void					restore_history_from_file(t_sh *sh);
 int						check_empty_line(t_inp **inp);
 
 /*						auto_completion									*/
