@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:31:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/01/29 14:02:35 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/22 10:35:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static char		**dir_create(const char *path)
 	size_t	len;
 
 	i = 0;
+	ft_bzero(new_path, 2048);
 	if (path[0] == '/')
 		new_path[i++] = ' ';
 	len = ft_strlen(path);

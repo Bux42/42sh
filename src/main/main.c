@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 13:43:59 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/22 10:36:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int			find_hist_file(char *man_path)
 	char	*cp;
 
 	fd = -1;
-	if (!(cp = (char*)malloc(sizeof(char) * (ft_strlen(man_path) + 8))))
+	if (!(cp = (char*)malloc(sizeof(char) * (ft_strlen(man_path) + 9))))
 		return (0);
-	ft_bzero(cp, ft_strlen(man_path) + 8);
+	ft_bzero(cp, ft_strlen(man_path) + 9);
 	ft_strcat(cp, man_path);
 	ft_strcat(cp, ".history");
 	fd = open(cp, O_CREAT | O_RDWR, 0777);
@@ -96,6 +96,7 @@ int			main(int ac, char **av, char **env)
 	sh->man_path = find_man_path(av[0]);
 	if ((sh->fd = find_hist_file(sh->man_path)) == -1)
 		return (0);
+	return (0);
 	get_env(env, sh);
 	sh->history = NULL;
 	restaure_history_from_file(sh);
