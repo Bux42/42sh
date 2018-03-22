@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:40:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:49:31 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void		print_converted(t_inp **inp, int type)
 			ft_putchar(cp->c);
 			cp = cp->next;
 		}
+		if (type & HERE)
+			ft_putstr(" <= HERE");
 		if (type & PIPE)
 			ft_putstr(" <= PIPE");
 		if (type & AND)

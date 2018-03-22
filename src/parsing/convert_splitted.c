@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:21:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:54:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 						cp->type = _FILE;
 					if (cp->previous && (cp->previous->type & TOFILE))
 						cp->type = _FILE;
+					if (cp->previous && (cp->previous->type & HERE))
+						cp->type = ARGUMENT;
 				}
 			}
 			else if (cp->type == 1)

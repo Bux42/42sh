@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:42:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:48:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,12 @@ int			check_left_arrow(t_inp **inp)
 
 	type = 0;
 	if ((cp = (*inp)))
+	{
 		if (!cp->next)
 			return (type | TOEXE);
+		else if (cp->next->c == '<' && !cp->next->next)
+			return (type | HERE);
+	}
 	return (-1);
 }
 

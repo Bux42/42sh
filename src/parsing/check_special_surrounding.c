@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:43:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:00:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ int			bad_surrounding_2(t_inpl *inpl)
 	return (1);
 }
 
+int			bad_surrounding_3(t_inpl *inpl)
+{
+	if (inpl->previous)
+		if (inpl->previous->type > 64 && inpl->previous->type < 1024)
+			return (0);
+	return (1);
+}
+
 int			check_special_surrounding(t_inpl **inpl)
 {
 	t_inpl	*cp;
@@ -61,6 +69,11 @@ int			check_special_surrounding(t_inpl **inpl)
 			if (cp->type & TOFILE || cp->type & ATOFILE || cp->type & TOEXE)
 				if (bad_surrounding_2(cp))
 					return (special_error_surrounding(&cp->inp));
+			if (cp->type & HERE)
+			{
+				if (bad_surrounding_3(cp))
+					return (special_error_surrounding(&cp->inp));
+			}
 			cp = cp->next;
 		}
 	}

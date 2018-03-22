@@ -46,3 +46,14 @@ ls >
 ls > file
 ls > file > file
 ls > file < file
+ls << file
+ls << file | wc > file && cd
+ls
+cat ../remind_me
+cd ..;cat<brewfix|wc -c > output && ls -z || ls && ls && ls -z && ls;cd 21sh
+ls
+cd ..
+ls
+cat output
+cd -
+ls
