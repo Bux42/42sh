@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:38:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:42:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		*special_error(t_inp **inp)
 			write(2, &cp->c, 1);
 			cp = cp->next;
 		}
+		custom_return();
 	}
 	return (NULL);
 }

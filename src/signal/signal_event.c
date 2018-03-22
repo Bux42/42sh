@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:37:40 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 13:55:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:01:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void		signal_print_prompt(int inp)
 		free_list_from_beginning(&g_sh->inpl->inp);
 	else
 		free_closing(g_sh, &g_sh->close);
-	tty_debug(g_sh, &g_sh->inpl->inp);
 }
 
 void		signal_init(void)

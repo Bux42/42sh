@@ -18,3 +18,31 @@ ls
 qefqef
 ls -la && ls > file
 ls
+qefqef
+ls
+ls -la | wc
+ls > >
+ls | |
+ls > >
+ls &&
+>
+>>>
+ls &&
+ls && ls
+ls > fie
+ls > fie > file
+ls > fie > cd
+ls
+ls > 
+ls > file
+ls
+ls > 
+ls > file > file
+ls > file
+ls > file > file
+ls >
+;;
+ls >
+ls > file
+ls > file > file
+ls > file < file

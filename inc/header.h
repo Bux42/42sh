@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 12:27:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:43:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,8 @@ void					quote_inp(t_inp **cp, t_sh *sh);
 void					bquote_inp(t_inp **cp, t_sh *sh);
 
 int						redirection(t_inp **inp);
+
+int						check_special_surrounding(t_inpl **inpl);
 
 void					print_variable(t_inp **cp, t_sh *sh);
 int						valid_variable_char(char c);
