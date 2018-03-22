@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:39:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 09:10:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,16 @@ void		parse(t_sh *sh)
 		splitted = NULL;
 		sh->context = 0;
 		split_line(&splitted, &clean, sh);
-		if (convert_splitted(&splitted, sh) != NULL)
+		if (splitted && convert_splitted(&splitted, sh) != NULL)
 		{
-			print_splitted(&splitted);
-			ft_putstr("Creating Token List");
+			//print_splitted(&splitted);
+			//ft_putstr("Creating Token List");
 			tokenize_splitted(&splitted, sh, &tok);
+			free_inpl(&splitted);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 			ft_putchar('\n');
-			execute_tokens(&tok, sh);
+			//execute_tokens(&tok, sh);
+			free_tokens(&tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}
 		sh->context = 0;

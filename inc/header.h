@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:31:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 08:54:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char					*get_specific_loc(char *env, t_loc **envlist);
 void					get_env(char **env, t_sh *sh);
 void					env_push_back(t_env **envlist, char *env);
 t_env					*new_env(char *env);
+void					free_char_array(char **array);
 
 /*						pwd_stuff										*/
 
@@ -104,6 +105,7 @@ void					restore_cursor_right(int nb, t_sh *sh);
 
 t_inpl					*new_inpl(t_inp **inp, int type);
 void					inpl_push_back(t_inpl **inpl, t_inp **inp, int type);
+void					free_inpl(t_inpl **inpl);
 
 void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);
@@ -241,6 +243,7 @@ char					*parse_variable_name(t_inp **inp);
 /*						tokenization									*/
 
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+void					free_tokens(t_listc **tok);
 
 /*						execution										*/
 

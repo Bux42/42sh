@@ -6,7 +6,7 @@
 #    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/22 08:39:42 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/22 08:50:40 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ line_edition/optimized_tools.c\
 line_edition/optimized_tools_2.c\
 line_edition/inpl_list.c\
 parsing/debug.c\
+parsing/token_list.c\
 parsing/tokenize_splitted.c\
 parsing/convert_quotes.c\
 parsing/check_special.c\
