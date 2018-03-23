@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 12:37:33 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:07:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ char		**inpl_to_here(t_inpl **inpl)
 			}
 			cp = cp->next;
 		}
+		while (cp && cp->previous)
+			cp = cp->previous;
+		free_inpl(&cp);
 		cont[len] = NULL;
 	}
 	return (cont);

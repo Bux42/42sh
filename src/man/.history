@@ -91,3 +91,8 @@ sort << oui && cat << non
 sort << oui
 sort << o
 ls << oui << non
+ls << oui 
+ls
+ls > file
+ls << file
+ls > file

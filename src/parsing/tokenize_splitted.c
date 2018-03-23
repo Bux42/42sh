@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 12:40:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:04:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char		*get_file_name(t_inp **inp)
 	return (ret);
 }
 
-t_redir		*new_redir(int *redir_type, char *file)
+t_redir		*new_redir(int *redir_type, char *file, char **here)
 {
 	t_redir	*redir;
 
@@ -177,6 +177,7 @@ t_redir		*new_redir(int *redir_type, char *file)
 	redir->redir[0] = redir_type[0];
 	redir->redir[1] = redir_type[1];
 	redir->redir[2] = redir_type[2];
+	redir->heredoc = here;
 	redir->next = NULL;
 	return (redir);
 }
@@ -208,13 +209,13 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		here = get_heredoc(&(*inpl)->next->inp);
 	}
 	if (!*redir)
-		*redir = new_redir(redir_type, file);
+		*redir = new_redir(redir_type, file, here);
 	else
 	{
 		last = *redir;
 		while (last->next)
 			last = last->next;
-		last->next = new_redir(redir_type, file);
+		last->next = new_redir(redir_type, file, here);
 	}
 	ft_putstr("[REDIR TYPE:");ft_putnbr(redir_type[1]);
 	ft_putstr(" FD1:");ft_putnbr(redir_type[0]);

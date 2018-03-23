@@ -6,16 +6,32 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:49:39 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 09:51:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:05:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
+void		free_heredoc(t_redir *tmp)
+{
+	int		i;
+
+	i = 0;
+	while (tmp->heredoc[i])
+	{
+		ft_putstr(tmp->heredoc[i]);
+		free(tmp->heredoc[i]);
+		i++;
+		custom_return();
+	}
+	free(tmp->heredoc);
+}
+
 void		free_redirs(t_redir **redir)
 {
 	t_redir	*cp;
 	t_redir	*tmp;
+	int		i;
 
 	if ((cp = (*redir)))
 	{
@@ -28,6 +44,9 @@ void		free_redirs(t_redir **redir)
 				free(tmp->file);
 				tmp->file = NULL;
 			}
+			if (tmp->redir[1] == HEREDOC)
+				free_heredoc(tmp);
+			i = -1;
 			free(tmp);
 			tmp = NULL;
 		}
