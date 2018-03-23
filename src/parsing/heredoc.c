@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 13:35:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 14:29:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ char		**inpl_to_here(t_inpl **inpl)
 			cp = cp->previous;
 		while (cp->next)
 		{
-			if (cp->inp)
-				len++;
+			len++;
 			cp = cp->next;
 		}
 		if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
@@ -80,11 +79,8 @@ char		**inpl_to_here(t_inpl **inpl)
 		len = 0;
 		while (cp->next)
 		{
-			if (cp->inp)
-			{
-				cont[len] = get_ending_here(&cp->inp);
-				len++;
-			}
+			cont[len] = get_ending_here(&cp->inp);
+			len++;
 			cp = cp->next;
 		}
 		while (cp && cp->previous)

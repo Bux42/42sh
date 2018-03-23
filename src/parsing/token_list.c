@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:49:39 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 13:05:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 14:34:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void		free_heredoc(t_redir *tmp)
 	i = 0;
 	while (tmp->heredoc[i])
 	{
-		ft_putstr(tmp->heredoc[i]);
 		free(tmp->heredoc[i]);
 		i++;
-		custom_return();
 	}
 	free(tmp->heredoc);
 }

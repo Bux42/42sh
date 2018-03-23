@@ -104,3 +104,12 @@ ls << file
 ls > file
 qfqef'qefqfe'
 ls << file
+ls << file ; salut << file2
+ls << 
+ls << EOF
+ls << ""
+ls << " "
+cat << bite
+ls
+ls | bite
+sort << file

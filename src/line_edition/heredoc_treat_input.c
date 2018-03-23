@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:10:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 12:37:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 14:34:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int			treat_input_here(t_sh *sh, t_inpl **inpl, char *ending)
 				return (0);
 			else
 			{
+				inp_insert_posat(&(*inpl)->inp, '\n');
 				inpl_add_new(inpl, 0);
 				print_heredoc(ending, sh);
 			}
