@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/22 08:56:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:04:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 # include "../libft/includes/libft.h"
 
 // Structure qui gère les pipes
-typedef struct 				s_pipe
+typedef struct			s_pipe
 {
-	int 					cote[2];    // Cotés du tube 0 = WRITE 1 = READ
-}							t_pipe;
+	int					cote[2];    // Cotés du tube 0 = WRITE 1 = READ
+}						t_pipe;
 
 typedef struct			s_redir
 {
 	int					redir[3];
 	char				*file;
+	char				**heredoc;
 	struct s_redir		*next;
 }						t_redir;
 

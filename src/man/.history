@@ -69,3 +69,25 @@ exit
 ls
 lexit
 exit
+ls
+ls << ss
+ls << qfe
+ls <<
+ls << file
+qfqefqef
+vim Makefile
+ls << file
+ffffff
+ls << ' '
+qeffqe
+qfqf
+qefef
+ls << e
+ls << abcd
+ls"fffqfqef"
+ls << a
+ls << oui
+sort << oui && cat << non
+sort << oui
+sort << o
+ls << oui << non

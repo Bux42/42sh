@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 08:43:29 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:39:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define IN				0
 # define OUT			1
 # define AOUT			3
+# define HEREDOC		4
 # define ERR_OUT		2
 # define READ_END		0
 # define WRITE_END		1
@@ -246,6 +247,9 @@ char					*parse_variable_name(t_inp **inp);
 
 /*						tokenization									*/
 
+void					print_heredoc(char *ending, t_sh *sh);
+int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
+char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 void					free_tokens(t_listc **tok);
 

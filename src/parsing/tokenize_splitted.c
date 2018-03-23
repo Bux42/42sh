@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 13:50:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:40:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,9 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 	char	*file;
 	int		redir_type[3];
 	t_redir	*last;
+	char	**here;
 
+	here = NULL;
 	file = NULL;
 	if (type & TOFILE || type & ATOFILE || type & TOEXE)
 	{
@@ -199,6 +201,11 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 			redir_type[1] = IN;
 		redir_type[0] = 1;
 		redir_type[2] = 0;
+	}
+	if (type & HERE)
+	{
+		redir_type[1] = HEREDOC;
+		here = get_heredoc(&(*inpl)->next->inp);
 	}
 	if (!*redir)
 		*redir = new_redir(redir_type, file);
@@ -222,6 +229,8 @@ int			is_redirection(int type)
 	if (type & ATOFILE)
 		return (1);
 	if (type & TOEXE)
+		return (1);
+	if (type & HERE)
 		return (1);
 	return (0);
 }

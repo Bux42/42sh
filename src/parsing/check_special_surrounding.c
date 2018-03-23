@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 15:00:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:43:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ int			bad_surrounding_2(t_inpl *inpl)
 
 int			bad_surrounding_3(t_inpl *inpl)
 {
+	if (inpl->previous && inpl->previous->previous)
+		if (inpl->previous->previous->type & HERE)
+			return (1);
 	if (inpl->previous)
 		if (inpl->previous->type > 64 && inpl->previous->type < 1024)
-			return (0);
+			if (inpl->next && inpl->next->type & ARGUMENT)
+				return (0);
 	return (1);
 }
 

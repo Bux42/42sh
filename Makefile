@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/23 08:45:09 by jamerlin         ###   ########.fr        #
+#    Updated: 2018/03/23 09:28:10 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -34,6 +34,7 @@ SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
 line_edition/treat_input.c\
+line_edition/heredoc_treat_input.c\
 line_edition/add_delete_letter.c\
 line_edition/check_shortcut.c\
 line_edition/paste_after.c\
@@ -62,6 +63,7 @@ line_edition/optimized_tools.c\
 line_edition/optimized_tools_2.c\
 line_edition/inpl_list.c\
 parsing/debug.c\
+parsing/heredoc.c\
 parsing/token_list.c\
 parsing/tokenize_splitted.c\
 parsing/convert_quotes.c\
