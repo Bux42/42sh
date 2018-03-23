@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 13:04:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:33:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,9 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 	}
 	if (type & HERE)
 	{
+		redir_type[0] = -1;
 		redir_type[1] = HEREDOC;
+		redir_type[2] = -1;
 		here = get_heredoc(&(*inpl)->next->inp);
 	}
 	if (!*redir)
