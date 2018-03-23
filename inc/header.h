@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:43:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 08:43:29 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,13 +265,22 @@ void					execute_tokens_debo(t_listc **tok, t_sh *sh);
 
 /*						real_execution									*/
 
-void					execute_tokens(t_listc **tok, t_sh *sh);
-void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
-void                    prepare_pipe(t_listc *cmd);
-void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
-int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
+//Main
 void				    signal_handler(int inp);
 void				    signal_newline(int inp);
+void					execute_tokens(t_listc **tok, t_sh *sh);
+void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
+//Pipeline
+void                    prepare_pipe(t_listc *cmd);
+void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
+void                    fermeture(int fils, int nb_tube, t_pipe *tabTube);
+void                    pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env);
+void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env);
+int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
+int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
+//Redirections
+void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
+//Tools
 void                    errExit(char *str);
 char		            *command_path(t_env **env, char *command, t_sh *sh);
 
