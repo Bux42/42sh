@@ -23,13 +23,17 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 		return ;
     if (!(fullpath = command_path(&i_env->env, cli, i_env)))
         return ;
+	printf("%d\n",full_detail->sep_type);
+	if (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC)
+		heredock_redirect(full_detail, tabTube, 0);
 	if (/*!bin && */fullpath[0] && full_detail->sep_type == PIPE)
 		status = init_pipe(full_detail, tabTube, i_env);
 	else if (/*!bin && */fullpath[0] && (father = fork()) == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		env = env_list_to_char(&i_env->env);
-		if (full_detail->sep_type == 0 || full_detail->sep_type == SEMICOLON)
+		if (full_detail->sep_type == 0 || full_detail->sep_type == SEMICOLON 
+			|| (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC))
 			redirect(full_detail, tabTube, 0);
 		if (full_detail->prev && (full_detail->prev->sep_type == AND || full_detail->prev->sep_type == OR))
 		{
@@ -43,8 +47,6 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 		else
 			execve(fullpath, full_detail->cont, env);
 		access(fullpath, X_OK) ? dprintf(2,"Permission denied.\n") : dprintf(2, "error\n");
-		//pcat("minishell: ", fullpath, ": Permission denied.", 1) :
-		//pcat("minishell: ", fullpath, NEOB, 1);
 		exit(-1);
 	}
 	(fullpath[0]) ? signal(SIGINT, &signal_newline) : 0;

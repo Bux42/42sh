@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 12:39:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/24 15:52:37 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,7 @@ void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int
 int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
 int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
 //Redirections
+void                    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i);
 void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
 //Tools
 void                    errExit(char *str);

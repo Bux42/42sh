@@ -113,3 +113,90 @@ cat << bite
 ls
 ls | bite
 sort << file
+ls
+exit
+ls
+ls > file
+cat file
+rm file
+ls
+sort << lol
+ls
+exit
+sort << FIN
+exit
+sort << FIN
+exit
+ls
+sort << FIN
+exit
+sort << i
+exit
+sort << FIN
+exit
+sort << FIN
+exit
+sort << FIN
+exit
+ls
+sort << M
+make
+exit
+sort << lol
+exit
+sort << fin
+exit
+sort << fin
+exit
+sort << f
+exit
+sort << l
+exit
+sort << f
+exit
+sort << f
+exit
+ls > file
+cat file
+rm file
+exit
+ls > file
+cat file
+rm file
+sort << f
+exit
+sort << fin
+exit
+sort << fin
+exit
+ls | ls
+ls | cat -e
+cat -e | ls
+cat | ls
+sort << lol
+exit
+sort << fin
+exit
+sort << mdr
+exit
+sort << fin
+exit
+sort << fin
+make
+exit
+sort << fin
+cat | sort << fin
+cat | sort
+cat | sort << fin
+exit
+sort << fin
+exit
+sort << fin
+make
+./21sh
+exit
+sort << FIN
+exit
+sort << fin
+exit
+sort << fin

@@ -9,20 +9,39 @@ void    left_redirect(t_listc *cmd, t_pipe *tabTube, int i) //redirection d'un f
         errExit(cmd->redirs->file);
     }
     tabTube[i].cote[0] = (cmd->redirs->file) ? ret : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = /*(i == 0) ?*/ cmd->redirs->redir[0] /*: tabTube[i].cote[1]*/;
+    tabTube[i].cote[1] = cmd->redirs->redir[0];
 }
 
 void right_redirect(t_listc *cmd, t_pipe *tabTube, int i) //redirection d'une sortie vers un fichier
 {
     tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR| O_TRUNC | O_CREAT, S_IRWXU) 
     : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = /*(i == 0) ?*/ cmd->redirs->redir[0] /*: tabTube[i].cote[1]*/;
+    tabTube[i].cote[1] = cmd->redirs->redir[0];
+}
+
+void    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i)
+{
+    /*int tg;
+    
+    tg = -1;
+    tabTube[i].cote[0] = 0;
+    tabTube[i].cote[1] = 1*//*cmd->redirs->redir[0]*//*;
+    dup2(tabTube[i].cote[0], STDIN_FILENO);
+    while (cmd->redirs->heredoc[++tg])
+        ft_putstr(cmd->redir->heredoc[tg]);
+    ft_putchar(4);*/
+    if (pipe(tabTube[i].cote) == -1)
+        errExit("pipe");
+    dprintf(2, "tabTube.cote[0] == [%d] -- tabTube.cote[1] == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1]);
+    for (int j = 0; cmd->redirs->heredoc[j]; j++)
+        write(tabTube[i].cote[1], cmd->redirs->heredoc[j],ft_strlen(cmd->redirs->heredoc[j]));
+    close(tabTube[i].cote[1]);
 }
 
 void    double_right_redirect(t_listc *cmd, t_pipe *tabTube, int i)// redirection d'une sortie vers la fin d'un fichier
 {
     tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR | O_APPEND | O_CREAT, S_IRWXU ) : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = /*(i == 0) ? */cmd->redirs->redir[0] /*: tabTube[i].cote[1]*/;
+    tabTube[i].cote[1] = cmd->redirs->redir[0] ;
 }
 
 void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirections
@@ -36,13 +55,13 @@ void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirectio
         else if (cmd->redirs && cmd->redirs->redir[1] == 1)
             right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
         else if (cmd->redirs && cmd->redirs->redir[1] == 3)
-               double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
+            double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
        //dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
-        
-        if (cmd->redirs->redir[1] != 0)
+        if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4)
             dup2(tabTube[i].cote[0], STDOUT_FILENO);
         else 
             dup2(tabTube[i].cote[0], STDIN_FILENO);
+        dprintf(2, "FD1[%d] -- FD2[%d]\n", tabTube[i].cote[0], tabTube[i].cote[1]);
         close(tabTube[i].cote[0]);
         cmd->redirs = cmd->redirs->next;
         j++;
