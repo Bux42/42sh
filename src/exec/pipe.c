@@ -1,13 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/25 17:54:57 by jamerlin          #+#    #+#             */
+/*   Updated: 2018/03/25 17:55:00 by jamerlin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/header.h"
 
 void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 {
-	//char fullpath[MAXPATHLEN * 2 + 1];
-    char *fullpath;
+    char	*fullpath;
 
-	//if (filter_cli(cmd->cont, fullpath, cmd->cont[0], g_backup_env) < 0)
-	 if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+	if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
     	return ;
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
@@ -30,6 +39,8 @@ void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env)
 		//fprintf(stderr, "dup | i = [%d] -val=%d vers 1\n", i, tabTube[i].cote[1]);
 		dup2(tabTube[i].cote[1], STDOUT_FILENO);
 	}
+	if (cmd->redirs && cmd->redirs->redir[1] == 4)
+		heredock_redirect(cmd, tabTube, i);
 	redirect(cmd, tabTube, i);
 	ft_cmd_pipe(cmd, i_env);
 }
@@ -37,7 +48,6 @@ void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env)
 void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env)
 {
 	pid_t son;
-
 	son = -1;
 	son = fork();
 	if (son == -1)

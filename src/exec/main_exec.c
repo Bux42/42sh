@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_exec.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
+/*   Updated: 2018/03/25 17:54:44 by jamerlin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/header.h"
 
 void				signal_handler(int inp)
@@ -9,26 +21,22 @@ void				signal_handler(int inp)
 
 void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 {
-	//char			fullpath[MAXPATHLEN * 2 + 1];
     char            *fullpath;
 	char			**env;
-	//int				bin;
 	pid_t			father;
 	static int		status;
 	t_pipe			*tabTube;
-	//int				(*func)(char **, t_sh*);
 
 	father = getpid();
     if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
     if (!(fullpath = command_path(&i_env->env, cli, i_env)))
         return ;
-	printf("%d\n",full_detail->sep_type);
 	if (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC)
 		heredock_redirect(full_detail, tabTube, 0);
-	if (/*!bin && */fullpath[0] && full_detail->sep_type == PIPE)
+	if (fullpath[0] && full_detail->sep_type == PIPE)
 		status = init_pipe(full_detail, tabTube, i_env);
-	else if (/*!bin && */fullpath[0] && (father = fork()) == 0)
+	else if (fullpath[0] && (father = fork()) == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		env = env_list_to_char(&i_env->env);

@@ -200,3 +200,91 @@ exit
 sort << fin
 exit
 sort << fin
+cat | ls
+cat -e | sort << FIN
+cat | sort << FIN
+cat | sort << FIN | cat -e
+exit
+cat | ls
+cat | ls src/exec | grep exe | rev | cut -c3- | rev | cat -e
+cat | sort << FIN
+exit
+cat | sort << FIN
+exit
+cat | sort << FIN
+cat -e | ls
+cat | ls
+ exit
+cat | sort << FIN
+cat | sort << FIN | cat -e
+cat << EOF |
+exit
+cat | sort << FIN
+cat | sort << FIN | cat -e
+exit
+cat | sort << FI
+exit
+cat | sort << FIN
+cat | sort << FIN | cat -e
+sort << FIN
+sort << FIN | cat -e
+exit
+sort << FIN | cat -e
+exit
+sort << FIN | cat -e
+exit
+sort << HERE
+sort << FIN | cat -e
+exit
+cat | sort << FIN
+exit
+cat | sort << FIN
+exit
+cat | sort << FIN
+make
+exit
+sort << FIN
+sort << FIN | cat -e
+sort | cat -e
+ls | cat -e
+cat -e | ls
+ls | grep M | cat -e
+exit
+ls | cat -e
+ls | grep M | cat -e
+cat | ls | grep M | cat -e
+cat < auteur | cat -e
+ls
+exit
+cat Makefile | cat -e
+cat < Makefile | cat -e
+cat | sort << FIN
+sort << FIN | cat -e
+exit
+sort << FIN
+exit
+sort << FIN | cat -e
+cat | sort << FIN
+cat | sort << FIN | cat -e
+exit
+cat | sort << FIN
+cat | sort << FIN | wc | rev | cat -e
+exit
+sort << FIN 
+cat | sort << FIN | wc | cat -e
+cat | sort << FIN | wc << FIN | cat -e
+exit
+cat | sort << FIN > file | cat -e
+cat file
+rm file
+ls
+exit
+ls -z 2>&1 1>&file
+ls -z 2>&1 1>file
+exit
+ls -z 2>file
+ls -z 2 > file
+cat file
+rm file
+ls
+exit
