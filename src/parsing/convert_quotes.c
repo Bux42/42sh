@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:25:37 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 21:16:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 21:33:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void		convert_bquote(t_inp **inp, t_sh *sh)
 {
-	*inp = *inp;
+	ft_putchar('#');
+	ft_putchar((*inp)->c);
 	sh->posy = sh->posy;
 }
 

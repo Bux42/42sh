@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 14:58:46 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/26 21:33:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ void		parse(t_sh *sh)
 	t_inp	*clean;
 	t_inpl	*splitted;
 	t_listc	*tok;
+	int		fd[2];
+	int saved_stdout;
+	saved_stdout = dup(STDOUT_FILENO);
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
@@ -128,11 +131,17 @@ void		parse(t_sh *sh)
 				check_special_surrounding(&splitted))
 		{
 			print_splitted(&splitted);
-			//ft_putstr("Creating Token List");
 			tokenize_splitted(&splitted, sh, &tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 			ft_putchar('\n');
+			pipe(fd);
+			//dup2(fd[1], STDOUT_FILENO);   /* redirect stdout to the pipe */
+			//close(fd[1]);
 			execute_tokens(&tok, sh);
+			//char	buff[100];
+		//	read(fd[0], buff, 100);
+		//	dup2(saved_stdout, STDOUT_FILENO);
+		//	write(1, buff, 100);;
 			free_tokens(&tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}

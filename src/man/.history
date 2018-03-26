@@ -433,3 +433,41 @@ ls 2>&file
 `"`"`"`"`""`"`"`"`"`
 `a"b`c"d`e"f`g"h`i"j"i`h"g`f"e`d"c`b"a`
 `'`'`'`'`''
+ls
+ls -l
+ls
+ls -la
+`e`
+ls
+`e`
+exit
+ les 3 tests suivants. Si l'un au moins de ces tests choue, alors toute la section est choue, passez  la suivante :   Executez la commande suivante "$> echo "Testing redirections," > /tmp/test.txt" et vrifiez que le fichier /tmp/test.txt contient la string "Testing redirections,".   Executez la commande suivante "$> echo "with multiple lines" >> /tmp/test.txt" et vrifiez que le fichier /tmp/test.txt contient la string "Testing redirections,". et "with multiple lines" sur la ligne suivante.  Executez la commande suivante "$> wc -c < /tmp/test.txt" et vrifiez que le retour est bien '42'.  Logical operatorsDans cette section nous allons valuer l'implementation des oprateurs logique. 
+Effectuez les 3 tests suivants. Si l'un au moins de ces tests choue, alors toute la section est choue, passez  la suivante :  Executez la commande suivante "$> ls -l && ls" et verifiez que la commande ls s'est bien execute 2 fois de manire differentes. 
+  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la cal  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Executez la commande suivan  Execu-a
+env
+cd ..
+env
+cd ..
+env
+ls
+env
+./21sh
+env
+./21sh
+env
+./21sh
+env
+./21sh
+env
+./21sh
+env
+./21sh
+env
+setenv oui=prout
+env
+./21sh
+env
+./21sh
+env
+./21sh
+env
