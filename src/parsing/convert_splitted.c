@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:54:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 15:27:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int			check_special(t_inp **inp)
 	type = 0;
 	if ((cp = (*inp)))
 	{
+		if (cp->c > 47 && cp->c < 58)
+			type = check_mult_aggr(&cp);
 		if (cp->c == '>')
 			type = check_right_arrow(&cp);
 		if (cp->c == '<')

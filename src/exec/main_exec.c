@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/25 17:54:44 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:36:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void				signal_handler(int inp)
 
 void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 {
-    char            *fullpath;
+	char            *fullpath;
 	char			**env;
 	pid_t			father;
 	static int		status;
 	t_pipe			*tabTube;
 
 	father = getpid();
-    if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
+	if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
-    if (!(fullpath = command_path(&i_env->env, cli, i_env)))
-        return ;
+	if (!(fullpath = command_path(&i_env->env, cli, i_env)))
+		return ;
 	if (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC)
 		heredock_redirect(full_detail, tabTube, 0);
 	if (fullpath[0] && full_detail->sep_type == PIPE)
@@ -41,7 +41,7 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 		signal(SIGINT, SIG_DFL);
 		env = env_list_to_char(&i_env->env);
 		if (full_detail->sep_type == 0 || full_detail->sep_type == SEMICOLON 
-			|| (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC))
+				|| (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC))
 			redirect(full_detail, tabTube, 0);
 		if (full_detail->prev && (full_detail->prev->sep_type == AND || full_detail->prev->sep_type == OR))
 		{

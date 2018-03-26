@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 12:43:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 15:48:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int			special_error_surrounding(t_inp **inp)
 int			bad_surrounding(t_inpl *inpl)
 {
 	if (inpl->previous && inpl->next)
-		if (inpl->previous->type > 64 && inpl->previous->type < 2048)
+		if ((inpl->previous->type > 64 && inpl->previous->type < 2048) || 
+				inpl->previous->type > 2048)
 			if (inpl->next->type > 64 && inpl->next->type < 2048)
 				return (0);
 	return (1);

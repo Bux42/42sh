@@ -342,3 +342,78 @@ it
 .
 .oui
 ../fdf/fdf ../fdf/map1
+sort << coucou | rev
+;,
+ls
+env
+ls && unsetenv PATH && ls
+ls -z 2>&1 
+ls -z >&1 
+ls >&-
+ls >&3
+ls >&-
+ls >&
+ls >&1
+ls >&-
+ls >&1
+ls >&2
+ls >&3
+ls >&0
+ls >&-1
+ls 2>&1
+ls >&1
+ls 2>&file
+ls 2>&2
+ls 2>&file
+ls >&file
+ls >&1
+ls >&2
+ls >&3
+ls >&2
+ls >&0
+ls >&-
+ls >&file
+ls 1>&file
+ls 1>&|
+ls 1>&
+ls 1>&123
+ls 1>&1 | wc
+ls 1>&file | wc
+ls 1>&file | wc
+ls 1>&file && ls
+sort << bite
+ls 1>&file
+ls >&file
+ls >&2
+ls >&-
+ls >&file
+ls >&-
+ls >&1
+ls >&file
+ls >&1
+ls >&w
+ls >&9
+ls >&2
+ls >&file
+ls 1>&file
+ls 1>&1
+ls >&1
+ls >&2
+ls >&3
+ls >&-
+ls >&
+ls >&1
+ls >&-
+ls 1>&-
+ls 1>&2
+ls 1>&-
+ls 1>&- && ls
+ls 1>&-
+ls 1>&1
+ls 2>&1
+ls >&1
+ls 2>&1
+ls >&1
+ls >&-
+ls >&file
+ls >&-

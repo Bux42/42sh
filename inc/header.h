@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/24 15:52:37 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/26 18:58:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define BUILTIN		512
 # define _FILE			1024
 # define SEMICOLON		2048
+# define AGGR			4096
+# define AGGRFILE		8192
+# define AGGROUT		16384
 
 # include <termcap.h>
 # include <termios.h>
@@ -213,6 +216,8 @@ int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
 int						check_semicolon(t_inp **inp);
+int						check_out_aggr(t_inp *inp);
+int						check_mult_aggr(t_inp **inp);
 
 char					*inp_to_cont(t_inp **inp);
 

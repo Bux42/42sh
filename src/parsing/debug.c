@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:49:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 17:18:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void		print_converted(t_inp **inp, int type)
 			ft_putstr(" <= FILE");
 		if (type & SEMICOLON)
 			ft_putstr(" <= SEMICOLON");
+		if (type & AGGR)
+			ft_putstr(" <= AGGR");
+		if (type & AGGRFILE)
+			ft_putstr(" <= AGGR TOFILE");
+		if (type & AGGROUT)
+			ft_putstr(" <= AGGROUT");
 		custom_return();
 	}
 }

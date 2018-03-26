@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 14:48:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 18:58:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,41 @@ int			check_left_arrow(t_inp **inp)
 	return (-1);
 }
 
+int			check_out_aggr(t_inp *inp)
+{
+	int		type;
+
+	type = 0;
+	if (inp->c > 47 && inp->c < 51)
+		return (type | AGGROUT | AGGR);
+	return (-1);
+}
+
+int			check_mult_aggr(t_inp **inp)
+{
+	int		type;
+	t_inp	*cp;
+
+	type = 0;
+	if ((cp = (*inp)))
+	{
+		if (cp->next && cp->next->c == '>')
+		{
+			cp = cp->next;
+			if (cp->next && cp->next->c == '&')
+			{
+				if (!cp->next->next)
+					return (type | AGGRFILE | AGGR);
+				cp = cp->next;
+				if (cp->next->c > 47 && cp->next->c < 51)
+					if (!cp->next->next)
+						return (type | AGGR);
+			}
+		}
+	}
+	return (-1);
+}
+
 int			check_right_arrow(t_inp **inp)
 {
 	t_inp	*cp;
@@ -98,6 +133,13 @@ int			check_right_arrow(t_inp **inp)
 			return (type | TOFILE);
 		if (cp->next && cp->next->c == '>' && !cp->next->next)
 			return (type | ATOFILE);
+		if (cp->next && cp->next->c == '&')
+		{
+			if (cp->next->next)
+				return (check_out_aggr(cp->next->next));
+			else
+				return (type | AGGRFILE | AGGR | AGGROUT);
+		}
 	}
 	return (-1);
 }
