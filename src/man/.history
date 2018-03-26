@@ -292,3 +292,18 @@ d
 f
 qef
 env
+ls
+cd ..
+cd -
+ls
+echo oui
+$HOME
+cd ..
+cd -
+cd ..
+cd -
+ls
+env
+salut
+ls
+cd ..
