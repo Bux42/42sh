@@ -29,7 +29,7 @@ void		free_redirs(t_redir **redir)
 {
 	t_redir	*cp;
 	t_redir	*tmp;
-	int		i;
+//	int		i;
 
 	if ((cp = (*redir)))
 	{
@@ -44,7 +44,7 @@ void		free_redirs(t_redir **redir)
 			}
 			if (tmp->redir[1] == HEREDOC)
 				free_heredoc(tmp);
-			i = -1;
+//			i = -1;
 			free(tmp);
 			tmp = NULL;
 		}

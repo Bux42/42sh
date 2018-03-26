@@ -28,10 +28,10 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	t_pipe			*tabTube;
 
 	father = getpid();
-    if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
+	if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
-    if (!(fullpath = command_path(&i_env->env, cli, i_env)))
-        return ;
+	if (!(fullpath = command_path(&i_env->env, cli, i_env)))
+		return ;
 	if (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC)
 		heredock_redirect(full_detail, tabTube, 0);
 	if (fullpath[0] && full_detail->sep_type == PIPE)
