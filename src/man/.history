@@ -288,3 +288,7 @@ cat file
 rm file
 ls
 exit
+d
+f
+qef
+env

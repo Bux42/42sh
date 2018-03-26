@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:10:49 by videsvau          #+#    #+#             */
-/*   Updated: 2017/08/25 06:13:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 13:27:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(char const *s1)
 	i = 0;
 	while (s1[i])
 		i++;
-	if (!(str = (char*)malloc(sizeof(char) * i + 1)))
+	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
 		return (0);
 	i = 0;
 	while (s1[i])

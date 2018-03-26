@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/18 08:14:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/26 13:22:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void		env_push_back(t_env **envlist, char *env)
 {
 	t_env	*first;
 
+	if (ft_strlen(env) > 20000)
+		return ;
 	if (!(*envlist))
 		(*envlist) = new_env(env);
 	else
