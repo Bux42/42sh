@@ -471,3 +471,200 @@ env
 env
 ./21sh
 env
+ls
+exit
+ls 2>&1
+ls 2>&
+ls 2>
+ls 2>&
+ls 2>&-
+ls 2>&1
+ls 2>&file
+ls 2>&-
+ls 2>1
+exit
+ls 2<&1
+ls <&1
+ls -<&1
+ls 2>1
+ls 2>&1
+exit
+ls 2 > 1
+cat 1
+ls
+rm 1
+ls
+exit
+ls -z 2 > 1
+cat 1
+rm 1
+ls
+ls 2>&1
+ls 2>&file
+ls 2>&-
+exit
+ls -z 2>&file
+cat file
+exit
+ls -z 2&>file
+ls -z 2>&file
+cat file
+rm file
+ls
+exit
+ls
+ls -z 2>&1
+ls
+ls -z 2>&file
+cat file
+ls
+exit
+ls -z 2>&file
+cat file
+ls
+exit
+ls -z 2>&file
+exit
+ls -z 2>&file
+exit
+ls -z 2>&file
+exit
+ls -z 2>&file
+exit
+ls -z 2>&file
+exit
+ls -z 2>&file
+cat ifle
+cat file
+ls
+exit
+exit
+ls -z 2>&file
+cat file
+ls
+cat file
+exit
+exit
+exit
+exit
+cat file
+ls -z 2>&-
+ls
+ls -z 2>&file
+exit
+cat file
+ls
+rmf file
+ls
+exit
+cat file
+exit
+ls -z 2>&file || ls
+cat file
+ls -z 2>&file 
+exit
+cat -e fsdafs 2>&file | ls
+cat file
+cat file
+exit
+ls | cat -e fsfs 2>&file | cat -e
+cat file
+cat file
+ls
+ls -la src fds > file 2>&1
+cat file
+
+ls
+cd ..
+ls
+rm wc
+ls
+exit
+ls -la src fds > file 2>&1
+dl
+ls
+cat file
+ls -la src fds > file 2>&1
+cat file
+ls -la src fds >> file 2>&1
+cat file
+rm file
+ls -la src fds > file 2>>&1
+ls -la src fds > file 2>&file
+cat file
+exit
+cat file
+rm file
+ls
+exit
+ls
+ls -la fsd 42sh > file  2>&1
+cat file
+rm file
+ls
+exit
+ls -la fsd src > file  2>&1
+cat file
+ls -la fsd src 2>&1 > file
+exit
+ls -la fsd src | wc | cat -e
+ls -la fsd src 2>&1 | wc | cat -e
+ls -la fsd src 2>&1 
+exit
+ls -la fsd 42sh 2>&1 | wc | cat -e
+ls -la fsd src 2>&1 | wc | cat -e
+ls -la fsd src 2>&1 | wc | cat -eexit
+exit
+ls -la fds src 2>&1
+exit
+ls -la fds src | wc | cat -e
+ls -la fds | wc | cat -e
+ls -z | wc | cat-e
+d
+exit
+exit
+ls -z | wc | cat -e
+exit
+ls -la fds src 2>&1
+exit
+exit
+exit
+exit
+exit
+exit
+ls -la fds src 2>&1-
+ls  2>&1-
+ls  2>&-
+ls  >&-
+exit
+ls -la fds src 2>&1
+exit
+ls -la fds src 2>&1
+exit
+exit
+ls -la fds src
+exti
+exit
+ls
+rm file
+ls -la fds src 2&>file | cat < file
+ls -la fds src 2>&file | cat < file
+ls -la fds src 2>&file 
+ls
+ls -la fds src 2>&file exit
+exit
+ls ; ls
+ls ; l*
+ls
+ls ; grep l*
+ls ; grep l
+grep l
+exit
+/bin/ls/ls
+exit
+ls 2&>1
+ls 2>&1
+ls src gfg 2>&1
+ls src gfg 2>&1 | cat -e
+git status
+exit
