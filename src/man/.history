@@ -668,3 +668,93 @@ ls src gfg 2>&1
 ls src gfg 2>&1 | cat -e
 git status
 exit
+ls 2>&file | cat file
+exit
+ks
+ls
+env
+./21sh
+ls
+exit
+s -l
+exit
+./21sh
+exit
+it
+exit
+./21sh
+sll
+xtl
+xtei
+xtxtei
+exit
+
+./21sh
+exit
+ls
+exit
+./21sh
+exit
+it
+ls 2>&-
+ls 1>&-
+exit
+exit
+exit
+exit
+ls 1>&file-
+ls | grep l*
+exit
+cat file
+exit
+exit
+ls -z 1>&-
+ls -l fds src 1>&- 
+ls -l fds src 2>&- 
+ls -l fds src 2>&file- 
+ls -l fds src 2>&file 
+exit
+setenv PATH=''
+/222
+ls -l fds src 1>&- | cat -e
+ls -l fds src 1>&- || ls
+echo $TERM
+env
+env $_
+ls | cd ..| cat -e
+exit
+cat < > lol
+cat <> lol
+exit
+cat < Makefile > lol
+cat < Makefile >lol
+cat < Makefile > lol
+exit
+chmod 000 .
+cd ..
+ls -l
+ls
+chmod 755 .
+ls
+exit
+ls -l
+exit
+echo 'aaa' > t.txt
+cat t.txt
+echo 'aaa' >> t.txt
+cat t.txt
+ls >> t.txt
+cat t
+cat t.txt
+rm t.txt
+" ' "
+exit
+echo " ' "
+exit
+ls < > file
+ls
+cat < Makefile > file
+exit
+ls -z 2>&file | cat file
+cat file
+exit

@@ -62,7 +62,7 @@ void    do_aggre(t_listc *cmd, t_pipe *tabTube , int i)
             tabTube[i].cote[1] = cmd->redirs->redir[0];
         }
     }
-    else if (cmd->redirs->redir[1] == 12288)
+    else if (cmd->redirs->redir[1] == AGGR + AGGRFILE)
     {
         if (cmd->redirs->file != NULL)
         {
@@ -73,11 +73,19 @@ void    do_aggre(t_listc *cmd, t_pipe *tabTube , int i)
         {
             tabTube[i].cote[0] = cmd->redirs->redir[2];
             tabTube[i].cote[1] = cmd->redirs->redir[0];
-            //close(tabTube[i].cote[0]);
+            dprintf(2,"[%d]\n", tabTube[i].cote[0]);
+            if (tabTube[i].cote[0] == -1)
+                close(tabTube[i].cote[1]);
         }
     }
-    else if (cmd->redirs->redir[1] == 28672)
-    ;
+    else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT)
+    {
+        tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR| O_TRUNC | O_CREAT, S_IRWXU) 
+            : cmd->redirs->redir[2];
+        tabTube[i].cote[1] = cmd->redirs->redir[0];
+        if (tabTube[i].cote[0] == -1)
+            close(tabTube[i].cote[1]);
+    }
 }
 
 void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirections
@@ -93,7 +101,8 @@ void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirectio
         else if (cmd->redirs && cmd->redirs->redir[1] == 3)
             double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
         else if (cmd->redirs && (cmd->redirs->redir[1] == AGGR || cmd->redirs->redir[1] == AGGRFILE 
-            || cmd->redirs->redir[1] == AGGROUT || cmd->redirs->redir[1] == AGGR + AGGRFILE))
+            || cmd->redirs->redir[1] == AGGROUT || cmd->redirs->redir[1] == AGGR + AGGRFILE 
+                || cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT))
             do_aggre(cmd, tabTube, i); 
        // dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
         if (tabTube[i].cote[0] != -1) {
@@ -106,8 +115,11 @@ void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirectio
         }  
         //dprintf(2, "FD1[%d] -- FD2[%d]\n", tabTube[i].cote[0], tabTube[i].cote[1]);
         if (cmd->redirs && !(cmd->redirs->redir[1] == AGGR || cmd->redirs->redir[1] == AGGRFILE 
-            || cmd->redirs->redir[1] == AGGROUT || cmd->redirs->redir[1] == AGGR + AGGRFILE))
-            close(tabTube[i].cote[0]);
+            || cmd->redirs->redir[1] == AGGROUT || cmd->redirs->redir[1] == AGGR + AGGRFILE 
+                || cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT))
+            {
+                close(tabTube[i].cote[0]);
+            }
         cmd->redirs = cmd->redirs->next;
         j++;
     }
