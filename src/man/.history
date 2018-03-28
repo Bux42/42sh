@@ -978,3 +978,29 @@ qefqe
 cat -e Makefile
 echo oui | cat -e
 env | cat -e
+$HOME
+$HOME ~
+$HOME ~/
+$HOME ~/qe
+$HOME
+echo ee
+echo ee | cat
+echo ee | cat -e
+$PATH
+~
+~/
+~/21sh
+~
+~~
+~/1_42SH
+$HOME
+$HOME$HOME
+$HOME
+e$HOME
+eeeee
+e$HOME|
+e$HOME$USER
+e$HOME
+$USERe$HOME
+$USERe$HOME$TERM
+$USER$HOME$TERM

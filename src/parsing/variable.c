@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 17:49:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 20:32:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,72 +49,68 @@ char		*get_variable_name(t_inp **inp)
 	return (ret);
 }
 
-t_inp		*replace_inp(t_inp **inp, char *content)
+t_inp		**free_variable_name(t_inp **inp)
+{
+	t_inp	*tmp;
+
+	tmp = (*inp);
+	(*inp) = (*inp)->next;
+	free(tmp);
+	while (*inp && check_key((*inp)->c))
+	{
+		tmp = (*inp);
+		(*inp) = (*inp)->next;
+		free(tmp);
+	}
+	return (inp);
+}
+
+t_inp		*variable(char *value)
 {
 	t_inp	*ret;
-	t_inp	*del;
-	int		len;
+	int		i;
 
 	ret = NULL;
-	len = -1;
-	while (content[++len])
-		inp_insert_posat(&ret, content[len]);
-	while ((*inp)->next && check_key((*inp)->next->c))
-	{
-		del = (*inp);
-		(*inp) = (*inp)->next;
-		free(del);
-		del = NULL;
-	}
-	free(*inp);
-	(*inp) = NULL;
+	i = -1;
+	while (value[++i])
+		inp_insert_posat(&ret, value[i]);
 	return (ret);
 }
 
-t_inp		*get_end(t_inp **inp)
+void		insert_and_replace(t_inp **inp, char *value)
 {
-	t_inp	*ret;
+	t_inp	*before;
+	t_inp	*add;
 
-	ret = (*inp);
-	while (ret->next && check_key(ret->next->c))
-		ret = ret->next;
-	return (ret->next);
-}
-
-t_inp		*relink_inp(t_inp *before, t_inp *after, t_inp *new)
-{
+	before = (*inp)->previous;
+	inp = free_variable_name(inp);
+	add = variable(value);
 	if (before)
-		before->next = new;
-	new->previous = before;
-	while (new->next)
-		new = new->next;
-	if (after)
-		after->previous = new;
-	new->next = after;
-	return (new);
+		before->next = add;
+	add->previous = before;
+	while (add->next)
+		add = add->next;
+	if (*inp)
+		(*inp)->previous = add;
+	add->next = *inp;
+	*inp = add;
 }
 
 void		try_insert_variable(t_inp **inp, t_sh *sh)
 {
 	char	*variable;
 	char	*content;
-	int		i;
 
-	i = -1;
-	custom_return();
 	if ((*inp)->next && (variable = get_variable_name(inp)))
 	{
 		if ((content = get_specific_loc(variable, &sh->loc)) ||
 				(content = get_specific_env(variable, &sh->env)))
 		{
-			ft_putchar((*inp)->c);
-			while (content[++i])
-				inp_insert_posat(inp, content[i]);
+			insert_and_replace(inp, content);
 			free(content);
 		}
 		free(variable);
 	}
 	else
 		return ;
-	custom_return();
 }

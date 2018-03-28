@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 20:25:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 19:04:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,8 +199,6 @@ void					custom_return(void);
 int						ending_char(char c);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
 void					try_insert_home(t_inp **inp, t_sh *sh);
-t_inp					*relink_inp(t_inp *before, t_inp *after, t_inp *new);
-t_inp					*replace_inp(t_inp **inp, char *content);
 void					split_line(t_inpl **inpl, t_inp **clean, t_sh *sh);
 int						check_key(char key);
 int						try_update_context(char c, int flag);
