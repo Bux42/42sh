@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 14:19:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 12:45:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 		}
 		if (!*cp)
 			break ;
-		if (!check_quoting((*cp)->c))
-			inp_insert_posat_remake(&add, (*cp)->c);
+		inp_insert_posat_remake(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	if (add)
