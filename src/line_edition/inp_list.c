@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:38:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 21:21:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:09:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,16 @@ void		insert_first(t_inp *first, t_inp *tmp, t_inp **inp)
 
 void		insert_beginning(t_inp *first, t_inp *tmp)
 {
-	tmp->pos = 1;
-	first->pos = 0;
+	if (first->pos == 2)
+	{
+		first->pos = 1;
+		tmp->pos = 0;
+	}
+	else
+	{
+		tmp->pos = 1;
+		first->pos = 0;
+	}
 	first->next = tmp;
 	tmp->previous = first;
 }
