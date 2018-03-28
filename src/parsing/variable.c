@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 13:09:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:26:13 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ t_inp		*replace_inp(t_inp **inp, char *content)
 		del = (*inp);
 		(*inp) = (*inp)->next;
 		free(del);
+		del = NULL;
 	}
 	free(*inp);
+	(*inp) = NULL;
 	return (ret);
 }
 
