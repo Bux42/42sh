@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 15:26:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:49:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,25 +98,23 @@ void		try_insert_variable(t_inp **inp, t_sh *sh)
 {
 	char	*variable;
 	char	*content;
-	t_inp	*before;
-	t_inp	*after;
-	t_inp	*new;
+	int		i;
 
-	before = NULL;
-	after = NULL;
+	i = -1;
+	custom_return();
 	if ((*inp)->next && (variable = get_variable_name(inp)))
 	{
 		if ((content = get_specific_loc(variable, &sh->loc)) ||
 				(content = get_specific_env(variable, &sh->env)))
 		{
-			before = (*inp)->previous;
-			after = get_end(inp);
-			new = replace_inp(inp, &content[1]);
-			*inp = relink_inp(before, after, new);
+			ft_putchar((*inp)->c);
+			while (content[++i])
+				inp_insert_posat(inp, content[i]);
 			free(content);
 		}
 		free(variable);
 	}
 	else
 		return ;
+	custom_return();
 }

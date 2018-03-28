@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/26 16:36:11 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 18:18:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 	pid_t			father;
 	t_pipe			*tabTube;
 
+	fullpath = NULL;
 	father = getpid();
 	if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;
-	if (!(fullpath = command_path(&i_env->env, cli, i_env)))
-		return ;
 	if (full_detail->redirs && full_detail->redirs->redir[1] == HEREDOC)
 		heredock_redirect(full_detail, tabTube, 0);
-	if (fullpath[0] && full_detail->sep_type == PIPE)
+	if (full_detail->sep_type == PIPE)
 		i_env->retval = init_pipe(full_detail, tabTube, i_env);
-	else if (fullpath[0] && (father = fork()) == 0)
+	else if ((fullpath = command_path(&i_env->env, cli, i_env)) && (father = fork()) == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		env = env_list_to_char(&i_env->env);
@@ -56,7 +55,6 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 		access(fullpath, X_OK) ? dprintf(2,"Permission denied.\n") : dprintf(2, "error\n");
 		exit(-1);
 	}
-	(fullpath[0]) ? signal(SIGINT, &signal_newline) : 0;
 	waitpid(father, &i_env->retval, WUNTRACED);
 	for(int i = 0; i < full_detail->nb_arg; i++)
 	{

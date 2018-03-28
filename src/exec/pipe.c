@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:57 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/28 17:17:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 18:05:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 		exit(i_env->retval);
 	}
 	else if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
-		return ;
+		exit(1);
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
 }

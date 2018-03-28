@@ -6,103 +6,103 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:39:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 19:49:15 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:57:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
 /*void		exec_cli(char *cli, t_listc *tok, t_sh *sh)
-{
-	if (cli && tok && sh)
-		;
-}*/
+  {
+  if (cli && tok && sh)
+  ;
+  }*/
 /*******************************--REDIRECTIONS--********************************/
 
 void    left_redirect(t_listc *cmd, t_pipe *tabTube, int i) //redirection d'un fichier vers une sortie
 {
-    int ret;
-    if (!(ret = open(cmd->redirs->file, O_RDONLY)))
-    {
-        close(ret);
-        errExit(cmd->redirs->file);
-    }
-    tabTube[i].cote[0] = (cmd->redirs->file) ? ret : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
+	int ret;
+	if (!(ret = open(cmd->redirs->file, O_RDONLY)))
+	{
+		close(ret);
+		errExit(cmd->redirs->file);
+	}
+	tabTube[i].cote[0] = (cmd->redirs->file) ? ret : cmd->redirs->redir[2];
+	tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
 }
 
 void right_redirect(t_listc *cmd, t_pipe *tabTube, int i) //redirection d'une sortie vers un fichier
 {
-    tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR| O_TRUNC | O_CREAT, S_IRWXU) 
-    : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
+	tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR| O_TRUNC | O_CREAT, S_IRWXU) 
+		: cmd->redirs->redir[2];
+	tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
 }
 
 void    double_right_redirect(t_listc *cmd, t_pipe *tabTube, int i)// redirection d'une sortie vers la fin d'un fichier
 {
-    tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR | O_APPEND | O_CREAT, S_IRWXU ) : cmd->redirs->redir[2];
-    tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
+	tabTube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file, O_RDWR | O_APPEND | O_CREAT, S_IRWXU ) : cmd->redirs->redir[2];
+	tabTube[i].cote[1] = (i == 0) ? cmd->redirs->redir[0] : tabTube[i].cote[1];
 }
 
 void errExit(char *str)
 {
-    printf("[%s]\n", str);
-    exit(1);
+	printf("[%s]\n", str);
+	exit(1);
 }
 
 void   redirect(t_listc *cmd, t_pipe *tabTube , int i) // gestion des redirections
 {
-    int j = 0;
-    
-    while (cmd->redirs != NULL)
-    {
-        if (cmd->redirs && cmd->redirs->redir[1] == 0)
-            left_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne 
-        else if (cmd->redirs && cmd->redirs->redir[1] == 1)
-            right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
-        else if (cmd->redirs && cmd->redirs->redir[1] == 3)
-               double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
-       //dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
-        
-        if (cmd->redirs->redir[1] != 0)
-            dup2(tabTube[i].cote[0], STDOUT_FILENO);
-        else 
-            dup2(tabTube[i].cote[0], STDIN_FILENO);
-        close(tabTube[i].cote[0]);
-        cmd->redirs = cmd->redirs->next;
-        j++;
-    }
-    i++;
+	int j = 0;
+
+	while (cmd->redirs != NULL)
+	{
+		if (cmd->redirs && cmd->redirs->redir[1] == 0)
+			left_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne 
+		else if (cmd->redirs && cmd->redirs->redir[1] == 1)
+			right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
+		else if (cmd->redirs && cmd->redirs->redir[1] == 3)
+			double_right_redirect(cmd, tabTube, i); // une liste de 1 maillon avec le fichier renseigne
+		//dprintf(2,"tabTube.cote[0] == [%d] ; tabTube.cote[1] == [%d] ; i == [%d]\n", tabTube[i].cote[0], tabTube[i].cote[1], i/*j**/);
+
+		if (cmd->redirs->redir[1] != 0)
+			dup2(tabTube[i].cote[0], STDOUT_FILENO);
+		else 
+			dup2(tabTube[i].cote[0], STDIN_FILENO);
+		close(tabTube[i].cote[0]);
+		cmd->redirs = cmd->redirs->next;
+		j++;
+	}
+	i++;
 }
 
 /**********************************--PIPES--******************************************/
 
 void    prepare_pipe(t_listc *cmd)
 {
-    t_listc *cpy;
-//    t_listc *last;
-    int nb_cmd;
-    int i;
+	t_listc *cpy;
+	//    t_listc *last;
+	int nb_cmd;
+	int i;
 
-    cpy = cmd;
-    nb_cmd = 0;
-    i = 0;
-    while (cpy->sep_type == PIPE) 
-    {
-  //      last = cpy;
-        if (cpy->sep_type == PIPE)
-            nb_cmd++;
-        cpy = cpy->next;
-    }
-    cpy = cmd;
-    nb_cmd++;
-    while (cpy && i < nb_cmd)
-    {
-        cpy->nb_arg = nb_cmd;
-        i++;
-        //cpy->prev = cpy;
+	cpy = cmd;
+	nb_cmd = 0;
+	i = 0;
+	while (cpy->sep_type == PIPE) 
+	{
+		//      last = cpy;
+		if (cpy->sep_type == PIPE)
+			nb_cmd++;
 		cpy = cpy->next;
-    }
+	}
+	cpy = cmd;
+	nb_cmd++;
+	while (cpy && i < nb_cmd)
+	{
+		cpy->nb_arg = nb_cmd;
+		i++;
+		//cpy->prev = cpy;
+		cpy = cpy->next;
+	}
 }
 
 void	fermeture(int fils, int nb_tube, t_pipe *tabTube)
@@ -130,11 +130,11 @@ void	fermeture(int fils, int nb_tube, t_pipe *tabTube)
 void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 {
 	//char fullpath[MAXPATHLEN * 2 + 1];
-    char *fullpath;
+	char *fullpath;
 
 	//if (filter_cli(cmd->cont, fullpath, cmd->cont[0], g_backup_env) < 0)
-	 if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
-    	return ;
+	if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+		return ;
 	execve(fullpath, cmd->cont, NULL);
 	errExit("execve");
 }
@@ -201,7 +201,7 @@ int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env)
 	while (++wt_cpt < cmd->nb_arg)
 	{
 		waitpid(pid_tab[wt_cpt], &cpy->status, 0);
-			status = cpy->status;
+		status = cpy->status;
 		cpy = cpy->next;
 	}
 	return (status);
@@ -233,7 +233,7 @@ int		init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env)
 void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 {
 	//char			fullpath[MAXPATHLEN * 2 + 1];
-    char            *fullpath;
+	char            *fullpath;
 	char			**env;
 	//int				bin;
 	pid_t			father;
@@ -243,7 +243,7 @@ void				exec_cli(char *cli, t_listc *full_detail, t_sh *i_env)
 
 	father = getpid();
 	/*if ((bin = filter_cli(full_detail->cont, fullpath, cli, &i_env->env)) < 0)
-		return ;*/
+	  return ;*/
 	//printf("\n");
 	if (!(tabTube = (t_pipe *)malloc(sizeof(t_pipe) * ((full_detail->nb_arg)))))
 		return ;

@@ -926,3 +926,55 @@ ls | env 0>&1| wc
 ls | env 0>&1 | wc
 ls | env 0>&file | wc
 cat file
+setenv
+setenv oui
+setenv oui=
+env
+$oui
+setenv oui=
+env
+setenv
+env
+env
+setenv
+env
+$SHLVL
+env
+$SHLVL
+$USER
+$TERM
+$HOME
+$HOME$HOME
+~/1_42SH
+$HOME
+$HOME $HOME
+$HOME$HOME
+setenv oui=
+env
+echo $oui
+echo $_
+setenv
+setenv oui=
+env
+echo $oui
+qefqef | wc
+qefqef | ca
+qefqef | cat
+qefqef | cat -e
+qefqef
+qefqef | cat
+ls
+qefqef | cat
+qefqef | cat -e
+cat Makefile
+cat Makefile | wc
+ca Makefile | wc
+ca Makefile | cat
+ls -z | cat
+ls -z | cat -e
+qefqefqfe | cat -e
+weqfqef | echo prout |  cat -e
+qefqe
+cat -e Makefile
+echo oui | cat -e
+env | cat -e
