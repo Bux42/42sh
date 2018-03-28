@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:39:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/12 21:05:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 13:18:47 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int			print_expected_prompt(t_sh *sh, t_close **close)
 {
 	t_close		*cp;
 
+	sh->posy = 1;
 	if ((cp = *close))
 	{
 		while (cp->next)
@@ -38,6 +39,7 @@ int			print_expected_prompt(t_sh *sh, t_close **close)
 		}
 	}
 	print_str("> ", sh);
+	sh->prompt_len = sh->posy;
 	return (0);
 }
 

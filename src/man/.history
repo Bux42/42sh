@@ -777,3 +777,16 @@ echo " ' "
 echo " ' "
 cat < Makefile >  file
 cat file
+echo $TERM
+env
+'    '
+env
+$
+$_
+$/
+$
+$_
+$TERM
+$USER
+env
+echo $USER

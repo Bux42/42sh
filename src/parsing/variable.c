@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 11:29:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/28 13:09:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char		*get_variable_name(t_inp **inp)
 	t_inp	*cp;
 
 	cp = (*inp);
-	len = 0;
+	len = 1;
 	while (cp->next && check_key(cp->next->c))
 	{
 		cp = cp->next;
@@ -37,6 +37,7 @@ char		*get_variable_name(t_inp **inp)
 	if (!len || !(ret = (char*)malloc(sizeof(char) * (len + 1))))
 		return (0);
 	ret[len] = '\0';
+	ret[len - 1] = '=';
 	len = 0;
 	cp = (*inp);
 	while (cp->next && check_key(cp->next->c))
