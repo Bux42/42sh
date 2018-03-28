@@ -15,9 +15,17 @@
 void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 {
     char	*fullpath;
+	int		(*func)(char **, t_sh*);
 
 	if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+	{
+		if (cmd->func)
+		{
+			func = cmd->func;
+			i_env->retval = func(cmd->cont, i_env);	
+		}
     	return ;
+	}
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
 }
@@ -64,12 +72,10 @@ void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env)
 
 int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env)
 {
-	int		status;
 	int		nu_cmd;
 	int		wt_cpt;
 	t_listc	*cpy;
 
-	status = 0;
 	nu_cmd = 0;
 	wt_cpt = -1;
 	cpy = cmd;
@@ -85,10 +91,10 @@ int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env)
 	while (++wt_cpt < cmd->nb_arg)
 	{
 		waitpid(pid_tab[wt_cpt], &cpy->status, 0);
-			status = cpy->status;
+			i_env->retval = cpy->status;
 		cpy = cpy->next;
 	}
-	return (status);
+	return (i_env->retval);
 }
 
 int		init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env)

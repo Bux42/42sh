@@ -856,3 +856,43 @@ ls
 ls -R ../
 ls
 ls -R ../
+ls
+ls && ls
+ls || ls
+ls
+sls
+exit
+ls
+exit
+ls
+exit
+ls
+exit
+ls
+exti
+exit
+ls
+exit
+ls
+exit
+ls
+exit
+ls
+ls | cd .. | cat -e
+ls
+ls | env | cat -e
+exit
+env
+ls | env | cat -e
+env | cat -e
+echo "lol" | cat -e
+env
+env | cat -e
+echo "lol" | cat -e
+ls | echo "lol" | cat -e
+exit
+ls | env | cat -e
+ls | env ls | cat -e
+exit
+ls | env 2>&1 | cat -e
+ls | env 1>&2 | cat -e

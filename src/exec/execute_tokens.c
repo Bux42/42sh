@@ -21,7 +21,7 @@ void		execute_tokens(t_listc **tok, t_sh *sh)
 	{
 		while (cp)
 		{
-			if (cp->func)
+			if (cp->func && cp->sep_type != PIPE)
 			{
 				func = cp->func;
 				sh->retval = func(cp->cont, sh);
