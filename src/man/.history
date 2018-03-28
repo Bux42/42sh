@@ -775,3 +775,5 @@ echo " ' "
 ' '
 ' e'
 echo " ' "
+cat < Makefile >  file
+cat file
