@@ -1004,3 +1004,15 @@ e$HOME
 $USERe$HOME
 $USERe$HOME$TERM
 $USER$HOME$TERM
+ls
+$term
+echo $term
+echo $?
+env
+echo $TERM
+ls
+exit
+ls | cat -e
+cat -e | ls
+cat | ls
+exit

@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 19:04:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 22:00:10 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
 //Pipeline
 void                    prepare_pipe(t_listc *cmd);
 void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
-void                    fermeture(int fils, int nb_tube, t_pipe *tabTube);
+void                    closed_unused_fd(int fils, int nb_tube, t_pipe *tabTube);
 void                    pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env);
 void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env);
 int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
@@ -289,7 +289,7 @@ int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
 void                    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i);
 void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
 //Tools
-void                    errExit(char *str);
+void                    errexit(char *str);
 char		            *command_path(t_env **env, char *command, t_sh *sh);
 
 /*						builtins										*/
