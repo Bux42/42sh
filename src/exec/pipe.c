@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:57 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/25 17:55:00 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:17:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 {
-    char	*fullpath;
+	char	*fullpath;
 	int		(*func)(char **, t_sh*);
 
-	if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+	if (cmd->func)
 	{
-		if (cmd->func)
-		{
-			func = cmd->func;
-			i_env->retval = func(cmd->cont, i_env);	
-		}
-    	return ;
+		func = cmd->func;
+		i_env->retval = func(cmd->cont, i_env);
+		exit(i_env->retval);
 	}
+	else if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+		return ;
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
 }
@@ -91,7 +90,7 @@ int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env)
 	while (++wt_cpt < cmd->nb_arg)
 	{
 		waitpid(pid_tab[wt_cpt], &cpy->status, 0);
-			i_env->retval = cpy->status;
+		i_env->retval = cpy->status;
 		cpy = cpy->next;
 	}
 	return (i_env->retval);

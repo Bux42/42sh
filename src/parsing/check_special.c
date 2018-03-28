@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 19:57:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:25:18 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int			check_mult_aggr(t_inp **inp)
 					return (type | AGGRFILE | AGGR);
 				cp = cp->next;
 				if (cp->next->c > 47 && cp->next->c < 51)
-					if (!cp->next->next)
+					if (!cp->next->next || ending_char(cp->next->next->c))
 						return (type | AGGR);
 			}
 		}

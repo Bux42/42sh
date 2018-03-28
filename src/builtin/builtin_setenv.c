@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/26 21:50:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:14:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int			print_env(t_env **env)
 	{
 		while (cp)
 		{
-			ft_putstr(cp->env);
-			custom_return();
+			ft_putendl_fd(cp->env, STDOUT_FILENO);
 			cp = cp->next;
 		}
 	}

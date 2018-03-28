@@ -896,3 +896,33 @@ ls | env ls | cat -e
 exit
 ls | env 2>&1 | cat -e
 ls | env 1>&2 | cat -e
+env
+echo oui
+echo oui | cat -e
+env | cat -e
+echo oui non salut | cat -e
+env
+env | cat -e
+env
+env | cat
+env
+env | cat -e
+echo oui | cat
+env | cat
+cd .. | cat
+echo oui | cat
+echo oui
+echo oui | cat
+echo oui 
+echo oui | cat
+env | cat
+env | cat -e
+qefqef
+qefqef | wc
+qefqef | cat
+ls | env 0>&1
+ls | env 0>&1 | wc
+ls | env 0>&1| wc
+ls | env 0>&1 | wc
+ls | env 0>&file | wc
+cat file
