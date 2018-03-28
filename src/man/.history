@@ -849,3 +849,10 @@ e$HOME$HOME
 ~
 $HOME~
 ~/$HOME
+~~
+env | cat -e
+env
+ls
+ls -R ../
+ls
+ls -R ../

@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 15:30:00 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:57:12 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void		parse(t_sh *sh)
 			//dup2(fd[1], STDOUT_FILENO);   /* redirect stdout to the pipe */
 			//close(fd[1]);
 			execute_tokens(&tok, sh);
+			signal_init();
 			//char	buff[100];
 		//	read(fd[0], buff, 100);
 		//	dup2(saved_stdout, STDOUT_FILENO);

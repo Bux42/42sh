@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 15:35:16 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:47:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int			print_env_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_putstr(tab[i]);
-		custom_return();
+		ft_putendl(tab[i]);
 		i++;
 	}
 	env_free(tab);
