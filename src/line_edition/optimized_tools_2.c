@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:30:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/22 08:39:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/29 14:40:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,26 @@ int			inp_to_inp_cmp(t_inp **inp1, t_inp **inp2)
 			return (0);
 	}
 	return (1);
+}
+
+t_inp		*inp_dup(t_inp **inp)
+{
+	t_inp	*ret;
+	t_inp	*cp;
+
+	ret = NULL;
+	if ((cp = (*inp)))
+	{
+		ret = new_inp(cp->c);
+		while (cp->next)
+		{
+			ret->next = new_inp(cp->next->c);
+			ret->next->previous = ret;
+			ret = ret->next;
+			cp = cp->next;
+		}
+		while (ret->previous)
+			ret = ret->previous;
+	}
+	return (ret);
 }

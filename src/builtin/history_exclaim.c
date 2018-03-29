@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 20:58:08 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/29 15:00:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,18 @@ int		next_is_false(t_inp **cp)
 	return (0);
 }
 
-int		history_parsing(t_inp **cp, t_sh *sh)
+int		history_parsing(t_inp **inp, t_sh *sh)
 {
-	t_inp	*inp;
-
-	inp = *cp;
-	if (inp->next->c == '!')
-		return (last_command(sh, cp));
-	else if (inp->next->c == '-')
-		return (by_last(sh, cp, 1));
-	else if (inp->next->c <= '9' && inp->next->c >= '0')
-		return (by_last(sh, cp, 2));
-	else if (inp->next->c == '?')
-		return (by_last(sh, cp, 4));
+	if ((*inp)->next->c == '!')
+		return (last_command(sh, inp));
+	else if ((*inp)->next->c == '-')
+		return (by_last(sh, inp, 1));
+	else if ((*inp)->next->c <= '9' && (*inp)->next->c >= '0')
+		return (by_last(sh, inp, 2));
+	else if ((*inp)->next->c == '?')
+		return (by_last(sh, inp, 4));
 	else
-		return (by_last(sh, cp, 3));
+		return (by_last(sh, inp, 3));
 	return (0);
 }
 

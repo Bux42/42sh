@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 15:57:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/29 15:01:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	t_inp	*cp;
 	int		i;
 
-	if (history_exclaim(inp, sh))
-		return (0);
 	i = 0;
 	if ((cp = (*inp)))
 	{
+		if (history_exclaim(inp, sh))
+			return (0);
 		while (cp && cp->c)
 		{
 			if (!is_space(cp->c))

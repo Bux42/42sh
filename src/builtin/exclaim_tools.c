@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 20:57:58 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/29 15:03:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,31 @@ int		no_history(void)
 	return (-1);
 }
 
+t_inp	*replace_double_exclaim(t_inp **his, t_inp **inp)
+{
+	t_inp	*insert;
+	t_inp	*previous;
+
+	previous = (*inp)->previous;
+	insert = inp_dup(his);
+	(*inp) = (*inp)->next->next;
+	if (previous)
+		previous->next = insert;
+	insert->previous = previous;
+	while (insert->next)
+		insert = insert->next;
+	if (*inp)
+		(*inp)->previous = insert;
+	insert->next = (*inp);
+	return (insert);
+}
+
 int		last_command(t_sh *sh, t_inp **inp)
 {
-	t_inp	*input;
-	t_inp	*tmp;
-
-	tmp = NULL;
-	if (!(sh->history && sh->history->next))
-	{
-		if (!((*inp)->next->next) && !((*inp)->previous))
-			return (no_history());
-	}
+	if (!(sh->history))
+		return (no_history());
 	else
-	{
-		tmp = (*inp)->next;
-		input = sh->history->inp;
-		while (input)
-		{
-			tmp = insert_inp(&tmp, input->c);
-			input = input->next;
-		}
-	}
-	suppr_exclaim(inp, 1, sh);
-	if (!(sh->history && sh->history->next))
-		tmp = (*inp)->next;
-	suppr_letter(inp);
-	*inp = tmp;
+		*inp = replace_double_exclaim(&sh->history->inp, inp);
 	return (0);
 }
 

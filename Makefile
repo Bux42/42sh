@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/28 18:19:32 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/29 13:20:10 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address

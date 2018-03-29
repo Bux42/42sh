@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 22:00:10 by jamerlin         ###   ########.fr       */
+/*   Updated: 2018/03/29 14:37:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void					jump_up(t_sh *sh, t_inp **inp);
 void					jump_down(t_sh *sh, t_inp **inp);
 
 t_inp					*new_inp(char c);
+t_inp					*inp_dup(t_inp **inp);
 void					inp_insert_posat(t_inp **inp, char c);
 void					inp_insert_posat_remake(t_inp **inp, char c);
 void					insert_middle(t_inp *first, t_inp *tmp);
