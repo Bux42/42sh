@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/30 17:15:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/30 17:45:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,26 @@ int			custom_chdir(char *path, int flag, t_env **env)
 				return (err_msg("cd: permission denied :", path, -1));
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int			chdir_old_pwd(t_env **env, int flag)
 {
 	char	*old_pwd;
 	char	*pwd;
+	int		err;
 
 	if ((old_pwd = get_specific_env("OLDPWD=", env)))
 	{
-		custom_chdir(old_pwd, flag, env);
+		err = custom_chdir(old_pwd, flag, env);
 		free(old_pwd);
-		if ((pwd = get_specific_env("PWD=", env)))
+		if ((pwd = get_specific_env("PWD=", env)) && err == 0)
 		{
 			ft_putstr(pwd);
 			custom_return();
 			free(pwd);
 		}
-		return (0);
+		return (err);
 	}
 	else
 		return (err_msg("cd: OLDPWD not set", "", 3));
@@ -112,24 +113,25 @@ int			builtin_cd(char **exec, t_sh *sh)
 	int		flag;
 	int		index;
 	char	*home;
+	int		ret;
 
 	index = 1;
+	ret = 0;
 	if ((flag = parse_flags(exec, &index)) == -1)
 		return (1);
 	if (!exec[index])
 	{
 		if ((home = get_specific_env("HOME=", &sh->env)))
 		{
-			custom_chdir(home, flag, &sh->env);
+			ret = custom_chdir(home, flag, &sh->env);
 			free(home);
 		}
 		else
 			return (err_msg("cd: HOME not set", "", 2));
 	}
-	else if (ft_strcmp(exec[index], "-") == 0 &&
-			chdir_old_pwd(&sh->env, flag) == 3)
-		return (3);
-	else if (!(ft_strcmp(exec[index], "-") == 0))
-		custom_chdir(exec[index], flag, &sh->env);
-	return (0);
+	else if (ft_strcmp(exec[index], "-") == 0)
+			ret = chdir_old_pwd(&sh->env, flag);
+	else
+		ret = custom_chdir(exec[index], flag, &sh->env);
+	return (ret);
 }
