@@ -115,8 +115,8 @@ void		parse(t_sh *sh)
 	t_inpl	*splitted;
 	t_listc	*tok;
 	int		fd[2];
-	int saved_stdout;
-	saved_stdout = dup(STDOUT_FILENO);
+//	int saved_stdout;
+//	saved_stdout = dup(STDOUT_FILENO);
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
