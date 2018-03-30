@@ -73,16 +73,18 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *i_env)
 	{
 		if ((father = fork()) == 0)
 		{
-			signal(SIGINT, SIG_DFL);
+			signal_exec();
 			env = env_list_to_char(&i_env->env);
 			if (cmd->sep_type == 0 || cmd->sep_type == SEMICOLON
 				|| (cmd->redirs && cmd->redirs->redir[1] == HEREDOC))
 				redirect(cmd, tabtube, 0);
 			run_cmd(fullpath, cmd, i_env, env);
 		}
+		signal_init();
+		signal(SIGINT, &signal_newline);
 	}
 	waitpid(father, &i_env->retval, WUNTRACED);
-	if (WIFSIGNALED(i_env->retval) && WTERMSIG(i_env->retval))
+	if (WIFSIGNALED(i_env->retval) && WTERMSIG(i_env->retval) == 9)
  	{
 		 ft_putstr_fd("Killed: 9\n",2);
 		 kill(0,SIGKILL);
