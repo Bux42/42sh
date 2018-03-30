@@ -82,5 +82,10 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *i_env)
 		}
 	}
 	waitpid(father, &i_env->retval, WUNTRACED);
+	if (WIFSIGNALED(i_env->retval) && WTERMSIG(i_env->retval))
+ 	{
+		 ft_putstr_fd("Killed: 9\n",2);
+		 kill(0,SIGKILL);
+	}
 	close_tabtube(cmd->nb_arg, tabtube);
 }
