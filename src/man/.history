@@ -21,3 +21,38 @@ exit
 ls -Rl /
 cat
 :q
+ls
+exit
+./21sh
+ls
+exit
+ls
+cat -e | ls | exit | ls
+setenv PATH=""
+setenv PATH=''
+ls
+exit
+ls
+./21sh
+'$TERM'
+'"$TERM"'
+"$TERM"
+\'
+'\'''
+exit
+ext
+exit
+exit
+exit
+exit
+cat < Makefile > file
+cat file
+rm file
+ls
+clear
+ls
+ls exit
+make
+exit
+ls
+exit

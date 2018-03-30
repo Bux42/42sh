@@ -12,7 +12,7 @@
 
 #include "../../inc/header.h"
 
-void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
+void	ft_cmd_pipe(t_listc *cmd, t_sh *sh)
 {
 	char	*fullpath;
 	int		(*func)(char **, t_sh*);
@@ -20,16 +20,16 @@ void	ft_cmd_pipe(t_listc *cmd, t_sh *i_env)
 	if (cmd->func)
 	{
 		func = cmd->func;
-		i_env->retval = func(cmd->cont, i_env);
-		exit(i_env->retval);
+		sh->retval = func(cmd->cont, sh);
+		exit(sh->retval);
 	}
-	else if (!(fullpath = command_path(&i_env->env, cmd->cont[0], i_env)))
+	else if (!(fullpath = command_path(&sh->env, cmd->cont[0], sh)))
 		exit(1);
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
 }
 
-void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabtube, t_sh *i_env)
+void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabtube, t_sh *sh)
 {
 	closed_unused_fd(i, cmd->nb_arg - 1, tabtube);
 	if (i > 0)
@@ -45,10 +45,10 @@ void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabtube, t_sh *i_env)
 	if (cmd->redirs && cmd->redirs->redir[1] == 4)
 		heredock_redirect(cmd, tabtube, i);
 	redirect(cmd, tabtube, i);
-	ft_cmd_pipe(cmd, i_env);
+	ft_cmd_pipe(cmd, sh);
 }
 
-void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, int i, t_sh *i_env)
+void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, int i, t_sh *sh)
 {
 	pid_t son;
 
@@ -62,11 +62,11 @@ void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, int i, t_sh *i_env)
 		exit(1);
 	}
 	else if (son == 0)
-		pipe_tmp(cmd, i, tabtube, i_env);
+		pipe_tmp(cmd, i, tabtube, sh);
 	pid_tab[i] = son;
 }
 
-int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *i_env)
+int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *sh)
 {
 	int		nu_cmd;
 	int		wt_cpt;
@@ -77,23 +77,23 @@ int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *i_env)
 	cpy = cmd;
 	while (nu_cmd < cmd->nb_arg - 1)
 	{
-		ft_pipe(cmd, pid_tab, tabtube, nu_cmd, i_env);
+		ft_pipe(cmd, pid_tab, tabtube, nu_cmd, sh);
 		cmd = cmd->next;
 		nu_cmd++;
 	}
 	signal(SIGINT, SIG_IGN);
-	ft_pipe(cmd, pid_tab, tabtube, nu_cmd, i_env);
+	ft_pipe(cmd, pid_tab, tabtube, nu_cmd, sh);
 	closed_unused_fd(-1, cmd->nb_arg - 1, tabtube);
 	while (++wt_cpt < cmd->nb_arg)
 	{
 		waitpid(pid_tab[wt_cpt], &cpy->status, 0);
-		i_env->retval = cpy->status;
+		sh->retval = cpy->status;
 		cpy = cpy->next;
 	}
-	return (i_env->retval);
+	return (sh->retval);
 }
 
-int		init_pipe(t_listc *cmd, t_pipe *tabtube, t_sh *i_env)
+int		init_pipe(t_listc *cmd, t_pipe *tabtube, t_sh *sh)
 {
 	int		*pid_tab;
 	int		i;
@@ -111,5 +111,5 @@ int		init_pipe(t_listc *cmd, t_pipe *tabtube, t_sh *i_env)
 		}
 		i++;
 	}
-	return (do_pipe(cmd, pid_tab, tabtube, i_env));
+	return (do_pipe(cmd, pid_tab, tabtube, sh));
 }

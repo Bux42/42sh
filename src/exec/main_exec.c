@@ -14,8 +14,10 @@
 
 void	print_access_error(char *fullpath)
 {
-	access(fullpath, X_OK) ? ft_putstr_fd("Permission denied.\n", 2)
-		: ft_putstr_fd("error\n", 2);
+	if (access(fullpath, X_OK))
+		ft_putstr_fd("Permission denied.\n", 2);
+	else
+		ft_putstr_fd("error\n", 2);
 }
 
 void	close_tabtube(int len, t_pipe *tabtube)
@@ -34,19 +36,19 @@ void	close_tabtube(int len, t_pipe *tabtube)
 	free(tabtube);
 }
 
-void	run_cmd(char *fullpath, t_listc *cmd, t_sh *i_env, char **env)
+void	run_cmd(char *fullpath, t_listc *cmd, t_sh *sh, char **env)
 {
 	if (cmd->prev && (cmd->prev->sep_type == AND
 		|| cmd->prev->sep_type == OR))
 	{
 		if (cmd->prev->sep_type == OR &&
-			WEXITSTATUS(i_env->retval) != 0)
+			WEXITSTATUS(sh->retval) != 0)
 			execve(fullpath, cmd->cont, env);
 		else if (cmd->prev->sep_type == AND
-			&& WEXITSTATUS(i_env->retval) == 0)
+			&& WEXITSTATUS(sh->retval) == 0)
 			execve(fullpath, cmd->cont, env);
 		else
-			exit(WEXITSTATUS(i_env->retval));
+			exit(WEXITSTATUS(sh->retval));
 	}
 	else
 		execve(fullpath, cmd->cont, env);
@@ -54,37 +56,37 @@ void	run_cmd(char *fullpath, t_listc *cmd, t_sh *i_env, char **env)
 	exit(-1);
 }
 
-void	exec_cli(char *cli, t_listc *cmd, t_sh *i_env)
+void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 {
 	char	*fullpath;
 	char	**env;
-	pid_t	father;
+	pid_t	pid;
 	t_pipe	*tabtube;
 
-	father = 0;
+	pid = 0;
 	fullpath = NULL;
 	if (!(tabtube = (t_pipe *)malloc(sizeof(t_pipe) * ((cmd->nb_arg)))))
 		return ;
 	if (cmd->redirs && cmd->redirs->redir[1] == HEREDOC)
 		heredock_redirect(cmd, tabtube, 0);
 	if (cmd->sep_type == PIPE)
-		i_env->retval = init_pipe(cmd, tabtube, i_env);
-	else if ((fullpath = command_path(&i_env->env, cli, i_env)))
+		sh->retval = init_pipe(cmd, tabtube, sh);
+	else if ((fullpath = command_path(&sh->env, cli, sh)))
 	{
-		if ((father = fork()) == 0)
+		if ((pid = fork()) == 0)
 		{
 			signal_exec();
-			env = env_list_to_char(&i_env->env);
+			env = env_list_to_char(&sh->env);
 			if (cmd->sep_type == 0 || cmd->sep_type == SEMICOLON
 				|| (cmd->redirs && cmd->redirs->redir[1] == HEREDOC))
 				redirect(cmd, tabtube, 0);
-			run_cmd(fullpath, cmd, i_env, env);
+			run_cmd(fullpath, cmd, sh, env);
 		}
 		signal_init();
 		signal(SIGINT, &signal_newline);
 	}
-	waitpid(father, &i_env->retval, WUNTRACED);
-	if (WIFSIGNALED(i_env->retval) && WTERMSIG(i_env->retval) == 9)
+	waitpid(pid, &sh->retval, WUNTRACED);
+	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
  	{
 		 ft_putstr_fd("Killed: 9\n",2);
 		 kill(0,SIGKILL);
