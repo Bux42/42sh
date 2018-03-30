@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 15:35:11 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/30 21:13:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,20 @@ int		show_err(int err, char c);
 int		get_lg(int *lg, char **exec);
 int		get_beg(int *i, t_his **history, char **exec);
 int		last_command(t_sh *sh, t_inp **t);
-int		by_last(t_sh *sh, t_inp **t, int pos);
+int		get_his(t_sh *sh, t_inp **inp, int pos);
+
 int		history_exclaim(t_inp **inp, t_sh *sh);
-int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
-int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
-int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input);
-int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_last(t_inp **inp, t_sh *sh);
+int		get_by_first(t_inp **inp, t_sh *sh);
+int		get_by_beg(t_inp **inp, t_sh *sh);
+int		get_by_name(t_inp **inp, t_sh *sh);
+
+int		inp_to_int(t_inp **inp);
+t_inp	*get_search(t_inp **inp);
+t_inp	*replace_exclaim_inter(t_inp *found, t_inp **inp);
+t_inp	*replace_double_exclaim(t_inp **his, t_inp **inp);
+t_inp	*insert_found(t_inp **inp, t_inp *found);
+
 void	fill_str(t_inp *inp, char (*str)[20]);
 int		no_event(int i);
 int		name_no_event(int i, t_inp *inp, int pos);
