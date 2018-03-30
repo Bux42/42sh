@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/28 17:50:41 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:08:13 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 	set_env(env, name, value);
 	if (ft_strcmp(name, "PATH=") == 0)
 		new_hash(sh, value);
+	else
+		free(value);
 	free(name);
-	free(value);
 	return (0);
 }
 
