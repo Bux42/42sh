@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:23:58 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 21:57:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/30 23:41:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,25 @@ int		next_is_false(t_inp **cp)
 	return (0);
 }
 
+int		exclaim_surrounding(t_inp **inp)
+{
+	if ((*inp)->next->next)
+	{
+		if ((*inp)->next->next->c == '!')
+			return (0);
+	}
+	return (1);
+}
+
 int		history_parsing(t_inp **inp, t_sh *sh)
 {
-	if ((*inp)->next->c == '!')
+	if ((*inp)->next->c == '!' && exclaim_surrounding(inp))
 		return (last_command(sh, inp));
-	else if ((*inp)->next->c == '-')
+	else if ((*inp)->next->c == '-' && exclaim_surrounding(inp))
 		return (get_his(sh, inp, 1));
-	else if ((*inp)->next->c > 48 && (*inp)->next->c < 58)
+	else if ((*inp)->next->c > 48 && (*inp)->next->c < 58 && exclaim_surrounding(inp))
 		return (get_his(sh, inp, 2));
-	else if ((*inp)->next->c == '?')
+	else if ((*inp)->next->c == '?' && exclaim_surrounding(inp))
 		return (get_his(sh, inp, 4));
 	else
 		return (get_his(sh, inp, 3));

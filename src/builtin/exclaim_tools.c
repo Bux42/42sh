@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 22:31:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/30 23:40:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,22 @@ int		last_command(t_sh *sh, t_inp **inp)
 
 int		get_his(t_sh *sh, t_inp **inp, int pos)
 {
+	int		ret;
+
+	ret = -1;
 	if ((*inp)->next)
 	{
 		(*inp) = (*inp)->next;
 		if (pos == 1)
 			(*inp) = (*inp)->next;
 		if (pos == 1 && (*inp))
-			return (get_by_last(inp, sh));
+			ret =  (get_by_last(inp, sh));
 		if (pos == 2)
-			return (get_by_first(inp, sh));
+			ret = (get_by_first(inp, sh));
 		if (pos == 4)
-			return (get_by_name(inp, sh));
+			ret = (get_by_name(inp, sh));
 		if (pos == 3)
-			return (get_by_beg(inp, sh));
+			ret =  (get_by_beg(inp, sh));
 	}
-	return (-1);
+	return (ret);
 }

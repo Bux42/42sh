@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/30 22:32:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 16:33:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		free_and_relink(t_inp **inp, char c)
 		(*inp)->c = c;
 }
 
-int			empty_inp(t_inp **inp, t_sh *sh)
+int			empty_inp(t_inp **inp)
 {
 	t_inp	*cp;
 	int		i;
@@ -95,9 +95,6 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	i = 0;
 	if ((cp = (*inp)))
 	{
-		if (history_exclaim(inp, sh))
-			return (0);
-		cp = *inp;
 		while (cp && cp->c)
 		{
 			if (!is_space(cp->c))
@@ -121,7 +118,7 @@ void		parse(t_sh *sh)
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
-	if (empty_inp(&clean, sh))
+	if (empty_inp(&clean))
 	{
 		history_push_front(&sh->history, clean, sh);
 		sh->history_len = history_len(&sh->history);
