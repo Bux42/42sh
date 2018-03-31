@@ -81,6 +81,7 @@ void		signal_init(void)
 void		signal_exec(void)
 {
 	signal(SIGINT, SIG_DFL);
+	signal(SIGKILL, SIG_DFL);
 	signal(SIGHUP, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGILL, SIG_DFL);
@@ -91,4 +92,5 @@ void		signal_exec(void)
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGSTOP, SIG_DFL);
 	signal(SIGCONT, SIG_DFL);
+	signal(SIGCONT, SIG_IGN);
 }
