@@ -28,6 +28,8 @@ SRC_DIR		=	src/
 INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
+HIST		= ./src/man/.history
+
 SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
@@ -171,6 +173,7 @@ cleanlib:
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
+	@rm -rf $(HIST)
 	@printf "\r\033[38;5;196m ❌ fclean $(NAME).\033[0m\033[K\n"
 
 fcleanlib:		cleanlib

@@ -34,7 +34,7 @@ int		name_no_event(int i, t_inp *inp, int pos)
 {
 	ft_putstr("!: No such event: ");
 	if (i && inp && pos)
-		;
+		i++;
 	custom_return();
 	return (-1);
 }
