@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:05:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 21:59:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 19:23:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ char		*get_specific_env(char *env, t_env **envlist)
 		while (cp)
 		{
 			if (ft_strncmp(env, cp->env, ft_strlen(env)) == 0)
+			{
+				if (!cp->env[ft_strlen(env)])
+					return (NULL);
 				return (ft_strdup(&cp->env[ft_strlen(env)]));
+			}
 			cp = cp->next;
 		}
 	}
@@ -38,7 +42,11 @@ char		*get_specific_loc(char *env, t_loc **envlist)
 		while (cp)
 		{
 			if (ft_strncmp(env, cp->content, ft_strlen(env)) == 0)
+			{
+				if (!cp->content[ft_strlen(env)])
+					return (NULL);
 				return (ft_strdup(&cp->content[ft_strlen(env)]));
+			}
 			cp = cp->next;
 		}
 	}

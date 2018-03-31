@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 16:33:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 19:25:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define AGGR			4096
 # define AGGRFILE		8192
 # define AGGROUT		16384
+# define LAGGR			32768
+# define LAGGRIN		65536
 
 # include <termcap.h>
 # include <termios.h>
@@ -108,6 +110,7 @@ void					inp_insert_chain(t_inp **src, t_sh *sh);
 void					print_str(char *str, t_sh *sh);
 void					restore_cursor_pos(int nb, t_sh *sh);
 void					restore_cursor_right(int nb, t_sh *sh);
+void					print_t_inp(t_inp **inp);
 
 t_inpl					*new_inpl(t_inp **inp, int type);
 void					inpl_push_back(t_inpl **inpl, t_inp **inp, int type);
@@ -217,6 +220,7 @@ int						check_and(t_inp **inp);
 int						check_semicolon(t_inp **inp);
 int						check_out_aggr(t_inp *inp);
 int						check_mult_aggr(t_inp **inp);
+int						check_left_aggr(t_inp *inp);
 
 char					*inp_to_cont(t_inp **inp);
 

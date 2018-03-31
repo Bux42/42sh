@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 22:03:14 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 17:25:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 18:11:38 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int			check_left_arrow(t_inp **inp)
 			return (type | TOEXE);
 		else if (cp->next->c == '<' && !cp->next->next)
 			return (type | HERE);
+		else
+			return (check_left_aggr(cp));
 	}
 	return (-1);
 }
@@ -93,6 +95,26 @@ int			check_out_aggr(t_inp *inp)
 	type = 0;
 	if (inp->c > 47 && inp->c < 51)
 		return (type | AGGROUT | AGGR);
+	return (-1);
+}
+
+int			check_left_aggr(t_inp *cp)
+{
+	int		type;
+
+	type = 0;
+	if (cp->next && cp->next->c == '&')
+	{
+		cp = cp->next;
+		if (cp->next)
+		{
+			if (cp->next->c > 47 && cp->next->c < 51)
+				if (!cp->next->next)
+					return (type | LAGGR);
+		}
+		else
+			return (type | LAGGRIN);
+	}
 	return (-1);
 }
 
@@ -117,6 +139,8 @@ int			check_mult_aggr(t_inp **inp)
 						return (type | AGGR);
 			}
 		}
+		if (cp->next && cp->next->c == '<')
+			return (check_left_aggr(cp->next));
 	}
 	return (-1);
 }

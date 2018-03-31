@@ -6,11 +6,25 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/30 23:04:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 19:25:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		print_t_inp(t_inp **inp)
+{
+	t_inp	*cp;
+
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			cp = cp->next;
+		}
+	}
+}
 
 void		print_converted(t_inp **inp, int type)
 {
@@ -53,6 +67,10 @@ void		print_converted(t_inp **inp, int type)
 			ft_putstr(" <= AGGR TOFILE");
 		if (type & AGGROUT)
 			ft_putstr(" <= AGGROUT");
+		if (type & LAGGR)
+			ft_putstr(" <= LAGGR");
+		if (type & LAGGRIN)
+			ft_putstr(" <= LAGGRIN");
 		custom_return();
 	}
 }

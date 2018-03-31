@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 19:57:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 19:37:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,23 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		else
 			redir_type[0] = (*inpl)->inp->c - 48;
 	}
+	else if (type & LAGGR || type & LAGGRIN)
+	{
+		redir_type[1] = type;
+		if (type & LAGGRIN)
+			redir_type[2] = -1;
+		else
+		{
+			if ((*inpl)->inp->c == '<')
+				redir_type[2] = (*inpl)->inp->next->next->c - 48;
+			else
+				redir_type[2] = (*inpl)->inp->next->next->next->c - 48;
+		}
+		if ((*inpl)->inp->c == '<')
+			redir_type[0] = 0;
+		else
+			redir_type[0] = (*inpl)->inp->c - 48;
+	}
 	if (!*redir)
 		*redir = new_redir(redir_type, file, here);
 	else
@@ -266,6 +283,10 @@ int			is_redirection(int type)
 	if (type & AGGR)
 		return (1);
 	if (type & AGGRFILE)
+		return (1);
+	if (type & LAGGR)
+		return (1);
+	if (type & LAGGRIN)
 		return (1);
 	return (0);
 }

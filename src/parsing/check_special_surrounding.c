@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 12:57:38 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 18:50:09 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,34 @@ int			bad_surrounding_3(t_inpl *inpl)
 		if (inpl->previous->previous->type & HERE)
 			return (1);
 	if (inpl->previous)
-		if (inpl->previous->type > 64 && inpl->previous->type < 1024)
+		if ((inpl->previous->type > 64 && inpl->previous->type < 1024) ||
+				inpl->previous->type > 2048)
 			if (inpl->next && inpl->next->type & ARGUMENT)
 				return (0);
+	return (1);
+}
+
+int			bad_surrounding_4(t_inpl *inpl)
+{
+
+	if (inpl->previous)
+	{
+		if (inpl->previous->type > 64 && inpl->previous->type < 1024)
+			return (0);
+		else if (inpl->previous->type > 2048)
+			return (0);
+	}
+	return (1);
+}
+
+int			bad_closing_aggr(t_inpl *inpl)
+{
+	int		type;
+
+	type = 0;
+	if (inpl)
+		if (inpl->inp && inpl->inp->c == '-' && !inpl->inp->next)
+			return (0);
 	return (1);
 }
 
@@ -76,6 +101,12 @@ int			check_special_surrounding(t_inpl **inpl)
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & HERE)
 				if (bad_surrounding_3(cp))
+					return (special_error_surrounding(&cp->inp));
+			if (cp->type & AGGR || cp->type & LAGGR || cp->type & LAGGRIN)
+				if (bad_surrounding_4(cp))
+					return (special_error_surrounding(&cp->inp));
+			if (cp->type & AGGRFILE || cp->type & LAGGRIN)
+				if (bad_closing_aggr(cp->next))
 					return (special_error_surrounding(&cp->inp));
 			cp = cp->next;
 		}

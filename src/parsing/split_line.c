@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 12:45:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 16:35:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,12 @@ int			special_tok(char c)
 int			redir(t_inp *cp)
 {
 	if (cp->c > 47 && cp->c < 58)
+	{
 		if (cp->next && cp->next->c == '>')
 			return (1);
+		if (cp->next && cp->next->c == '<')
+			return (1);
+	}
 	return (0);
 }
 
