@@ -65,7 +65,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 
 	pid = 0;
 	fullpath = NULL;
-	if (!(tabtube = (t_pipe *)malloc(sizeof(t_pipe) * ((cmd->nb_arg)))))
+	if (!(tabtube = (t_pipe *)malloc(sizeof(t_pipe) * ((cmd->nb_arg + 1)))))
 		return ;
 	if (cmd->redirs && cmd->redirs->redir[1] == HEREDOC)
 		heredock_redirect(cmd, tabtube, 0);
@@ -85,6 +85,8 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		signal_init();
 		signal(SIGINT, &signal_newline);
 	}
+	else
+		return ;
 	waitpid(pid, &sh->retval, WUNTRACED);
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
  	{
