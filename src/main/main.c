@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 13:35:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 22:14:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		init_variables(t_sh *sh)
 	sh->close = NULL;
 	sh->hash = NULL;
 	sh->hash_size = 0;
+	sh->bin = NULL;
 	ft_bzero(sh->buff, 6);
 }
 
@@ -109,6 +110,7 @@ int			main(int ac, char **av, char **env)
 		ft_putstr(tgetstr("le", NULL));
 	}
 	init_variables(g_sh);
+	get_bin(&g_sh->env, g_sh);
 	signal_init();
 	while (ac > -1)
 		if (read(1, g_sh->buff, 4))

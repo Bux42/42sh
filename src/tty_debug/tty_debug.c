@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/26 13:27:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 20:48:36 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 		custom_strcat(buff, sh->comp_path);
 	else
 		custom_strcat(buff, "NULL");
+	custom_strcat(buff, " comp_builtin:  ");
+	itoa = ft_itoa(sh->comp_builtin);custom_strcat(buff, itoa);free(itoa);
 	if (sh->clipboard)
 	{
 		custom_strcat(buff, " Clipboard: ");

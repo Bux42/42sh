@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/31 18:48:51 by videsvau         ###   ########.fr        #
+#    Updated: 2018/03/31 23:10:41 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -50,6 +50,7 @@ line_edition/auto_completion.c\
 line_edition/auto_completion_clear.c\
 line_edition/completion_path.c\
 line_edition/print_completion.c\
+line_edition/auto_completion_builtin.c\
 line_edition/line_is_closed.c\
 line_edition/s_close_list.c\
 line_edition/enter_key.c\
@@ -60,6 +61,7 @@ line_edition/print_search.c\
 line_edition/optimized_tools.c\
 line_edition/optimized_tools_2.c\
 line_edition/inpl_list.c\
+line_edition/s_bin_list.c\
 parsing/debug.c\
 parsing/heredoc.c\
 parsing/token_list.c\

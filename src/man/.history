@@ -104,3 +104,9 @@ ls >&1
 ls <&2
 ls <&-
 ls 1<&-
+ls <&
+ls /bin
+wait4path
+d
+norminette Makefile
+norminette Makefile && norminette ~/21sh/*

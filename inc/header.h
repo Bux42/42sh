@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 19:25:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 23:31:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ struct s_sh				*g_sh;
 
 int						init_term(void);
 void					init_variables(t_sh *sh);
+void					get_bin(t_env **env, t_sh *sh);
+t_bin					*new_bin(char *name);
+void					bin_push_front(t_bin **bin, char *name);
 void					signal_init(void);
 void					signal_exec(void);
 void					signal_event(int signo);
@@ -176,6 +179,11 @@ int						check_empty_line(t_inp **inp);
 
 void					autocompletion(t_inp **inp, t_sh *sh);
 void					print_completion(t_sh *sh, t_inp **inp);
+void					not_found(t_sh *sh, t_inp *inp);
+int						get_diff(char *fl, t_sh *sh);
+void					print_completion_builtin(t_sh *sh, t_inp *inp, t_bin **bin);
+void					delete_remain(t_sh *sh, char *remain);
+int						complete_builtin(t_inp **inp);
 void					found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp);
 void					insert_completion(t_sh *sh, t_inp **inp);
 void					erase_completion(t_sh *sh, t_inp **inp);

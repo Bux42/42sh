@@ -6,11 +6,32 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 02:01:15 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/02 18:21:12 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/31 23:28:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void            delete_remain(t_sh *sh, char *remain)
+{
+        int             len;
+        int             len2;
+        t_inp   *cp;
+
+        len2 = 0;
+        cp = get_to_pos(&sh->inpl->inp);
+        while (cp)
+        {
+                cp = cp->next;
+                len2++;
+        }
+        len = ft_strlen(remain) + len2 - 1;
+        print_spaces(len, sh);
+        len = ft_strlen(remain) + len2 - 1;
+        while (len--)
+                custom_left(sh);
+        overwrite_remaining(sh, &sh->inpl->inp);
+}
 
 int			get_diff(char *fl, t_sh *sh)
 {
@@ -88,23 +109,29 @@ void		print_completion(t_sh *sh, t_inp **inp)
 	t_inp			*cp;
 
 	cp = get_to_pos(inp);
+	sh->comp_builtin = complete_builtin(&cp);
 	cp = cp->next;
 	sh->dec = -1;
 	sh->over = 0;
-	if (!(od = opendir(sh->comp_path)))
-		return ;
-	while ((fl = readdir(od)))
+	if (sh->comp_builtin && ft_strcmp(sh->comp_path, "./") == 0)
+		print_completion_builtin(sh, cp, &sh->bin);
+	else
 	{
-		if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug))
-				== 0)
-		{
-			found(sh, od, fl, cp);
-			if (sh->comp_remain == NULL)
-				closedir(od);
+		if (!(od = opendir(sh->comp_path)))
 			return ;
+		while ((fl = readdir(od)))
+		{
+			if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug))
+					== 0)
+			{
+				found(sh, od, fl, cp);
+				if (sh->comp_remain == NULL)
+					closedir(od);
+				return ;
+			}
 		}
+		if (sh->comp_remain)
+			not_found(sh, cp);
+		closedir(od);
 	}
-	if (sh->comp_remain)
-		not_found(sh, cp);
-	closedir(od);
 }
