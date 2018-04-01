@@ -6,11 +6,53 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:30:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/30 21:53:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 21:58:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		str_to_inp(char *str, t_inp **inp)
+{
+	int		i;
+	t_inp	*cp;
+	t_inp	*tmp;
+
+	i = -1;
+	cp = *inp;
+	while (str[++i])
+	{
+		if (str[i] > 32)
+		{
+			if (!cp)
+			{
+				cp = new_inp(str[i]);
+				*inp = cp;
+			}
+			else
+			{
+				tmp = new_inp(str[i]);
+				cp->next = tmp;
+				tmp->previous = cp;
+				cp = cp->next;
+			}
+		}
+	}
+}
+
+t_his		*new_his(char *str)
+{
+	t_his	*ret;
+
+	ret = NULL;
+	if (!(ret = (t_his*)malloc(sizeof(t_his))))
+		return (NULL);
+	ret->next = NULL;
+	ret->previous = NULL;
+	ret->inp = NULL;
+	str_to_inp(str, &ret->inp);
+	return (ret);
+}
 
 int			inp_to_inp_cmp(t_inp **inp1, t_inp **inp2)
 {

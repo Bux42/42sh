@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/31 23:10:41 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/01 22:16:39 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -27,8 +27,6 @@ LIBS		=	-ltermcap
 SRC_DIR		=	src/
 INC_DIR		=	includes/
 OBJ_DIR		=	objs/
-
-HIST		= ./src/man/.history
 
 SRC_BASE	=	\
 main/main.c\
@@ -173,7 +171,6 @@ cleanlib:
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
-	@rm -rf $(HIST)
 	@printf "\r\033[38;5;196m ❌ fclean $(NAME).\033[0m\033[K\n"
 
 fcleanlib:		cleanlib

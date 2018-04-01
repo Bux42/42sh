@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 02:01:15 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 23:28:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 20:40:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void		print_completion(t_sh *sh, t_inp **inp)
 			if (ft_strncmp(sh->comp_debug, fl->d_name, ft_strlen(sh->comp_debug))
 					== 0)
 			{
+				if (sh->comp_remain)
+					delete_remain(sh, sh->comp_remain);
 				found(sh, od, fl, cp);
 				if (sh->comp_remain == NULL)
 					closedir(od);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 23:39:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 22:13:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,23 @@ int			check_empty_line(t_inp **inp)
 void		restore_history_from_file(t_sh *sh)
 {
 	char	*str;
-	int		i;
-	t_inp	*inp;
+	t_his	*tmp;
 
-	inp = NULL;
 	sh->hist_res = 1;
 	while (get_next_line(sh->fd, &str))
 	{
-		i = -1;
-		while (str[++i] && str[i] > 31 && str[i] < 127)
-			inp_insert_posat(&inp, str[i]);
-		if (inp)
-			history_push_front(&sh->history, inp, sh);
-		free_list_from_beginning(&inp);
+		if (str)
+		{
+			if (!sh->history)
+				sh->history = new_his(str);
+			else
+			{
+				tmp = new_his(str);
+				tmp->next = sh->history;
+				sh->history->previous = tmp;
+				sh->history = tmp;
+			}
+		}
 		free(str);
 	}
 	sh->hist_res = 0;
