@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:30:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 21:58:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 22:31:30 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		str_to_inp(char *str, t_inp **inp)
 	cp = *inp;
 	while (str[++i])
 	{
-		if (str[i] > 32)
+		if (str[i] > 31)
 		{
 			if (!cp)
 			{

@@ -1,0 +1,40 @@
+wc -c < Makefile
+ls -l && ls
+ls something || ls
+ls || ls something
+ls -1; touch test_file; ls -1
+rm test_file
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+ls
+rm -rf ../test
+pwd
+cd ..
+ls
+echo "'oui maman"
+echo '"oui papa'
+ls 
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem
+ls
+cat /tmp/sorted_poem
+cat /tmp/sorted_poem
+rm nosuchfile 2>&-
+ls
+rm nosuchfile 2>&1 | cat -e
+cho "No dollar character" 1>&2 | cat -e
+echo "No dollar character" 1>&2 | cat -e
+myman
+myman echo
+echo oui -n
+echo -n oui
+myman 
+myman set
+set OUI=non NON=oui
+env
+echo $OUI
+echo $NON
+myman
+myman histiry
+myman history
+history -n
+history -1
+history

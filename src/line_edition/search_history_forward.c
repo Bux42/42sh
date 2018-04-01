@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:32:05 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 22:13:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 22:31:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			check_empty_line(t_inp **inp)
 	{
 		while (cp)
 		{
-			if (cp->c > 32 && cp->c < 127)
+			if (cp->c > 31 && cp->c < 127)
 				letters++;
 			cp = cp->next;
 		}
