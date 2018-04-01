@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 18:50:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 19:57:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ int			bad_surrounding_4(t_inpl *inpl)
 
 int			bad_closing_aggr(t_inpl *inpl)
 {
-	int		type;
-
-	type = 0;
 	if (inpl)
 		if (inpl->inp && inpl->inp->c == '-' && !inpl->inp->next)
 			return (0);
@@ -105,7 +102,7 @@ int			check_special_surrounding(t_inpl **inpl)
 			if (cp->type & AGGR || cp->type & LAGGR || cp->type & LAGGRIN)
 				if (bad_surrounding_4(cp))
 					return (special_error_surrounding(&cp->inp));
-			if (cp->type & AGGRFILE || cp->type & LAGGRIN)
+			if (cp->type & AGGROUT || cp->type & LAGGRIN)
 				if (bad_closing_aggr(cp->next))
 					return (special_error_surrounding(&cp->inp));
 			cp = cp->next;

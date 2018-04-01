@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 19:23:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 19:34:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ char		*command_path(t_env **env, char *command, t_sh *sh)
 	char	*ret;
 	char	**split;
 
-	if (sh)
-		;
 	ret = NULL;
 	if (command[0] == '/' || command[0] == '.')
 		return (ft_strdup(command));
@@ -77,6 +75,7 @@ char		*command_path(t_env **env, char *command, t_sh *sh)
 	{
 		ft_putstr_fd("21sh: command not found: ", 2);
 		ft_putendl_fd(command, 2);
+		sh->retval = 127;
 	}
 	return (ret);
 }
