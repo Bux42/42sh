@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:05:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 19:23:06 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/01 20:32:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char		*get_specific_loc(char *env, t_loc **envlist)
 {
 	t_loc	*cp;
 
+	if (env && env[0] == '?' && env[1] == '=' && !env[2])
+		return (ft_itoa(g_sh->retval));
 	if ((cp = (*envlist)))
 	{
 		while (cp)
