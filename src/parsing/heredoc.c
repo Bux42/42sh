@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 14:29:17 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/02 21:47:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char		**get_heredoc(t_inp **inp)
 	t_inpl	*inpl;
 	int		ret;
 	char	*ending;
+	int		test;
 
 	ret = 1;
 	here = NULL;
@@ -109,8 +110,14 @@ char		**get_heredoc(t_inp **inp)
 	if ((ending = get_ending_here(inp)))
 	{
 		print_heredoc(ending, g_sh);
-		while (ret && read(1, g_sh->buff, 6))
+		while (ret && (test = read(1, g_sh->buff, 6)))
 		{
+			if (test == -1)
+			{
+				free(ending);
+				free(inpl);
+				return (NULL);
+			}
 			ret = treat_input_here(g_sh, &inpl, ending);
 			ft_bzero(g_sh->buff, 6);
 		}

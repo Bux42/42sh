@@ -38,3 +38,76 @@ myman history
 history -n
 history -1
 history
+myman
+color
+color red
+myman color
+ls
+ls -l
+ls
+ls ../
+color
+myman
+`ls`
+norminette Makefile Makefile  Makefile Makefile Makefile
+``
+`h`
+ls `ls`
+`ls -lhahaha\``
+ls `oui`
+ls ``
+ls `e`
+ls `qefefqefqefqefqeffqwef\`qefefqefq`
+`\``
+``
+`e`
+`salut`
+`w`
+" "
+`e`
+d
+qqf
+qefqfe
+`w`
+`ls`
+`echo $HOME`
+`sort << OUI`
+echo $HOME
+`echo $HOME`
+`e`
+ls
+`e`
+`ls`
+`ls $HOME`
+`ls -R`
+`sort << EOF`
+norminette `ls`
+`ls`
+''exit
+ls << EOF
+'ls'
+`ls`
+`ls -ls`
+`ls`
+`ls -l`
+`ls`
+e`ls`e
+`ls`
+ls
+echo oui
+ls
+`ls`
+''
+exit
+'ls -l'
+`ls -l`
+ls -l
+ls
+l
+ls
+ls -l
+ls
+ls -R
+ls
+s
+ls

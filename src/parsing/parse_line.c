@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 19:55:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/02 23:21:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,6 @@ void		parse(t_sh *sh)
 	t_inp	*clean;
 	t_inpl	*splitted;
 	t_listc	*tok;
-	int		fd[2];
-//	int saved_stdout;
-//	saved_stdout = dup(STDOUT_FILENO);
 
 	clean = concat_inpl(&sh->inpl, sh);
 	tok = NULL;
@@ -128,19 +125,12 @@ void		parse(t_sh *sh)
 		if (splitted && convert_splitted(&splitted, sh) != NULL &&
 				check_special_surrounding(&splitted))
 		{
-			print_splitted(&splitted);
+			if (DEBUG)
+				print_splitted(&splitted);
 			tokenize_splitted(&splitted, sh, &tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-			ft_putchar('\n');
-			pipe(fd);
-			//dup2(fd[1], STDOUT_FILENO);   /* redirect stdout to the pipe */
-			//close(fd[1]);
 			execute_tokens(&tok, sh);
 			signal_init();
-			//char	buff[100];
-		//	read(fd[0], buff, 100);
-		//	dup2(saved_stdout, STDOUT_FILENO);
-		//	write(1, buff, 100);;
 			free_tokens(&tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}

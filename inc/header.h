@@ -6,13 +6,14 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 21:54:22 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/02 23:33:33 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
+# define DEBUG			1
 # define DQUOTE			1
 # define QUOTE			2
 # define BQUOTE			4
@@ -222,6 +223,8 @@ void					*convert_splitted(t_inpl **inpl, t_sh *sh);
 void					convert_quote(t_inp **inp);
 void					convert_dquote(t_inp **inp, t_sh *sh);
 void					convert_bquote(t_inp **inp, t_sh *sh);
+
+void					parse_backquotes(t_inp **inp, t_sh *sh);
 
 void*					special_error(t_inp **inp);
 int						check_right_arrow(t_inp **inp);
