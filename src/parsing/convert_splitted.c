@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:39:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:52:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		remove_backslash(t_inp **inp)
 		{
 			free(previous->next);
 			previous->next = NULL;
+			*inp = previous;
 		}
 	}
 	else
