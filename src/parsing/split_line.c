@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 16:35:36 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:36:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int			right_context(int flag)
 {
 	if (flag & QUOTE)
-		return (0);
-	if (flag & BQUOTE)
 		return (0);
 	if (flag & DQUOTE)
 		return (0);
@@ -94,9 +92,6 @@ int			empty_quote(int context, t_inp **inp)
 			return (1);
 	if (cp->c == '\"' && context & DQUOTE)
 		if (cp->next && cp->next->c == '\"')
-			return (1);
-	if (cp->c == '`' && context & BQUOTE)
-		if (cp->next && cp->next->c == '`')
 			return (1);
 	return (0);
 }

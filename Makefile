@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/02 22:10:07 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/03 20:37:49 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ parsing/check_special_surrounding.c\
 parsing/convert_splitted.c\
 parsing/split_line.c\
 parsing/parse_line.c\
-parsing/parse_backquotes.c\
 parsing/lexer_parser.c\
 parsing/redirections.c\
 parsing/variable.c\

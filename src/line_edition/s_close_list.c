@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:39:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/28 13:18:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:35:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int			print_expected_prompt(t_sh *sh, t_close **close)
 				print_str("quote", sh);
 			if (cp->flag & DQUOTE)
 				print_str("dquote", sh);
-			if (cp->flag & BQUOTE)
-				print_str("bquote", sh);
 			if (cp->previous)
 			{
 				print_str(" ", sh);

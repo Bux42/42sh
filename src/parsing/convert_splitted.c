@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/02 23:16:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:39:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 				convert_quote(&cp);
 			else if (cp && cp->c == '\"')
 				convert_dquote(&cp, sh);
-			else if (cp && cp->c == '`')
-				convert_bquote(&cp, sh);
 			else if (cp && cp->c == '$')
 				try_insert_variable(&cp, sh);
 			else if (cp && cp->c == '~')

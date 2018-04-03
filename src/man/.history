@@ -111,3 +111,22 @@ ls -R
 ls
 s
 ls
+echo `ls`
+`ls`
+src
+ls -l
+ls "-l"
+echo `ls`
+ls
+`ls`
+ls
+`ls`
+cat -e `ls`
+echo `ls` > file
+cat file
+`ls`
+ls
+`
+ls
+`
+`ls`

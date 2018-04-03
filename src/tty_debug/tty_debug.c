@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/31 20:48:36 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:35:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void		add_close(char *buff, t_close **close)
 			ft_strcat(buff, "quote, ");
 		if (cp->flag & DQUOTE)
 			ft_strcat(buff, "dquote, ");
-		if (cp->flag & BQUOTE)
-			ft_strcat(buff, "bquote, ");
 		cp = cp->next;
 	}
 }

@@ -6,17 +6,16 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/02 23:33:33 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:34:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
-# define DEBUG			1
+# define DEBUG			0
 # define DQUOTE			1
 # define QUOTE			2
-# define BQUOTE			4
 
 # define IN				0
 # define OUT			1
