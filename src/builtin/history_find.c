@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/09 17:45:22 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:02:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 	inp = inp->next;
 	fill_str(inp, &str);
 	i = ft_atoi(str);
-	ft_putnbr(i);
 	j = i;
 	if (his && his->inp)
 	{
@@ -53,7 +52,6 @@ int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 	*input = NULL;
 	fill_str(inp, &str);
 	i = ft_atoi(str);
-	ft_putnbr(i);
 	j = i;
 	if (his && his->inp)
 	{
@@ -77,12 +75,15 @@ int		find_in_his(t_inp *his, t_inp *inp, int *i, int flag)
 	{
 		if (ft_strchr(stop, inp->c) ||
 				(flag % 2 == 0 && inp->c == '?' && (++(*i)) > -1))
+		{
 			return (0);
+		}
 		if (flag > 2)
 			ft_putchar(inp->c);
 		else if (ft_strchr(last, inp->c))
 			return ((inp->c == his->c) ? 0 : 1);
-		else if (inp->c == '\\' && !(inp->next || ft_isalnum(inp->next->c)))
+		else if (inp->c == '\\' && !(inp->next || 
+					(inp->next && inp->next->c && ft_isalnum(inp->next->c))))
 			return ((inp->c == his->c) ? 0 : 1);
 		else if (inp->c != his->c)
 			return (-1);
@@ -126,10 +127,10 @@ int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input)
 	inp = inp->next;
 	while (his && his->inp)
 	{
-		i = 0;
 		cp = his->inp;
 		while (cp)
 		{
+			i = 0;
 			if (find_in_his(cp, inp, &i, 2) == 0)
 			{
 				*input = (his)->inp;

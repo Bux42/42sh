@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 20:57:58 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:06:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_inp	*get_start(t_inp **inp, int i)
 	t_inp	*tmp;
 
 	tmp = (*inp);
-	while (--i >= 0)
-		tmp = tmp->next;
+	while (--i >= 0 && tmp && tmp->next)
+			tmp = tmp->next;
 	return (tmp);
 }
 

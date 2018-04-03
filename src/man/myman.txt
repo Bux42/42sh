@@ -28,6 +28,7 @@ DESCRIPTION
        - local
 	   - history
 	   - exclaim
+	   - color
 
 
 AUTHOR
