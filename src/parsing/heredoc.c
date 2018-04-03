@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/02 21:47:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 22:00:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char		*get_ending_here(t_inp **inp)
 		len = 0;
 		while (cp)
 		{
-			len++;
+			if (cp->c > 31)
+				len++;
 			cp = cp->next;
 		}
 		if (!(ret = (char*)malloc(sizeof(char) * (len + 1))))
@@ -33,7 +34,8 @@ char		*get_ending_here(t_inp **inp)
 		len = 0;
 		while (cp)
 		{
-			ret[len] = cp->c;
+			if (cp->c > 31)
+				ret[len] = cp->c;
 			len++;
 			cp = cp->next;
 		}

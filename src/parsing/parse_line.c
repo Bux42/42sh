@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:33:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/04 00:03:50 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,17 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 			tmp = cp;
 			cp = cp->next;
 			free_list_from_beginning(&tmp->inp);
+			free(tmp);
+			tmp = NULL;
 		}
+		if ((sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
+		{
+			sh->inpl->previous = NULL;
+			sh->inpl->next = NULL;
+			sh->inpl->inp = NULL;
+		}
+		else
+			return (NULL);
 	}
 	while (ret && ret->previous)
 		ret = ret->previous;
