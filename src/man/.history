@@ -244,3 +244,120 @@ HPY\n,
 ls
 rm p8Z2jyBeg
 %8lUaHz
+echo "lol"
+echo "lol" > mdr
+echo "lol"
+ls
+echo "lol" > mdr
+echo "lol"
+echo "lol" > mdr
+cd .. > mdr
+echo "lol" 
+cd ..
+ls
+cd -
+ls
+clear
+echo "lol" > mdr
+echo lol > mdr
+echo lol
+ls
+echo "lol"
+echo "lol" > mdr
+ls
+ls | cat
+cat | ls
+echo "lol"
+echo "lol" > mdr
+echo "lol" > ndr
+echo "lol" > mdr
+cat mdr
+hihi
+cat mdr
+exit
+echo lol > mdr
+cat mdr
+rm mdr
+ls
+echo lol > mdr
+cat mdr
+rm mdr
+exit
+echo "lol" > mdr
+cat mdr
+ls
+ls | ls
+ls && ls
+cat | ls
+exit
+cat | ls
+echo lol > mdr
+echo "lol" > mdr
+cat mdr
+ls 
+cat mdr 
+cat | ls
+exit
+echo lol > ete
+cat ete
+ls 
+cat | ls
+ls
+rm ete
+rm mdr
+cd .. > lol
+ls
+cd 44sh
+ls
+cat lol
+rm lol
+ls /dev/fd
+exit
+echo lol > ndr
+cat ndr
+ls
+cat | ls
+ls /dev/fd
+exit
+echo lol > mdr
+cat mdr
+cat | ls
+ls /dev/fd
+echo mdr > xd
+exit
+ls /dev/fd
+ls -la /dev/fd
+exit
+echo lol > mdr
+cat mdr
+cat | ls
+rm mdr
+ls /dev/random
+ls /dev/fd
+echo "mdr" > tst
+cat tst
+cat < tst > file
+cat tst
+cat file
+cat | ls
+rm tst file
+ls
+echo << fin
+ls
+cat | ls
+exit
+echo lol
+echo lol > mdr
+cat mdr
+ls
+rm mdr
+exit
+echo lol > mdr
+cat mdr
+cat | ls
+cat mdr
+rm mdr
+ls
+clear
+ls /dev/fd
+exit

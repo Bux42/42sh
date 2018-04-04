@@ -309,6 +309,7 @@ void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
 //Tools
 void                    errexit(char *str);
 char		            *command_path(t_env **env, char *command, t_sh *sh);
+void                    close_tabtube(int len, t_pipe *tabtube);
 
 /*						builtins										*/
 
