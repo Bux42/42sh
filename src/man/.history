@@ -361,3 +361,27 @@ ls
 clear
 ls /dev/fd
 exit
+cat /dev/uran
+cat /dev/urandom
+cat /dev/random | head -c 1000
+ls
+cat /dev/urandom | head -c 1000
+exit
+echo "lol" | cat -e
+clear
+ls
+cd .. | cat -e
+cd .. > lui
+cd 44sh
+ls
+cat lui
+rm lui
+ls
+exit
+echo lol > mdr
+cat mdr
+ls
+rm mdr
+ls
+cat | ls
+exit
