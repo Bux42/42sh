@@ -15,3 +15,58 @@ color off
 ls
 color on
 ls
+ls -l
+env -i ls
+hisotry -A
+qegqeg
+qrgqg
+qefqef
+qefqefqefqf
+qefqefqefqef
+qefqef | qefqe |fqefqef
+qefqefqef
+qefeq|f qef
+qeefq > file
+cat file
+rm file
+ls
+ls -l
+rm -rf 21sh.dSYM
+ls
+cd ..
+ls -R
+ls
+ls -R
+cd 21sh
+ls -R
+env -i qefqef
+env -i qefqefqefqef
+env | cat -e
+ls > file
+rm file
+ls
+ls | ls
+ls | ls | ls
+ls | ls
+qefqefef
+qefqef
+qeff
+ls
+qefqef
+ls | ls
+ls | cat
+ls | ls
+ls | ls | ls
+ls && ls
+ls && ls && ls
+ls | 
+ls | ls
+env -i ls
+env -i pwd
+env -i ls
+env -i /usr/bin/env
+env -i coucou /usr/bin/env
+env -i coucou=qef /usr/bin/env
+test=oui
+env -i LESS=more /usr/bin/env
+env -i 

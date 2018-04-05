@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 04:32:46 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 05:54:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 07:43:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int		fork_command(char *path, char **exec, char **env)
 	int		status;
 
 	status = -1;
-	for (int i = 0; env[i]; i++)
-		ft_putendl(env[i]);
 	if ((father = fork()) != -1)
 	{
 		if (father == 0)

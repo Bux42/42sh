@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:57 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/28 18:05:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 07:29:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *sh)
 		sh->retval = cpy->status;
 		cpy = cpy->next;
 	}
+	free(pid_tab);
 	return (sh->retval);
 }
 

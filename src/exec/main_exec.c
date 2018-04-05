@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/05 04:17:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 07:15:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		free(fullpath);
 	}
 	else
-		return ;
+		return ((void)close_tabtube(cmd->nb_arg, tabtube));
 	waitpid(pid, &sh->retval, WUNTRACED);
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
  	{
