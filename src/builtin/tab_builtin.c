@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 13:18:02 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 12:24:58 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:08:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		env_free(char **env)
 		++i;
 	}
 	free(env);
-	return (0);
+	return (2);
 }
 
 char	*env_val(char *env_v)

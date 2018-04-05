@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:51:01 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 12:22:21 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:08:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int		flag_equal(char ***tab, char **exec, int verbose)
 		}
 		else if (env_verbose(verbose, exec[i])
 				&& !(*tab = env_error(*tab, exec[i])))
-			return (0);
+			return (env_free(*tab));
 	}
 	return (i);
 }
