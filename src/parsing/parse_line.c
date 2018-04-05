@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_backquotes.c                                 :+:      :+:    :+:   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 07:41:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:45:44 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 {
 	t_inpl	*cp;
 	t_inp	*ret;
+	t_inpl	*tmp;
 
 	ret = NULL;
 	sh->posy = sh->posy;
@@ -63,8 +64,20 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 		while (cp)
 		{
 			concat_inp(&cp->inp, &ret, cp);
+			tmp = cp;
 			cp = cp->next;
+			free_list_from_beginning(&tmp->inp);
+			free(tmp);
+			tmp = NULL;
 		}
+		if ((sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
+		{
+			sh->inpl->previous = NULL;
+			sh->inpl->next = NULL;
+			sh->inpl->inp = NULL;
+		}
+		else
+			return (NULL);
 	}
 	while (ret && ret->previous)
 		ret = ret->previous;
@@ -89,9 +102,9 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	t_inp	*cp;
 	int		i;
 
+	i = 0;
 	if (history_exclaim(inp, sh))
 		return (0);
-	i = 0;
 	if ((cp = (*inp)))
 	{
 		while (cp && cp->c)
@@ -121,14 +134,20 @@ void		parse(t_sh *sh)
 		splitted = NULL;
 		sh->context = 0;
 		split_line(&splitted, &clean, sh);
-		if (convert_splitted(&splitted, sh) != NULL)
+		if (splitted && convert_splitted(&splitted, sh) != NULL &&
+				check_special_surrounding(&splitted))
 		{
-			print_splitted(&splitted);
-			ft_putstr("Creating Token List");
+			if (DEBUG)
+				print_splitted(&splitted);
 			tokenize_splitted(&splitted, sh, &tok);
+			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
+			execute_tokens(&tok, sh);
+			signal_init();
+			free_tokens(&tok);
+			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}
-		custom_return();
 		sh->context = 0;
+		free_inpl(&splitted);
 	}
 	free_list_from_beginning(&clean);
 }

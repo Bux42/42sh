@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:33:43 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/23 19:44:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:36:30 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ int			try_update_context(char c, int flag)
 			return (flag - DQUOTE);
 		else if (!flag)
 			return (flag | DQUOTE);
-	}
-	if (c == '`')
-	{
-		if (flag & BQUOTE)
-			return (flag - BQUOTE);
-		else if (!flag)
-			return (flag | BQUOTE);
 	}
 	return (flag);
 }

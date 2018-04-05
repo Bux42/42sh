@@ -3,142 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   execute_tokens.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 13:49:29 by drecours         ###   ########.fr       */
+/*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
+/*   Updated: 2018/04/05 07:09:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
-#include "../builtin/builtin.h"
 
-char		*concat_command_path(char *path, char *command)
+void	sve_fd(int save_fd[3])
 {
-	char	*ret;
-	int		len;
-
-	ret = NULL;
-	len = ft_strlen(path) + ft_strlen(command) + 1;
-
-	if (!(ret = (char*)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	ft_bzero(ret, len);
-	ft_strcat(ret, path);
-	ft_strcat(ret, "/");
-	ft_strcat(ret, command);
-	return (ret);
+	save_fd[0] = dup(0);
+	save_fd[1] = dup(1);
+	save_fd[2] = dup(2);
 }
 
-char		*find_command_path(char **path, char *command)
+void	reset_fd(int save_fd[3])
 {
-	char			*ret;
-	DIR				*od;
-	struct dirent	*fl;
-	int				i;
-
-	i = -1;
-	ret = NULL;
-	while (path[++i])
-	{
-		if ((od = opendir(path[i])))
-		{
-			while ((fl = readdir(od)))
-			{
-				if (ft_strcmp(command, fl->d_name) == 0)
-				{
-					closedir(od);
-					return (concat_command_path(path[i], command));
-				}
-			}
-			closedir(od);
-		}
-	}
-	return (ret);
+	dup2(save_fd[0], 0);
+	close(save_fd[0]);
+	dup2(save_fd[1], 1);
+	close(save_fd[1]);
+	dup2(save_fd[2], 2);
+	close(save_fd[2]);
 }
 
-char		*command_path(t_env **env, char *command, t_sh *sh)
+void	builtin_redir(t_listc *cp, int (*func)(char **, t_sh*), t_sh *sh)
 {
-	char	*path;
-	char	*ret;
-	char	**split;
+	int		save_fd[3];
+	t_pipe	*p;
 
-	ret = NULL;
-	ft_putstr("cwc");
-	if (command[0] == '/')
-		return (ft_strdup(command));
-	if ((ret = get_hash_path(&sh->hash, command, sh)))
-	{
-		ft_putstr(ret);
-		return (ret);
-	}
-	if ((path = get_specific_env("PATH=", env)))
-	{
-		if ((split = ft_strsplit(path, ':')))
-		{
-			ret = find_command_path(split, command);
-		}
-	}
-	else
-		return (NULL);
-	return (ret);
+	sve_fd(save_fd);
+	if (!(p = (t_pipe *)malloc(sizeof(t_pipe) * ((2)))))
+		return ;
+	redirect(cp, p, 0);
+	func = cp->func;
+	sh->retval = func(cp->cont, sh);
+	reset_fd(save_fd);
+	close_tabtube(2, p);
 }
 
-void		free_char_array(char **array)
-{
-	int		i;
-
-	i = -1;
-	if (array)
-	{
-		while (array[++i])
-			free(array[i]);
-		if (array)
-			free(array);
-		array = NULL;
-	}
-}
-
-void		execute_tokens_debo(t_listc **tok, t_sh *sh)
+void	execute_tokens(t_listc **tok, t_sh *sh)
 {
 	t_listc	*cp;
-	char	*path;
-	char	**env;
 	int		(*func)(char **, t_sh*);
-	pid_t	pid;
 
 	if ((cp = (*tok)))
 	{
-		if (cp->cont)
+		while (cp)
 		{
-			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
-			ft_putchar('\n');
-			if (cp->func)
+			if (cp->func && cp->sep_type != PIPE)
 			{
 				func = cp->func;
-				sh->retval = func(cp->cont, sh);
+				(cp->redirs) ? builtin_redir(cp, func, sh) :
+					(sh->retval = func(cp->cont, sh));
 			}
-			else if ((path = command_path(&sh->env, cp->cont[0], sh)))
+			else if (cp->sep_type == AND || cp->sep_type == OR
+				|| cp->sep_type & SEMICOLON || !cp->sep_type)
+				exec_cli(cp->cont[0], cp, sh);
+			else if (cp->sep_type & PIPE)
 			{
-				env = env_list_to_char(&sh->env);
-				if ((pid = fork()) != -1)
-				{
-					if (pid == 0)
-					{
-						execve(path, cp->cont, env);
-					}
-					else
-						waitpid(pid, &sh->retval, 0);
-				}
-				free_char_array(env);
-				free(path);
+				prepare_pipe(cp);
+				exec_cli(cp->cont[0], cp, sh);
+				while (cp->next && cp->sep_type & PIPE)
+					cp = cp->next;
 			}
-			else
-			{
-				ft_putstr("42sh: command not found");
-				ft_putendl(cp->cont[0]);
-			}
-			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
+			cp = cp->next;
 		}
 	}
 }

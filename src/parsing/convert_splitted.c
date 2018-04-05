@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 07:43:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 02:23:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		remove_backslash(t_inp **inp)
 		{
 			free(previous->next);
 			previous->next = NULL;
+			*inp = previous;
 		}
 	}
 	else
@@ -49,8 +50,6 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 				convert_quote(&cp);
 			else if (cp && cp->c == '\"')
 				convert_dquote(&cp, sh);
-			else if (cp && cp->c == '`')
-				convert_bquote(&cp, sh);
 			else if (cp && cp->c == '$')
 				try_insert_variable(&cp, sh);
 			else if (cp && cp->c == '~')
@@ -124,6 +123,8 @@ int			check_special(t_inp **inp)
 	type = 0;
 	if ((cp = (*inp)))
 	{
+		if (cp->c > 47 && cp->c < 58)
+			type = check_mult_aggr(&cp);
 		if (cp->c == '>')
 			type = check_right_arrow(&cp);
 		if (cp->c == '<')
@@ -161,6 +162,8 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 						cp->type = _FILE;
 					if (cp->previous && (cp->previous->type & TOFILE))
 						cp->type = _FILE;
+					if (cp->previous && (cp->previous->type & HERE))
+						cp->type = ARGUMENT;
 				}
 			}
 			else if (cp->type == 1)

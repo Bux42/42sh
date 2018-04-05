@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 13:50:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/02 23:22:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char		*get_file_name(t_inp **inp)
 	return (ret);
 }
 
-t_redir		*new_redir(int *redir_type, char *file)
+t_redir		*new_redir(int *redir_type, char *file, char **here)
 {
 	t_redir	*redir;
 
@@ -177,6 +177,7 @@ t_redir		*new_redir(int *redir_type, char *file)
 	redir->redir[0] = redir_type[0];
 	redir->redir[1] = redir_type[1];
 	redir->redir[2] = redir_type[2];
+	redir->heredoc = here;
 	redir->next = NULL;
 	return (redir);
 }
@@ -186,7 +187,9 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 	char	*file;
 	int		redir_type[3];
 	t_redir	*last;
+	char	**here;
 
+	here = NULL;
 	file = NULL;
 	if (type & TOFILE || type & ATOFILE || type & TOEXE)
 	{
@@ -200,19 +203,74 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		redir_type[0] = 1;
 		redir_type[2] = 0;
 	}
+	else if (type & HERE)
+	{
+		redir_type[0] = -1;
+		redir_type[1] = HEREDOC;
+		redir_type[2] = -1;
+		here = get_heredoc(&(*inpl)->next->inp);
+	}
+	else if (type & AGGR)
+	{
+		redir_type[1] = type;
+		if (type & AGGRFILE)
+		{
+			file = get_file_name(&(*inpl)->next->inp);
+			if (ft_strcmp(file, "-") == 0)
+			{
+				free(file);
+				file = NULL;
+				redir_type[2] = -1;
+			}
+		}
+		else if (type & AGGROUT)
+			redir_type[2] = (*inpl)->inp->next->next->c - 48;
+		else
+			redir_type[2] = (*inpl)->inp->next->next->next->c - 48;
+		if (type & AGGROUT)
+			redir_type[0] = 1;
+		else
+			redir_type[0] = (*inpl)->inp->c - 48;
+	}
+	else if (type & LAGGR || type & LAGGRIN)
+	{
+		redir_type[1] = type;
+		if (type & LAGGRIN)
+			redir_type[2] = -1;
+		else
+		{
+			if ((*inpl)->inp->c == '<')
+				redir_type[2] = (*inpl)->inp->next->next->c - 48;
+			else
+				redir_type[2] = (*inpl)->inp->next->next->next->c - 48;
+		}
+		if ((*inpl)->inp->c == '<')
+			redir_type[0] = 0;
+		else
+			redir_type[0] = (*inpl)->inp->c - 48;
+	}
 	if (!*redir)
-		*redir = new_redir(redir_type, file);
+		*redir = new_redir(redir_type, file, here);
 	else
 	{
 		last = *redir;
 		while (last->next)
 			last = last->next;
-		last->next = new_redir(redir_type, file);
+		last->next = new_redir(redir_type, file, here);
 	}
-	ft_putstr("[REDIR TYPE:");ft_putnbr(redir_type[1]);
-	ft_putstr(" FD1:");ft_putnbr(redir_type[0]);
-	ft_putstr(" FD2:");ft_putnbr(redir_type[2]);
-	ft_putstr("] ");
+	if (DEBUG)
+	{
+		ft_putstr("[FILE: ");
+		if (file)
+			ft_putstr(file);
+		else
+			ft_putstr("NULL");
+		ft_putchar(']');
+		ft_putstr(" [REDIR TYPE:");ft_putnbr(redir_type[1]);
+		ft_putstr(" FD1:");ft_putnbr(redir_type[0]);
+		ft_putstr(" FD2:");ft_putnbr(redir_type[2]);
+		ft_putstr("] ");
+	}
 }
 
 int			is_redirection(int type)
@@ -222,6 +280,16 @@ int			is_redirection(int type)
 	if (type & ATOFILE)
 		return (1);
 	if (type & TOEXE)
+		return (1);
+	if (type & HERE)
+		return (1);
+	if (type & AGGR)
+		return (1);
+	if (type & AGGRFILE)
+		return (1);
+	if (type & LAGGR)
+		return (1);
+	if (type & LAGGRIN)
 		return (1);
 	return (0);
 }
@@ -234,15 +302,20 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok, int type)
 	type++;
 	if ((add = new_token()))
 	{
-		custom_return();
+		if (DEBUG)
+			custom_return();
 		add->cont = concat_content(inpl);
-		ft_putstr(add->cont[0]);
+		if (DEBUG)
+			ft_putstr(add->cont[0]);
 		add->func = get_builtin_function(add->cont[0]);
-		ft_putstr(" is a ");
-		if (add->func)
-			ft_putstr("builtin ");
-		else
-			ft_putstr("command ");
+		if (DEBUG)
+		{
+			ft_putstr(" is a ");
+			if (add->func)
+				ft_putstr("builtin ");
+			else
+				ft_putstr("command ");
+		}
 		cp = *inpl;
 		while (cp->next && keep_going(cp->next->type))
 		{
@@ -251,13 +324,15 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok, int type)
 			if (cp->next->type & PIPE || cp->next->type & AND || cp->next->type & OR || cp->next->type & SEMICOLON)
 			{
 				add->sep_type = cp->next->type;
-				ft_putnbr(add->sep_type);
+				if (DEBUG)
+					ft_putnbr(add->sep_type);
 				return ((void)tok_push_back(tok, add));
 			}
 			cp = cp->next;
 		}
 		add->sep_type = 0;
-		ft_putnbr(add->sep_type);
+		if (DEBUG)
+			ft_putnbr(add->sep_type);
 		tok_push_back(tok, add);
 	}
 }
@@ -274,8 +349,8 @@ int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok)
 			if (cp->type & BUILTIN || cp->type & COMMAND)
 			{
 				add_listc_token(&cp, tok, cp->type);
-				ft_putstr(" <= SEP_TYPE");
-			//	execute_tokens_debo(tok, sh);
+				if (DEBUG)
+					ft_putstr(" <= SEP_TYPE");
 			}
 			cp = cp->next;
 		}

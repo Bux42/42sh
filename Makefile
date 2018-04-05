@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: videsvau <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/03/19 14:23:20 by drecours         ###   ########.fr        #
+#    Updated: 2018/04/05 11:44:15 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,6 @@ FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
-
-DELTA		=	$$(echo "$$(tput cols)-47"|bc)
 
 LIBFT_DIR	=	libft/
 LIBFT_LIB	=	$(LIBFT_DIR)libft.a
@@ -34,6 +32,7 @@ SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
 line_edition/treat_input.c\
+line_edition/heredoc_treat_input.c\
 line_edition/add_delete_letter.c\
 line_edition/check_shortcut.c\
 line_edition/paste_after.c\
@@ -51,6 +50,7 @@ line_edition/auto_completion.c\
 line_edition/auto_completion_clear.c\
 line_edition/completion_path.c\
 line_edition/print_completion.c\
+line_edition/auto_completion_builtin.c\
 line_edition/line_is_closed.c\
 line_edition/s_close_list.c\
 line_edition/enter_key.c\
@@ -59,11 +59,16 @@ line_edition/treat_input_search.c\
 line_edition/insert_search_history_result.c\
 line_edition/print_search.c\
 line_edition/optimized_tools.c\
+line_edition/optimized_tools_2.c\
 line_edition/inpl_list.c\
+line_edition/s_bin_list.c\
 parsing/debug.c\
+parsing/heredoc.c\
+parsing/token_list.c\
 parsing/tokenize_splitted.c\
 parsing/convert_quotes.c\
 parsing/check_special.c\
+parsing/check_special_surrounding.c\
 parsing/convert_splitted.c\
 parsing/split_line.c\
 parsing/parse_line.c\
@@ -72,7 +77,12 @@ parsing/redirections.c\
 parsing/variable.c\
 parsing/insert_home.c\
 parsing/context_updater.c\
+exec/pipe.c\
+exec/redir.c\
+exec/redir_tools.c\
+exec/main_exec.c\
 exec/execute_tokens.c\
+exec/execute_tokens_old.c\
 exec/inp_to_exec.c\
 exec/check_valid_command.c\
 exec/fork_command.c\
@@ -145,7 +155,6 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
 	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
-	@printf "\r\033[38;5;11m⌛ MAKE %10.10s : %2d%% \033[48;5;%dm%*s\033[0m%*s\033[48;5;255m \033[0m \033[38;5;11m %*.*s\033[0m\033[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) $(DELTA) "$@"
 	@$(CC) $(FLAGS) $(D_FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)

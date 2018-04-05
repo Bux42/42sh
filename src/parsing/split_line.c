@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/16 00:31:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 03:10:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int			right_context(int flag)
 {
 	if (flag & QUOTE)
-		return (0);
-	if (flag & BQUOTE)
 		return (0);
 	if (flag & DQUOTE)
 		return (0);
@@ -95,10 +93,24 @@ int			empty_quote(int context, t_inp **inp)
 	if (cp->c == '\"' && context & DQUOTE)
 		if (cp->next && cp->next->c == '\"')
 			return (1);
-	if (cp->c == '`' && context & BQUOTE)
-		if (cp->next && cp->next->c == '`')
-			return (1);
 	return (0);
+}
+
+int			escaped(t_inp **inp)
+{
+	t_inp	*cp;
+	int		odd;
+
+	odd = 2;
+	if ((cp = (*inp)))
+	{
+		while (cp->previous && cp->previous->c == '\\')
+		{
+			odd++;
+			cp = cp->previous;
+		}
+	}
+	return (odd % 2);
 }
 
 void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
@@ -108,7 +120,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 	add = NULL;
 	while (*cp)
 	{
-		if (check_quoting((*cp)->c))
+		if (check_quoting((*cp)->c) && !escaped(cp))
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;
@@ -119,8 +131,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 		}
 		if (!*cp)
 			break ;
-		if (!check_quoting((*cp)->c))
-			inp_insert_posat_remake(&add, (*cp)->c);
+		inp_insert_posat_remake(&add, (*cp)->c);
 		(*cp) = (*cp)->next;
 	}
 	if (add)
@@ -161,8 +172,12 @@ int			special_tok(char c)
 int			redir(t_inp *cp)
 {
 	if (cp->c > 47 && cp->c < 58)
+	{
 		if (cp->next && cp->next->c == '>')
 			return (1);
+		if (cp->next && cp->next->c == '<')
+			return (1);
+	}
 	return (0);
 }
 

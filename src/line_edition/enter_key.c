@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/28 16:44:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:29:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ void		process_line(t_sh *sh)
 	while (sh->inpl && sh->inpl->previous)
 		sh->inpl = sh->inpl->previous;
 	parse(sh);
-	while (sh->inpl && sh->inpl->next)
-		sh->inpl = sh->inpl->next;
-	while (sh->inpl && sh->inpl->previous)
-	{
-		free_list_from_beginning(&sh->inpl->inp);
-		sh->inpl = sh->inpl->previous;
-		free(sh->inpl->next);
-		sh->inpl->next = NULL;
-	}
-	if (sh->inpl)
-	{
-		free_list_from_beginning(&sh->inpl->inp);
-		sh->inpl->next = NULL;
-	}
 	print_prompt(sh);
 }
 

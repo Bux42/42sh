@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 07:46:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:46:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
+# define DEBUG			0
 # define DQUOTE			1
 # define QUOTE			2
-# define BQUOTE			4
 
 # define IN				0
 # define OUT			1
 # define AOUT			3
+# define HEREDOC		4
 # define ERR_OUT		2
 # define READ_END		0
 # define WRITE_END		1
@@ -36,6 +37,11 @@
 # define BUILTIN		512
 # define _FILE			1024
 # define SEMICOLON		2048
+# define AGGR			4096
+# define AGGRFILE		8192
+# define AGGROUT		16384
+# define LAGGR			32768
+# define LAGGRIN		65536
 
 # include <termcap.h>
 # include <termios.h>
@@ -43,8 +49,8 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <signal.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # include "typedef.h"
 # include "hash.h"
@@ -58,10 +64,15 @@ void					print_converted(t_inp **inp, int type);
 
 struct termios			g_old_term;
 struct termios			g_new_term;
+struct s_sh				*g_sh;
 
 int						init_term(void);
 void					init_variables(t_sh *sh);
+void					get_bin(t_env **env, t_sh *sh);
+t_bin					*new_bin(char *name);
+void					bin_push_front(t_bin **bin, char *name);
 void					signal_init(void);
+void					signal_exec(void);
 void					signal_event(int signo);
 
 /*						environment										*/
@@ -71,6 +82,7 @@ char					*get_specific_loc(char *env, t_loc **envlist);
 void					get_env(char **env, t_sh *sh);
 void					env_push_back(t_env **envlist, char *env);
 t_env					*new_env(char *env);
+void					free_char_array(char **array);
 
 /*						pwd_stuff										*/
 
@@ -101,9 +113,11 @@ void					inp_insert_chain(t_inp **src, t_sh *sh);
 void					print_str(char *str, t_sh *sh);
 void					restore_cursor_pos(int nb, t_sh *sh);
 void					restore_cursor_right(int nb, t_sh *sh);
+void					print_t_inp(t_inp **inp);
 
 t_inpl					*new_inpl(t_inp **inp, int type);
 void					inpl_push_back(t_inpl **inpl, t_inp **inp, int type);
+void					free_inpl(t_inpl **inpl);
 
 void					move_cursor(t_sh *sh, t_inp **inp, char c);
 void					move_left(t_sh *sh, t_inp **inp);
@@ -123,6 +137,7 @@ void					jump_up(t_sh *sh, t_inp **inp);
 void					jump_down(t_sh *sh, t_inp **inp);
 
 t_inp					*new_inp(char c);
+t_inp					*inp_dup(t_inp **inp);
 void					inp_insert_posat(t_inp **inp, char c);
 void					inp_insert_posat_remake(t_inp **inp, char c);
 void					insert_middle(t_inp *first, t_inp *tmp);
@@ -145,10 +160,14 @@ void					free_list_before(t_inp **cp);
 
 void					paste_after(t_sh *sh, t_inp **inp);
 
+int						inp_to_inp_cmp(t_inp **inp1, t_inp **inp2);
 void					history_push_front(t_his **history, t_inp *inp, t_sh *sh);
 t_his					*history_new(t_inp *inp, t_sh *sh);
 t_inp					*inp_insert_chain_his(t_inp **src, t_sh *sh, int nb);
 int						history_len(t_his **history);
+
+t_his					*new_his(char *str);
+void					str_to_inp(char *str, t_inp **inp);
 
 void					search_history_backward(t_sh *sh, t_his **history);
 void					search_history_forward(t_sh *sh, t_his **history);
@@ -156,13 +175,18 @@ void					search_history_inp(t_sh *sh, t_inp **inp);
 void					clear_line(t_sh *sh, t_inp **inp);
 
 char					*inp_to_char(t_inp **inp, t_sh *sh);
-void					restaure_history_from_file(t_sh *sh);
+void					restore_history_from_file(t_sh *sh);
 int						check_empty_line(t_inp **inp);
 
 /*						auto_completion									*/
 
 void					autocompletion(t_inp **inp, t_sh *sh);
 void					print_completion(t_sh *sh, t_inp **inp);
+void					not_found(t_sh *sh, t_inp *inp);
+int						get_diff(char *fl, t_sh *sh);
+void					print_completion_builtin(t_sh *sh, t_inp *inp, t_bin **bin);
+void					delete_remain(t_sh *sh, char *remain);
+int						complete_builtin(t_inp **inp);
 void					found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp);
 void					insert_completion(t_sh *sh, t_inp **inp);
 void					erase_completion(t_sh *sh, t_inp **inp);
@@ -190,8 +214,6 @@ void					custom_return(void);
 int						ending_char(char c);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
 void					try_insert_home(t_inp **inp, t_sh *sh);
-t_inp					*relink_inp(t_inp *before, t_inp *after, t_inp *new);
-t_inp					*replace_inp(t_inp **inp, char *content);
 void					split_line(t_inpl **inpl, t_inp **clean, t_sh *sh);
 int						check_key(char key);
 int						try_update_context(char c, int flag);
@@ -201,12 +223,17 @@ void					convert_quote(t_inp **inp);
 void					convert_dquote(t_inp **inp, t_sh *sh);
 void					convert_bquote(t_inp **inp, t_sh *sh);
 
+void					parse_backquotes(t_inp **inp, t_sh *sh);
+
 void*					special_error(t_inp **inp);
 int						check_right_arrow(t_inp **inp);
 int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
 int						check_and(t_inp **inp);
 int						check_semicolon(t_inp **inp);
+int						check_out_aggr(t_inp *inp);
+int						check_mult_aggr(t_inp **inp);
+int						check_left_aggr(t_inp *inp);
 
 char					*inp_to_cont(t_inp **inp);
 
@@ -233,13 +260,19 @@ void					bquote_inp(t_inp **cp, t_sh *sh);
 
 int						redirection(t_inp **inp);
 
+int						check_special_surrounding(t_inpl **inpl);
+
 void					print_variable(t_inp **cp, t_sh *sh);
 int						valid_variable_char(char c);
 char					*parse_variable_name(t_inp **inp);
 
 /*						tokenization									*/
 
+void					print_heredoc(char *ending, t_sh *sh);
+int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
+char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+void					free_tokens(t_listc **tok);
 
 /*						execution										*/
 
@@ -254,6 +287,29 @@ int						fork_command(char *path, char **exec, char **env);
 char					**env_list_to_char(t_env **env);
 
 void					execute_tokens_debo(t_listc **tok, t_sh *sh);
+
+/*						real_execution									*/
+
+//Main
+void				    signal_handler(int inp);
+void				    signal_newline(int inp);
+void					execute_tokens(t_listc **tok, t_sh *sh);
+void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
+//Pipeline
+void                    prepare_pipe(t_listc *cmd);
+void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
+void                    closed_unused_fd(int fils, int nb_tube, t_pipe *tabTube);
+void                    pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env);
+void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env);
+int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
+int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
+//Redirections
+void                    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i);
+void                    redirect(t_listc *cmd, t_pipe *tabTube , int i);
+//Tools
+void                    errexit(char *str);
+char		            *command_path(t_env **env, char *command, t_sh *sh);
+void                    close_tabtube(int len, t_pipe *tabtube);
 
 /*						builtins										*/
 

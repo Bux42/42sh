@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 14:41:35 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/31 22:07:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 
 # include "../libft/includes/libft.h"
 
+// Structure qui gère les pipes
+typedef struct			s_pipe
+{
+	int					cote[2];    // Cotés du tube 0 = WRITE 1 = READ
+}						t_pipe;
+
 typedef struct			s_redir
 {
 	int					redir[3];
 	char				*file;
+	char				**heredoc;
 	struct s_redir		*next;
 }						t_redir;
 
@@ -29,6 +36,7 @@ typedef struct			s_list_c
 	void				*func;
 	int					nb_arg;
 	t_redir				*redirs;
+	int					status;
 	struct s_list_c		*prev;
 	struct s_list_c		*next;
 }						t_listc;
@@ -39,6 +47,12 @@ typedef struct			s_close
 	struct s_close		*next;
 	struct s_close		*previous;
 }						t_close;
+
+typedef struct			s_bin
+{
+	char				*name;
+	struct s_bin		*next;
+}						t_bin;
 
 typedef struct			s_env
 {
@@ -89,6 +103,7 @@ typedef struct			s_sh
 	char				*comp_debug;
 	char				*comp_remain;
 	char				*comp_path;
+	int					comp_builtin;
 	int					old_len;
 	int					over;
 	int					dec;
@@ -112,6 +127,7 @@ typedef struct			s_sh
 	char				pwd[2048];
 	char				*man_path;
 	unsigned int		hash_size;
+	struct s_bin		*bin;
 	struct s_env		*env;
 	struct s_loc		*loc;
 	struct s_inpl		*inpl;
@@ -119,7 +135,7 @@ typedef struct			s_sh
 	struct s_his		*search_pos;
 	struct s_inp		*his_search;
 	struct s_close		*close;
-	struct s_hash       **hash;
+	struct s_hash		**hash;
 }						t_sh;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 01:48:52 by videsvau          #+#    #+#             */
-/*   Updated: 2017/02/07 12:24:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 11:52:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		get_next_line(const int fd, char **line)
 	char			*tmp;
 	int				end;
 
+	ft_bzero(buff, BUFF_SIZE + 1);
+	end = 0;
 	if (fd < 0 || line == NULL || read(fd, NULL, 0) == -1)
 		return (-1);
 	curr = ft_manage_fd(fd, &chain);

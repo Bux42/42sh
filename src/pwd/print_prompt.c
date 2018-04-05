@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 02:12:01 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 13:30:44 by drecours         ###   ########.fr       */
+/*   Updated: 2018/03/26 13:39:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void		print_prompt(t_sh *sh)
 	char	*path;
 
 	ft_bzero(sh->pwd, 2048);
-	path = get_specific_env("PWD=", &sh->env);
-	ft_strcat(sh->pwd, path);
-	free(path);
+	if ((path = get_specific_env("PWD=", &sh->env)))
+	{
+		ft_strcat(sh->pwd, path);
+		free(path);
+	}
 	sh->posy = 4;
 	prompt_colors(1);
 	sh->width = tgetnum("co");

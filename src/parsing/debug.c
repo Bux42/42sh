@@ -6,11 +6,28 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/08 15:40:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 02:56:43 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		print_t_inp(t_inp **inp)
+{
+	t_inp	*cp;
+
+	ft_putchar('[');
+	if ((cp = (*inp)))
+	{
+		while (cp)
+		{
+			ft_putchar(cp->c);
+			cp = cp->next;
+		}
+	}
+	ft_putchar(']');
+	custom_return();
+}
 
 void		print_converted(t_inp **inp, int type)
 {
@@ -23,6 +40,8 @@ void		print_converted(t_inp **inp, int type)
 			ft_putchar(cp->c);
 			cp = cp->next;
 		}
+		if (type & HERE)
+			ft_putstr(" <= HERE");
 		if (type & PIPE)
 			ft_putstr(" <= PIPE");
 		if (type & AND)
@@ -45,6 +64,16 @@ void		print_converted(t_inp **inp, int type)
 			ft_putstr(" <= FILE");
 		if (type & SEMICOLON)
 			ft_putstr(" <= SEMICOLON");
+		if (type & AGGR)
+			ft_putstr(" <= AGGR");
+		if (type & AGGRFILE)
+			ft_putstr(" <= AGGR TOFILE");
+		if (type & AGGROUT)
+			ft_putstr(" <= AGGROUT");
+		if (type & LAGGR)
+			ft_putstr(" <= LAGGR");
+		if (type & LAGGRIN)
+			ft_putstr(" <= LAGGRIN");
 		custom_return();
 	}
 }

@@ -6,17 +6,11 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:25:37 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/02 09:23:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 22:47:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
-
-void		convert_bquote(t_inp **inp, t_sh *sh)
-{
-	*inp = *inp;
-	sh->posy = sh->posy;
-}
 
 void		convert_backslash_quote(t_inp **inp)
 {
@@ -91,6 +85,8 @@ void		convert_dquote(t_inp **inp, t_sh *sh)
 			try_insert_variable(inp, sh);
 		if ((*inp)->c == '\\')
 			convert_backslash_dquote(inp);
+		if (!(*inp)->next)
+			break ;
 		(*inp) = (*inp)->next;
 	}
 	after = (*inp)->next;
@@ -106,6 +102,14 @@ void		convert_quote(t_inp **inp)
 	t_inp	*previous;
 	t_inp	*after;
 
+	if (!(*inp)->next)
+	{
+		previous = (*inp)->previous;
+		free(previous->next);
+		previous->next = NULL;
+		*inp = previous;
+		return ;
+	}
 	previous = (*inp)->previous;
 	(*inp) = (*inp)->next;
 	free((*inp)->previous);
@@ -116,6 +120,8 @@ void		convert_quote(t_inp **inp)
 	{
 		if ((*inp)->c == '\\')
 			convert_backslash_quote(inp);
+		if (!(*inp)->next)
+			break ;
 		(*inp) = (*inp)->next;
 	}
 	after = (*inp)->next;

@@ -26,9 +26,9 @@ DESCRIPTION
        - unset
        - export
        - local
-	   - history
-	   - exclaim
-	   - color
+       - history
+       - exclaim
+       - color
 
 
 AUTHOR

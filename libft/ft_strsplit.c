@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 23:08:05 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/21 09:25:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:05:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char		*get_word(const char *s, int pos, char c)
 				ret = get_word_2(s, i, len);
 			j++;
 		}
-		i++;
+		if (s[i])
+			i++;
 	}
 	return (ret);
 }
