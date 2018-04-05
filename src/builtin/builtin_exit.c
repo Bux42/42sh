@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 12:11:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 14:38:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:07:07 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	quit(char **input, int ret)
 {
-	ft_putstr_fd("Bye!", STDOUT_FILENO);
-	custom_return();
+	ft_putendl_fd("Bye!", STDOUT_FILENO);
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
 	if (!input[1])
 		exit(ret);
@@ -26,18 +25,15 @@ int		quit_error(int i, int flag)
 {
 	if (flag == 1)
 	{
-		ft_putstr_fd("exit: Too many arguments.", STDERR_FILENO);
-		custom_return();
+		ft_putendl_fd("exit: Too many arguments.", STDERR_FILENO);
 		return (1);
 	}
 	if (i == 0)
 	{
-		ft_putstr_fd("exit: Expression syntax.", STDERR_FILENO);
-		custom_return();
+		ft_putendl_fd("exit: Expression syntax.", STDERR_FILENO);
 		return (2);
 	}
-	ft_putstr_fd("exit: Badly formed number.", STDERR_FILENO);
-	custom_return();
+	ft_putendl_fd("exit: Badly formed number.", STDERR_FILENO);
 	return (3);
 }
 

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/03 15:06:09 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:18:59 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 int		no_history(void)
 {
-	ft_putstr_fd("!!: No history.", 2);
-	custom_return();
+	ft_putendl_fd("!!: No history.", 2);
 	return (-1);
 }
 

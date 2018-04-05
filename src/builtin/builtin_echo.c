@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 18:09:24 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 14:37:31 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:07:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int			builtin_echo(char **input, t_sh *sh)
 		flag = 1;
 	}
 	if (!input[1] || ft_strcmp(input[1], "-n"))
-		custom_return();
+		ft_putstr("\n");
 	return (0);
 }

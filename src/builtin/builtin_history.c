@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 11:55:25 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:09:57 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,17 @@ int		show_err(int err, char c, char *fg)
 	if (fg)
 		free(fg);
 	if (err == 1)
-		ft_putstr_fd("history: Too many arguments.", STDERR_FILENO);
+		ft_putendl_fd("history: Too many arguments.", STDERR_FILENO);
 	if (err == 2)
 	{
 		ft_putstr_fd("history: illegal option -- ", STDERR_FILENO);
 		ft_putchar_fd(c, STDERR_FILENO);
-		custom_return();
-		ft_putstr_fd("usage: history [-nA | -C] [[0]n]", STDERR_FILENO);
+		ft_putendl_fd("\nusage: history [-nA | -C] [[0]n]", STDERR_FILENO);
 	}
 	if (err == 3)
-		ft_putstr_fd("history: Arguments must be numerical.", STDERR_FILENO);
+		ft_putendl_fd("history: Arguments must be numerical.", STDERR_FILENO);
 	if (err == 4)
-		ft_putstr_fd("history: -A and -C together is illegal", STDERR_FILENO);
-	custom_return();
+		ft_putendl_fd("history: -A and -C together is illegal", STDERR_FILENO);
 	return (err);
 }
 

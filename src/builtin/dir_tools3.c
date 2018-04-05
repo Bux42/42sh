@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 15:08:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/14 13:03:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:13:20 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			check_flag(int flag, char letter)
 		return (flag | 2);
 	ft_putstr_fd("cd: no such file or directory: -", 2);
 	ft_putchar_fd(letter, 2);
-	custom_return();
+	ft_putstr("\n");
 	return (-1);
 }
 

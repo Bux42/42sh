@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 17:40:42 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/14 13:14:19 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:20:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		name_no_event(int i, t_inp *inp, int pos)
 {
 	ft_putstr("!: No such event: ");
 	find_in_his(inp, inp, &i, pos);
-	custom_return();
+	ft_putstr("\n");
 	return (-1);
 }
 
@@ -25,7 +25,7 @@ int		no_event(int i)
 {
 	ft_putstr("!: No such event: ");
 	ft_putnbr(i);
-	custom_return();
+	ft_putstr("\n");
 	return (-1);
 }
 

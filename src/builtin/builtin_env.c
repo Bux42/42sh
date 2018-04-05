@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 12:51:29 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:08:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 		show_args(exec);
 	if (!(path = existing_command(exec, &sh->env, sh, 1)))
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(exec[0], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		custom_return();
+		ft_putstr_fd("env: ", STDERR_FILENO);
+		ft_putstr_fd(exec[0], STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		i = 127;
 		return (i);
 	}

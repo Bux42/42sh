@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/30 17:45:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:12:33 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int			chdir_old_pwd(t_env **env, int flag)
 		free(old_pwd);
 		if ((pwd = get_specific_env("PWD=", env)) && err == 0)
 		{
-			ft_putstr(pwd);
-			custom_return();
+			ft_putendl(pwd);
 			free(pwd);
 		}
 		return (err);

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 14:40:49 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:10:54 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 int		man_error(int err)
 {
 	if (err == 1)
-		ft_putstr_fd("myman: Too many arguments.", STDERR_FILENO);
+		ft_putendl_fd("myman: Too many arguments.", STDERR_FILENO);
 	else if (err == 2)
-		ft_putstr_fd("myman: This builtin doesn't exists.", STDERR_FILENO);
-	custom_return();
+		ft_putendl_fd("myman: This builtin doesn't exists.", STDERR_FILENO);
 	return (err);
 }
 

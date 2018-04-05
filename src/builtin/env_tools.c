@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:01:25 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 12:36:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:15:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ int		env_verbose(int verb, char *exec)
 {
 	if (verb > 0)
 	{
-		ft_putstr("#env: setenv    ");
-		ft_putstr(exec);
-		custom_return();
+		ft_putstr_fd("#env: setenv    ", STDERR_FILENO);
+		ft_putendl_fd(exec, STDERR_FILENO);
 	}
 	return (1);
 }
@@ -28,8 +27,7 @@ char	**clear_realloc(int verb, char **tab)
 {
 	if (verb > 0)
 	{
-		ft_putstr("#env: clearing environ");
-		custom_return();
+		ft_putendl_fd("#env: clearing environ", STDERR_FILENO);
 	}
 	env_free(tab);
 	if (!(tab = (char**)malloc(sizeof(char*) * 1)))
@@ -61,6 +59,5 @@ void	hist_verbose(int i)
 {
 	ft_putstr("Removed ");
 	ft_putnbr(i);
-	ft_putstr(" entries from the history.");
-	custom_return();
+	ft_putendl(" entries from the history.");
 }
