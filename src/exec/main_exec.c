@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/05 01:14:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 04:17:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ void	run_cmd(char *fullpath, t_listc *cmd, t_sh *sh, char **env)
 	exit(-1);
 }
 
+t_pipe	*new_tabtube(int len)
+{
+	t_pipe	*ret;
+	int		i;
+
+	ret = NULL;
+	i = 0;
+	if (!(ret = (t_pipe*)malloc(sizeof(t_pipe) * (len + 1))))
+		return (NULL);
+	while (i < len)
+	{
+		ret[i].cote[0] = 0;
+		ret[i].cote[1] = 0;
+		i++;
+	}
+	return (ret);
+}
+
 void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 {
 	char	*fullpath;
@@ -65,7 +83,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 
 	pid = 0;
 	fullpath = NULL;
-	if (!(tabtube = (t_pipe *)malloc(sizeof(t_pipe) * ((cmd->nb_arg + 1)))))
+	if (!(tabtube = new_tabtube(cmd->nb_arg)))
 		return ;
 	if (cmd->redirs && cmd->redirs->redir[1] == HEREDOC)
 		heredock_redirect(cmd, tabtube, 0);

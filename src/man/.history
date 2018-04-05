@@ -1121,3 +1121,11 @@ ls
 cat << oui
 cat -e << bite
 cat << oui
+ls | wc
+ls > file
+cat -e file
+cat -e file | sort
+cat << oui
+ls | wc
+ls | cat -e | sort | wc
+ls | cat -e | sort
