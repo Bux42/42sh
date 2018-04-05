@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 05:48:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:46:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ void					tty_debug(t_sh *sh, t_inp **inp);
 void					parse(t_sh *sh);
 t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
 void					contcat_inp(t_inp **inp, t_inp **ret);
-int						empty_inp(t_inp **inp);
+int						empty_inp(t_inp **inp, t_sh *sh);
 
 void					lexer_parser(t_inp **inp, t_sh *sh);
 int						working_context(int context, char c);

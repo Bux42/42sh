@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 17:46:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/15 20:38:24 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:00:57 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	suppr_exclaim(t_inp **inp, int i, t_sh *sh)
 {
 	(void)sh;
 	while (--i >= 0 && (*inp)->next)
-	{
-		ft_putchar((*inp)->next->c);
 		suppr_letter(&(*inp)->next);
-	}
 }
 
 int		nothing_front_back(t_inp **input, int i)

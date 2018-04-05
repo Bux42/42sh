@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/05 03:49:08 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/05 11:44:15 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,8 +114,6 @@ builtin/history_tools.c\
 builtin/verbose.c\
 builtin/env_tools2.c\
 builtin/history_exclaim.c\
-builtin/exclaim_find_forward.c\
-builtin/exclaim_find_word.c\
 builtin/exclaim_tools.c\
 builtin/history_find.c\
 builtin/exclaim_tools2.c\

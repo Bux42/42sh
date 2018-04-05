@@ -6,15 +6,17 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 06:14:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:55:25 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
 
-int		show_err(int err, char c)
+int		show_err(int err, char c, char *fg)
 {
+	if (fg)
+		free(fg);
 	if (err == 1)
 		ft_putstr_fd("history: Too many arguments.", STDERR_FILENO);
 	if (err == 2)
@@ -56,14 +58,14 @@ int		built_err(char **exec, char *fg)
 		if (ft_strcmp("--", exec[i]) == 0)
 		{
 			if (exec[i + 1] && exec[i + 2] && exec[i + 3])
-				return (show_err(1, 'c'));
+				return (show_err(1, 'c', fg));
 			return (0);
 		}
 		if (exec[i][0] == '-')
 		{
 			while (exec[i][++j])
 				if (ft_strchr(flag, exec[i][j]) == NULL || put(exec[i][j], fg))
-					return (show_err(2, exec[i][j]));
+					return (show_err(2, exec[i][j], fg));
 			j = 0;
 		}
 		else
@@ -109,7 +111,7 @@ int		builtin_history(char **exec, t_sh *sh)
 	fg = ft_strdup("000");
 	lg = -1;
 	if ((err = built_err(exec, fg)) > 0)
-		return (free_and_return(NULL, fg, err));
+		return (err);
 	if (fg[0] == 'A' && fg[1] == 'C')
 		return (erase_fg(fg, 4));
 	if (fg[1] == 'C')

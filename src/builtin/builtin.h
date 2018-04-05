@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 06:09:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:55:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 /*
 ** BUILTINS
 */
-
-int		free_and_return(char **tab, char *str, int nb);
-
 int		builtin_setenv(char **exec, t_sh *sh);
 int		builtin_unsetenv(char **exec, t_sh *sh);
 int		builtin_echo(char **exec, t_sh *sh);
@@ -83,24 +80,16 @@ int		dir_exists(char *path);
 void	hist_verbose(int i);
 int		change_fd(t_sh *sh, char *path);
 int		history_clean(char c, t_his **hist, t_sh *sh);
-int		show_err(int err, char c);
+int		show_err(int err, char c, char *fg);
 int		get_lg(int *lg, char **exec);
 int		get_beg(int *i, t_his **history, char **exec);
 int		last_command(t_sh *sh, t_inp **t);
-int		get_his(t_sh *sh, t_inp **inp, int pos);
-
+int		by_last(t_sh *sh, t_inp **t, int pos);
 int		history_exclaim(t_inp **inp, t_sh *sh);
-int		get_by_last(t_inp **inp, t_sh *sh);
-int		get_by_first(t_inp **inp, t_sh *sh);
-int		get_by_beg(t_inp **inp, t_sh *sh);
-int		get_by_name(t_inp **inp, t_sh *sh);
-
-int		inp_to_int(t_inp **inp);
-t_inp	*get_search(t_inp **inp);
-t_inp	*replace_exclaim_inter(t_inp *found, t_inp **inp);
-t_inp	*replace_double_exclaim(t_inp **his, t_inp **inp);
-t_inp	*insert_found(t_inp **inp, t_inp *found);
-
+int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input);
+int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input);
 void	fill_str(t_inp *inp, char (*str)[20]);
 int		no_event(int i);
 int		name_no_event(int i, t_inp *inp, int pos);

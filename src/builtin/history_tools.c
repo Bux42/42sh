@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/05 14:14:50 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:56:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			get_beg(int *first, t_his **history, char **exec)
 		return (0);
 	while (exec[i][++ite])
 		if (ft_isnum(exec[i][ite]) == 0)
-			return (show_err(3, '0'));
+			return (show_err(3, '0', NULL));
 	if (exec[i])
 		*first = (exec[i][0] == '0') ? ft_atoi(&exec[i][1]) : ft_atoi(exec[i]);
 	if (!exec[i] || *first > history_len(history))
@@ -64,7 +64,7 @@ int			get_lg(int *lg, char **exec)
 	}
 	while (exec[i + 1][++ite])
 		if (ft_isnum(exec[i + 1][ite]) == 0)
-			return (show_err(3, '0'));
+			return (show_err(3, '0', NULL));
 	*lg = ft_atoi(exec[i + 1]);
 	*lg = (*lg < 0) ? *lg * -1 : *lg;
 	return (0);
@@ -94,7 +94,7 @@ int			history_clean(char c, t_his **hist, t_sh *sh)
 int			check_arg(char **exec, int i)
 {
 	if (exec[i + 1] && exec[i + 2])
-		return (show_err(1, '0'));
+		return (show_err(1, '0', NULL));
 	return (0);
 }
 

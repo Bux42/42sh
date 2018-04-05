@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 14:42:12 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/14 13:13:07 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 11:56:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int					erase_fg(char *fg, int i)
 {
 	free(fg);
 	if (i == 4)
-		return (show_err(4, '0'));
+		return (show_err(4, '0', NULL));
 	return (i);
 }

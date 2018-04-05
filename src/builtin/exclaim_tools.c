@@ -6,29 +6,12 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 23:40:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:06:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
-
-t_inp	*get_search(t_inp **inp)
-{
-	t_inp	*ret;
-	t_inp	*cp;
-
-	ret = NULL;
-	if ((cp = (*inp)))
-	{
-		while (cp && !ending_char(cp->c))
-		{
-			inp_insert_posat(&ret, cp->c);
-			cp = cp->next;
-		}
-	}
-	return (ret);
-}
 
 int		no_history(void)
 {
@@ -37,58 +20,82 @@ int		no_history(void)
 	return (-1);
 }
 
-t_inp	*replace_double_exclaim(t_inp **his, t_inp **inp)
-{
-	t_inp	*insert;
-	t_inp	*previous;
-	t_inp	*tmp;
-
-	previous = (*inp)->previous;
-	insert = inp_dup(his);
-	tmp = *inp;
-	(*inp) = (*inp)->next;
-	free(tmp);
-	tmp = *inp;
-	(*inp) = (*inp)->next;
-	free(tmp);
-	if (previous)
-		previous->next = insert;
-	insert->previous = previous;
-	while (insert->next)
-		insert = insert->next;
-	if (*inp)
-		(*inp)->previous = insert;
-	insert->next = (*inp);
-	return (insert);
-}
-
 int		last_command(t_sh *sh, t_inp **inp)
 {
-	if (!(sh->history) || !sh->history->inp)
-		return (no_history());
+	t_inp	*input;
+	t_inp	*tmp;
+
+	tmp = NULL;
+	if (!(sh->history && sh->history->next))
+	{
+		if (!((*inp)->next->next) && !((*inp)->previous))
+			return (no_history());
+	}
 	else
-		*inp = replace_double_exclaim(&sh->history->inp, inp);
+	{
+		tmp = (*inp)->next;
+		input = sh->history->inp;
+		while (input)
+		{
+			tmp = insert_inp(&tmp, input->c);
+			input = input->next;
+		}
+	}
+	suppr_exclaim(inp, 1, sh);
+	if (!(sh->history && sh->history->next))
+		tmp = (*inp)->next;
+	suppr_letter(inp);
+	*inp = tmp;
 	return (0);
 }
 
-int		get_his(t_sh *sh, t_inp **inp, int pos)
+t_inp	*get_start(t_inp **inp, int i)
 {
-	int		ret;
+	t_inp	*tmp;
 
-	ret = -1;
-	if ((*inp)->next)
+	tmp = (*inp);
+	while (--i >= 0 && tmp && tmp->next)
+			tmp = tmp->next;
+	return (tmp);
+}
+
+int		get_his(t_inp **inp, t_sh *sh, t_inp **input, int pos)
+{
+	if (pos == 1)
+		return (get_by_last((*inp)->next, sh, input));
+	if (pos == 2)
+		return (get_by_first((*inp)->next, sh, input));
+	if (pos == 3)
+		return (get_by_beg((*inp)->next, sh, input));
+	if (pos == 4)
+		return (get_by_name((*inp)->next, sh, input));
+	return (-1);
+}
+
+int		by_last(t_sh *sh, t_inp **inp, int pos)
+{
+	t_inp	*input;
+	t_inp	*tmp;
+	int		i;
+
+	i = 0;
+	if ((i = get_his(inp, sh, &input, pos)) == -1)
+		return (-1);
+	if (!(sh->history && sh->history->inp && sh->history->inp->c))
+		if (nothing_front_back(inp, i) == -1)
+			return (no_history());
+	if (input && input->c)
 	{
-		(*inp) = (*inp)->next;
-		if (pos == 1)
-			(*inp) = (*inp)->next;
-		if (pos == 1 && (*inp))
-			ret =  (get_by_last(inp, sh));
-		if (pos == 2)
-			ret = (get_by_first(inp, sh));
-		if (pos == 4)
-			ret = (get_by_name(inp, sh));
-		if (pos == 3)
-			ret =  (get_by_beg(inp, sh));
+		tmp = get_start(&(*inp), i);
+		while (input && input->c)
+		{
+			tmp = insert_inp(&tmp, input->c);
+			input = input->next;
+		}
 	}
-	return (ret);
+	suppr_exclaim(&(*inp), i, sh);
+	tmp = (!(sh->history && sh->history->inp)) ? (*inp)->next : tmp;
+	suppr_letter(inp);
+	*inp = tmp;
+	return (0);
 }

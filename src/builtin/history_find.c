@@ -6,108 +6,139 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 21:39:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:02:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
 
-t_inp	*find_from_start(t_his **his, int nb)
+int		get_by_last(t_inp *inp, t_sh *sh, t_inp **input)
 {
-	t_inp	*ret;
-	t_his	*cp;
+	char	str[20];
+	int		i;
+	int		j;
+	t_his	*his;
 
-	ret = NULL;
-	if ((cp = (*his)))
+	his = sh->history;
+	ft_bzero(&str, 20);
+	i = 0;
+	*input = NULL;
+	inp = inp->next;
+	fill_str(inp, &str);
+	i = ft_atoi(str);
+	j = i;
+	if (his && his->inp)
 	{
-		while (cp->next)
-			cp = cp->next;
-		while (nb > 1 && cp)
-		{
-			cp = cp->previous;
-			nb--;
-		}
-		if (cp && cp->inp)
-			ret = inp_dup(&cp->inp);
+		while (i-- > 1 && his && his->next && his->inp)
+			his = his->next;
+		if (i > 1)
+			return (no_event(j));
+		*input = (his)->inp;
 	}
-	return (ret);
+	return ((ft_strlen(str) + 1));
 }
 
-int		get_by_first(t_inp **inp, t_sh *sh)
+int		get_by_first(t_inp *inp, t_sh *sh, t_inp **input)
 {
-	int		nb;
-	t_inp	*found;
-	t_inp	*before;
+	char	str[20];
+	int		i;
+	int		j;
+	t_his	*his;
 
-	before = (*inp)->previous->previous;
-	nb = inp_to_int(inp);
-	if ((found = find_from_start(&sh->history, nb)))
+	his = sh->history;
+	ft_bzero(&str, 20);
+	i = 0;
+	*input = NULL;
+	fill_str(inp, &str);
+	i = ft_atoi(str);
+	j = i;
+	if (his && his->inp)
 	{
-		if (before)
-			before->next = *inp;
-		free((*inp)->previous);
-		(*inp)->previous = before;
-		*inp = insert_found(inp, found);
-		return (1);
+		while (his && his->next && his->next->inp)
+			his = his->next;
+		while (i-- > 1 && his->previous && his->previous->inp)
+			his = his->previous;
+		if (i > 1)
+			return (no_event(j));
+		*input = (his)->inp;
 	}
-	return (-1);
+	return (ft_strlen(str));
 }
 
-int		inp_start_with_inp(t_inp **inp, t_inp **to_search)
+int		find_in_his(t_inp *his, t_inp *inp, int *i, int flag)
 {
-	t_inp	*cp;
-	t_inp	*search;
+	static char	*stop = ";:-*^$%\'\"`";
+	static char	*last = "@#!";
 
-	if ((cp = (*inp)))
+	while (inp && inp->c && his && his->c)
 	{
-		search = *to_search;
-		while (cp && search && search->c == cp->c)
+		if (ft_strchr(stop, inp->c) ||
+				(flag % 2 == 0 && inp->c == '?' && (++(*i)) > -1))
 		{
-			cp = cp->next;
-			search = search->next;
+			return (0);
 		}
-		if (!search)
-			return (1);
+		if (flag > 2)
+			ft_putchar(inp->c);
+		else if (ft_strchr(last, inp->c))
+			return ((inp->c == his->c) ? 0 : 1);
+		else if (inp->c == '\\' && !(inp->next || 
+					(inp->next && inp->next->c && ft_isalnum(inp->next->c))))
+			return ((inp->c == his->c) ? 0 : 1);
+		else if (inp->c != his->c)
+			return (-1);
+		*i = *i + 1;
+		inp = inp->next;
+		his = his->next;
 	}
+	if (inp && inp->c)
+		return (-1);
 	return (0);
 }
 
-t_inp	*find_beginning(t_his **his, t_inp **inp)
+int		get_by_beg(t_inp *inp, t_sh *sh, t_inp **input)
 {
-	t_inp	*ret;
-	t_inp	*to_search;
-	t_his	*cp;
+	int		i;
+	t_his	*his;
 
-	ret = NULL;
-	to_search = NULL;
-	if ((cp = (*his)))
+	his = sh->history;
+	while (his && his->inp)
 	{
-		if ((to_search = get_search(inp)))
+		i = 0;
+		if (find_in_his(his->inp, inp, &i, 2) == 0)
 		{
-			while (cp)
-			{
-				if (inp_start_with_inp(&cp->inp, &to_search))
-					break ;
-				cp = cp->next;
-			}
-			if (cp)
-				ret = inp_dup(&cp->inp);
-			free_list_from_beginning(&to_search);
+			*input = (his)->inp;
+			return (i);
 		}
+		his = his->next;
 	}
-	return (ret);
+	return (name_no_event(i, inp, 3));
 }
 
-int		get_by_beg(t_inp **inp, t_sh *sh)
+int		get_by_name(t_inp *inp, t_sh *sh, t_inp **input)
 {
-	t_inp	*find;
+	int		i;
+	t_his	*his;
+	t_inp	*cp;
 
-	if ((find = find_beginning(&sh->history, inp)))
+	his = sh->history;
+	if (!(inp->next))
+		return (-1);
+	inp = inp->next;
+	while (his && his->inp)
 	{
-		(*inp) = (*inp)->previous;
-		*inp = replace_exclaim_inter(find, inp);
-		return (1);
+		cp = his->inp;
+		while (cp)
+		{
+			i = 0;
+			if (find_in_his(cp, inp, &i, 2) == 0)
+			{
+				*input = (his)->inp;
+				return (i + 1);
+			}
+			cp = cp->next;
+		}
+		his = his->next;
 	}
-	return (-1);
+	return (name_no_event(i, inp, 4));
 }

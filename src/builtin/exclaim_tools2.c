@@ -6,35 +6,17 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 17:40:42 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 21:03:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:14:19 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./builtin.h"
+#include "builtin.h"
 #include "../../inc/header.h"
-
-int		inp_to_int(t_inp **inp)
-{
-	int		ret;
-
-	ret = 0;
-	while ((*inp)->c > 47 && (*inp)->c < 58)
-	{
-		ret *= 10;
-		ret += (*inp)->c - 48;
-		if ((*inp)->next)
-			(*inp) = (*inp)->next;
-		else
-			break ;
-	}
-	return (ret);
-}
 
 int		name_no_event(int i, t_inp *inp, int pos)
 {
 	ft_putstr("!: No such event: ");
-	if (i && inp && pos)
-		i++;
+	find_in_his(inp, inp, &i, pos);
 	custom_return();
 	return (-1);
 }
