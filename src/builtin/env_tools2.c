@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 14:42:12 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:18:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 13:25:23 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				show_args(char **exec)
 	{
 		ft_putstr_fd("#env    arg[", STDERR_FILENO);
 		j = ft_itoa(i);
-		ft_putstri_fd(j, STDERR_FILENO);
+		ft_putstr_fd(j, STDERR_FILENO);
 		free(j);
 		ft_putstr_fd("]= '", STDERR_FILENO);
 		ft_putstr_fd(exec[i], STDERR_FILENO);
