@@ -6,12 +6,24 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:03:53 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/21 16:57:31 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:02:07 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
+
+int		 match_name(char *env, char *name)
+{
+	int		i;
+
+	i = 0;
+	while (env[i] == name[i] && name[i] && env[i] && env[i] != '=')
+		i++;
+	if (name[i] == '\0' && env[i] == '=')
+		return (1);
+	return (0);
+}
 
 int		builtin_color(char **exec, t_sh *sh)
 {

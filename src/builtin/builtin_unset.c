@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:11:46 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:03:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,15 @@ int			remove_first(t_loc **env, t_loc **cp)
 	return (1);
 }
 
-int			match_name(char *env, char *name)
+static int	unset_err(char *key)
 {
-	int		i;
-
-	i = 0;
-	while (env[i] == name[i] && name[i] && env[i] && env[i] != '=')
-		i++;
-	if (name[i] == '\0' && env[i] == '=')
-		return (1);
+	ft_putstr_fd("unset: ", STDERR_FILENO);
+	ft_putstr_fd(key, STDERR_FILENO);
+	ft_putendl_fd(" key doesn't exist.", STDERR_FILENO);
 	return (0);
 }
 
-static int	remove_loc_if(char *key, t_loc **local)
+static int	remove_loc_if(char *key, t_loc **local, char *builtin)
 {
 	t_loc	*cp;
 	t_loc	*tmp;
@@ -61,9 +57,8 @@ static int	remove_loc_if(char *key, t_loc **local)
 		tmp = cp;
 		cp = cp->next;
 	}
-	ft_putstr_fd("unset: ", STDERR_FILENO);
-	ft_putstr_fd(key, STDERR_FILENO);
-	ft_putendl_fd(" key doesn't exist.", STDERR_FILENO);
+	if (ft_strcmp(builtin, "export"))
+		unset_err(key);
 	return (1);
 }
 
@@ -78,7 +73,7 @@ int			builtin_unset(char **exec, t_sh *sh)
 		return (1);
 	}
 	while (exec[++i])
-		if (remove_loc_if(exec[i], &sh->loc) == 1)
+		if (remove_loc_if(exec[i], &sh->loc, exec[0]) == 1)
 			return (2);
 	return (0);
 }

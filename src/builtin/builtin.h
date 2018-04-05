@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 11:55:09 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:02:04 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**unsetenv_tab(char **env, char *key);
 int		env_free(char **env);
 char	*env_key(char *env_v);
 int		matching_name(char *env, char *name);
+int		match_name(char *env, char *name);
 int		ft_isnum(char c);
 int		env_verbose(int verb, char *exec);
 char	**clear_realloc(int verb, char **tab);
