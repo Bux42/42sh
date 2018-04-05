@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 11:46:03 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:52:02 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ void					free_tokens(t_listc **tok);
 /*						execution										*/
 
 void					valid_command(t_inp **inp, t_sh *sh);
-char					*existing_command(char *command, t_env **env, t_sh *sh);
+char					*existing_command(char **command, t_env **env, t_sh *sh, int fg);
 char					**get_full_command(t_inp **inp, t_sh *sh);
 char					*get_command(t_inp **inp, t_sh *sh);
 void					exec_command(t_inp **inp, t_sh *sh);

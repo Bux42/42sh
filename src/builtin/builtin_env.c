@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 12:09:10 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:51:29 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		**env_in_tab(t_env **env)
 	return (tab);
 }
 
-int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
+int			exec_cmd(char **tab, char **exec, t_sh *sh)
 {
 	int		i;
 	char	*path;
@@ -63,7 +63,7 @@ int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
 	i = 0;
 	if (flag_v(exec))
 		show_args(exec);
-	if (!(path = existing_command(exec[0], &new_env, sh)))
+	if (!(path = existing_command(exec, &sh->env, sh, 1)))
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(exec[0], 2);
@@ -72,7 +72,7 @@ int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
 		i = 127;
 		return (i);
 	}
-	else
+	else if (ft_strcmp(path, "ok"))
 	{
 		i = fork_command(path, exec, tab);
 		free(path);
@@ -120,10 +120,12 @@ int			builtin_env(char **exec, t_sh *sh)
 			return (2);
 		if (!exec[i])
 			return (print_env_tab(tab));
-		new_env = tab_in_env(tab);
-		i = exec_cmd(new_env, tab, &(exec[i]), sh);
+		new_env = sh->env;
+		sh->env = tab_in_env(tab);
+		i = exec_cmd(tab, &(exec[i]), sh);
 		env_free(tab);
-		free_list(&new_env);
+		free_list(&sh->env);
+		sh->env = new_env;
 		return (i);
 	}
 	return (0);

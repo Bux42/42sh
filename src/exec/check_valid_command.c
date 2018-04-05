@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/19 15:36:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:53:06 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,31 @@ char		*check_exec_path(char *command, t_env **env, int rep)
 	return (command);
 }
 
-char		*existing_command(char *command, t_env **env, t_sh *sh)
+char		*existing_command(char **command, t_env **env, t_sh *sh, int fg)
 {
 	char	*path;
 	char	*exec_path;
 	char	**path_list;
 	int		i;
+	int		(*builtin_ptr)(char **, t_sh *);
 
+	(void)sh;
 	i = -1;
 	path_list = NULL;
 	exec_path = NULL;
-	if (command[0] == '/')
-		return (ft_strdup(command));
-	if (ft_strcmp(command, "cd") == 0)
-		return (ft_strdup(command));
-	if (ft_strcmp(command, "env") == 0)
-		return (ft_strdup(command));
-	if (ft_strcmp(command, "setenv") == 0)
-		return (ft_strdup(command));
-	if (ft_strcmp(command, "unsetenv") == 0)
-		return (ft_strdup(command));
-	if ((exec_path = get_hash_path(&sh->hash, command, sh)))
+	if (fg == 2 && (exec_path = get_hash_path(&sh->hash, command[0], sh)))
 		return (exec_path);
+	if (fg == 1 && (builtin_ptr = get_builtin_function(command[0])))
+	{
+		sh->retval = builtin_ptr(command, sh);
+		return ("ok");
+	}
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((path_list = ft_strsplit(path, ':')))
 		{
 			while (path_list[++i])
-				if ((exec_path = found_exec_path(path_list[i], command)))
+				if ((exec_path = found_exec_path(path_list[i], command[0])))
 					break ;
 			i = -1;
 			while (path_list[++i])
