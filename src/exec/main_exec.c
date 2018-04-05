@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/03/28 18:18:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 01:14:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		}
 		signal_init();
 		signal(SIGINT, &signal_newline);
+		free(fullpath);
 	}
 	else
 		return ;

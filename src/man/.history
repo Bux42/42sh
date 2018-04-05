@@ -385,3 +385,60 @@ rm mdr
 ls
 cat | ls
 exit
+ls 1>&2
+ls 1>&2 | wc
+ls 1>&1 | wc
+ls 1>&file | wc
+cat file
+ls
+rm file
+ls
+ls -la
+ls | wc > file
+ls -l || ls
+ls -l > file && cat << salut >> result
+cat result
+ls -l > file
+cat file
+rm file
+rm result
+ls > file
+ls | wc > file
+ls | wc
+ls 
+ls
+l
+ls
+ls | wc
+ls
+ls -l
+ls -l 2>&1
+ls -l 2>&1 | wc
+ls -z 2>&1 | wc
+ls
+ls | wc
+ls &>-
+ls 1&>-
+ls 1>&-
+ls
+ls -l
+ls
+ls -l
+rm -rf 21sh.dSYM
+rm file
+rm result
+ls
+ls -l
+echo $HOME
+echo e$HOME
+echo e$HOME haha
+echo "e$HOME haha"
+echo "e$HOME  haha"
+echo ~
+echo ~/21sh
+echo ~/21sh/libft
+ls 
+ls ' qefqefqefef'
+ls ``
+ls \''\'
+echo \''\'

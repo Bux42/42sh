@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/02 19:35:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 02:56:43 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		print_t_inp(t_inp **inp)
 {
 	t_inp	*cp;
 
+	ft_putchar('[');
 	if ((cp = (*inp)))
 	{
 		while (cp)
@@ -24,6 +25,8 @@ void		print_t_inp(t_inp **inp)
 			cp = cp->next;
 		}
 	}
+	ft_putchar(']');
+	custom_return();
 }
 
 void		print_converted(t_inp **inp, int type)

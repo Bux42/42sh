@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:36:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 03:10:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,23 @@ int			empty_quote(int context, t_inp **inp)
 	return (0);
 }
 
+int			escaped(t_inp **inp)
+{
+	t_inp	*cp;
+	int		odd;
+
+	odd = 2;
+	if ((cp = (*inp)))
+	{
+		while (cp->previous && cp->previous->c == '\\')
+		{
+			odd++;
+			cp = cp->previous;
+		}
+	}
+	return (odd % 2);
+}
+
 void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 {
 	t_inp	*add;
@@ -103,7 +120,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 	add = NULL;
 	while (*cp)
 	{
-		if (check_quoting((*cp)->c))
+		if (check_quoting((*cp)->c) && !escaped(cp))
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;

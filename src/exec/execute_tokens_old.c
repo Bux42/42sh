@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:39:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 00:48:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ char		*command_path(t_env **env, char *command, t_sh *sh)
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((split = ft_strsplit(path, ':')))
+		{
 			ret = find_command_path(split, command);
+			env_free(split);
+		}
+		free(path);
 	}
 	if (!ret)
 	{
