@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 21:13:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 06:09:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 /*
 ** BUILTINS
 */
+
+int		free_and_return(char **tab, char *str, int nb);
+
 int		builtin_setenv(char **exec, t_sh *sh);
 int		builtin_unsetenv(char **exec, t_sh *sh);
 int		builtin_echo(char **exec, t_sh *sh);

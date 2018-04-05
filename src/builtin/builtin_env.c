@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/28 17:21:50 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 06:09:11 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		**env_in_tab(t_env **env)
 	return (tab);
 }
 
-int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
+int			exec_cmd(char **tab, char **exec, t_sh *sh)
 {
 	int		i;
 	char	*path;
@@ -63,15 +63,8 @@ int			exec_cmd(t_env *new_env, char **tab, char **exec, t_sh *sh)
 	i = 0;
 	if (flag_v(exec))
 		show_args(exec);
-	if (!(path = existing_command(exec[0], &new_env, sh)))
-	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(exec[0], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		custom_return();
-		i = 127;
-		return (i);
-	}
+	if (!(path = command_path(&sh->env, exec[0], sh)))
+		return (127);
 	else
 	{
 		i = fork_command(path, exec, tab);
@@ -100,31 +93,40 @@ void		free_list(t_env **env)
 	}
 }
 
+int			free_and_return(char **tab, char *str, int nb)
+{
+	if (tab)
+		env_free(tab);
+	if (str)
+		free(str);
+	return (nb);
+}
+
 int			builtin_env(char **exec, t_sh *sh)
 {
 	char	**tab;
 	int		i;
 	int		verbose;
-	t_env	*new_env;
 
 	i = 0;
 	verbose = 0;
 	if (!exec[1])
 		return (print_env(&sh->env));
-	if (!(tab = env_in_tab(&sh->env)))
-		return (1);
-	if (flag_v_u_i(&tab, exec, &verbose))
+	if ((tab = env_in_tab(&sh->env)))
 	{
-		tab = flag_i(tab, exec, verbose);
-		if (!(i = flag_equal(&tab, exec, verbose)))
-			return (2);
-		if (!exec[i])
-			return (print_env_tab(tab));
-		new_env = tab_in_env(tab);
-		i = exec_cmd(new_env, tab, &(exec[i]), sh);
+		if (flag_v_u_i(&tab, exec, &verbose))
+		{
+			if (!(i = flag_equal(&tab, exec, verbose)))
+				return (free_and_return(tab, NULL, 2));
+			if (!exec[i])
+				return (print_env_tab(tab));
+			i = exec_cmd(tab, &(exec[i]), sh);
+			env_free(tab);
+			return (i);
+		}
 		env_free(tab);
-		free_list(&new_env);
-		return (i);
 	}
+	else
+		return (1);
 	return (0);
 }
