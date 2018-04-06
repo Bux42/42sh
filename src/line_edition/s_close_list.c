@@ -6,17 +6,41 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:39:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:35:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 00:51:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		check_close_length(t_inp **inp, t_sh *sh)
+{
+	t_inp	*cp;
+	int		len;
+
+	len = 0;
+	if ((cp = (*inp)))
+	{
+		while (cp && !cp->pos)
+			cp = cp->next;
+		while (cp && cp->next)
+		{
+			len++;
+			cp = cp->next;
+		}
+		while (len > sh->width)
+		{
+			len -= sh->width;
+			custom_return();
+		}
+	}
+}
 
 int			print_expected_prompt(t_sh *sh, t_close **close)
 {
 	t_close		*cp;
 
 	sh->posy = 1;
+	check_close_length(&sh->inpl->inp, sh);
 	if ((cp = *close))
 	{
 		while (cp->next)
