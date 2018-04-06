@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:39:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 00:51:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 01:12:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ void		check_close_length(t_inp **inp, t_sh *sh)
 			len++;
 			cp = cp->next;
 		}
-		while (len > sh->width)
-		{
-			len -= sh->width;
+		len /= sh->width;
+		while (len--)
 			custom_return();
-		}
 	}
 }
 

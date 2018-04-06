@@ -45,3 +45,10 @@ cat Makefile |echo || echo a
 qefqefqqqqqqqqqqqqqqqqqqqqqqqq
 $PATH@$PATH
 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqefeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeewwwwwwwwwwwwwwwwwwwwwwwwwfffffffffffffffffffffffffffffffffffffff'ffffffffffffffffffffffffffffffffffffff
+ls -l > 2 1 > 1 2
+cat 2
+cat 1
+ls
+rm 1
+rm 2
+ls

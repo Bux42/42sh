@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 12:11:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:07:07 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 00:54:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	quit(char **input, int ret)
 {
-	ft_putendl_fd("Bye!", STDOUT_FILENO);
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_old_term);
+	ft_putendl_fd("Bye!", STDOUT_FILENO);
 	if (!input[1])
 		exit(ret);
 	exit(ft_atoi(input[1]));
