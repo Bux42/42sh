@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 11:45:44 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 00:24:33 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void		parse(t_sh *sh)
 		}
 		sh->context = 0;
 		free_inpl(&splitted);
+		custom_return();
 	}
 	free_list_from_beginning(&clean);
 }
