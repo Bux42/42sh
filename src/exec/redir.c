@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:55:11 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/07 08:05:42 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/05 00:57:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,18 @@ void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
 		if (tabtube[i].cote[0] == -1)
 			close(tabtube[i].cote[1]);
 	}
+	else if (cmd->redirs->redir[1] == LAGGR || cmd->redirs->redir[1] == LAGGRIN)
+	{
+		//printf("-------------[%d]---------------\n", cmd->redirs->redir[2]);
+		tabtube[i].cote[0] = cmd->redirs->redir[2];
+		tabtube[i].cote[1] = cmd->redirs->redir[0];
+		if (cmd->redirs->redir[1] == LAGGRIN && cmd->redirs->redir[2] == -1)
+			close(tabtube[i].cote[1]);
+	}
 }
 
-void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
+void	redirect(t_listc *cmd, t_pipe *tabtube, int i)
 {
-	t_redir	*cp;
-
-	cp = *redir;
 	while (cmd->redirs != NULL)
 	{
 		if (cmd->redirs && cmd->redirs->redir[1] == 0)
@@ -105,7 +110,7 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 			right_redirect(cmd, tabtube, i);
 		else if (cmd->redirs && cmd->redirs->redir[1] == 3)
 			double_right_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && (cmd->redirs->redir[1] & AGGR))
+		else if (cmd->redirs && (cmd->redirs->redir[1] & (AGGR | LAGGR | LAGGRIN)))
 			do_aggre(cmd, tabtube, i);
 		if (tabtube[i].cote[0] != -1)
 		{
@@ -118,11 +123,7 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 		}
 		if (cmd->redirs && !(cmd->redirs->redir[1] & AGGR))
 			close(tabtube[i].cote[0]);
-		if (cmd->redirs->next)
-			cmd->redirs = cmd->redirs->next;
-		else
-			break ;
+		cmd->redirs = cmd->redirs->next;
 	}
-	cmd->redirs = cp;
 	i++;
 }
