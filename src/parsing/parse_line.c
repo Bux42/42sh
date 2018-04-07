@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 00:24:33 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 03:03:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	int		i;
 
 	i = 0;
-	if (history_exclaim(inp, sh))
-		return (0);
+	if (sh)
+		;
+	//if (history_exclaim(inp, sh))
+	//	return (0);
 	if ((cp = (*inp)))
 	{
 		while (cp && cp->c)
@@ -148,7 +150,6 @@ void		parse(t_sh *sh)
 		}
 		sh->context = 0;
 		free_inpl(&splitted);
-		custom_return();
 	}
 	free_list_from_beginning(&clean);
 }

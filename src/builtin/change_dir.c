@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 16:49:33 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 04:42:33 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int			change_pwd(int flag, t_env **env, char *path, int err)
 int			check_link(char *path, int flag, t_env **env)
 {
 	char	buff[2048];
+	char	pathcwd[2048];
 	char	*tmp;
-	char	*getpwd;
 
+	getcwd(pathcwd, 2048);
 	if (path[0] == '/')
 		path_subcpy(path, buff, 0, ft_strlen(path));
 	else
 	{
-		tmp = path_join((getpwd = get_specific_env("PWD=", env)), path);
-		free(getpwd);
+		tmp = path_join(pathcwd, path);
 		path_subcpy(tmp, buff, 0, ft_strlen(tmp));
 		free(tmp);
 	}
