@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:10:54 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 18:42:12 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ char	*checkman(char *path, char *file)
 		x = -1;
 	if (!(S_ISREG(data.st_mode)))
 		if (x == -1)
+		{
+			free(str);
 			return (NULL);
+		}
 	return (str);
 }
 
@@ -56,12 +59,13 @@ int		builtin_myman(char **input, t_sh *sh)
 	if (!input[1])
 		tab[2] = checkman(sh->man_path, "myman.txt");
 	else
+	{
 		tab[2] = checkman(sh->man_path, file);
+		free(file);
+	}
 	if (!tab[2])
 		return (man_error(2));
 	builtin_env(tab, sh);
-	if (input[1])
-		free(file);
 	free(tab[2]);
 	return (0);
 }
