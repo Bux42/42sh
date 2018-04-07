@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 10:13:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 17:52:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int			main(int ac, char **av, char **env)
 		ft_putstr(tgetstr("le", NULL));
 	}
 	init_variables(g_sh);
+	g_sh->hash = hash_table(get_specific_env("PATH=", &g_sh->env), g_sh);
 	get_bin(&g_sh->env, g_sh);
 	signal_init();
 	while (ac > -1)
