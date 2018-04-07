@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/07 07:59:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 15:11:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	close_tabtube(int len, t_pipe *tabtube)
 void	run_cmd(char *fullpath, t_listc *cmd, t_sh *sh, char **env)
 {
 	if (cmd->prev && (cmd->prev->sep_type == AND
-		|| cmd->prev->sep_type == OR))
+				|| cmd->prev->sep_type == OR))
 	{
 		if (cmd->prev->sep_type == OR &&
-			WEXITSTATUS(sh->retval) != 0)
+				WEXITSTATUS(sh->retval) != 0)
 			execve(fullpath, cmd->cont, env);
 		else if (cmd->prev->sep_type == AND
-			&& WEXITSTATUS(sh->retval) == 0)
+				&& WEXITSTATUS(sh->retval) == 0)
 			execve(fullpath, cmd->cont, env);
 		else
 			exit(WEXITSTATUS(sh->retval));
@@ -95,9 +95,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		{
 			signal_exec();
 			env = env_list_to_char(&sh->env);
-			//if (cmd->sep_type == 0 || cmd->sep_type == SEMICOLON
-			//	|| (cmd->redirs && cmd->redirs->redir[1] == HEREDOC))
-				redirect(cmd, tabtube, 0, &cmd->redirs);
+			redirect(cmd, tabtube, 0, &cmd->redirs);
 			run_cmd(fullpath, cmd, sh, env);
 		}
 		signal_init();
@@ -108,9 +106,9 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		return ((void)close_tabtube(cmd->nb_arg, tabtube));
 	waitpid(pid, &sh->retval, WUNTRACED);
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
- 	{
-		 ft_putstr_fd("Killed: 9\n",2);
-		 kill(0,SIGKILL);
+	{
+		ft_putstr_fd("Killed: 9\n",2);
+		kill(0,SIGKILL);
 	}
 	close_tabtube(cmd->nb_arg, tabtube);
 }
