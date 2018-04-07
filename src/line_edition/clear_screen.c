@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 02:05:21 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 02:45:27 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 11:05:00 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,15 @@ void		print_lines(t_inpl **inpl, t_close **close, t_sh *sh)
 		while (cp->next)
 		{
 			custom_return();
-			if ((*close)->flag & QUOTE)
-				print_str("quote> ", sh);
+			if (*close)
+			{
+				if ((*close)->flag & QUOTE)
+					print_str("quote> ", sh);
+				else
+					print_str("dquote> ", sh);
+			}
 			else
-				print_str("dquote> ", sh);
+				print_str("> ", sh);
 			print_inp_clear(&cp->next->inp, sh);
 			cp = cp->next;
 		}

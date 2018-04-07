@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:08:57 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 00:33:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 10:56:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ void		custom_return(void)
 int			inpl_add_new(t_inpl **inpl, int print)
 {
 	t_inpl	*new;
-	t_inpl	*cp;
 
 	if (!(new = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (print);
 	new->inp = NULL;
 	new->next = NULL;
+	new->previous = (*inpl);
 	(*inpl)->next = new;
-	cp = (*inpl);
 	(*inpl) = (*inpl)->next;
-	cp->next = (*inpl);
-	(*inpl)->previous = cp;
 	return (print);
 }
 

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:10:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 14:34:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 10:25:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,33 @@ int			inpl_char_cmp(char *ending, t_inp **inp)
 		}
 	}
 	return (1);
+}
+
+int			check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending)
+{
+	int		ret;
+	int		i;
+	char	tmp[6];
+
+	i = -1;
+	ret = 0;
+	if (sh->buff[0] == 27 || sh->buff[1] == '\0')
+		ret = treat_input_here(sh, inpl, ending);
+	else
+	{
+		ft_bzero(tmp, 6);
+		while (sh->buff[++i])
+			tmp[i] = sh->buff[i];
+		ft_bzero(sh->buff, 6);
+		i = -1;
+		while (tmp[++i])
+		{
+			sh->buff[0] = tmp[i];
+			if (!(ret = treat_input_here(sh, inpl, ending)))
+				break ;
+		}
+	}
+	return (ret);
 }
 
 int			treat_input_here(t_sh *sh, t_inpl **inpl, char *ending)

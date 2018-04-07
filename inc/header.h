@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 07:58:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 10:15:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ char					*parse_variable_name(t_inp **inp);
 
 void					print_heredoc(char *ending, t_sh *sh);
 int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
+int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending);
 char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 void					free_tokens(t_listc **tok);

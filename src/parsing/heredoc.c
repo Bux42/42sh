@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 03:53:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 10:24:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char		**get_heredoc(t_inp **inp)
 				free(inpl);
 				return (NULL);
 			}
-			ret = treat_input_here(g_sh, &inpl, ending);
+			ret = check_pasted_here(g_sh, &inpl, ending);
 			ft_bzero(g_sh->buff, 6);
 		}
 		custom_return();

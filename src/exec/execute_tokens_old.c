@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 05:45:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 10:39:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		*find_command_path(char **path, char *command)
 
 char		*check_path_bin(char *path, t_sh *sh)
 {
-	if (access(path, X_OK))
+	if (access(path, X_OK) != -1)
 		return (ft_strdup(path));
 	ft_putstr_fd("21sh: no such file or directory: ", 2);
 	ft_putendl_fd(path, 2);
