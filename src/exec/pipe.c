@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:57 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/05 07:29:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 05:25:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_cmd_pipe(t_listc *cmd, t_sh *sh)
 		exit(1);
 	execve(fullpath, cmd->cont, NULL);
 	perror("execve");
+	exit(1);
 }
 
 void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabtube, t_sh *sh)

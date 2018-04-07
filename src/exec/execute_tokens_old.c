@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 06:38:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 05:45:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ char		*find_command_path(char **path, char *command)
 	return (ret);
 }
 
+char		*check_path_bin(char *path, t_sh *sh)
+{
+	if (access(path, X_OK))
+		return (ft_strdup(path));
+	ft_putstr_fd("21sh: no such file or directory: ", 2);
+	ft_putendl_fd(path, 2);
+	sh->retval = 127;
+	return (NULL);
+}
+
 char		*command_path(t_env **env, char *command, t_sh *sh)
 {
 	char	*path;
@@ -65,7 +75,7 @@ char		*command_path(t_env **env, char *command, t_sh *sh)
 
 	ret = NULL;
 	if (command[0] == '/' || command[0] == '.')
-		return (ft_strdup(command));
+		return (check_path_bin(command, sh));
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((split = ft_strsplit(path, ':')))
