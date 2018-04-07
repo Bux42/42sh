@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:09:57 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 19:25:54 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,24 @@ int		built_err(char **exec, char *fg)
 	return (0);
 }
 
+int		in_it(int len, int i, int max, int lg)
+{
+	if (lg == max && ((i <= len && len < i + 10)))
+		return (1);
+	if (lg != max && ((i <= len && len < i + lg)))
+		return (1);
+	return (0);
+}
+
+int		in_this(int len, int i, int max, int lg)
+{
+	if (lg == max && max - i <= len && len < max - i + 10)
+		return (1);
+	if (lg != max && max - i <= len && len < max - i + lg)
+		return (1);
+	return (0);
+}
+
 int		builtin_hist(int i, t_his **hist, int lg, char *fg)
 {
 	int		len;
@@ -81,17 +99,17 @@ int		builtin_hist(int i, t_his **hist, int lg, char *fg)
 
 	len = 0;
 	his = *hist;
-	pos = (i < 0) ? 1 : 0;
+	pos = (i <= 0) ? 1 : 0;
 	i = (i < 0) ? -i : i;
-	if (i == 0 || lg == 0)
+	if (lg == 0)
 		return (0);
 	while (his->next)
 		his = his->next;
 	max = history_len(hist);
 	while (his->previous)
 	{
-		if ((len >= i && len < i + lg && pos == 1)
-				|| (len >= (max - i) && len < (max - i + lg) && pos == 0))
+		if (fg[0] == 'A' || (pos == 1 && in_it(len, i, max, lg)) ||
+				(pos == 0 && in_this(len, i, max, lg)))
 			show_line(fg[2], len, his->inp);
 		his = his->previous;
 		len++;
@@ -117,9 +135,7 @@ int		builtin_history(char **exec, t_sh *sh)
 	else if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{
-		i = (fg[0] == 'A') ? -1 : i;
-		lg = (lg == -1 || fg[0] == 'A') ? history_len(&sh->history) : lg;
-		i = (i == 0) ? -1 : i;
+		lg = (lg == -1) ? history_len(&sh->history) : lg;
 		i = (i > 0) ? i + 1 : i;
 		err = builtin_hist(i, &sh->history, lg, fg);
 	}
