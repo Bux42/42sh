@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:08:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 14:50:18 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,5 @@ int			builtin_env(char **exec, t_sh *sh)
 		sh->env = new_env;
 		return (i);
 	}
-	return (0);
+	return (env_free(tab));
 }
