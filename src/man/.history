@@ -52,3 +52,28 @@ ls
 rm 1
 rm 2
 ls
+e'ee'
+echo "sho ko la cho"
+echo "sho ko la cho" | wc
+echo "sho ko la cho" | wc | rev
+echo "sho ko la cho" | wc | rev | tr
+echo "sho ko la cho" | wc | rev | tr -d
+echo "sho ko la cho" | wc | rev | cat -e
+echo "sho ko la cho" | wc | rev | cat -m
+echo "sho ko la cho" | wc | rev | cat -e
+myman set
+set
+cat -e   <notexist.txt> output.txt 2>&1 ; cat output.txt
+cat -e <input.txt> output.txt
+cat output.txt
+cat << lol
+ls -z 2<&1 | wc
+qefqefqeefffffffffffffffffffffffffffffffffffffffff
+qefqefqefqef'qefqefqef'qefqef
+qef'qefqef'fqef:
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddd
+qefqef`
+fqefqe'qefqef'"qefqefqfqeqefqefqefqefqefqefqeff'"
+ls -R
+ls -R ../
+qefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqefqef

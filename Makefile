@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/05 11:44:15 by drecours         ###   ########.fr        #
+#    Updated: 2018/04/07 02:05:13 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
 line_edition/treat_input.c\
+line_edition/clear_screen.c\
 line_edition/heredoc_treat_input.c\
 line_edition/add_delete_letter.c\
 line_edition/check_shortcut.c\

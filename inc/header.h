@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 12:52:02 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/07 02:14:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int						pos_at(t_inp **inp, int len);
 int						inp_list_len(t_inp **inp);
 
 void					check_shortcut(t_sh *sh);
+void					clear_screen(t_sh *sh);
 void					enter_key(t_sh *sh);
 void					cut_after(t_sh *sh, t_inp **inp);
 void					cut_before(t_sh *sh, t_inp **inp);
