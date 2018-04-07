@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 06:26:33 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 08:00:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	builtin_redir(t_listc *cp, int (*func)(char **, t_sh*), t_sh *sh)
 	sve_fd(save_fd);
 	if (!(p = (t_pipe *)malloc(sizeof(t_pipe) * ((2)))))
 		return ;
-	redirect(cp, p, 0);
+	redirect(cp, p, 0, &cp->redirs);
 	func = cp->func;
 	sh->retval = func(cp->cont, sh);
 	reset_fd(save_fd);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:49:39 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 14:34:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 08:05:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		free_redirs(t_redir **redir)
 {
 	t_redir	*cp;
 	t_redir	*tmp;
-//	int		i;
 
 	if ((cp = (*redir)))
 	{
@@ -44,7 +43,6 @@ void		free_redirs(t_redir **redir)
 			}
 			if (tmp->redir[1] == HEREDOC)
 				free_heredoc(tmp);
-//			i = -1;
 			free(tmp);
 			tmp = NULL;
 		}

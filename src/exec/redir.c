@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:55:11 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/07 06:39:37 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 08:05:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,11 @@ void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
 	}
 }
 
-void	redirect(t_listc *cmd, t_pipe *tabtube, int i)
+void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 {
+	t_redir	*cp;
+
+	cp = *redir;
 	while (cmd->redirs != NULL)
 	{
 		if (cmd->redirs && cmd->redirs->redir[1] == 0)
@@ -115,7 +118,11 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i)
 		}
 		if (cmd->redirs && !(cmd->redirs->redir[1] & AGGR))
 			close(tabtube[i].cote[0]);
-		cmd->redirs = cmd->redirs->next;
+		if (cmd->redirs->next)
+			cmd->redirs = cmd->redirs->next;
+		else
+			break ;
 	}
+	cmd->redirs = cp;
 	i++;
 }

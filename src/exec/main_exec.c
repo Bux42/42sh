@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/07 06:38:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/07 07:59:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 			env = env_list_to_char(&sh->env);
 			//if (cmd->sep_type == 0 || cmd->sep_type == SEMICOLON
 			//	|| (cmd->redirs && cmd->redirs->redir[1] == HEREDOC))
-				redirect(cmd, tabtube, 0);
+				redirect(cmd, tabtube, 0, &cmd->redirs);
 			run_cmd(fullpath, cmd, sh, env);
 		}
 		signal_init();
