@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 19:57:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 06:21:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,9 @@ int			special_error_surrounding(t_inp **inp)
 int			bad_surrounding(t_inpl *inpl)
 {
 	if (inpl->previous && inpl->next)
-		if ((inpl->previous->type > 64 && inpl->previous->type < 2048) || 
+		if ((inpl->previous->type > 64 && inpl->previous->type < 2048) ||
 				inpl->previous->type > 2048)
 			if (inpl->next->type > 64 && inpl->next->type < 2048)
-				return (0);
-	return (1);
-}
-
-int			bad_surrounding_2(t_inpl *inpl)
-{
-	if (inpl->previous && inpl->next)
-		if (inpl->next->type & _FILE)
-			if (inpl->previous->type > 64 && inpl->previous->type < 2048)
 				return (0);
 	return (1);
 }
@@ -61,24 +52,22 @@ int			bad_surrounding_3(t_inpl *inpl)
 	return (1);
 }
 
-int			bad_surrounding_4(t_inpl *inpl)
+int			bad_surrounding_4(t_inpl *inpl, int flag)
 {
-
-	if (inpl->previous)
+	if (flag == 4 && inpl->previous)
 	{
 		if (inpl->previous->type > 64 && inpl->previous->type < 1024)
 			return (0);
 		else if (inpl->previous->type > 2048)
 			return (0);
 	}
-	return (1);
-}
-
-int			bad_closing_aggr(t_inpl *inpl)
-{
-	if (inpl)
+	if (flag == 5 && inpl)
 		if (inpl->inp && inpl->inp->c == '-' && !inpl->inp->next)
 			return (0);
+	if (flag == 2 && inpl->previous && inpl->next)
+		if (inpl->next->type & _FILE)
+			if (inpl->previous->type > 64 && inpl->previous->type < 2048)
+				return (0);
 	return (1);
 }
 
@@ -94,16 +83,16 @@ int			check_special_surrounding(t_inpl **inpl)
 				if (bad_surrounding(cp))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & TOFILE || cp->type & ATOFILE || cp->type & TOEXE)
-				if (bad_surrounding_2(cp))
+				if (bad_surrounding_4(cp, 2))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & HERE)
 				if (bad_surrounding_3(cp))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & AGGR || cp->type & LAGGR || cp->type & LAGGRIN)
-				if (bad_surrounding_4(cp))
+				if (bad_surrounding_4(cp, 4))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & AGGROUT || cp->type & LAGGRIN)
-				if (bad_closing_aggr(cp->next))
+				if (bad_surrounding_4(cp, 5))
 					return (special_error_surrounding(&cp->inp));
 			cp = cp->next;
 		}

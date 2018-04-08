@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 10:24:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 03:29:58 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void		print_heredoc(char *ending, t_sh *sh)
 {
 	ft_bzero(sh->buff, 6);
 	sh->width = tgetnum("co");
-	custom_return();
 	sh->posy = 1;
+	custom_return();
 	print_str("heredoc('", sh);
 	print_str(ending, sh);
 	print_str("') ", sh);

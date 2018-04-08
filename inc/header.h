@@ -6,14 +6,14 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 10:15:58 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 06:37:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
-# define DEBUG			0
+# define DEBUG			1
 # define DQUOTE			1
 # define QUOTE			2
 
@@ -224,6 +224,9 @@ void					convert_quote(t_inp **inp);
 void					convert_dquote(t_inp **inp, t_sh *sh);
 void					convert_bquote(t_inp **inp, t_sh *sh);
 
+void					get_previous_inp(t_inp **inp, t_inp **previous);
+void					relink_with_end(t_inp **inp);
+
 void					parse_backquotes(t_inp **inp, t_sh *sh);
 
 void*					special_error(t_inp **inp);
@@ -274,7 +277,14 @@ int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
 int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending);
 char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+char					*get_file_name(t_inp **inp);
 void					free_tokens(t_listc **tok);
+
+char					*add_file_redir(int redir[3], t_inp **file, int type);
+char					**add_here_redir(int redir[3], t_inp **eof);
+char					*add_aggr_redir(int redir[3], t_inpl **inpl, int type);
+void					add_laggr_redir(int redir[3], t_inpl **inpl, int type);
+void					redir_debug(char *file, int redir[3]);
 
 /*						execution										*/
 

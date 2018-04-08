@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/07 11:05:33 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/08 06:28:45 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -67,8 +67,11 @@ parsing/debug.c\
 parsing/heredoc.c\
 parsing/token_list.c\
 parsing/tokenize_splitted.c\
+parsing/t_redir_list.c\
 parsing/convert_quotes.c\
+parsing/convert_quotes_tools.c\
 parsing/check_special.c\
+parsing/check_special_redir.c\
 parsing/check_special_surrounding.c\
 parsing/convert_splitted.c\
 parsing/split_line.c\

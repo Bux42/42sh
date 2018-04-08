@@ -1,0 +1,66 @@
+ls -l | wc && cat Makefile > file
+cat file
+rm file
+ls
+env -i ./21sh
+env -i 21sh
+env -i /usr/bin/env
+env
+env -i env
+env -i toto=tata env
+env -i
+env
+!!
+!!!
+!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+cat file
+history
+myman history
+history -2
+history 2
+history 23
+$PATH
+echo e$PATH
+echo e$PATH|wc
+env
+ls 2>file
+ls 2>&file
+cat file
+ls -z 2>&file
+cat file
+qefqefeqe
+ls -l
+lqefqef'qefqefqefqefqefqefqefqefqefqefqefqef;'
+ls
+norminette
+touch jaimlespommesdepainsurlaterredemongrandperepapitumemanquesdepuisquetueses
+rm jaimlespommesdepainsurlaterredemongrandperepapitumemanquesdepuisquetueses
+ls
+norminette src/parsing
+vi src/parsing/variable.c
+vi src/parsing/token_list.c
+vi src/parsing/tokenize_splitted.c
+ls > file
+cat file
+ls >> file
+cat file
+rm file
+sort << EOF
+ls -z 2>&file
+ls -z 2>&-
+ls -z 2>&file
+rm file
+cat file
+cat Makefile
+ls
+cat < README.md
+ls
+cat < file
+ls > file
+ls 2&>file
+ls 2>&file
+rm file
+ls
+echo ee'aa'rr
+echo ee"aa"rr

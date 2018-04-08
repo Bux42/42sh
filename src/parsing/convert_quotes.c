@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:25:37 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 22:47:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 06:39:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		convert_backslash_quote(t_inp **inp)
 			c = '\t';
 		if (c)
 		{
-			after = (*inp)->next->next;;
+			after = (*inp)->next->next;
 			(*inp)->c = c;
 			free((*inp)->next);
 			(*inp)->next = after;
@@ -71,14 +71,8 @@ void		convert_backslash_dquote(t_inp **inp)
 void		convert_dquote(t_inp **inp, t_sh *sh)
 {
 	t_inp	*previous;
-	t_inp	*after;
 
-	previous = (*inp)->previous;
-	(*inp) = (*inp)->next;
-	free((*inp)->previous);
-	if (previous)
-		previous->next = (*inp);
-	(*inp)->previous = previous;
+	get_previous_inp(inp, &previous);
 	while ((*inp)->c != '\"')
 	{
 		if ((*inp)->c == '$')
@@ -89,18 +83,12 @@ void		convert_dquote(t_inp **inp, t_sh *sh)
 			break ;
 		(*inp) = (*inp)->next;
 	}
-	after = (*inp)->next;
-	if (after)
-		after->previous = (*inp)->previous;
-	(*inp) = (*inp)->previous;
-	free((*inp)->next);
-	(*inp)->next = after;
+	relink_with_end(inp);
 }
 
 void		convert_quote(t_inp **inp)
 {
 	t_inp	*previous;
-	t_inp	*after;
 
 	if (!(*inp)->next)
 	{
@@ -110,12 +98,7 @@ void		convert_quote(t_inp **inp)
 		*inp = previous;
 		return ;
 	}
-	previous = (*inp)->previous;
-	(*inp) = (*inp)->next;
-	free((*inp)->previous);
-	if (previous)
-		previous->next = (*inp);
-	(*inp)->previous = previous;
+	get_previous_inp(inp, &previous);
 	while ((*inp)->c != '\'')
 	{
 		if ((*inp)->c == '\\')
@@ -124,10 +107,5 @@ void		convert_quote(t_inp **inp)
 			break ;
 		(*inp) = (*inp)->next;
 	}
-	after = (*inp)->next;
-	(*inp) = (*inp)->previous;
-	if (after)
-		after->previous = (*inp);
-	free((*inp)->next);
-	(*inp)->next = after;
+	relink_with_end(inp);
 }
