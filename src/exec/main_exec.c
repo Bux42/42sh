@@ -103,7 +103,10 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 		free(fullpath);
 	}
 	else
+	{
+		sh->retval = -1;
 		return ((void)close_tabtube(cmd->nb_arg, tabtube));
+	}
 	waitpid(pid, &sh->retval, WUNTRACED);
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
 	{
