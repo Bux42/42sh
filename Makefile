@@ -6,14 +6,14 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/08 12:48:12 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/08 16:33:27 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	21sh
 
 CC			=	gcc
-FLAGS		=	-fsanitize=address -Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 #-fsanitize=address
@@ -31,6 +31,7 @@ OBJ_DIR		=	objs/
 SRC_BASE	=	\
 main/main.c\
 tty_debug/tty_debug.c\
+tty_debug/optimized_tools.c\
 line_edition/treat_input.c\
 line_edition/clear_screen.c\
 line_edition/heredoc_treat_input.c\

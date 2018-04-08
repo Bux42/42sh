@@ -575,3 +575,17 @@ cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .
 cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
 ls
 cat ./src/man/.history
+cd
+env
+setenv prout=
+env
+setenv prout=''
+env
+unsetenv prout
+cd ..
+env
+dddddddddddd
+ls -l
+qefqf
+ls -z
+cat << EOF

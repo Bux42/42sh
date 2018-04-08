@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 13:14:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 16:41:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define HEADER_H
 # define TERM "xterm-256color"
 # define DEBUG			1
+# define TTY_MAX		10000
+
 # define DQUOTE			1
 # define QUOTE			2
 
@@ -257,7 +259,10 @@ char					*inp_to_cont(t_inp **inp);
 int						get_tty(t_sh *sh, char *av);
 char					*custom_strcat(char *s1, char *s2);
 int						special_char(char c);
+void					custom_itoa(int *pos, char *buff, int nb);
 void					tty_debug(t_sh *sh, t_inp **inp);
+void					opti_strcat(int *pos, char *buff, char *buff2, int esc);
+int						get_len(int nb);
 
 /*						parsing											*/
 

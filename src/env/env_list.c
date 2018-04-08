@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 02:36:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 14:41:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ void		set_env(t_env **env, char *name, char *value)
 		return ;
 	ft_bzero(new_env, len);
 	ft_strcat(new_env, name);
-	if (value)
-		ft_strcat(new_env, value);
-	if ((cp = (*env)))
+	if ((cp = (*env)) && value)
 	{
+		ft_strcat(new_env, value);
 		while (cp)
 		{
 			if (ft_strncmp(name, cp->env, ft_strlen(name)) == 0)
