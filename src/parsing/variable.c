@@ -6,29 +6,21 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:28:07 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 03:11:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:24:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-int			check_key(char key)
-{
-	if (key == '\n' || key == ' ' || key == '\t' || key == ';' || key == '>' ||
-			key == '<' || key == '&' || key == '|' || key == '$' ||
-			key == '\'' || key == '`' || key == '\"')
-		return (0);
-	return (1);
-}
-
 char		*get_variable_name(t_inp **inp)
 {
-	char	*ret = NULL;
+	char	*ret;
 	int		len;
 	t_inp	*cp;
 
 	cp = (*inp);
 	len = 1;
+	ret = NULL;
 	while (cp->next && check_key(cp->next->c))
 	{
 		cp = cp->next;

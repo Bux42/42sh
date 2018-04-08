@@ -6,11 +6,22 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 06:21:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:21:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int			check_previous(int type)
+{
+	if (type & TOEXE)
+		return (_FILE);
+	if (type & ATOFILE)
+		return (_FILE);
+	if (type & TOFILE)
+		return (_FILE);
+	return (ARGUMENT);
+}
 
 int			special_error_surrounding(t_inp **inp)
 {
@@ -27,16 +38,6 @@ int			special_error_surrounding(t_inp **inp)
 		custom_return();
 	}
 	return (0);
-}
-
-int			bad_surrounding(t_inpl *inpl)
-{
-	if (inpl->previous && inpl->next)
-		if ((inpl->previous->type > 64 && inpl->previous->type < 2048) ||
-				inpl->previous->type > 2048)
-			if (inpl->next->type > 64 && inpl->next->type < 2048)
-				return (0);
-	return (1);
 }
 
 int			bad_surrounding_3(t_inpl *inpl)
@@ -68,6 +69,11 @@ int			bad_surrounding_4(t_inpl *inpl, int flag)
 		if (inpl->next->type & _FILE)
 			if (inpl->previous->type > 64 && inpl->previous->type < 2048)
 				return (0);
+	if (flag == 1 && inpl->previous && inpl->next)
+		if ((inpl->previous->type > 64 && inpl->previous->type < 2048) ||
+				inpl->previous->type > 2048)
+			if (inpl->next->type > 64 && inpl->next->type < 2048)
+				return (0);
 	return (1);
 }
 
@@ -80,7 +86,7 @@ int			check_special_surrounding(t_inpl **inpl)
 		while (cp)
 		{
 			if (cp->type & PIPE || cp->type & AND || cp->type & OR)
-				if (bad_surrounding(cp))
+				if (bad_surrounding_4(cp, 1))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & TOFILE || cp->type & ATOFILE || cp->type & TOEXE)
 				if (bad_surrounding_4(cp, 2))

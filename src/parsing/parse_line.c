@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 01:04:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:19:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,7 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 			free(tmp);
 			tmp = NULL;
 		}
-		if ((sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
-		{
-			sh->inpl->previous = NULL;
-			sh->inpl->next = NULL;
-			sh->inpl->inp = NULL;
-		}
-		else
+		if (!(sh->inpl = allocate_here_cont()))
 			return (NULL);
 	}
 	while (ret && ret->previous)
@@ -118,8 +112,6 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	}
 	return (i);
 }
-
-int			tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 
 void		parse(t_sh *sh)
 {

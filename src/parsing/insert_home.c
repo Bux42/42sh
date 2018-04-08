@@ -6,11 +6,20 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 11:21:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/08 07:03:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:24:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int		check_key(char key)
+{
+	if (key == '\n' || key == ' ' || key == '\t' || key == ';' || key == '>' ||
+			key == '<' || key == '&' || key == '|' || key == '$' ||
+			key == '\'' || key == '`' || key == '\"')
+		return (0);
+	return (1);
+}
 
 int		can_insert_home(t_inp **inp)
 {

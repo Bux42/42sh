@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 08:12:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:12:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ int						check_key(char key);
 int						try_update_context(char c, int flag);
 
 void					*convert_splitted(t_inpl **inpl, t_sh *sh);
+int						check_previous(int type);
 void					convert_quote(t_inp **inp);
 void					convert_dquote(t_inp **inp, t_sh *sh);
 void					convert_bquote(t_inp **inp, t_sh *sh);

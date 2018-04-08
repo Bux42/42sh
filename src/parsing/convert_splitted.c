@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 08:32:46 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:17:54 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,8 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 					if (cp->previous && cp->previous->type > 64 &&
 							cp->previous->type != 2048)
 						cp->type = ARGUMENT;
-					if (cp->previous && cp->previous->type & TOEXE)
-						cp->type = _FILE;
-					if (cp->previous && (cp->previous->type & ATOFILE))
-						cp->type = _FILE;
-					if (cp->previous && (cp->previous->type & TOFILE))
+					if (cp->previous && cp->previous->type > 8 &&
+							cp->previous->type < 128)
 						cp->type = _FILE;
 					if (cp->previous && (cp->previous->type & HERE))
 						cp->type = ARGUMENT;
