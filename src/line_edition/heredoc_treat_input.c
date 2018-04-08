@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:10:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 10:25:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 11:30:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ int			check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending)
 	else
 	{
 		ft_bzero(tmp, 6);
-		while (sh->buff[++i])
+		while (++i < 6)
 			tmp[i] = sh->buff[i];
 		ft_bzero(sh->buff, 6);
 		i = -1;
-		while (tmp[++i])
+		while (++i < 6)
 		{
 			sh->buff[0] = tmp[i];
-			if (!(ret = treat_input_here(sh, inpl, ending)))
+			ret = treat_input_here(sh, inpl, ending);
+			if (!ret)
 				break ;
 		}
 	}
