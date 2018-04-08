@@ -73,3 +73,34 @@ ls ';' yes ";"
 ls -l | wc && echo "ls | file"
 ls ; ls ; ks
 cat << EOF
+cat <&- << EOF
+cat 1<&- << EOF
+cat 1&<- << EOF
+cat <&- << EOF
+cat <&- 
+cat <&-
+cat file <&-
+cat file 1<&-
+cat file 1<&3
+sort << EOF
+ls ""
+echo ''
+echo 'e'
+echo ''
+echo ' '
+echo ''
+echo ''''
+""""
+'e''e'
+''''
+''''a
+''e''a
+''''a
+''
+''''
+''
+''e''
+''e''e
+a''e''e
+a''e''e""
+''''''''''''''''''''''''

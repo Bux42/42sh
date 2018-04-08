@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 05:06:29 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 08:32:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,6 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 		while ((*inp)->previous)
 			(*inp) = (*inp)->previous;
 	}
-}
-
-int			inp_cmp(t_inp **inp, char *str)
-{
-	t_inp	*cp;
-	int		i;
-
-	i = 0;
-	if ((cp = (*inp)))
-	{
-		while (str[i])
-		{
-			if (cp && cp->c == str[i])
-			{
-				cp = cp->next;
-				i++;
-			}
-			else
-				break;
-			if (!cp && !str[i])
-				return (1);
-		}
-	}
-	return (0);
 }
 
 int			idenfity_regular(t_inp **inp)

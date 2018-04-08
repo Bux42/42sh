@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 03:10:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 08:42:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ int			empty_quote(int context, t_inp **inp)
 	if (cp->c == '\"' && context & DQUOTE)
 		if (cp->next && cp->next->c == '\"')
 			return (1);
+	if (cp->c == '\'' && !context)
+		if (cp->next && cp->next->c == '\'')
+			return (1);
+	if (cp->c == '\"' && !context)
+		if (cp->next && cp->next->c == '\"')
+			return (1);
 	return (0);
 }
 
@@ -124,7 +130,7 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 			sh->context = try_update_context((*cp)->c, sh->context);
 		if (right_context(sh->context) && ending_char((*cp)->c))
 			break ;
-		if (empty_quote(sh->context, cp))
+		while ((*cp) && empty_quote(sh->context, cp))
 		{
 			(*cp) = (*cp)->next->next;
 			sh->context = 0;

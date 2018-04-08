@@ -6,11 +6,35 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:30:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 22:31:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 08:11:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+int			inp_cmp(t_inp **inp, char *str)
+{
+	t_inp	*cp;
+	int		i;
+
+	i = 0;
+	if ((cp = (*inp)))
+	{
+		while (str[i])
+		{
+			if (cp && cp->c == str[i])
+			{
+				cp = cp->next;
+				i++;
+			}
+			else
+				break ;
+			if (!cp && !str[i])
+				return (1);
+		}
+	}
+	return (0);
+}
 
 void		str_to_inp(char *str, t_inp **inp)
 {

@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 07:19:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 08:12:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void					custom_return(void);
 /*						line_conversion									*/
 
 int						ending_char(char c);
+int						inp_cmp(t_inp **inp, char *str);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
 void					try_insert_home(t_inp **inp, t_sh *sh);
 void					split_line(t_inpl **inpl, t_inp **clean, t_sh *sh);
@@ -277,6 +278,8 @@ void					print_heredoc(char *ending, t_sh *sh);
 int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
 int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending);
 char					**allocate_cont(t_inpl **inpl);
+char					*allocate_eof(t_inp **inp);
+t_inpl					*allocate_here_cont(void);
 char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 char					*get_file_name(t_inp **inp);

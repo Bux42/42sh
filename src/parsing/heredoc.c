@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 08:53:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 07:22:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 08:02:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,8 @@ char		*get_ending_here(t_inp **inp)
 	ret = NULL;
 	if ((cp = (*inp)))
 	{
-		len = 0;
-		while (cp)
-		{
-			if (cp->c > 31)
-				len++;
-			cp = cp->next;
-		}
-		if (!(ret = (char*)malloc(sizeof(char) * (len + 1))))
+		if (!(ret = allocate_eof(inp)))
 			return (NULL);
-		ret[len] = '\0';
-		cp = *inp;
 		len = 0;
 		while (cp)
 		{
@@ -80,9 +71,8 @@ char		*here_to_char(t_inp **inp)
 		len = 0;
 		while (cp)
 		{
-			ret[len] = cp->c;
+			ret[len++] = cp->c;
 			cp = cp->next;
-			len++;
 		}
 	}
 	return (ret);
@@ -119,27 +109,16 @@ char		**get_heredoc(t_inp **inp)
 	t_inpl	*inpl;
 	int		ret;
 	char	*ending;
-	int		test;
 
 	ret = 1;
 	here = NULL;
-	inpl = NULL;
-	if (!(inpl = (t_inpl*)malloc(sizeof(t_inpl))))
+	if (!(inpl = allocate_here_cont()))
 		return (NULL);
-	inpl->next = NULL;
-	inpl->previous = NULL;
-	inpl->inp = NULL;
 	if ((ending = get_ending_here(inp)))
 	{
 		print_heredoc(ending, g_sh);
-		while (ret && (test = read(1, g_sh->buff, 6)))
+		while (ret && (read(1, g_sh->buff, 6) != -1))
 		{
-			if (test == -1)
-			{
-				free(ending);
-				free(inpl);
-				return (NULL);
-			}
 			ret = check_pasted_here(g_sh, &inpl, ending);
 			ft_bzero(g_sh->buff, 6);
 		}
