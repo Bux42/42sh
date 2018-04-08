@@ -6,11 +6,34 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 06:26:00 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 06:39:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 06:49:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		rep_backslash(char c, t_inp **inp, t_inp **bef)
+{
+	t_inp	*aft;
+
+	aft = NULL;
+	if (c)
+	{
+		aft = (*inp)->next->next;
+		(*inp)->c = c;
+		(*inp)->next = aft;
+		free((aft)->previous);
+		(aft)->previous = (*inp);
+	}
+	else
+	{
+		(*inp) = (*inp)->next;
+		free((*inp)->previous);
+		if (*bef)
+			(*bef)->next = (*inp);
+		(*inp)->previous = *bef;
+	}
+}
 
 void		get_previous_inp(t_inp **inp, t_inp **previous)
 {

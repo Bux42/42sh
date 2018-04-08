@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/08 06:28:45 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/08 07:21:08 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ line_edition/inpl_list.c\
 line_edition/s_bin_list.c\
 parsing/debug.c\
 parsing/heredoc.c\
+parsing/heredoc_tools.c\
 parsing/token_list.c\
 parsing/tokenize_splitted.c\
 parsing/t_redir_list.c\

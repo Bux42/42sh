@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 11:21:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/28 15:30:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 07:03:31 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,40 @@ int		can_insert_home(t_inp **inp)
 	return (1);
 }
 
-void	try_insert_home(t_inp **inp, t_sh *sh)
+void	insert_home(char *variable, t_inp **inp)
 {
-	char	*variable;
 	t_inp	*before;
 	t_inp	*after;
 	t_inp	*new;
 	int		i;
 
 	i = -1;
+	before = (*inp)->previous;
+	after = (*inp)->next;
+	free(*inp);
+	new = NULL;
+	while (variable[++i])
+		inp_insert_posat(&new, variable[i]);
+	if (before)
+		before->next = new;
+	new->previous = before;
+	while (new->next)
+		new = new->next;
+	if (after)
+		after->previous = new;
+	new->next = after;
+	*inp = new;
+}
+
+void	try_insert_home(t_inp **inp, t_sh *sh)
+{
+	char	*variable;
+
 	if (can_insert_home(inp))
 	{
 		if ((variable = get_specific_env("HOME=", &sh->env)))
 		{
-			before = (*inp)->previous;
-			after = (*inp)->next;
-			free(*inp);
-			new = NULL;
-			while (variable[++i])
-				inp_insert_posat(&new, variable[i]);
-			if (before)
-				before->next = new;
-			new->previous = before;
-			while (new->next)
-				new = new->next;
-			if (after)
-				after->previous = new;
-			new->next = after;
-			*inp = new;
+			insert_home(variable, inp);
 			free(variable);
 		}
 	}

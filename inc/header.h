@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 06:37:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 07:19:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ void					convert_bquote(t_inp **inp, t_sh *sh);
 
 void					get_previous_inp(t_inp **inp, t_inp **previous);
 void					relink_with_end(t_inp **inp);
+void					rep_backslash(char c, t_inp **i, t_inp **u);
 
 void					parse_backquotes(t_inp **inp, t_sh *sh);
 
@@ -275,6 +276,7 @@ char					*parse_variable_name(t_inp **inp);
 void					print_heredoc(char *ending, t_sh *sh);
 int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
 int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending);
+char					**allocate_cont(t_inpl **inpl);
 char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
 char					*get_file_name(t_inp **inp);

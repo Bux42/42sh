@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:43 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/22 18:28:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 07:02:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,20 @@ int			working_context(int context, char c)
 		if (context & DQUOTE)
 			return (0);
 	if (c == '\"')
-	{
 		if (context & QUOTE)
 			return (0);
-	}
 	if (c == '$')
-	{
 		if (context & QUOTE)
 			return (0);
-	}
 	if (c == ';')
-	{
-		if (context & QUOTE)
+		if (context & QUOTE || context & DQUOTE)
 			return (0);
-		if (context & DQUOTE)
-			return (0);
-	}
 	if (c == '|')
-	{
-		if (context & QUOTE)
+		if (context & QUOTE || context & DQUOTE)
 			return (0);
-		if (context & DQUOTE)
+	if (c == '\0')
+		if (context & QUOTE || context & DQUOTE)
 			return (0);
-	}
-	if (c == '\0') // binary or option to binary
-	{
-		if (context & QUOTE)
-			return (0);
-		if (context & DQUOTE)
-			return (0);
-	}
 	return (1);
 }
 
@@ -102,8 +86,7 @@ void		lexer_parser(t_inp **inp, t_sh *sh)
 			if (cp && cp->c == ';' && working_context(sh->context, cp->c))
 			{
 				custom_return();
-				lexer_parser(&cp->next, sh);
-				return ;
+				return (void)lexer_parser(&cp->next, sh);
 			}
 			if (cp)
 			{

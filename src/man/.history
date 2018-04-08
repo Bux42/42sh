@@ -64,3 +64,12 @@ rm file
 ls
 echo ee'aa'rr
 echo ee"aa"rr
+echo "\n\tyes\too"
+ls -l > file && ls | wc
+~
+~/
+ls ';' yes
+ls ';' yes ";"
+ls -l | wc && echo "ls | file"
+ls ; ls ; ks
+cat << EOF
