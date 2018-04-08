@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/08 12:28:27 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/08 12:33:34 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ parsing/heredoc.c\
 parsing/heredoc_tools.c\
 parsing/token_list.c\
 parsing/tokenize_splitted.c\
+parsing/check_tokenize.c\
 parsing/t_redir_list.c\
 parsing/convert_quotes.c\
 parsing/convert_quotes_tools.c\

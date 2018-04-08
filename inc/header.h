@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:28:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:33:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,10 @@ char					*allocate_eof(t_inp **inp);
 t_inpl					*allocate_here_cont(void);
 char					**get_heredoc(t_inp **inp);
 int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+t_listc					*new_token(void);
+int						keep_going(int type);
+int						is_redirection(int type);
+void					tok_push_back(t_listc **tok, t_listc *add);
 char					*get_file_name(t_inp **inp);
 void					free_tokens(t_listc **tok);
 

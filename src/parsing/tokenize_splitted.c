@@ -6,45 +6,16 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 04:05:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:33:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-int			valid_condition(t_inpl **inpl)
-{
-	if ((*inpl)->previous && (*inpl)->next)
-	{
-		if ((*inpl)->previous->type < 128)
-			return (0);
-		if ((*inpl)->next->type < 128)
-			return (0);
-		if ((*inpl)->previous->type & SEMICOLON)
-			return (0);
-		if ((*inpl)->next->type & SEMICOLON)
-			return (0);
-		return (1);
-	}
-	return (0);
-}
-
 void		is_a_directory(char *str)
 {
 	ft_putstr("21sh: is a directory: ");
 	ft_putstr(str);
-}
-
-int			valid_tofile(t_inpl **inpl)
-{
-	if ((*inpl)->previous && (*inpl)->next)
-	{
-		if ((*inpl)->previous->type < 128)
-			return (-1);
-		if ((*inpl)->previous->type == 2048 || (*inpl)->next->type == 2048)
-			return (-1);
-	}
-	return (1);
 }
 
 char		**concat_content(t_inpl **inpl)
@@ -73,69 +44,6 @@ char		**concat_content(t_inpl **inpl)
 	}
 	cont[len] = NULL;
 	return (cont);
-}
-
-int			valid_file(t_inpl **inpl)
-{
-	int		fd;
-
-	fd = -1;
-	if ((*inpl)->previous && (*inpl)->next)
-	{
-		if ((*inpl)->previous->type == 2048)
-			return (-1);
-		if ((*inpl)->next->type == 2048)
-			return (-1);
-		if ((*inpl)->previous && (*inpl)->previous->type > 64 && (*inpl)->previous->type < 1024)
-			if ((*inpl)->next->type & _FILE)
-				return (1);
-	}
-	else
-		return (-1);
-	return (fd);
-}
-
-t_listc		*new_token(void)
-{
-	t_listc		*ret;
-
-	if (!(ret = (t_listc*)malloc(sizeof(t_listc))))
-		return (NULL);
-	ret->func = NULL;
-	ret->cont = NULL;
-	ret->redirs = NULL;
-	ret->prev = NULL;
-	ret->next = NULL;
-	ret->sep_type = 0;
-	ret->nb_arg = 0;
-	return (ret);
-}
-
-void		tok_push_back(t_listc **tok, t_listc *add)
-{
-	t_listc		*last;
-
-	if (!*tok)
-		*tok = add;
-	else
-	{
-		last = *tok;
-		while (last->next)
-			last = last->next;
-		add->prev = last;
-		last->next = add;
-	}
-}
-
-int			keep_going(int type)
-{
-	if (type & SEMICOLON)
-		return (0);
-	if (type & BUILTIN)
-		return (0);
-	if (type & COMMAND)
-		return (0);
-	return (1);
 }
 
 char		*get_file_name(t_inp **inp)
@@ -208,29 +116,7 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 			last = last->next;
 		last->next = new_redir(redir_type, file, here);
 	}
-	if (DEBUG)
-		redir_debug(file, redir_type);
-}
-
-int			is_redirection(int type)
-{
-	if (type & TOFILE)
-		return (1);
-	if (type & ATOFILE)
-		return (1);
-	if (type & TOEXE)
-		return (1);
-	if (type & HERE)
-		return (1);
-	if (type & AGGR)
-		return (1);
-	if (type & AGGRFILE)
-		return (1);
-	if (type & LAGGR)
-		return (1);
-	if (type & LAGGRIN)
-		return (1);
-	return (0);
+	redir_debug(file, redir_type);
 }
 
 void		add_listc_token(t_inpl **inpl, t_listc **tok)
@@ -247,7 +133,8 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok)
 		{
 			if (is_redirection(cp->next->type))
 				redir_push_back(&add->redirs, &cp->next, cp->next->type);
-			if (cp->next->type & PIPE || cp->next->type & AND || cp->next->type & OR || cp->next->type & SEMICOLON)
+			if (cp->next->type & PIPE || cp->next->type & AND ||
+					cp->next->type & OR || cp->next->type & SEMICOLON)
 			{
 				add->sep_type = cp->next->type;
 				if (DEBUG)
@@ -257,8 +144,6 @@ void		add_listc_token(t_inpl **inpl, t_listc **tok)
 			cp = cp->next;
 		}
 		add->sep_type = 0;
-		if (DEBUG)
-			ft_putnbr(add->sep_type);
 		tok_push_back(tok, add);
 	}
 }
