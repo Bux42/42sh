@@ -6,11 +6,33 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 01:45:42 by videsvau          #+#    #+#             */
-/*   Updated: 2017/11/26 02:00:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 13:16:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		completion_readdir(DIR *od, t_sh *sh, t_inp *cp)
+{
+	struct dirent	*fl;
+
+	while ((fl = readdir(od)))
+	{
+		if (ft_strncmp(sh->comp_debug, fl->d_name,
+					ft_strlen(sh->comp_debug)) == 0)
+		{
+			if (sh->comp_remain)
+				delete_remain(sh, sh->comp_remain);
+			found(sh, od, fl, cp);
+			if (sh->comp_remain == NULL)
+				closedir(od);
+			return ;
+		}
+	}
+	if (sh->comp_remain)
+		not_found(sh, cp);
+	closedir(od);
+}
 
 void		fill_path(char *ret, char *home, int len, t_inp *cp)
 {

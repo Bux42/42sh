@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 22:21:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 13:03:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,9 @@ void		treat_input(t_sh *sh)
 		return ;
 	sh->width = tgetnum("co");
 	if (!sh->buff[1])
-	{
-		if (sh->buff[0] > 31)
-		{
-			add_delete_letter(sh);
-			autocompletion(&sh->inpl->inp, sh);
-		}
-		else
-			check_shortcut(sh);
-	}
+		classic_edition(&sh->inpl->inp, sh, 0);
 	if (sh->buff[0] == 4 && !sh->buff[1])
-	{
-		char *tab[3];
-		tab[0] = "exit";
-		tab[1] = "0";
-		tab[2] = NULL;
-		builtin_exit(tab, sh);
-	}
+		try_exit(sh, &sh->inpl->inp);
 	if (!sh->buff[3] && sh->buff[0] == 27 && sh->buff[1] == 91)
 		move_cursor(sh, &sh->inpl->inp, sh->buff[2]);
 	if (sh->buff[0] == 27 && sh->buff[1] == 27 && sh->buff[2] == 91)

@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:49:48 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 13:14:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ struct termios			g_new_term;
 struct s_sh				*g_sh;
 
 int						init_term(void);
+void					try_exit(t_sh *sh, t_inp **inp);
 void					init_variables(t_sh *sh);
 void					get_bin(t_env **env, t_sh *sh);
 t_bin					*new_bin(char *name);
@@ -98,6 +99,7 @@ void					erase_inp_spaces(t_sh *sh, t_inp **inp);
 void					ft_putstr_endline(char *str, t_sh *sh);
 void					check_pasted(t_sh *sh);
 void					treat_input(t_sh *sh);
+void					classic_edition(t_inp **inp, t_sh *sh, int flag);
 void					add_delete_letter(t_sh *sh);
 void					delete_letter(t_sh *sh, t_inp **inp);
 void					delete_first_letter(t_inp *cp, t_inp **inp);
@@ -198,6 +200,7 @@ void					overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i);
 void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
 void					rewrite_beginning(t_sh *sh, t_inp *cp);
+void					completion_readdir(DIR *od, t_sh *sh, t_inp *cp);
 
 /*						quotes_and_slash								*/
 

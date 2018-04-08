@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:19:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:52:56 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,6 @@ t_inp		*concat_inpl(t_inpl **inpl, t_sh *sh)
 	while (ret && ret->previous)
 		ret = ret->previous;
 	return (ret);
-}
-
-void		free_and_relink(t_inp **inp, char c)
-{
-	t_inp	*tmp;
-
-	tmp = (*inp)->next;
-	(*inp)->next = tmp->next;
-	if (tmp->next)
-		tmp->next->previous = (*inp);
-	free(tmp);
-	if (c)
-		(*inp)->c = c;
 }
 
 int			empty_inp(t_inp **inp, t_sh *sh)

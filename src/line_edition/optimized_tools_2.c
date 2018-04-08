@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:30:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 08:11:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 13:18:06 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,20 @@ int			inp_to_inp_cmp(t_inp **inp1, t_inp **inp2)
 	t_inp	*cp1;
 	t_inp	*cp2;
 
-	if ((cp1 = (*inp1)) && (cp2 = (*inp2)))
+	if ((cp1 = (*inp1)))
 	{
-		while (cp1 && cp2)
+		if ((cp2 = (*inp2)))
 		{
-			if (cp1->c != cp2->c)
+			while (cp1 && cp2)
+			{
+				if (cp1->c != cp2->c)
+					return (0);
+				cp1 = cp1->next;
+				cp2 = cp2->next;
+			}
+			if ((!cp1 && cp2) || (cp1 && !cp2))
 				return (0);
-			cp1 = cp1->next;
-			cp2 = cp2->next;
 		}
-		if ((!cp1 && cp2) || (cp1 && !cp2))
-			return (0);
 	}
 	return (1);
 }

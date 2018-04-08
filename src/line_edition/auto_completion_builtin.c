@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 20:59:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 20:39:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:53:52 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void		print_completion_builtin(t_sh *sh, t_inp *cp, t_bin **bin)
 	{
 		while (bincp)
 		{
-			if (ft_strncmp(sh->comp_debug, bincp->name, ft_strlen(sh->comp_debug)) == 0)
+			if (ft_strncmp(sh->comp_debug, bincp->name,
+						ft_strlen(sh->comp_debug)) == 0)
 			{
 				if (sh->comp_remain)
 					delete_remain(sh, sh->comp_remain);

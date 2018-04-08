@@ -6,11 +6,25 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:10:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 11:30:17 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 13:03:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "../builtin/builtin.h"
+
+void		try_exit(t_sh *sh, t_inp **inp)
+{
+	char	*tab[3];
+
+	if (!(*inp))
+	{
+		tab[0] = "exit";
+		tab[1] = "0";
+		tab[2] = NULL;
+		builtin_exit(tab, sh);
+	}
+}
 
 int			inpl_char_cmp(char *ending, t_inp **inp)
 {
@@ -64,6 +78,31 @@ int			check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending)
 	return (ret);
 }
 
+void		classic_edition(t_inp **inp, t_sh *sh, int flag)
+{
+	if (flag & HERE)
+	{
+		if (sh->buff[0] != 127)
+		{
+			ft_putchar(sh->buff[0]);
+			check_endline(sh);
+			inp_insert_posat(inp, sh->buff[0]);
+		}
+		else
+			delete_letter(g_sh, inp);
+	}
+	else
+	{
+		if (sh->buff[0] > 31)
+		{
+			add_delete_letter(sh);
+			autocompletion(inp, sh);
+		}
+		else
+			check_shortcut(sh);
+	}
+}
+
 int			treat_input_here(t_sh *sh, t_inpl **inpl, char *ending)
 {
 	sh->pos_at = pos_at(&(*inpl)->inp, sh->prompt_len);
@@ -73,16 +112,7 @@ int			treat_input_here(t_sh *sh, t_inpl **inpl, char *ending)
 	if (!sh->buff[1])
 	{
 		if (sh->buff[0] > 31)
-		{
-			if (sh->buff[0] != 127)
-			{
-				ft_putchar(sh->buff[0]);
-				check_endline(sh);
-				inp_insert_posat(&(*inpl)->inp, sh->buff[0]);
-			}
-			else
-				delete_letter(g_sh, &(*inpl)->inp);
-		}
+			classic_edition(&(*inpl)->inp, g_sh, HERE);
 		else if (sh->buff[0] == 10)
 		{
 			if (!inpl_char_cmp(ending, &(*inpl)->inp))

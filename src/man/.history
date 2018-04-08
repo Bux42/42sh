@@ -538,3 +538,22 @@ cat /tmp/test.txt
 rm /tmp/test.txt
 cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
 cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+ls << EOF
+sort << EOF
+norminette ./src/line_edition/print_completion.c
+norminette src/line_edition
+rien && echo "perdu"
+ls || echo "perdu"
+cat < Makefile | wc >> /tmp/file
+cat /tmp/file ; rm /tmp/file
+unsetenv PATH
+ls
+setenv PATH=/bin
+/bin/ls || echo "perdu"
+setenv PATH=/Users/videsvau/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
