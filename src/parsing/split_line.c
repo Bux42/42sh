@@ -6,81 +6,11 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 08:42:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 12:28:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
-
-int			right_context(int flag)
-{
-	if (flag & QUOTE)
-		return (0);
-	if (flag & DQUOTE)
-		return (0);
-	return (1);
-}
-
-int			check_quoting(char c)
-{
-	if (c == '\'')
-		return (1);
-	if (c == '\"')
-		return (1);
-	if (c == '`')
-		return (1);
-	return (0);
-}
-
-int			ending_char(char c)
-{
-	if (c == ' ')
-		return (1);
-	if (c == '\t')
-		return (1);
-	if (c == '|')
-		return (1);
-	if (c == '&')
-		return (1);
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
-	if (c == ';')
-		return (1);
-	return (0);
-}
-
-int			ending_special_char(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\'' || c == '\"' || c == '`')
-		return (1);
-	if (c < 123 && c > 96)
-		return (1);
-	if (c < 96 && c > 64)
-		return (1);
-	if (c < 48 && c > 44)
-		return (1);
-	return (0);
-}
-
-void		print_add(t_inp **inp)
-{
-	t_inp	*cp;
-
-	if ((cp = (*inp)))
-	{
-		while (cp->previous)
-			cp = cp->previous;
-		ft_putchar('[');
-		while (cp)
-		{
-			ft_putchar(cp->c);
-			cp = cp->next;
-		}
-		ft_putchar(']');
-	}
-}
 
 int			empty_quote(int context, t_inp **inp)
 {
@@ -158,33 +88,6 @@ void		add_special_token(t_inpl **inpl, t_inp **cp)
 	}
 	if (add)
 		inpl_push_back(inpl, &add, 1);
-}
-
-int			special_tok(char c)
-{
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
-	if (c == '|')
-		return (1);
-	if (c == '&')
-		return (1);
-	if (c == ';')
-		return (1);
-	return (0);
-}
-
-int			redir(t_inp *cp)
-{
-	if (cp->c > 47 && cp->c < 58)
-	{
-		if (cp->next && cp->next->c == '>')
-			return (1);
-		if (cp->next && cp->next->c == '<')
-			return (1);
-	}
-	return (0);
 }
 
 void		split_line(t_inpl **inpl, t_inp **clean, t_sh *sh)
