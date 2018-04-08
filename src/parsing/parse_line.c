@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 07:30:31 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:52:56 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 14:38:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 	i = 0;
 	if (sh)
 		;
-	//if (history_exclaim(inp, sh))
-	//	return (0);
 	if ((cp = (*inp)))
 	{
 		while (cp && cp->c)
@@ -97,6 +95,12 @@ int			empty_inp(t_inp **inp, t_sh *sh)
 			cp = cp->next;
 		}
 	}
+	if (i)
+	{
+		cp = *inp;
+		history_push_front(&sh->history, cp, sh);
+	}
+	sh->context = 0;
 	return (i);
 }
 
@@ -110,10 +114,7 @@ void		parse(t_sh *sh)
 	tok = NULL;
 	if (empty_inp(&clean, sh))
 	{
-		history_push_front(&sh->history, clean, sh);
-		sh->history_len = history_len(&sh->history);
 		splitted = NULL;
-		sh->context = 0;
 		split_line(&splitted, &clean, sh);
 		if (splitted && convert_splitted(&splitted, sh) != NULL &&
 				check_special_surrounding(&splitted))
@@ -127,7 +128,6 @@ void		parse(t_sh *sh)
 			free_tokens(&tok);
 			tcsetattr(STDIN_FILENO, TCSADRAIN, &g_new_term);
 		}
-		sh->context = 0;
 		free_inpl(&splitted);
 	}
 	free_list_from_beginning(&clean);

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:17:54 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/08 14:27:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,31 @@ void		convert_regular(t_inp **inp, t_sh *sh)
 	}
 }
 
-int			idenfity_regular(t_inp **inp)
+int			idenfity_regular(t_inpl **inpl)
 {
 	int		type;
 
 	type = 0;
-	if (inp_cmp(inp, "env") || inp_cmp(inp, "unsetenv") || inp_cmp(inp, "echo"))
+	if (inp_cmp(&(*inpl)->inp, "env") || inp_cmp(&(*inpl)->inp, "unsetenv")
+			|| inp_cmp(&(*inpl)->inp, "echo"))
 		return (type | BUILTIN);
-	if (inp_cmp(inp, "cd") || inp_cmp(inp, "setenv") || inp_cmp(inp, "export"))
+	if (inp_cmp(&(*inpl)->inp, "cd") || inp_cmp(&(*inpl)->inp, "setenv") ||
+			inp_cmp(&(*inpl)->inp, "export"))
 		return (type | BUILTIN);
-	if (inp_cmp(inp, "exit") || inp_cmp(inp, "set") || inp_cmp(inp, "unset"))
+	if (inp_cmp(&(*inpl)->inp, "exit") || inp_cmp(&(*inpl)->inp, "set") ||
+			inp_cmp(&(*inpl)->inp, "unset"))
 		return (type | BUILTIN);
-	if (inp_cmp(inp, "local") || inp_cmp(inp, "myman")
-			|| inp_cmp(inp, "history"))
+	if (inp_cmp(&(*inpl)->inp, "local") || inp_cmp(&(*inpl)->inp, "myman")
+			|| inp_cmp(&(*inpl)->inp, "history"))
 		return (type | BUILTIN);
+	if ((*inpl)->previous && (*inpl)->previous->type > 64 &&
+		(*inpl)->previous->type != 2048)
+		return (type | ARGUMENT);
+	if ((*inpl)->previous && (*inpl)->previous->type > 8 &&
+		(*inpl)->previous->type < 128)
+		return (type | _FILE);
+	if ((*inpl)->previous && ((*inpl)->previous->type & HERE))
+		return (type | ARGUMENT);
 	return (type | COMMAND);
 }
 
@@ -117,17 +128,7 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 			{
 				convert_regular(&cp->inp, sh);
 				if (cp)
-				{
-					cp->type = idenfity_regular(&cp->inp);
-					if (cp->previous && cp->previous->type > 64 &&
-							cp->previous->type != 2048)
-						cp->type = ARGUMENT;
-					if (cp->previous && cp->previous->type > 8 &&
-							cp->previous->type < 128)
-						cp->type = _FILE;
-					if (cp->previous && (cp->previous->type & HERE))
-						cp->type = ARGUMENT;
-				}
+					cp->type = idenfity_regular(&cp);
 			}
 			else if (cp->type == 1)
 				if ((cp->type = check_special(&cp->inp)) == -1)
