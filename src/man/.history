@@ -128,3 +128,13 @@ ls 2>file
 ls 2>2
 ls 2>file
 ls 2> file
+ls 2> file
+ls 2>2
+cat <&2
+cat 1<&2
+ls >&-
+ls 1>&-
+ls 1>&2
+history
+history -a
+history -A

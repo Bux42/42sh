@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 16:03:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 17:24:47 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char		*add_aggr_file(int redir_type[3], t_inpl **inpl, int type)
 	file = get_file_name(&(*inpl)->next->inp);
 	ft_putchar((*inpl)->inp->c);
 	redir_type[0] = (*inpl)->inp->c - 48;
-	redir_type[1] = type;
+	redir_type[1] = TOFILE;
 	redir_type[2] = -1;
 	return (file);
 }
