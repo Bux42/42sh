@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 13:05:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:25:05 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,7 @@ void					redir_debug(char *file, int redir[3]);
 /*						execution										*/
 
 void					valid_command(t_inp **inp, t_sh *sh);
+int						bin_exists(const char *path, char *exec, int *ret);
 char					*existing_command(char **command, t_env **env, t_sh *sh, int fg);
 char					**get_full_command(t_inp **inp, t_sh *sh);
 char					*get_command(t_inp **inp, t_sh *sh);

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 12:06:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:29:14 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 		ft_putstr_fd(exec[0], STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		i = 127;
+		free(path);
 		return (i);
 	}
-	else if (ft_strcmp(path, "ok"))
+	else if (ft_strcmp(path, "ok") && bin_exists(path, exec[0], &sh->retval) == 0)
 	{
 		i = fork_command(path, exec, tab);
-		free(path);
 	}
+	if (path)
+		free(path);
 	return (i);
 }
 
