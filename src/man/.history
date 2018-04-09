@@ -201,3 +201,28 @@ ls -z 1>&-
 cat 0>&-
 exti
 exit
+ls 2>&1
+ls 2>&file
+ls -z 2>&file
+exit
+ls 2>file
+ls 1>file
+cat file
+rm file
+ls
+ls <&-
+ls 2<&-
+ls 1<&-
+exit
+ls 1<&-
+exit
+ls 1<&-
+exit
+ls 1<&-
+ls -z 2<&-
+ls -z 1<&-
+ls 1<&-
+ls 2>&-
+ls 1>&-
+ls 1>&-
+exit
