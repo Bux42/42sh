@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 01:45:42 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 11:26:04 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 13:35:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char		*get_comp_path(t_sh *sh, t_inp *cp)
 			if (cp->next && cp->next->c == '/')
 				if ((home = get_specific_env("HOME=", &sh->env)))
 					len += ft_strlen(home) - 2;
+		if (cp->c == '~')
+			break ;
 		if (!cp->previous || is_space(cp->previous->c))
 			break ;
 		len++;

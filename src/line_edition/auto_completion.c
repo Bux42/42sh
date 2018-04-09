@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 20:23:08 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 11:37:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 13:25:57 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 			}
 		}
 		free_comp(3, sh);
+	}
+}
+
+void		do_shit(t_inp **inp)
+{
+	t_inp	*cp;
+
+	cp = (*inp);
+	while (cp)
+	{
+		ft_putchar_fd(cp->c, g_sh->tty_fd);
+		cp = cp->next;
 	}
 }
 
@@ -60,7 +72,8 @@ char		*get_left_word(t_inp *cp, t_sh *sh)
 
 	slash = 0;
 	free_comp(6, sh);
-	i = left_word_len(&slash, &cp);
+	if ((i = left_word_len(&slash, &cp)) == -1)
+		return (NULL);
 	if (!(ret = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	if (slash)
