@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 09:52:18 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 09:57:14 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:26:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			is_redirection(int type)
 	if (type & LAGGR)
 		return (1);
 	if (type & LAGGRIN)
+		return (1);
+	if (type & CLOSEAGGR)
 		return (1);
 	return (0);
 }

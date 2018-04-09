@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 11:11:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:53:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			find_hist_file(char *man_path)
 	ft_bzero(cp, ft_strlen(man_path) + 9);
 	ft_strcat(cp, man_path);
 	ft_strcat(cp, ".history");
-	//fd = open(cp, O_CREAT | O_RDWR, 0777);
+	fd = open(cp, O_CREAT | O_RDWR, 0777);
 	free(cp);
 	return (fd);
 }
@@ -88,11 +88,11 @@ int			main(int ac, char **av, char **env)
 	if (!(g_sh->inpl = (t_inpl*)malloc(sizeof(t_inpl))))
 		return (0);
 	g_sh->man_path = find_man_path(av[0]);
-	//if ((g_sh->fd = find_hist_file(g_sh->man_path)) == -1)
-	//	return (0);
+	if ((g_sh->fd = find_hist_file(g_sh->man_path)) == -1)
+		return (0);
 	get_env(env, g_sh);
 	g_sh->history = NULL;
-	//restore_history_from_file(g_sh);
+	restore_history_from_file(g_sh);
 	if (!init_term() || !get_tty(g_sh, av[1]))
 		return (0);
 	g_sh->retval = 0;

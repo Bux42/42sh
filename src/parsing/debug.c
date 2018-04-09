@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:22:12 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 06:55:09 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:55:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		print_converted(t_inp **inp, int type)
 		(type & AGGROUT) ? ft_putstr(" <= AGGROUT") : ft_putstr("");
 		(type & LAGGR) ? ft_putstr(" <= LAGGR") : ft_putstr("");
 		(type & LAGGRIN) ? ft_putstr(" <= LAGGRIN") : ft_putstr("");
+		(type & CLOSEAGGR) ? ft_putstr(" <= CLOSE") : ft_putstr("");
 		custom_return();
 	}
 }

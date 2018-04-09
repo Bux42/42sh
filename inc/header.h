@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 13:05:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:48:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define AGGROUT		16384
 # define LAGGR			32768
 # define LAGGRIN		65536
+# define CLOSEAGGR		131072
 
 # include <termcap.h>
 # include <termios.h>
