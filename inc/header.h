@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 14:25:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:58:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
 void					rewrite_beginning(t_sh *sh, t_inp *cp);
 void					completion_readdir(DIR *od, t_sh *sh, t_inp *cp);
+void					do_shit(t_inp **inp);
 
 /*						quotes_and_slash								*/
 

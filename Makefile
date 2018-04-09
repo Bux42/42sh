@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/09 11:41:57 by drecours         ###   ########.fr        #
+#    Updated: 2018/04/09 14:58:43 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ line_edition/history_tools.c\
 line_edition/list_to_char.c\
 line_edition/search_history_forward.c\
 line_edition/auto_completion.c\
+line_edition/auto_completion_tools.c\
 line_edition/auto_completion_clear.c\
 line_edition/completion_path.c\
 line_edition/print_completion.c\
