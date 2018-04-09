@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/07 15:11:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 08:40:16 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,10 @@ void	close_tabtube(int len, t_pipe *tabtube)
 
 void	run_cmd(char *fullpath, t_listc *cmd, t_sh *sh, char **env)
 {
-	if (cmd->prev && (cmd->prev->sep_type == AND
-				|| cmd->prev->sep_type == OR))
-	{
-		if (cmd->prev->sep_type == OR &&
-				WEXITSTATUS(sh->retval) != 0)
-			execve(fullpath, cmd->cont, env);
-		else if (cmd->prev->sep_type == AND
-				&& WEXITSTATUS(sh->retval) == 0)
-			execve(fullpath, cmd->cont, env);
-		else
-			exit(WEXITSTATUS(sh->retval));
-	}
-	else
+	if (condition_is_valid(sh, cmd))
 		execve(fullpath, cmd->cont, env);
+	else
+		exit(WEXITSTATUS(sh->retval));
 	print_access_error(fullpath);
 	exit(-1);
 }

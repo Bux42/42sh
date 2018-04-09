@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 16:41:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 08:38:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,7 @@ void				    signal_handler(int inp);
 void				    signal_newline(int inp);
 void					execute_tokens(t_listc **tok, t_sh *sh);
 void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
+int						condition_is_valid(t_sh *sh, t_listc *cmd);
 //Pipeline
 void                    prepare_pipe(t_listc *cmd);
 void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);

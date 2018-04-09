@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 14:33:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 08:42:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void	builtin_redir(t_listc *cp, int (*func)(char **, t_sh*), t_sh *sh)
 	close_tabtube(2, p);
 }
 
+int		condition_is_valid(t_sh *sh, t_listc *cmd)
+{
+	if (cmd->prev)
+	{
+		if (cmd->prev->sep_type & AND)
+			if (WEXITSTATUS(sh->retval) != 0)
+				return (0);
+		if (cmd->prev->sep_type & OR)
+			if (WEXITSTATUS(sh->retval) == 0)
+				return (0);
+	}
+	return (1);
+}
+
 void	execute_tokens(t_listc **tok, t_sh *sh)
 {
 	t_listc	*cp;
@@ -53,7 +67,8 @@ void	execute_tokens(t_listc **tok, t_sh *sh)
 	{
 		while (cp)
 		{
-			if (cp->func && cp->sep_type != PIPE)
+			if (cp->func && cp->sep_type != PIPE &&
+					condition_is_valid(sh, cp))
 			{
 				func = cp->func;
 				(cp->redirs) ? builtin_redir(cp, func, sh) :
