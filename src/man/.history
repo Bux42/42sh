@@ -166,3 +166,38 @@ ls -z 2>file
 cat file
 rm file
 exit
+ls >&-
+ls >&1
+ls >&2
+ls >&0
+ls >&file
+ls 2>&-
+ls -z 2>&-
+ls >&-
+ls >&2 2>file
+cat file
+ls >&2 1>file
+cat file
+rm file
+ls
+exit
+rm file
+ls 2>file >&2
+cat file
+ls >&-
+exit
+ls >&-
+exit
+ls >&-
+ls
+rm file
+ls >&-
+ls
+ls -z 2>&-
+ls -z 1>&-
+ls -z 0>&-
+ls -z 2>&-
+ls -z 1>&-
+cat 0>&-
+exti
+exit

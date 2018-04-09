@@ -97,6 +97,12 @@ void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
 		if (cmd->redirs->redir[1] == LAGGRIN && cmd->redirs->redir[2] == -1)
 			close(tabtube[i].cote[1]);
 	}
+	else if (cmd->redirs->redir[1] == CLOSEAGGR)
+	{
+		tabtube[i].cote[0] = cmd->redirs->redir[2];
+		tabtube[i].cote[1] = cmd->redirs->redir[0];
+		close(tabtube[i].cote[1]);
+	}
 }
 
 void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
@@ -113,7 +119,7 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 		else if (cmd->redirs && cmd->redirs->redir[1] == 3)
 			double_right_redirect(cmd, tabtube, i);
 		else if (cmd->redirs && (cmd->redirs->redir[1] & (AGGR | LAGGR
-			| LAGGRIN)))
+			| LAGGRIN | CLOSEAGGR)))
 			do_aggre(cmd, tabtube, i);
 		if (tabtube[i].cote[0] != -1)
 		{
