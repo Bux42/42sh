@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 14:06:27 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 00:33:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:02:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ void		history_push_front(t_his **history, t_inp *inp, t_sh *sh)
 		(*history) = history_new(inp, sh);
 	else
 	{
-		if (!inp_to_inp_cmp(&inp, &(*history)->inp))
-		{
-			first = history_new(inp, sh);
-			while ((*history)->previous)
-				(*history) = (*history)->previous;
-			(*history)->previous = first;
-			first->next = (*history);
-			(*history) = first;
-		}
+		first = history_new(inp, sh);
+		while ((*history)->previous)
+			(*history) = (*history)->previous;
+		(*history)->previous = first;
+		first->next = (*history);
+		(*history) = first;
 	}
 }
 

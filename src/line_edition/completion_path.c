@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 01:45:42 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 13:16:24 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:26:04 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		fill_path(char *ret, char *home, int len, t_inp *cp)
 			i++;
 		}
 		free(home);
+		home = NULL;
 	}
 	while (i < len)
 	{
