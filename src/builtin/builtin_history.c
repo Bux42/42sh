@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/07 19:25:54 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:12:08 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,6 @@ int		built_err(char **exec, char *fg)
 		else
 			return (check_arg(exec, i));
 	}
-	return (0);
-}
-
-int		in_it(int len, int i, int max, int lg)
-{
-	if (lg == max && ((i <= len && len < i + 10)))
-		return (1);
-	if (lg != max && ((i <= len && len < i + lg)))
-		return (1);
-	return (0);
-}
-
-int		in_this(int len, int i, int max, int lg)
-{
-	if (lg == max && max - i <= len && len < max - i + 10)
-		return (1);
-	if (lg != max && max - i <= len && len < max - i + lg)
-		return (1);
 	return (0);
 }
 

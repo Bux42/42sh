@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:32:28 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:57:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:09:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,22 @@ int		valid_name(char *str, char *builtin)
 		return (0);
 	}
 	return (1);
+}
+
+int		in_it(int len, int i, int max, int lg)
+{
+	if (lg == max && ((i <= len && len < i + 10)))
+		return (1);
+	if (lg != max && ((i <= len && len < i + lg)))
+		return (1);
+	return (0);
+}
+
+int		in_this(int len, int i, int max, int lg)
+{
+	if (lg == max && max - i <= len && len < max - i + 10)
+		return (1);
+	if (lg != max && max - i <= len && len < max - i + lg)
+		return (1);
+	return (0);
 }

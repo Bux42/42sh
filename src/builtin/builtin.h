@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:51:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:10:02 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ void	suppr_exclaim(t_inp **inp, int i, t_sh *sh);
 t_inp	*insert_inp(t_inp **inp, char c);
 void	suppr_letter(t_inp **c);
 char	**env_in_tab(t_env **env);
+int		in_it(int len, int i, int max, int lg);
+int		in_this(int len, int i, int max, int lg);
 
 #endif

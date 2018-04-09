@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 14:40:55 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/03 15:02:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:08:37 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,12 @@ int		find_in_his(t_inp *his, t_inp *inp, int *i, int flag)
 	{
 		if (ft_strchr(stop, inp->c) ||
 				(flag % 2 == 0 && inp->c == '?' && (++(*i)) > -1))
-		{
 			return (0);
-		}
 		if (flag > 2)
 			ft_putchar(inp->c);
 		else if (ft_strchr(last, inp->c))
 			return ((inp->c == his->c) ? 0 : 1);
-		else if (inp->c == '\\' && !(inp->next || 
+		else if (inp->c == '\\' && !(inp->next ||
 					(inp->next && inp->next->c && ft_isalnum(inp->next->c))))
 			return ((inp->c == his->c) ? 0 : 1);
 		else if (inp->c != his->c)

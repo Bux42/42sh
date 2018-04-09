@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 06:48:58 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/07 04:58:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:07:33 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int			builtin_cd(char **exec, t_sh *sh)
 			return (err_msg("cd: HOME not set", "", 2));
 	}
 	else if (ft_strcmp(exec[index], "-") == 0)
-			ret = chdir_old_pwd(&sh->env, flag);
+		ret = chdir_old_pwd(&sh->env, flag);
 	else
 		ret = custom_chdir(exec[index], flag, &sh->env);
 	return (ret);

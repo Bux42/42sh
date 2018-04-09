@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:51:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:16:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,15 @@ int			print_env(t_env **env)
 	return (0);
 }
 
-void		new_hash(t_sh *sh, char *value)
+void		new_hash(char *name, t_sh *sh, char *value)
 {
-	hash_del(&sh->hash, sh);
-	sh->hash = hash_table(value, sh);
+	if (ft_strcmp(name, "PATH=") == 0)
+	{
+		hash_del(&sh->hash, sh);
+		sh->hash = hash_table(value, sh);
+	}
+	else
+		free(name);
 }
 
 int			parse_setenv(char **exec, t_env **env, t_sh *sh)
@@ -43,6 +48,8 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 	len = 0;
 	value = NULL;
 	name = NULL;
+	if (!valid_name(exec[1], "setenv"))
+		return (3);
 	while (exec[1][len] && exec[1][len] != '=')
 		len++;
 	if (!(name = (char*)malloc(sizeof(char) * (++len + 1))))
@@ -56,11 +63,7 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 	ft_bzero(value, ++len - ft_strlen(name));
 	ft_strcat(value, &exec[1][ft_strlen(name)]);
 	set_env(env, name, value);
-	if (ft_strcmp(name, "PATH=") == 0)
-		new_hash(sh, value);
-	else
-		free(value);
-	free(name);
+	new_hash(name, sh, value);
 	return (0);
 }
 
@@ -102,8 +105,6 @@ int			builtin_setenv(char **exec, t_sh *sh)
 		if (exec[1][i] == '=' && i == 0)
 			return (err_msg("setenv: parse error near '='", "", 2));
 	}
-	if (!valid_name(exec[1], "setenv"))
-		return (3);
 	if (exec[2] && exec[2][0] == '0' && exec[2][1] == '\0')
 		if (already_here(env, exec) == 0)
 			return (0);

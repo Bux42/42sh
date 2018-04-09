@@ -6,14 +6,14 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 13:03:53 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 16:02:07 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:07:21 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
 
-int		 match_name(char *env, char *name)
+int		match_name(char *env, char *name)
 {
 	int		i;
 
