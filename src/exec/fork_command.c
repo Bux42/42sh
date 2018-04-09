@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 04:32:46 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 07:43:07 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 13:12:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,22 @@ char		**env_list_to_char(t_env **env)
 
 int		fork_command(char *path, char **exec, char **env)
 {
-	pid_t	father;
+	pid_t	pid;
 	int		status;
 
 	status = -1;
-	if ((father = fork()) != -1)
+	if ((pid = fork()) == 0)
 	{
-		if (father == 0)
-			execve(path, exec, env);
-		else
-			waitpid(father, &status, 0);
+		signal_exec();
+		execve(path, exec, env);
+	}
+	signal_init();
+	signal(SIGINT, &signal_newline);
+	waitpid(pid, &status, WUNTRACED);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
+	{
+		ft_putstr_fd("Killed: 9\n",2);
+		kill(0,SIGKILL);
 	}
 	return (status);
 }
