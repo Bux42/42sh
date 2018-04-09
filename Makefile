@@ -5,13 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-<<<<<<< HEAD
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2018/04/09 16:05:29 by vboivin          ###   ########.fr        #
-=======
-#    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/09 14:58:43 by drecours         ###   ########.fr        #
->>>>>>> 73d2c9d9b4b09d51bfc96e6bd2f2c39e4547b134
+#    Updated: 2018/04/09 16:26:26 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,6 +141,7 @@ $(OBJPATH)/%.o: $(SRCPATH)/%.c
 $(NAME): $(DIR_OBJ)
 	@printf "\33[Kmain obj compil:\tdone\n"
 	@make -C libft
+	@printf "\33[Klibft compil:\t\tdone\n"
 	@echo "vboivin:jamerlin" > auteur
 	@$(COMP) $(DIR_OBJ) -o $(NAME) $(INCMAC) $(LIBFT) $(FLAGS) 
 	@printf "main compilation:\tdone\n"
