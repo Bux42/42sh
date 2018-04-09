@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:49:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 17:27:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ t_redir		*new_redir(int *redir_type, char *file, char **here)
 	return (redir);
 }
 
+char		*add_aggr_file(int redir_type[3], t_inpl **inpl)
+{
+	char	*file;
+
+	file = get_file_name(&(*inpl)->next->inp);
+	ft_putchar((*inpl)->inp->c);
+	redir_type[0] = (*inpl)->inp->c - 48;
+	redir_type[1] = TOFILE;
+	redir_type[2] = -1;
+	return (file);
+}
+
 void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 {
 	char	*file;
@@ -40,10 +52,12 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		file = add_file_redir(redir_type, &(*inpl)->next->inp, type);
 	else if (type & HERE)
 		here = add_here_redir(redir_type, &(*inpl)->next->inp);
-	else if (type & AGGR)
+	else if (type & AGGR || type & CLOSEAGGR)
 		file = add_aggr_redir(redir_type, inpl, type);
 	else if (type & LAGGR || type & LAGGRIN)
 		add_laggr_redir(redir_type, inpl, type);
+	else if (type & AGGRFILE)
+		file = add_aggr_file(redir_type, inpl);
 	if (!*redir)
 		*redir = new_redir(redir_type, file, here);
 	else

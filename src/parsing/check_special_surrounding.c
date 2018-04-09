@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:21:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:44:35 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			special_error_surrounding(t_inp **inp)
 
 	if ((cp = (*inp)))
 	{
-		ft_putstr_fd("21sh: parse error near ", 2);
+		ft_putstr_fd("21sh: check2:  parse error near ", 2);
 		while (cp)
 		{
 			ft_putchar_fd(cp->c, 2);
@@ -77,6 +77,13 @@ int			bad_surrounding_4(t_inpl *inpl, int flag)
 	return (1);
 }
 
+int			not_closed(t_inpl *cp)
+{
+	if (cp->next && cp->next->inp->c == '-' && !cp->next->inp->next)
+		return (0);
+	return (1);
+}
+
 int			check_special_surrounding(t_inpl **inpl)
 {
 	t_inpl	*cp;
@@ -94,11 +101,14 @@ int			check_special_surrounding(t_inpl **inpl)
 			if (cp->type & HERE)
 				if (bad_surrounding_3(cp))
 					return (special_error_surrounding(&cp->inp));
-			if (cp->type & AGGR || cp->type & LAGGR || cp->type & LAGGRIN)
+			if (cp->type & AGGR || cp->type & LAGGR)
 				if (bad_surrounding_4(cp, 4))
 					return (special_error_surrounding(&cp->inp));
-			if (cp->type & AGGROUT || cp->type & LAGGRIN)
-				if (bad_surrounding_4(cp, 5))
+			if (cp->type & LAGGRIN || cp->type & CLOSEAGGR)
+				if (not_closed(cp))
+					return (special_error_surrounding(&cp->inp));
+			if (cp->type & AGGRFILE)
+				if (!cp->next || !(cp->next->type & ARGUMENT))
 					return (special_error_surrounding(&cp->inp));
 			cp = cp->next;
 		}

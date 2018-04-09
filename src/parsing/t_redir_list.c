@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 12:09:56 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:09:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:08:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,20 @@ char		*add_aggr_redir(int redir_type[3], t_inpl **inpl, int type)
 
 	file = NULL;
 	redir_type[1] = type;
-	if (type & AGGRFILE)
+	if ((*inpl)->inp->c == '>')
 	{
-		file = get_file_name(&(*inpl)->next->inp);
-		if (ft_strcmp(file, "-") == 0)
-		{
-			free(file);
-			file = NULL;
-			redir_type[2] = -1;
-		}
-	}
-	else if (type & AGGROUT)
-		redir_type[2] = (*inpl)->inp->next->next->c - 48;
-	else
-		redir_type[2] = (*inpl)->inp->next->next->next->c - 48;
-	if (type & AGGROUT)
 		redir_type[0] = 1;
+		if (!(type & CLOSEAGGR))
+			redir_type[2] = (*inpl)->inp->next->next->c - 48;
+	}
 	else
+	{
 		redir_type[0] = (*inpl)->inp->c - 48;
+		if (!(type & CLOSEAGGR))
+			redir_type[2] = (*inpl)->inp->next->next->next->c - 48;
+	}
+	if (type & CLOSEAGGR)
+		redir_type[2] = -1;
 	return (file);
 }
 

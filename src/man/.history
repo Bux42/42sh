@@ -44,3 +44,97 @@ env
 ~
 ~/
 ~
+ls >&-
+ls >&1
+ls 2>file
+ls >&-
+ls 2> file
+ls 2>-
+ls 2>file
+ls 2<-
+ls 2<&-
+ls >&-
+ls 2<&-
+ls 2<&-
+ls <&-
+ls 2<&-
+ls <&-
+ls 2>-
+ls 2>file
+ls 2>file
+ls 2>fi
+ls 2>1
+ls -z 2>&-
+ls -z 2>&-
+ls -z >&-
+ls -z >&2
+ls -z 1>&2
+ls -z <&-
+ls -z <&2
+ls -z 1<&2
+ls 2>file
+/tmp/ft_select
+/tmp/videsvau2/ft_select
+/tmp/videsvau2/ft_select qef qef qef qef qef 
+/tmp/videsvau2/ft_select qef qef qef qef qef 
+ls ../
+cat ../redirection
+cat ../done
+ls 2>file
+ls 2> file
+ls 2> 
+ls 2> 
+ls 2> ff
+ls 2> ff
+ls 2> ff
+cat file
+ls -z 2> ff
+cat file
+ls -z 2> ff
+cat file
+ls 1>&1
+ls 1>&ff
+ls 1>&1
+ls >&1
+ls >&1
+ls >&1
+ls 2>&1
+ls 2>&1
+ls 2>&
+ls 2>&1
+ls >&1
+ls >&2
+ls >&
+ls >&-
+ls >&-
+ls >&-
+ls 1>&-
+ls 1>&2
+ls 1>&-
+ls 1>&2
+ls >&2
+ls 2>&-
+ls 2>&-
+ls 2>&-
+ls 2>&-
+ls >&-
+cat <&-
+cat <&2
+cat 1<&2
+cat 1<&2
+cat -<&2
+cat <&2
+ls 2>file
+ls 2>2
+ls 2>file
+ls 2> file
+ls 2> file
+ls 2>2
+cat <&2
+cat 1<&2
+ls >&-
+ls 1>&-
+ls 1>&2
+history
+history -a
+history -A
