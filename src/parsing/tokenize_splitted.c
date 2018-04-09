@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 17:24:47 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 17:27:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_redir		*new_redir(int *redir_type, char *file, char **here)
 	return (redir);
 }
 
-char		*add_aggr_file(int redir_type[3], t_inpl **inpl, int type)
+char		*add_aggr_file(int redir_type[3], t_inpl **inpl)
 {
 	char	*file;
 
@@ -57,7 +57,7 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 	else if (type & LAGGR || type & LAGGRIN)
 		add_laggr_redir(redir_type, inpl, type);
 	else if (type & AGGRFILE)
-		file = add_aggr_file(redir_type, inpl, type);
+		file = add_aggr_file(redir_type, inpl);
 	if (!*redir)
 		*redir = new_redir(redir_type, file, here);
 	else
