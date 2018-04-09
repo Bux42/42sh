@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 14:41:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:26:32 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ t_env		*new_env(char *env)
 
 	if (!(ret = (t_env*)malloc(sizeof(t_env))))
 		return (NULL);
-	ret->env = ft_strdup(env);
+	if (!(ret->env = ft_strdup(env)))
+	{
+		free(ret);
+		return (NULL);
+	}
 	ret->next = NULL;
 	return (ret);
 }

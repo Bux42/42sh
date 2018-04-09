@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 12:16:55 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:09:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		new_hash(char *name, t_sh *sh, char *value)
 		sh->hash = hash_table(value, sh);
 	}
 	else
-		free(name);
+		free(value);
 }
 
 int			parse_setenv(char **exec, t_env **env, t_sh *sh)
@@ -54,7 +54,6 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 		len++;
 	if (!(name = (char*)malloc(sizeof(char) * (++len + 1))))
 		return (1);
-	ft_bzero(name, len);
 	ft_strncat(name, exec[1], len);
 	while (exec[1][len])
 		len++;
@@ -64,6 +63,7 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 	ft_strcat(value, &exec[1][ft_strlen(name)]);
 	set_env(env, name, value);
 	new_hash(name, sh, value);
+	free(name);
 	return (0);
 }
 
