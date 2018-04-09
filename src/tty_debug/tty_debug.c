@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 16:41:13 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 09:25:41 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,28 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	int		i;
 
 	i = 0;
-	opti_strcat(&i, buff, "echo \"", 0);
 	add_line_infos(&i, buff, sh);
 	add_buff_expected(&i, buff, sh);
 	add_inp(&i, buff, inp);
-	opti_strcat(&i, buff, "\" > ", 0);
-	opti_strcat(&i, buff, sh->tty, 0);
-	system(buff);
+	write(sh->tty_fd, buff, i);
 }
 
 int			get_tty(t_sh *sh, char *av)
 {
 	struct stat	st;
 
+	sh->tty_fd = -1;
 	if (av && lstat(av, &st) > -1)
 	{
 		if (S_ISCHR(st.st_mode) && ft_strlen(av) == 12)
+		{
 			sh->tty = ft_strdup(av);
+			sh->tty_fd = open(sh->tty, O_WRONLY);
+		}
 		else
 			sh->tty = NULL;
 	}
 	else
 		sh->tty = NULL;
-	return (1);
+	return (sh->tty_fd);
 }

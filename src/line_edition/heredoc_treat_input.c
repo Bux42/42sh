@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:10:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 13:03:51 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 09:26:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int			treat_input_here(t_sh *sh, t_inpl **inpl, char *ending)
 		}
 	}
 	sh->inp_len = inp_list_len(&(*inpl)->inp);
-	if (sh->tty)
+	if (sh->tty_fd != -1)
 		tty_debug(sh, &(*inpl)->inp);
 	return (1);
 }

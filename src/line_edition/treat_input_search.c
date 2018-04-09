@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:35:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/03/23 09:16:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 09:26:40 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		treat_input_search(t_sh *sh)
 		}
 		search_input(sh);
 	}
-	if (sh->tty)
+	if (sh->tty_fd != -1)
 		tty_debug(sh, &sh->inpl->inp);
 	ft_bzero(sh->buff, 6);
 }

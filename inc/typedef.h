@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/31 22:07:57 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 09:23:26 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct			s_his
 typedef struct			s_sh
 {
 	char				*tty;
+	int					tty_fd;
 	char				*home_env;
 	char				*clipboard;
 	char				*comp_debug;

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 13:03:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/09 09:26:19 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		treat_input(t_sh *sh)
 	}
 	if (sh->inpl)
 		sh->inp_len = inp_list_len(&sh->inpl->inp);
-	if (sh->tty)
+	if (sh->tty_fd != -1)
 		tty_debug(sh, &sh->inpl->inp);
 	free_comp(4, sh);
 	ft_bzero(sh->buff, 6);
