@@ -49,7 +49,7 @@ void	pipe_tmp(t_listc *cmd, int i, t_pipe *tabtube, t_sh *sh)
 	ft_cmd_pipe(cmd, sh);
 }
 
-void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, int i, t_sh *sh)
+void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *sh)
 {
 	pid_t son;
 
@@ -57,33 +57,32 @@ void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, int i, t_sh *sh)
 	son = fork();
 	if (son == -1)
 	{
-		close(tabtube[i].cote[0]);
-		close(tabtube[i].cote[1]);
+		close(tabtube[sh->i].cote[0]);
+		close(tabtube[sh->i].cote[1]);
 		perror("fork");
 		exit(1);
 	}
 	else if (son == 0)
-		pipe_tmp(cmd, i, tabtube, sh);
-	pid_tab[i] = son;
+		pipe_tmp(cmd, sh->i, tabtube, sh);
+	pid_tab[sh->i] = son;
 }
 
 int		do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *sh)
 {
-	int		nu_cmd;
 	int		wt_cpt;
 	t_listc	*cpy;
 
-	nu_cmd = 0;
+	sh->i = 0;
 	wt_cpt = -1;
 	cpy = cmd;
-	while (nu_cmd < cmd->nb_arg - 1)
+	while (sh->i < cmd->nb_arg - 1)
 	{
-		ft_pipe(cmd, pid_tab, tabtube, nu_cmd, sh);
+		ft_pipe(cmd, pid_tab, tabtube, sh);
 		cmd = cmd->next;
-		nu_cmd++;
+		sh->i++;
 	}
 	signal(SIGINT, SIG_IGN);
-	ft_pipe(cmd, pid_tab, tabtube, nu_cmd, sh);
+	ft_pipe(cmd, pid_tab, tabtube, sh);
 	closed_unused_fd(-1, cmd->nb_arg - 1, tabtube);
 	while (++wt_cpt < cmd->nb_arg)
 	{

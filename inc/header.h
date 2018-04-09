@@ -341,7 +341,7 @@ void                    prepare_pipe(t_listc *cmd);
 void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
 void                    closed_unused_fd(int fils, int nb_tube, t_pipe *tabTube);
 void                    pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env);
-void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, int i, t_sh *i_env);
+void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
 int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
 int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
 //Redirections

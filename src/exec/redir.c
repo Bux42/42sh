@@ -92,7 +92,6 @@ void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
 	}
 	else if (cmd->redirs->redir[1] == LAGGR || cmd->redirs->redir[1] == LAGGRIN)
 	{
-		//printf("-------------[%d]---------------\n", cmd->redirs->redir[2]);
 		tabtube[i].cote[0] = cmd->redirs->redir[2];
 		tabtube[i].cote[1] = cmd->redirs->redir[0];
 		if (cmd->redirs->redir[1] == LAGGRIN && cmd->redirs->redir[2] == -1)
@@ -109,15 +108,17 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 	{
 		if (cmd->redirs && cmd->redirs->redir[1] == 0)
 			left_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && cmd->redirs->redir[1] == 1)
+		else if (cmd->redirs && cmd->redirs->redir[1] & (1 | 16))
 			right_redirect(cmd, tabtube, i);
 		else if (cmd->redirs && cmd->redirs->redir[1] == 3)
 			double_right_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && (cmd->redirs->redir[1] & (AGGR | LAGGR | LAGGRIN)))
+		else if (cmd->redirs && (cmd->redirs->redir[1] & (AGGR | LAGGR
+			| LAGGRIN)))
 			do_aggre(cmd, tabtube, i);
 		if (tabtube[i].cote[0] != -1)
 		{
-			if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4 && cmd->redirs->redir[0] != 2)
+			if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4
+				&& cmd->redirs->redir[0] != 2)
 				dup2(tabtube[i].cote[0], STDOUT_FILENO);
 			else if (cmd->redirs->redir[0] != 2)
 				dup2(tabtube[i].cote[0], STDIN_FILENO);
@@ -134,4 +135,3 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 	cmd->redirs = cp;
 	i++;
 }
-

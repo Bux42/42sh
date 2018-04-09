@@ -113,6 +113,8 @@ typedef struct			s_sh
 	int					context;
 	int					command_lenght;
 	int					fd;
+	int					i;
+	pid_t				pid;
 	int					posy;
 	int					diff;
 	int					prompt_len;

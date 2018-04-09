@@ -64,14 +64,28 @@ t_pipe	*new_tabtube(int len)
 	return (ret);
 }
 
+void	fork_exec(char *fullpath, t_listc *cmd, t_pipe *tabtube, t_sh *sh)
+{
+	char	**env;
+
+	if ((sh->pid = fork()) == 0)
+	{
+		signal_exec();
+		env = env_list_to_char(&sh->env);
+		redirect(cmd, tabtube, 0, &cmd->redirs);
+		run_cmd(fullpath, cmd, sh, env);
+	}
+	signal_init();
+	signal(SIGINT, &signal_newline);
+	free(fullpath);
+}
+
 void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 {
 	char	*fullpath;
-	char	**env;
-	pid_t	pid;
 	t_pipe	*tabtube;
 
-	pid = 0;
+	sh->pid = 0;
 	fullpath = NULL;
 	if (!(tabtube = new_tabtube(cmd->nb_arg)))
 		return ;
@@ -80,28 +94,17 @@ void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)
 	if (cmd->sep_type == PIPE)
 		sh->retval = init_pipe(cmd, tabtube, sh);
 	else if ((fullpath = command_path(&sh->env, cli, sh)))
-	{
-		if ((pid = fork()) == 0)
-		{
-			signal_exec();
-			env = env_list_to_char(&sh->env);
-			redirect(cmd, tabtube, 0, &cmd->redirs);
-			run_cmd(fullpath, cmd, sh, env);
-		}
-		signal_init();
-		signal(SIGINT, &signal_newline);
-		free(fullpath);
-	}
+		fork_exec(fullpath, cmd, tabtube, sh);
 	else
 	{
 		sh->retval = -1;
 		return ((void)close_tabtube(cmd->nb_arg, tabtube));
 	}
-	waitpid(pid, &sh->retval, WUNTRACED);
+	waitpid(sh->pid, &sh->retval, WUNTRACED);
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
 	{
-		ft_putstr_fd("Killed: 9\n",2);
-		kill(0,SIGKILL);
+		ft_putstr_fd("Killed: 9\n", 2);
+		kill(0, SIGKILL);
 	}
 	close_tabtube(cmd->nb_arg, tabtube);
 }
