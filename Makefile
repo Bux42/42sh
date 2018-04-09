@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2018/04/09 16:26:26 by vboivin          ###   ########.fr        #
+#    Updated: 2018/04/09 17:48:43 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,14 @@ hash/hash.c\
 hash/hash_functions.c\
 hash/init_hash.c
 
+RED='\e[1;31m'
+GRN='\e[1;32m'
+YEL='\e[1;33m'
+BLU='\e[1;34m'
+MAG='\e[1;35m'
+CYN='\e[1;36m'
+END='\e[0m'
+
 DIR_SRC		= $(addprefix $(SRCPATH)/, $(SRCS))
 SRCPATH		= src
 
@@ -135,25 +143,28 @@ OBJPATH		= objs
 all: $(NAME)
 
 $(OBJPATH)/%.o: $(SRCPATH)/%.c
-	@printf "\33[KCompiling $<\r"
+	@printf "\33[KCompiling `printf $(RED)`$<`printf $(END)`\r"
 	@$(COMP) $(FLAGS) -c $< -o $@ $(INC)
 
 $(NAME): $(DIR_OBJ)
-	@printf "\33[Kmain obj compil:\tdone\n"
+	@printf "\33[Kmain obj compil:\t`printf $(GRN)`done\t✅`printf $(END)`\n"
 	@make -C libft
-	@printf "\33[Klibft compil:\t\tdone\n"
+	@printf "\33[Klibft compil:\t\t`printf $(GRN)`done\t✅`printf $(END)`\n"
 	@echo "vboivin:jamerlin" > auteur
 	@$(COMP) $(DIR_OBJ) -o $(NAME) $(INCMAC) $(LIBFT) $(FLAGS) 
-	@printf "main compilation:\tdone\n"
+	@printf "main compilation:\t`printf $(GRN)`done\t✅`printf $(END)`\n"
 
 clean:
 	@make clean -C libft
 	@rm -rf $(DIR_OBJ)
 
 fclean: rmtest
+	@printf "\33[K`printf $(RED)`Crushing \t\t\t☠️`printf $(END)`\r"
 	@make fclean -C libft
 	@rm -rf $(DIR_OBJ)
 	@rm -rf $(NAME)
+	@printf "\33[K`printf $(GRN)`Crushing done\t\t\t🗑️`printf $(END)`\n"
+
 test:
 	@mkdir test_dir
 	@mkdir test_dir/test_rec

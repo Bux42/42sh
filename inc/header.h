@@ -6,14 +6,13 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 14:58:03 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:41:15 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
-# define DEBUG			1
 # define TTY_MAX		10000
 
 # define DQUOTE			1
@@ -59,6 +58,7 @@
 
 /*						debug											*/
 
+# define DEBUG			0
 void					print_splitted(t_inpl **inpl);
 void					print_converted(t_inp **inp, int type);
 
