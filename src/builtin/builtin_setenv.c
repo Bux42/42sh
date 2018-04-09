@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/30 15:08:13 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:51:06 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,15 @@ int			builtin_setenv(char **exec, t_sh *sh)
 	{
 		if (exec[1][i] == '=')
 			equal++;
-		if (exec[1][i] == '=')
-			if (i < 1)
-				return (err_msg("setenv: parse error near '='", "", -1));
+		if (exec[1][i] == '=' && i == 0)
+			return (err_msg("setenv: parse error near '='", "", 2));
 	}
+	if (!valid_name(exec[1], "setenv"))
+		return (3);
 	if (exec[2] && exec[2][0] == '0' && exec[2][1] == '\0')
 		if (already_here(env, exec) == 0)
 			return (0);
 	if (!equal)
-		return (err_msg("setenv: missing '='", "", -1));
+		return (err_msg("setenv: missing '='", "", 2));
 	return (parse_setenv(exec, env, sh));
 }

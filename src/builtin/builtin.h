@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 16:02:04 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:51:55 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	show_args(char **exec);
 int		erase_fg(char *fg, int i);
 void	free_list(t_env **env);
 int		flag_v(char **exec);
+int		valid_name(char *str, char *builtin);
 
 /*
 ** CD TOOLS

@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 02:03:18 by videsvau          #+#    #+#              #
-#    Updated: 2018/04/08 16:33:27 by videsvau         ###   ########.fr        #
+#    Updated: 2018/04/09 11:41:57 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ builtin/exclaim_tools2.c\
 builtin/exclaim_misc.c\
 builtin/dir_tools3.c\
 builtin/color.c\
+builtin/set_tools.c\
 hash/hash.c\
 hash/hash_functions.c\
 hash/init_hash.c

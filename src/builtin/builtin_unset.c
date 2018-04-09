@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 16:03:37 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:52:52 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ int			builtin_unset(char **exec, t_sh *sh)
 		return (1);
 	}
 	while (exec[++i])
-		if (remove_loc_if(exec[i], &sh->loc, exec[0]) == 1)
-			return (2);
+		if (valid_name(exec[i], "unset"))
+		{
+			if (remove_loc_if(exec[i], &sh->loc, exec[0]) == 1)
+				return (2);
+		}
+		else
+			return (3);
 	return (0);
 }

@@ -6,11 +6,12 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/19 15:38:03 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:54:12 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+#include "builtin.h"
 
 static int			remove_between(t_env **cp, t_env **tmp)
 {
@@ -66,6 +67,8 @@ int					builtin_unsetenv(char **exec, t_sh *sh)
 		return (err_msg("unsetenv: missing argument", "", 1));
 	while (exec[i])
 	{
+		if (valid_name(exec[i], "unsetenv") == 0)
+			return (3);
 		delete_env(env, exec[i], sh);
 		i++;
 	}
