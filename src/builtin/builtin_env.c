@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 16:42:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:47:40 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,18 @@ int			builtin_env(char **exec, t_sh *sh)
 		return (print_env(&sh->env));
 	if (!(tab = env_in_tab(&sh->env)))
 		return (1);
-	if (flag_v_u_i(&tab, exec, &verbose))
-	{
-		tab = flag_i(tab, exec, verbose);
-		if (!(i = flag_equal(&tab, exec, verbose)))
-			return (2);
-		if (!exec[i])
-			return (print_env_tab(tab));
-		new_env = sh->env;
-		sh->env = tab_in_env(tab);
-		i = exec_cmd(tab, &(exec[i]), sh);
-		env_free(tab);
-		free_list(&sh->env);
-		sh->env = new_env;
-		return (i);
-	}
-	return (env_free(tab));
+	if (!(flag_v_u_i(&tab, exec, &verbose)))
+		return (env_free(tab));
+	tab = flag_i(tab, exec, verbose);
+	if (!(i = flag_equal(&tab, exec, verbose)))
+		return (2);
+	if (!exec[i])
+		return (print_env_tab(tab));
+	new_env = sh->env;
+	sh->env = tab_in_env(tab);
+	i = exec_cmd(tab, &(exec[i]), sh);
+	env_free(tab);
+	free_list(&sh->env);
+	sh->env = new_env;
+	return (i);
 }
