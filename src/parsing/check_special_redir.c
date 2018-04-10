@@ -64,10 +64,8 @@ int		check_left_aggr(t_inp *cp)
 
 int		check_mult_aggr(t_inp **inp)
 {
-	int		type;
 	t_inp	*cp;
 
-	type = 0;
 	cp = *inp;
 	if (cp->next && cp->next->c == '>')
 		return (check_fd_aggr_right(cp));
