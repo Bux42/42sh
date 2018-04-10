@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 04:32:46 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 13:12:28 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 09:40:58 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int		fork_command(char *path, char **exec, char **env)
 		signal_exec();
 		execve(path, exec, env);
 	}
-	signal_init();
-	signal(SIGINT, &signal_newline);
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, WUNTRACED);
+	signal_init();
+	if (WIFSIGNALED(status) && WTERMSIG(status) == 2)
+		ft_putstr("\n");
 	if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
 	{
 		ft_putstr_fd("Killed: 9\n",2);

@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/09 10:32:55 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 09:40:51 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	fork_exec(char *fullpath, t_listc *cmd, t_pipe *tabtube, t_sh *sh)
 void	check_signal(t_sh *sh)
 {
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 2)
-		ft_putstr("^C\n");
+		ft_putstr("\n");
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
 	{
 		ft_putstr_fd("Killed: 9\n", 2);
