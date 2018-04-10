@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 17:37:44 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:53:09 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,7 +325,8 @@ void					dup_fd(t_listc *cmd, t_pipe *tabtube, int i);
 void					*get_builtin_function(char *command);
 int						err_msg(char *message, char *name, int ret);
 
-int						fork_builtin(int (*)(char**, char**), char **e, char **d);
+int						fork_builtin(int (*c)(char **a, char **b),
+						char **e, char **d);
 
 int						change_dir(char **exec, t_env **env);
 int						parse_flag(char **exec);
