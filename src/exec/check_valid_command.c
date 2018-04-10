@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 02:01:21 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 12:53:06 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 09:32:14 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char		*existing_command(char **command, t_env **env, t_sh *sh, int fg)
 	if (fg == 1 && (builtin_ptr = get_builtin_function(command[0])))
 	{
 		sh->retval = builtin_ptr(command, sh);
-		return ("ok");
+		return (ft_strdup("builtin"));
 	}
 	if ((path = get_specific_env("PATH=", env)))
 	{
