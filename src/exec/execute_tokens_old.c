@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:04:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:49:12 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		*check_path_bin(char *path, t_sh *sh)
 {
 	if (access(path, X_OK) != -1)
 		return (ft_strdup(path));
-	ft_putstr_fd("21sh: no such file or directory: ", 2);
+	ft_putstr_fd("21sh: Permission denied: ", 2);
 	ft_putendl_fd(path, 2);
 	sh->retval = 127;
 	return (NULL);
