@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:33:43 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 16:51:59 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:04:46 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ int			update_context(int context, int flag)
 		return (context - flag);
 	return (context | flag);
 }
-

@@ -6,8 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 15:23:30 by drecours         ###   ########.fr       */
-/*   Updated: 2018/04/09 14:58:03 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:17:23 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +58,8 @@
 # include "typedef.h"
 # include "hash.h"
 
-/*						debug											*/
-
 void					print_splitted(t_inpl **inpl);
 void					print_converted(t_inp **inp, int type);
-
-/*						initialize_term									*/
 
 struct termios			g_old_term;
 struct termios			g_new_term;
@@ -80,8 +75,6 @@ void					signal_init(void);
 void					signal_exec(void);
 void					signal_event(int signo);
 
-/*						environment										*/
-
 char					**env_list_to_char(t_env **env);
 char					*get_specific_env(char *env, t_env **envlist);
 char					*get_specific_loc(char *env, t_loc **envlist);
@@ -90,13 +83,9 @@ void					env_push_back(t_env **envlist, char *env);
 t_env					*new_env(char *env);
 void					free_char_array(char **array);
 
-/*						pwd_stuff										*/
-
 void					print_prompt(t_sh *sh);
 void					tild_prompt(t_sh *sh);
 void					prompt_colors(int i);
-
-/*						line_edition									*/
 
 void					free_null(char **str);
 
@@ -169,7 +158,7 @@ void					free_list_before(t_inp **cp);
 void					paste_after(t_sh *sh, t_inp **inp);
 
 int						inp_to_inp_cmp(t_inp **inp1, t_inp **inp2);
-void					history_push_front(t_his **history, t_inp *inp, t_sh *sh);
+void					history_push_front(t_his **his, t_inp *inp, t_sh *sh);
 t_his					*history_new(t_inp *inp, t_sh *sh);
 t_inp					*inp_insert_chain_his(t_inp **src, t_sh *sh, int nb);
 int						history_len(t_his **history);
@@ -186,13 +175,11 @@ char					*inp_to_char(t_inp **inp, t_sh *sh);
 void					restore_history_from_file(t_sh *sh);
 int						check_empty_line(t_inp **inp);
 
-/*						auto_completion									*/
-
 void					autocompletion(t_inp **inp, t_sh *sh);
 void					print_completion(t_sh *sh, t_inp **inp);
 void					not_found(t_sh *sh, t_inp *inp);
 int						get_diff(char *fl, t_sh *sh);
-void					print_completion_builtin(t_sh *sh, t_inp *inp, t_bin **bin);
+void					print_completion_builtin(t_sh *s, t_inp *i, t_bin **b);
 void					delete_remain(t_sh *sh, char *remain);
 int						complete_builtin(t_inp **inp);
 void					found(t_sh *sh, DIR *od, struct dirent *fl, t_inp *cp);
@@ -206,9 +193,6 @@ void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
 void					rewrite_beginning(t_sh *sh, t_inp *cp);
 void					completion_readdir(DIR *od, t_sh *sh, t_inp *cp);
-void					do_shit(t_inp **inp);
-
-/*						quotes_and_slash								*/
 
 int						line_is_closed(t_sh *sh, t_inp **inp);
 int						print_expected_prompt(t_sh *sh, t_close **close);
@@ -218,8 +202,6 @@ t_close					*new_close(int flag);
 int						inpl_add_new(t_inpl **inpl, int print);
 void					process_line(t_sh *sh);
 void					custom_return(void);
-
-/*						line_conversion									*/
 
 int						ending_char(char c);
 int						inp_cmp(t_inp **inp, char *str);
@@ -247,7 +229,9 @@ void					rep_backslash(char c, t_inp **i, t_inp **u);
 
 void					parse_backquotes(t_inp **inp, t_sh *sh);
 
-void*					special_error(t_inp **inp);
+void					*special_error(t_inp **inp);
+int						check_fd_aggr_right(t_inp *cp);
+int						check_fd_aggr_left(t_inp *cp);
 int						check_right_arrow(t_inp **inp);
 int						check_left_arrow(t_inp **inp);
 int						check_pipe_or(t_inp **inp);
@@ -257,19 +241,16 @@ int						check_out_aggr(t_inp *inp);
 int						check_mult_aggr(t_inp **inp);
 int						check_left_aggr(t_inp *inp);
 
+int						not_closed(t_inpl *cp);
 char					*inp_to_cont(t_inp **inp);
-
-/*						tty_debug										*/
 
 int						get_tty(t_sh *sh, char *av);
 char					*custom_strcat(char *s1, char *s2);
 int						special_char(char c);
 void					custom_itoa(int *pos, char *buff, int nb);
 void					tty_debug(t_sh *sh, t_inp **inp);
-void					opti_strcat(int *pos, char *buff, char *buff2, int esc);
+void					opti_strcat(int *pos, char *buff, char *buff2, int es);
 int						get_len(int nb);
-
-/*						parsing											*/
 
 void					parse(t_sh *sh);
 t_inp					*concat_inpl(t_inpl **inpl, t_sh *sh);
@@ -292,16 +273,14 @@ void					print_variable(t_inp **cp, t_sh *sh);
 int						valid_variable_char(char c);
 char					*parse_variable_name(t_inp **inp);
 
-/*						tokenization									*/
-
 void					print_heredoc(char *ending, t_sh *sh);
-int						treat_input_here(t_sh *sh, t_inpl **inpl, char *ending);
-int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *ending);
+int						treat_input_here(t_sh *sh, t_inpl **inpl, char *end);
+int						check_pasted_here(t_sh *sh, t_inpl **inpl, char *end);
 char					**allocate_cont(t_inpl **inpl);
 char					*allocate_eof(t_inp **inp);
 t_inpl					*allocate_here_cont(void);
 char					**get_heredoc(t_inp **inp);
-int						tokenize_splitted(t_inpl **inpl, t_sh *sh, t_listc **tok);
+int						tokenize_splitted(t_inpl **i, t_sh *sh, t_listc **t);
 char					**concat_content(t_inpl **inpl);
 t_listc					*new_token(void);
 int						keep_going(int type);
@@ -316,49 +295,42 @@ char					*add_aggr_redir(int redir[3], t_inpl **inpl, int type);
 void					add_laggr_redir(int redir[3], t_inpl **inpl, int type);
 void					redir_debug(char *file, int redir[3]);
 
-/*						real_execution									*/
-
 int						fork_command(char *path, char **exec, char **tab);
 
-//Main
-void				    signal_handler(int inp);
-void				    signal_newline(int inp);
+void					signal_handler(int inp);
+void					signal_newline(int inp);
 void					execute_tokens(t_listc **tok, t_sh *sh);
 void					exec_cli(char *cli, t_listc *tok, t_sh *sh);
 int						condition_is_valid(t_sh *sh, t_listc *cmd);
-//Pipeline
-void                    prepare_pipe(t_listc *cmd);
-void                    ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
-void                    closed_unused_fd(int fils, int nb_tube, t_pipe *tabTube);
-void                    pipe_tmp(t_listc *cmd, int i, t_pipe *tabTube, t_sh *i_env);
-void                    ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
-int                     do_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabTube, t_sh *i_env);
-int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
-//Redirections
-void                    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i);
-void                    redirect(t_listc *cmd, t_pipe *tabTube , int i, t_redir **redir);
-void                    do_aggre(t_listc *cmd, t_pipe *tabtube, int i);
-//Tools
-void                    errexit(char *str);
-char		            *command_path(t_env **env, char *command, t_sh *sh);
-void                    close_tabtube(int len, t_pipe *tabtube);
-void                    print_access_error(char *fullpath);
-t_pipe                  *new_tabtube(int len);
-void                    dup_fd(t_listc *cmd, t_pipe *tabtube, int i);
 
-/*						builtins										*/
+void					prepare_pipe(t_listc *cmd);
+void					ft_cmd_pipe(t_listc *cmd, t_sh *i_env);
+void					closed_unused_fd(int fils, int nb_tube, t_pipe *t);
+void					pipe_tmp(t_listc *cmd, int i, t_pipe *t, t_sh *i_env);
+void					ft_pipe(t_listc *cmd, int *pid, t_pipe *t, t_sh *i);
+int						do_pipe(t_listc *cmd, int *pid, t_pipe *t, t_sh *i);
+int						init_pipe(t_listc *cmd, t_pipe *t, t_sh *i_env);
+
+void					heredock_redirect(t_listc *cmd, t_pipe *t, int i);
+void					redirect(t_listc *cmd, t_pipe *t, int i, t_redir **r);
+void					do_aggre(t_listc *cmd, t_pipe *t, int i);
+
+void					errexit(char *str);
+char					*command_path(t_env **env, char *command, t_sh *sh);
+void					close_tabtube(int len, t_pipe *tabtube);
+void					print_access_error(char *fullpath);
+t_pipe					*new_tabtube(int len);
+void					dup_fd(t_listc *cmd, t_pipe *tabtube, int i);
 
 void					*get_builtin_function(char *command);
 int						err_msg(char *message, char *name, int ret);
 
-int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
+int						fork_builtin(int (*)(char**, char**), char **e, char **d);
 
 int						change_dir(char **exec, t_env **env);
 int						parse_flag(char **exec);
 int						check_flag(int flag, char letter);
 char					*check_path_bin(char *path, t_sh *sh);
-
-/*						history_search									*/
 
 void					history_search(t_sh *sh);
 void					erase_inp(t_sh *sh, t_inp **inp);
@@ -367,16 +339,15 @@ void					treat_input_search(t_sh *sh);
 void					add_delete_letter_search(t_sh *sh);
 void					search_input(t_sh *sh);
 void					switch_search_mode(t_sh *sh, t_inp **his_search);
-void					print_search_forward(t_sh *sh, t_inp **his_search, t_his **his, int repeat);
-void					print_search_backward(t_sh *sh, t_inp **his_search, t_his **his, int repeat);
+void					print_search_forward(t_sh *s, t_inp **a, t_his **h, int r);
+void					print_search_backward(t_sh *s, t_inp **a, t_his **h, int r);
 void					print_match(t_sh *sh);
-void					insert_search(t_sh *sh, t_inp **his_search, t_inp **his_pos);
-void					hide_history_search(t_sh *sh, t_inp **his_search, t_inp **his_pos);
+void					insert_search(t_sh *sh, t_inp **h, t_inp **his_pos);
+void					hide_history_search(t_sh *sh, t_inp **a, t_inp **h);
 void					insert_found_history(t_sh *sh, t_inp **search_pos);
 void					restaure_inp(t_sh *sh, t_inp **inp);
 
-
-
 int						path_eval(char *path);
 char					*find_man_path(char *relativ);
+
 #endif

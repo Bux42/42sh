@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:56:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 16:17:34 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:07:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,5 @@ void		insert_completion(t_sh *sh, t_inp **inp)
 			overwrite_remaining(sh, &sh->inpl->inp);
 		}
 		free_comp(3, sh);
-	}
-}
-
-void		do_shit(t_inp **inp)
-{
-	t_inp	*cp;
-
-	cp = (*inp);
-	while (cp)
-	{
-		ft_putchar_fd(cp->c, g_sh->tty_fd);
-		cp = cp->next;
 	}
 }

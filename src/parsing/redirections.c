@@ -6,26 +6,53 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 08:30:44 by videsvau          #+#    #+#             */
-/*   Updated: 2017/12/12 08:42:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:03:49 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 
-int			redirection(t_inp **inp)
+int			not_closed(t_inpl *cp)
 {
-	t_inp	*cp;
+	if (cp->next && cp->next->inp->c == '-' && !cp->next->inp->next)
+		return (0);
+	return (1);
+}
 
-	if ((cp = (*inp)))
+int			check_fd_aggr_left(t_inp *cp)
+{
+	int		type;
+
+	type = 0;
+	cp = cp->next;
+	if (cp && cp->next && cp->next->c == '&')
 	{
-		if (cp->c == '>')
-		{
-			if (cp->next && cp->next->c == '>')
-				ft_putstr(" append output to ");
-			else
-				ft_putstr(" redirect output to ");
-			(*inp) = (*inp)->next;
-		}
+		cp = cp->next;
+		if (cp->next && cp->next->c > 47 && cp->next->c < 51)
+			if (!cp->next->next)
+				return (type | LAGGR);
+		if (!cp->next)
+			return (type | LAGGRIN);
 	}
-	return (0);
+	return (-1);
+}
+
+int			check_fd_aggr_right(t_inp *cp)
+{
+	int		type;
+
+	type = 0;
+	cp = cp->next;
+	if (!cp->next)
+		return (type | AGGRFILE);
+	if (cp->next->c == '&')
+	{
+		cp = cp->next;
+		if (cp->next && cp->next->c > 47 && cp->next->c < 51)
+			if (!cp->next->next)
+				return (type | AGGR);
+		if (!cp->next)
+			return (type | CLOSEAGGR);
+	}
+	return (-1);
 }

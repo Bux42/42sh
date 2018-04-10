@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 06:12:50 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 16:48:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:01:01 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,9 @@ int		check_mult_aggr(t_inp **inp)
 	type = 0;
 	cp = *inp;
 	if (cp->next && cp->next->c == '>')
-	{
-		cp = cp->next;
-		if (!cp->next)
-			return (type | AGGRFILE);
-		if (cp->next->c == '&')
-		{
-			cp = cp->next;
-			if (cp->next && cp->next->c > 47 && cp->next->c < 51)
-				if (!cp->next->next)
-					return (type | AGGR);
-			if (!cp->next)
-				return (type | CLOSEAGGR);
-		}
-	}
+		return (check_fd_aggr_right(cp));
 	if (cp->next && cp->next->c == '<')
-	{
-		cp = cp->next;
-		if (cp && cp->next && cp->next->c == '&')
-		{
-			cp = cp->next;
-			if (cp->next && cp->next->c > 47 && cp->next->c < 51)
-				if (!cp->next->next)
-					return (type | LAGGR);
-			if (!cp->next)
-				return (type | LAGGRIN);
-		}
-	}
+		return (check_fd_aggr_left(cp));
 	return (-1);
 }
 

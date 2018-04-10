@@ -182,3 +182,9 @@ exit
 >>>>>>> c53d8c31302a74629665696f45b633a8b6ee05fb
 ls
 ls
+ls 1>&2
+ls 2>&1
+ls -z 2>&1
+ls -z 2>&1 | wc
+ls -z 2>&- | wc
+pkill -24 21sh
