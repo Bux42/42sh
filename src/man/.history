@@ -229,3 +229,5 @@ exit
 cd cd cd cd
 cd cd cd cd
 cd cd cd cd
+cat ../21sh/src/line_edition/s_bin_list.c
+cat ../21sh/src/line_edition/s_bin_list.c

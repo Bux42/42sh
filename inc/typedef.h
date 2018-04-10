@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:07:47 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 09:23:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:53:42 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct			s_sh
 	char				*comp_debug;
 	char				*comp_remain;
 	char				*comp_path;
+	char				*save_path;
 	int					comp_builtin;
 	int					old_len;
 	int					over;

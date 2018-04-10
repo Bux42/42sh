@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 14:53:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:54:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		init_variables(t_sh *sh)
 	sh->comp_debug = NULL;
 	sh->comp_remain = NULL;
 	sh->comp_path = NULL;
+	sh->save_path = NULL;
 	sh->loc = NULL;
 	sh->old_len = 0;
 	sh->context = 0;

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 13:05:26 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:59:53 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void		add_line_infos(int *pos, char *buff, t_sh *sh)
 	opti_strcat(pos, buff, sh->comp_remain, 1);
 	opti_strcat(pos, buff, " path: ", 0);
 	opti_strcat(pos, buff, sh->comp_path, 1);
+	opti_strcat(pos, buff, " saved_path: ", 0);
+	opti_strcat(pos, buff, sh->save_path, 1);
 	opti_strcat(pos, buff, "\n", 0);
 }
 

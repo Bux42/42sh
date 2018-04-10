@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:52:19 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 09:26:19 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:52:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		check_endline(t_sh *sh)
 
 void		treat_input(t_sh *sh)
 {
+	tty_debug(sh, &sh->inpl->inp);
 	sh->pos_at = pos_at(&sh->inpl->inp, sh->prompt_len);
 	if (!check_dimentions(sh))
 		return ;

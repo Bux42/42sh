@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:22:25 by videsvau          #+#    #+#             */
-/*   Updated: 2018/02/13 04:26:01 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:59:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,22 @@ void		free_comp(int i, t_sh *sh)
 	if (i & 2)
 		free_null(&sh->comp_debug);
 	if (i & 4)
+	{
+		if (sh->comp_path)
+		{
+			if (sh->save_path)
+			{
+				if (ft_strcmp(sh->comp_path, sh->save_path) != 0)
+				{
+					free_null(&sh->save_path);
+					sh->save_path = ft_strdup(sh->comp_path);
+				}
+			}
+			else
+				sh->save_path = ft_strdup(sh->comp_path);
+		}
 		free_null(&sh->comp_path);
+	}
 }
 
 void		overwrite_remaining_comp(t_sh *sh, t_inp **inp, int i)
