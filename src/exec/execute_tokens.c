@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 13:21:31 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 21:26:17 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void	execute_tokens(t_listc **tok, t_sh *sh)
 			(cp->redirs) ? builtin_redir(cp, func, sh) :
 				(sh->retval = func(cp->cont, sh));
 		}
-		else if (cp->sep_type == AND || cp->sep_type == OR
-			|| cp->sep_type & SEMICOLON || !cp->sep_type)
+		else if (cp->sep_type != 2 && condition_is_valid(sh, cp))
 			exec_cli(cp->cont[0], cp, sh);
 		else if (cp->sep_type & PIPE)
 		{
