@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:25:26 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:29:43 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ int			check_special_surrounding(t_inpl **inpl)
 			if (cp->type & TOFILE || cp->type & ATOFILE || cp->type & TOEXE)
 				if (bad_surrounding_4(cp, 2))
 					return (special_error_surrounding(&cp->inp));
-			if (cp->type & HERE)
-				if (bad_surrounding_3(cp))
+			if (cp->type & HERE && bad_surrounding_3(cp))
 					return (special_error_surrounding(&cp->inp));
 			if (cp->type & AGGR || cp->type & LAGGR)
 				if (bad_surrounding_4(cp, 4))
