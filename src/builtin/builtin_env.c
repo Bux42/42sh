@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 13:43:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:15:38 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 		return (sh->retval = func(exec, sh));
 	if ((path = command_path(&sh->env, exec[0], sh)))
 	{
-		i = fork_command(path, exec, tab);
+		if ((i = dir_exists(path)) != -1)
+			i = fork_command(path, exec, tab);
 		free(path);
 	}
 	return (i);
