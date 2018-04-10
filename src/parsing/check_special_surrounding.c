@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 14:16:03 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 15:44:35 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:25:26 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int			check_special_surrounding(t_inpl **inpl)
 	t_inpl	*cp;
 
 	if ((cp = (*inpl)))
-	{
 		while (cp)
 		{
 			if (cp->type & PIPE || cp->type & AND || cp->type & OR)
@@ -112,6 +111,5 @@ int			check_special_surrounding(t_inpl **inpl)
 					return (special_error_surrounding(&cp->inp));
 			cp = cp->next;
 		}
-	}
 	return (1);
 }
