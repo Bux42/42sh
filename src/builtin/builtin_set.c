@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 19:52:33 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:52:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:32:03 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int			new_local(char *str, t_loc **local)
 	t_loc	*cp;
 
 	cp = *local;
+	if (ft_strlen(str) > 20000)
+		return (0);
 	if (cp == NULL && ((*local) = chain_local(str)))
 		return (1);
 	while (cp && cp->content)
