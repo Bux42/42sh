@@ -211,3 +211,147 @@ ls 6>file
 ls 6>file 6>&-
  ls 6>file 1>&6 
 ls 6>file >&6
+ls 6>file
+ls 6>file 1>&6
+exit
+ls 6>file 1>&6
+ls 6>file >&6
+ls 6>file 1>&6
+exit
+ls 6>file 1>&6
+exit
+ls 6>file 1>&6
+cat file
+ls 10>file 1>&10
+ls 1>file 1>&10
+ls 1>file 1>&9
+ls
+ls
+cd src/
+cd exec/
+ls
+cd ..
+ls
+cd ..
+ls
+cd ..
+exit
+ls
+ls >&1
+exit
+ls >&1
+exit
+ls -z 2>file
+cat fiel
+cat file
+rm file
+ls -z 2>file
+cat file
+exit
+ls >&6
+cat 6
+ls
+exit
+ls 6>file 1>&6
+cat file
+exit
+ls 6>file 1>&6
+cat file
+exit
+ls 6>file 1>&6
+cat file
+rm file
+ls 1>file
+cat file
+rm file
+ls >&6
+ls 1>2
+ls 1>&2
+ls 1>&2 2>file
+cat file
+ls 2>file 1>&2
+cat file
+ls 1>&2
+ls 1>&6
+ls 6>file 1>&6
+cat file
+exit
+ls 2>fsd
+cat fsd
+rm fsd
+ls
+ls 2>10
+ls 2>9
+ls 2>8
+ls 2>1
+ls 1>file
+cat file
+rm file
+clear
+ls
+exit
+ls 1>file
+rm file
+ls 6>file
+cat file
+exit
+ls 6>file
+ls 6>file 1>&6
+cat file
+ls 2>file
+ls -z 2>file
+cat file
+rm file
+ls
+clear
+ls
+ls 6>file
+cat file
+ls 6>file 2>&6
+ls -z 6>file 2>&6
+cat file
+rm file
+s
+ls
+exit
+clear
+color on
+clear
+ls
+ls 6>file >&6
+cat file
+rm file
+ls
+ls >file 6>&-
+cat file
+ls 6>file 6>&-
+ls >&1
+ls 6>file cat file
+ls
+ls 6>file
+ls 6>file cat file
+clear
+ls 6>file cat file
+rm file
+ls 6>file cat file
+ls 5>test >&5
+cat test
+ls 5>test
+ls 6>file 1>&6
+cat file
+rm file
+ls 6>file 1>&6
+cat file
+rm file
+ls 6>file >&6
+cat file
+rm file
+ls 6>file >&6
+cat file
+rm file
+ls >file 6>&-
+cat file
+ls 6>file 6>&-
+ls >&1
+ls 6>file cat file
+exit
