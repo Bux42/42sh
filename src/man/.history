@@ -211,3 +211,31 @@ ls 6>file
 ls 6>file 6>&-
  ls 6>file 1>&6 
 ls 6>file >&6
+\!!
+\!\!!
+\!\!!
+ls
+ls
+man exclaim
+myman exclaim
+perl
+perl -e
+myman exclaim
+myman exclaim
+env qefqef
+myman exclaim
+ls 6>file >&6
+ls 6>file cat file
+myman $A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A
+set A=E
+set
+myman $A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A$A
+myman $A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A
+cd $A$A$A$A$A$A$A$A$A
+cd $A$A$A$A$A$A$A$A$A
+ls
+myman $A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A
+ls
+myman $A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A$A$A$A$A$A$A$A$A$A$A$A$A$A$[DA$A
+ls
+ls
