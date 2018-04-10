@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:56:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 13:16:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:06:31 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void		check_if_dir(t_sh *sh, t_inp **inp)
 
 	ft_bzero(buff, 5000);
 	ft_strcat(buff, sh->save_path);
+	if (buff[ft_strlen(buff) -1] != '/')
+		ft_strcat(buff, "/");
 	ft_strcat(buff, sh->comp_debug);
 	ft_strcat(buff, sh->comp_remain);
 	if (lstat(buff, &st) != -1)

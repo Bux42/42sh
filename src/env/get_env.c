@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:05:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/01 20:32:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:06:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void		get_env(char **env, t_sh *sh)
 	i = -1;
 	sh->env = NULL;
 	while (env[++i])
-		env_push_back(&sh->env, env[i]);
+		if (ft_strlen(env[i]) < 20000)
+			env_push_back(&sh->env, env[i]);
 	if ((shlvl = get_specific_env("SHLVL=", &sh->env)))
 	{
 		shlvl_atoi = ft_atoi(shlvl);
