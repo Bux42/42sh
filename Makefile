@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2018/04/09 17:48:43 by vboivin          ###   ########.fr        #
+#    Updated: 2018/04/10 20:38:46 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,3 +183,4 @@ rmtest:
 
 re: fclean all
 
+.PHONY :			fclean clean re
