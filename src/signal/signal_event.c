@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 03:37:40 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 15:15:16 by vboivin          ###   ########.fr       */
+/*   Updated: 2018/04/10 17:11:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ void		signal_init(void)
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGCONT, SIG_IGN);
+	signal(25, SIG_IGN);
+	signal(26, SIG_IGN);
+	signal(27, SIG_IGN);
+	signal(30, SIG_IGN);
 }
 
 void		signal_exec(void)
@@ -89,4 +93,8 @@ void		signal_exec(void)
 	signal(SIGKILL, SIG_DFL);
 	signal(SIGTERM, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
+	signal(25, SIG_DFL);
+	signal(26, SIG_DFL);
+	signal(27, SIG_DFL);
+	signal(30, SIG_DFL);
 }
