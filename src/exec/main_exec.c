@@ -6,7 +6,7 @@
 /*   By: jamerlin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:54:36 by jamerlin          #+#    #+#             */
-/*   Updated: 2018/04/10 09:40:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:59:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_access_error(char *fullpath)
 	if (access(fullpath, X_OK))
 		ft_putstr_fd("Permission denied.\n", 2);
 	else
-		ft_putstr_fd("error\n", 2);
+		ft_putstr_fd("No such file or directory.\n", 2);
 }
 
 void	close_tabtube(int len, t_pipe *tabtube)
