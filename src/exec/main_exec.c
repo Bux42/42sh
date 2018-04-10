@@ -57,11 +57,6 @@ void	check_signal(t_sh *sh)
 {
 	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 2)
 		ft_putstr("\n");
-	if (WIFSIGNALED(sh->retval) && WTERMSIG(sh->retval) == 9)
-	{
-		ft_putstr_fd("Killed: 9\n", 2);
-		kill(0, SIGKILL);
-	}
 }
 
 void	exec_cli(char *cli, t_listc *cmd, t_sh *sh)

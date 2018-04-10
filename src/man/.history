@@ -12,3 +12,18 @@ env PWS=$A$A$A$A$A$A[D$A$A$$$A
 env
 env PWS=$A$A$A$A$A$A[D$A$A$$$A
 echo $A$A$A$A$A$A[D$A$A$$$A
+ls
+ls || ls
+ls || dsaf && ls
+ls && dsaf && ls
+ls && dsaf || ls
+exit
+ls 2>&6
+ls 6>file 2>&6 
+rm file
+ls
+make fclean
+ls
+cearl
+exti
+exit
