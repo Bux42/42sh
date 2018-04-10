@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 06:12:50 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 12:32:08 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:17:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ int		check_mult_aggr(t_inp **inp)
 
 	type = 0;
 	cp = *inp;
-	ft_putchar('[');
-	print_t_inp(inp);
-	ft_putchar(']');
 	if (cp->next && cp->next->c == '>')
 	{
 		cp = cp->next;

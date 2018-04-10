@@ -55,31 +55,6 @@ void	double_right_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 	tabtube[i].cote[1] = cmd->redirs->redir[0];
 }
 
-void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
-{
-	if (cmd->redirs->file == NULL)
-		tabtube[i].cote[0] = cmd->redirs->redir[2];
-	else
-	{
-		if (cmd->redirs->redir[1] == AGGR + AGGRFILE)
-			tabtube[i].cote[0] = open(cmd->redirs->file, O_RDWR | O_APPEND
-				| O_CREAT, S_IRWXU);
-		else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT)
-			tabtube[i].cote[0] = open(cmd->redirs->file, O_RDWR | O_TRUNC
-				| O_CREAT, S_IRWXU);
-	}
-	tabtube[i].cote[1] = cmd->redirs->redir[0];
-	if (cmd->redirs->redir[1] == AGGR + AGGRFILE && tabtube[1].cote[0] == -1)
-		close(tabtube[1].cote[1]);
-	else if (cmd->redirs->redir[1] == LAGGRIN && tabtube[i].cote[0] == -1)
-		close(tabtube[i].cote[1]);
-	else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT
-		&& tabtube[i].cote[0] == -1)
-		close(tabtube[i].cote[1]);
-	else if (cmd->redirs->redir[1] == CLOSEAGGR)
-		close(tabtube[i].cote[1]);
-}
-
 void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 {
 	t_redir	*cp;
@@ -96,15 +71,7 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 		else if (cmd->redirs->redir[1] & (AGGR | LAGGR | LAGGRIN | CLOSEAGGR))
 			do_aggre(cmd, tabtube, i);
 		if (tabtube[i].cote[0] != -1)
-		{
-			if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4
-				&& cmd->redirs->redir[0] != 2)
-				dup2(tabtube[i].cote[0], STDOUT_FILENO);
-			else if (cmd->redirs->redir[0] != 2)
-				dup2(tabtube[i].cote[0], STDIN_FILENO);
-			else
-				dup2(tabtube[i].cote[0], STDERR_FILENO);
-		}
+			dup_fd(cmd, tabtube, i);
 		if (!(cmd->redirs->redir[1] & AGGR))
 			close(tabtube[i].cote[0]);
 		if (cmd->redirs->next)
