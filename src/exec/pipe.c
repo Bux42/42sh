@@ -26,7 +26,7 @@ void	ft_cmd_pipe(t_listc *cmd, t_sh *sh)
 	else if (!(fullpath = command_path(&sh->env, cmd->cont[0], sh)))
 		exit(1);
 	execve(fullpath, cmd->cont, NULL);
-	perror("execve");
+	errexit("Execve failed.");
 	exit(1);
 }
 
@@ -59,7 +59,7 @@ void	ft_pipe(t_listc *cmd, int *pid_tab, t_pipe *tabtube, t_sh *sh)
 	{
 		close(tabtube[sh->i].cote[0]);
 		close(tabtube[sh->i].cote[1]);
-		perror("fork");
+		errexit("Fork failed.");
 		exit(1);
 	}
 	else if (son == 0)
@@ -106,7 +106,7 @@ int		init_pipe(t_listc *cmd, t_pipe *tabtube, t_sh *sh)
 	{
 		if (pipe(tabtube[i].cote) != 0)
 		{
-			perror("pipe");
+			errexit("Pipe failed.");
 			free(tabtube);
 			exit(-2);
 		}

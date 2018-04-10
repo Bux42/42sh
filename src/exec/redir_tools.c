@@ -14,9 +14,7 @@
 
 void	errexit(char *str)
 {
-	ft_putstr("[");
-	ft_putstr(str);
-	ft_putstr("]\n");
+	ft_putendl_fd(str, 2);
 	exit(1);
 }
 

@@ -38,7 +38,7 @@ void	heredock_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 
 	j = 0;
 	if (pipe(tabtube[i].cote) == -1)
-		errexit("pipe");
+		errexit("Pipe failed.");
 	while (cmd->redirs->heredoc[j])
 	{
 		write(tabtube[i].cote[1], cmd->redirs->heredoc[j]
@@ -67,65 +67,17 @@ void	do_aggre(t_listc *cmd, t_pipe *tabtube, int i)
 		else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT)
 			tabtube[i].cote[0] = open(cmd->redirs->file, O_RDWR | O_TRUNC
 				| O_CREAT, S_IRWXU);
-
 	}
-	tabtube[i].cote[1] = cmd->redirs->redir[0];	
+	tabtube[i].cote[1] = cmd->redirs->redir[0];
 	if (cmd->redirs->redir[1] == AGGR + AGGRFILE && tabtube[1].cote[0] == -1)
 		close(tabtube[1].cote[1]);
 	else if (cmd->redirs->redir[1] == LAGGRIN && tabtube[i].cote[0] == -1)
 		close(tabtube[i].cote[1]);
-	else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT && tabtube[i].cote[0] == -1)
+	else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT
+		&& tabtube[i].cote[0] == -1)
 		close(tabtube[i].cote[1]);
 	else if (cmd->redirs->redir[1] == CLOSEAGGR)
 		close(tabtube[i].cote[1]);
-	/*
-	
-	if (cmd->redirs->redir[1] == AGGR)
-	{
-		if (cmd->redirs->redir[0] != -1 && (cmd->redirs->redir[1] != -1
-					&& cmd->redirs->file == NULL))
-		{
-			tabtube[i].cote[0] = cmd->redirs->redir[2];
-			tabtube[i].cote[1] = cmd->redirs->redir[0];
-		}
-	}
-	else if (cmd->redirs->redir[1] == AGGR + AGGRFILE)
-	{
-		if (cmd->redirs->file != NULL)
-		{
-			tabtube[i].cote[0] = open(cmd->redirs->file, O_RDWR | O_APPEND
-					| O_CREAT, S_IRWXU);
-			tabtube[i].cote[1] = cmd->redirs->redir[0];
-		}
-		else
-		{
-			tabtube[i].cote[0] = cmd->redirs->redir[2];
-			tabtube[i].cote[1] = cmd->redirs->redir[0];
-			if (tabtube[i].cote[0] == -1)
-				close(tabtube[i].cote[1]);
-		}
-	}
-	else if (cmd->redirs->redir[1] == AGGR + AGGRFILE + AGGROUT)
-	{
-		tabtube[i].cote[0] = (cmd->redirs->file) ? open(cmd->redirs->file,
-				O_RDWR | O_TRUNC | O_CREAT, S_IRWXU) : cmd->redirs->redir[2];
-		tabtube[i].cote[1] = cmd->redirs->redir[0];
-		if (tabtube[i].cote[0] == -1)
-			close(tabtube[i].cote[1]);
-	}
-	else if (cmd->redirs->redir[1] == LAGGR || cmd->redirs->redir[1] == LAGGRIN)
-	{
-		tabtube[i].cote[0] = cmd->redirs->redir[2];
-		tabtube[i].cote[1] = cmd->redirs->redir[0];
-		if (cmd->redirs->redir[1] == LAGGRIN && cmd->redirs->redir[2] == -1)
-			close(tabtube[i].cote[1]);
-	}
-	else if (cmd->redirs->redir[1] == CLOSEAGGR)
-	{
-		tabtube[i].cote[0] = cmd->redirs->redir[2];
-		tabtube[i].cote[1] = cmd->redirs->redir[0];
-		close(tabtube[i].cote[1]);
-	}*/
 }
 
 void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
@@ -135,14 +87,13 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 	cp = *redir;
 	while (cmd->redirs != NULL)
 	{
-		if (cmd->redirs && cmd->redirs->redir[1] == 0)
+		if (cmd->redirs->redir[1] == 0)
 			left_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && cmd->redirs->redir[1] & (1 | 16))
+		else if (cmd->redirs->redir[1] == 1 || cmd->redirs->redir[1] == 16)
 			right_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && cmd->redirs->redir[1] == 3)
+		else if (cmd->redirs->redir[1] == 3)
 			double_right_redirect(cmd, tabtube, i);
-		else if (cmd->redirs && (cmd->redirs->redir[1] & (AGGR | LAGGR
-			| LAGGRIN | CLOSEAGGR)))
+		else if (cmd->redirs->redir[1] & (AGGR | LAGGR | LAGGRIN | CLOSEAGGR))
 			do_aggre(cmd, tabtube, i);
 		if (tabtube[i].cote[0] != -1)
 		{
@@ -154,7 +105,7 @@ void	redirect(t_listc *cmd, t_pipe *tabtube, int i, t_redir **redir)
 			else
 				dup2(tabtube[i].cote[0], STDERR_FILENO);
 		}
-		if (cmd->redirs && !(cmd->redirs->redir[1] & AGGR))
+		if (!(cmd->redirs->redir[1] & AGGR))
 			close(tabtube[i].cote[0]);
 		if (cmd->redirs->next)
 			cmd->redirs = cmd->redirs->next;
