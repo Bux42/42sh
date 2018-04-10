@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 01:33:43 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/03 20:36:30 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:51:59 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,45 +38,3 @@ int			update_context(int context, int flag)
 	return (context | flag);
 }
 
-void		dquote_inp(t_inp **cp, t_sh *sh)
-{
-	t_inp	*delimiter;
-
-	delimiter = NULL;
-	while ((*cp))
-	{
-		(*cp) = (*cp)->next;
-	}
-	lexer_parser(&delimiter, sh);
-}
-
-void		quote_inp(t_inp **cp, t_sh *sh)
-{
-	t_inp	*delimiter;
-
-	delimiter = NULL;
-	while ((*cp))
-	{
-		(*cp) = (*cp)->next;
-	}
-	lexer_parser(&delimiter, sh);
-}
-
-void		bquote_inp(t_inp **cp, t_sh *sh)
-{
-	t_inp	*delimiter;
-
-	delimiter = NULL;
-	while ((*cp))
-	{
-		if ((*cp)->c == '`')
-		{
-			(*cp) = (*cp)->next;
-			break ;
-		}
-		else
-			inp_insert_posat(&delimiter, (*cp)->c);
-		(*cp) = (*cp)->next;
-	}
-	lexer_parser(&delimiter, sh);
-}

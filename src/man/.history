@@ -180,3 +180,5 @@ cat file
 rm file
 exit
 >>>>>>> c53d8c31302a74629665696f45b633a8b6ee05fb
+ls
+ls
