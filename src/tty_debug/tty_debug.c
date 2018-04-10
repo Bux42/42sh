@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 05:07:52 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 11:59:53 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:35:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ void		tty_debug(t_sh *sh, t_inp **inp)
 	int		i;
 
 	i = 0;
-	add_line_infos(&i, buff, sh);
-	add_buff_expected(&i, buff, sh);
-	add_inp(&i, buff, inp);
-	write(sh->tty_fd, buff, i);
+	if (sh->tty_fd != -1)
+	{
+		ft_bzero(buff, TTY_MAX);
+		add_line_infos(&i, buff, sh);
+		add_buff_expected(&i, buff, sh);
+		add_inp(&i, buff, inp);
+		write(sh->tty_fd, buff, i);
+	}
 }
 
 int			get_tty(t_sh *sh, char *av)
