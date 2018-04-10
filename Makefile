@@ -82,6 +82,8 @@ exec/redir.c\
 exec/redir_tools.c\
 exec/fork_command.c\
 exec/main_exec.c\
+exec/aggregations.c\
+exec/print_error.c\
 exec/execute_tokens.c\
 exec/execute_tokens_old.c\
 builtin/check_builtin.c\

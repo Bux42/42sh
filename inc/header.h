@@ -337,10 +337,14 @@ int		                init_pipe(t_listc *cmd, t_pipe *tabTube, t_sh *i_env);
 //Redirections
 void                    heredock_redirect(t_listc *cmd, t_pipe *tabTube, int i);
 void                    redirect(t_listc *cmd, t_pipe *tabTube , int i, t_redir **redir);
+void                    do_aggre(t_listc *cmd, t_pipe *tabtube, int i);
 //Tools
 void                    errexit(char *str);
 char		            *command_path(t_env **env, char *command, t_sh *sh);
 void                    close_tabtube(int len, t_pipe *tabtube);
+void                    print_access_error(char *fullpath);
+t_pipe                  *new_tabtube(int len);
+void                    dup_fd(t_listc *cmd, t_pipe *tabtube, int i);
 
 /*						builtins										*/
 

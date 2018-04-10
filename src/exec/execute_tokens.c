@@ -63,28 +63,26 @@ void	execute_tokens(t_listc **tok, t_sh *sh)
 	t_listc	*cp;
 	int		(*func)(char **, t_sh*);
 
-	if ((cp = (*tok)))
+	if (!(cp = (*tok)))
+		return ;
+	while (cp)
 	{
-		while (cp)
+		if (cp->func && cp->sep_type != PIPE && condition_is_valid(sh, cp))
 		{
-			if (cp->func && cp->sep_type != PIPE &&
-					condition_is_valid(sh, cp))
-			{
-				func = cp->func;
-				(cp->redirs) ? builtin_redir(cp, func, sh) :
-					(sh->retval = func(cp->cont, sh));
-			}
-			else if (cp->sep_type == AND || cp->sep_type == OR
-				|| cp->sep_type & SEMICOLON || !cp->sep_type)
-				exec_cli(cp->cont[0], cp, sh);
-			else if (cp->sep_type & PIPE)
-			{
-				prepare_pipe(cp);
-				exec_cli(cp->cont[0], cp, sh);
-				while (cp->next && cp->sep_type & PIPE)
-					cp = cp->next;
-			}
-			cp = cp->next;
+			func = cp->func;
+			(cp->redirs) ? builtin_redir(cp, func, sh) :
+				(sh->retval = func(cp->cont, sh));
 		}
+		else if (cp->sep_type == AND || cp->sep_type == OR
+			|| cp->sep_type & SEMICOLON || !cp->sep_type)
+			exec_cli(cp->cont[0], cp, sh);
+		else if (cp->sep_type & PIPE)
+		{
+			prepare_pipe(cp);
+			exec_cli(cp->cont[0], cp, sh);
+			while (cp->next && cp->sep_type & PIPE)
+				cp = cp->next;
+		}
+		cp = cp->next;
 	}
 }

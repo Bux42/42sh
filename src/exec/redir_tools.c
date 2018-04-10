@@ -12,12 +12,6 @@
 
 #include "../../inc/header.h"
 
-void	errexit(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(1);
-}
-
 void	prepare_pipe(t_listc *cmd)
 {
 	t_listc	*cpy;
@@ -56,4 +50,33 @@ void	closed_unused_fd(int fils, int nb_tube, t_pipe *tabtube)
 			close(tabtube[i].cote[1]);
 		i++;
 	}
+}
+
+t_pipe	*new_tabtube(int len)
+{
+	t_pipe	*ret;
+	int		i;
+
+	ret = NULL;
+	i = 0;
+	if (!(ret = (t_pipe*)malloc(sizeof(t_pipe) * (len + 1))))
+		return (NULL);
+	while (i < len)
+	{
+		ret[i].cote[0] = 0;
+		ret[i].cote[1] = 0;
+		i++;
+	}
+	return (ret);
+}
+
+void	dup_fd(t_listc *cmd, t_pipe *tabtube, int i)
+{
+	if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4
+		&& cmd->redirs->redir[0] != 2)
+		dup2(tabtube[i].cote[0], STDOUT_FILENO);
+	else if (cmd->redirs->redir[0] != 2)
+		dup2(tabtube[i].cote[0], STDIN_FILENO);
+	else
+		dup2(tabtube[i].cote[0], STDERR_FILENO);
 }

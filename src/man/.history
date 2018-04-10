@@ -101,3 +101,42 @@ pwd
 cd ..
 ls
 cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+ls > file
+cat file
+ls -l >> file
+cat file
+rm fie
+rm file
+ls
+exit
+ls -z 2>> file
+EXIT
+EXIT
+exit
+clear
+exit
+env
+unsetenv SHLVL
+env
+exit
+env
+exit
+color
+color on
+ls
+ls
+exit
+ls 
+color on
+ls
+clear
+ls
+make fclean
+ls
+exit
+ls
+ls | cat -e
+ls > file
+cat file
+rm file
+exit

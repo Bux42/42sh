@@ -12,14 +12,6 @@
 
 #include "../../inc/header.h"
 
-void	print_access_error(char *fullpath)
-{
-	if (access(fullpath, X_OK))
-		ft_putstr_fd("Permission denied.\n", 2);
-	else
-		ft_putstr_fd("No such file or directory.\n", 2);
-}
-
 void	close_tabtube(int len, t_pipe *tabtube)
 {
 	int i;
@@ -44,24 +36,6 @@ void	run_cmd(char *fullpath, t_listc *cmd, t_sh *sh, char **env)
 		exit(WEXITSTATUS(sh->retval));
 	print_access_error(fullpath);
 	exit(-1);
-}
-
-t_pipe	*new_tabtube(int len)
-{
-	t_pipe	*ret;
-	int		i;
-
-	ret = NULL;
-	i = 0;
-	if (!(ret = (t_pipe*)malloc(sizeof(t_pipe) * (len + 1))))
-		return (NULL);
-	while (i < len)
-	{
-		ret[i].cote[0] = 0;
-		ret[i].cote[1] = 0;
-		i++;
-	}
-	return (ret);
 }
 
 void	fork_exec(char *fullpath, t_listc *cmd, t_pipe *tabtube, t_sh *sh)
