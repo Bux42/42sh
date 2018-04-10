@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:11:42 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/07 18:04:34 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:13:50 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_hash				**hash_table(char *path, t_sh *sh)
 	if (!(path))
 		return (NULL);
 	lst = NULL;
+	hash = NULL;
 	init_bin_list(&lst, path);
 	free(path);
 	sh->hash_size = list_size(lst);
@@ -92,5 +93,9 @@ t_hash				**hash_table(char *path, t_sh *sh)
 		tmp = tmp->next;
 	}
 	lst_del(&lst);
+	if (sh->hash_size == 0 && hash)
+		free(hash);
+	if (sh->hash_size == 0)
+		hash = NULL;
 	return (hash);
 }
