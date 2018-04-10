@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:38:08 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:23:30 by drecours         ###   ########.fr       */
 /*   Updated: 2018/04/09 14:58:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -352,6 +352,7 @@ int						fork_builtin(int (*)(char**, char**), char **exec, char **env);
 int						change_dir(char **exec, t_env **env);
 int						parse_flag(char **exec);
 int						check_flag(int flag, char letter);
+char					*check_path_bin(char *path, t_sh *sh);
 
 /*						history_search									*/
 

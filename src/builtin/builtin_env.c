@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 15:15:38 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 15:23:47 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 	int		i;
 	char	*path;
 	int		(*func)(char**, t_sh *);
+	char	*tmp;
 
 	i = 0;
 	func = NULL;
@@ -69,8 +70,13 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 		return (sh->retval = func(exec, sh));
 	if ((path = command_path(&sh->env, exec[0], sh)))
 	{
-		if ((i = dir_exists(path)) != -1)
+		if ((tmp = check_path_bin(path, sh)))
+		{
 			i = fork_command(path, exec, tab);
+			free(tmp);
+		}
+		else
+			i = 2;
 		free(path);
 	}
 	return (i);
