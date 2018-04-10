@@ -1,233 +1,103 @@
-~
-~~
-~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~ ~ ~ ~ ~ ~ ~
-~/
-~/~
-~/~/~/
-~
-ls
-ls -l
-ls -la
-hahaha
-~~
-l
-ls
-ls -l
-rm BD
-rm FFJ#
-rm BF+6AlVWfuOOT
-rm Nrr4rIm(j:uB)L]1
-rm gyQeF+6AlVWfuOOT
-rm g#
-rm ms#_Bka,ywEt}yaTEs4G^0
-ls
-rm U4.}
-rm Cv^
-rm L5#W9NUe@1Ib2?$#={s6U(%@8)OS,ftOJ[]H(JA^}X-ZoZyq
-rm gCAB,-8Nz_rsA!HE1Y`gK-Dsr!~u?nk!]EVVX6Da$5QlE
-rm gyQeJAnl{
-rm if+]#t
-ls
-rm -rf 21sh.dSYM
-~~~~~~~~~~~~
-ls
-ls -l
-~/
-ls
-ls -l
-LEAKS MAGGLE
-ls -l
-env
-~/
-~
-~/
-~
-ls >&-
-ls >&1
-ls 2>file
-ls >&-
-ls 2> file
-ls 2>-
-ls 2>file
-ls 2<-
-ls 2<&-
-ls >&-
-ls 2<&-
-ls 2<&-
-ls <&-
-ls 2<&-
-ls <&-
-ls 2>-
-ls 2>file
-ls 2>file
-ls 2>fi
-ls 2>1
-ls -z 2>&-
-ls -z 2>&-
-ls -z >&-
-ls -z >&2
-ls -z 1>&2
-ls -z <&-
-ls -z <&2
-ls -z 1<&2
-ls 2>file
-/tmp/ft_select
-/tmp/videsvau2/ft_select
-/tmp/videsvau2/ft_select qef qef qef qef qef 
-/tmp/videsvau2/ft_select qef qef qef qef qef 
-ls ../
-cat ../redirection
-cat ../done
-ls 2>file
-ls 2> file
-ls 2> 
-ls 2> 
-ls 2> ff
-ls 2> ff
-ls 2> ff
-cat file
-ls -z 2> ff
-cat file
-ls -z 2> ff
-cat file
-ls 1>&1
-ls 1>&ff
-ls 1>&1
-ls >&1
-ls >&1
-ls >&1
-ls 2>&1
-ls 2>&1
-ls 2>&
-ls 2>&1
-ls >&1
-ls >&2
-ls >&
-ls >&-
-ls >&-
-ls >&-
-ls 1>&-
-ls 1>&2
-ls 1>&-
-ls 1>&2
-ls >&2
-ls 2>&-
-ls 2>&-
-ls 2>&-
-ls 2>&-
-ls >&-
-cat <&-
-cat <&2
-cat 1<&2
-cat 1<&2
-cat -<&2
-cat <&2
-ls 2>file
-ls 2>2
-ls 2>file
-ls 2> file
-ls 2> file
-ls 2>2
-cat <&2
-cat 1<&2
-ls >&-
-ls 1>&-
-ls 1>&2
-history
-history -a
-history -A
-ls -z 2>file
-ls > file
-ls -z 2> file
-exit
-ls
-ls sr 
-ls | grep M | rev | cut -c3- | rev | cat -e
-exit
-ls
-ls 2>file
+env -i qefqef
+env qefqef
+env qefqef
+env qefqef
+env qefqef
+env USR2=qwc
+myman env
+env -i PATH=/bin ./21sh
 ls
 exit
-ls 2>file
-exit
-ls 2>file
-ls -z 2>file
-cat file
-exit
-ls -z 2>file
-exi
-exit
-ls -z 2>file
-ls > file
-cat file
-ls -z 2>file
-cat file
-rm file
-exit
-ls >&-
-ls >&1
-ls >&2
-ls >&0
-ls >&file
-ls 2>&-
-ls -z 2>&-
-ls >&-
-ls >&2 2>file
-cat file
-ls >&2 1>file
-cat file
-rm file
+ls -a
+cat .testFile
+setenv SAVE=$PWD
+rien && echo "perdu"
+ls || echo "perdu"
+cat < Makefile | wc >> /tmp/file
+cat /tmp/file ; rm /tmp/file
+unsetenv PATH
 ls
-exit
-rm file
-ls 2>file >&2
-cat file
-ls >&-
-exit
-ls >&-
-exit
-ls >&-
+setenv PATH=/bin
+/bin/ls || echo "perdu"
+setenv PATH=/Users/videsvau/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+setenv SAVE=$PWD
+rien && echo "perdu"
+ls || echo "perdu"
+cat < Makefile | wc >> /tmp/file
+cat /tmp/file ; rm /tmp/file
+unsetenv PATH
 ls
-rm file
-ls >&-
+setenv PATH=/bin
+/bin/ls || echo "perdu"
+setenv PATH=/Users/videsvau/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+setenv SAVE=$PWD
+rien && echo "perdu"
+ls || echo "perdu"
+cat < Makefile | wc >> /tmp/file
+cat /tmp/file ; rm /tmp/file
+unsetenv PATH
 ls
-ls -z 2>&-
-ls -z 1>&-
-ls -z 0>&-
-ls -z 2>&-
-ls -z 1>&-
-cat 0>&-
-exti
-exit
-ls 2>&1
-ls 2>&file
-ls -z 2>&file
-exit
-ls 2>file
-ls 1>file
-cat file
-rm file
+setenv PATH=/bin
+/bin/ls || echo "perdu"
+setenv PATH=/Users/videsvau/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+setenv SAVE=$PWD
+rien && echo "perdu"
+ls || echo "perdu"
+cat < Makefile | wc >> /tmp/file
+cat /tmp/file ; rm /tmp/file
+unsetenv PATH
 ls
-ls <&-
-ls 2<&-
-ls 1<&-
-exit
-ls 1<&-
-exit
-ls 1<&-
-exit
-ls 1<&-
-ls -z 2<&-
-ls -z 1<&-
-ls 1<&-
-ls 2>&-
-ls 1>&-
-ls 1>&-
-exit
-cd cd cd cd
-cd cd cd cd
-cd cd cd cd
-cat ../21sh/src/line_edition/s_bin_list.c
-cat ../21sh/src/line_edition/s_bin_list.c
+setenv PATH=/bin
+/bin/ls || echo "perdu"
+setenv PATH=/Users/videsvau/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp;mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi ; cd .. ;rm -rf test
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+ $SAVE
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+echo "Testing redirections," > /tmp/test.txt ; 
+cat /tmp/test.txt
+echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cd /tmp
+mkdir test
+cd ..
+cd tmp/
+rm -rf test/
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+rm -rf ../test/
+pwd
+cd ..
+ls
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem

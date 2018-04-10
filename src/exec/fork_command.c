@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 04:32:46 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 09:40:58 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:03:22 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		**env_list_to_char(t_env **env)
 	return (ret);
 }
 
-int		fork_command(char *path, char **exec, char **env)
+int			fork_command(char *path, char **exec, char **env)
 {
 	pid_t	pid;
 	int		status;
@@ -57,8 +57,8 @@ int		fork_command(char *path, char **exec, char **env)
 		ft_putstr("\n");
 	if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
 	{
-		ft_putstr_fd("Killed: 9\n",2);
-		kill(0,SIGKILL);
+		ft_putstr_fd("Killed: 9\n", 2);
+		kill(0, SIGKILL);
 	}
 	return (status);
 }

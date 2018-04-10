@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:36:59 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:28:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 13:52:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void		add_token(t_inpl **inpl, t_inp **cp, t_sh *sh)
 	{
 		if (check_quoting((*cp)->c) && !escaped(cp))
 			sh->context = try_update_context((*cp)->c, sh->context);
-		if (right_context(sh->context) && ending_char((*cp)->c))
+		if (right_context(sh->context) && ending_char((*cp)->c) &&
+				!escaped(cp))
 			break ;
 		while ((*cp) && empty_quote(sh->context, cp))
 		{

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 11:27:10 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 13:24:34 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			idenfity_regular(t_inpl **inpl)
 			inp_cmp(&(*inpl)->inp, "export"))
 		return (type | BUILTIN);
 	if (inp_cmp(&(*inpl)->inp, "exit") || inp_cmp(&(*inpl)->inp, "set") ||
-			inp_cmp(&(*inpl)->inp, "unset"))
+			inp_cmp(&(*inpl)->inp, "unset") || inp_cmp(&(*inpl)->inp, "color"))
 		return (type | BUILTIN);
 	if (inp_cmp(&(*inpl)->inp, "local") || inp_cmp(&(*inpl)->inp, "myman")
 			|| inp_cmp(&(*inpl)->inp, "history"))
@@ -129,7 +129,6 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 				convert_regular(&cp->inp, sh);
 				if (cp)
 					cp->type = idenfity_regular(&cp);
-				ft_putnbr(cp->type);
 			}
 			else if (cp->type == 1)
 				if ((cp->type = check_special(&cp->inp)) == -1)

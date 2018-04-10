@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 17:09:18 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 13:51:04 by videsvau         ###   ########.fr       */
 /*   Updated: 2018/04/09 14:58:03 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -82,6 +82,7 @@ void					signal_event(int signo);
 
 /*						environment										*/
 
+char					**env_list_to_char(t_env **env);
 char					*get_specific_env(char *env, t_env **envlist);
 char					*get_specific_loc(char *env, t_loc **envlist);
 void					get_env(char **env, t_sh *sh);
@@ -225,6 +226,7 @@ int						inp_cmp(t_inp **inp, char *str);
 void					try_insert_variable(t_inp **inp, t_sh *sh);
 void					try_insert_home(t_inp **inp, t_sh *sh);
 void					split_line(t_inpl **inpl, t_inp **clean, t_sh *sh);
+int						escaped(t_inp **inp);
 int						special_tok(char c);
 int						ending_special_char(char c);
 int						redir(t_inp *inp);
@@ -313,22 +315,9 @@ char					*add_aggr_redir(int redir[3], t_inpl **inpl, int type);
 void					add_laggr_redir(int redir[3], t_inpl **inpl, int type);
 void					redir_debug(char *file, int redir[3]);
 
-/*						execution										*/
-
-void					valid_command(t_inp **inp, t_sh *sh);
-int						bin_exists(const char *path, char *exec, int *ret);
-char					*existing_command(char **command, t_env **env, t_sh *sh, int fg);
-char					**get_full_command(t_inp **inp, t_sh *sh);
-char					*get_command(t_inp **inp, t_sh *sh);
-void					exec_command(t_inp **inp, t_sh *sh);
-
-char					*check_exec_path(char *command, t_env **env, int free);
-int						fork_command(char *path, char **exec, char **env);
-char					**env_list_to_char(t_env **env);
-
-void					execute_tokens_debo(t_listc **tok, t_sh *sh);
-
 /*						real_execution									*/
+
+int						fork_command(char *path, char **exec, char **tab);
 
 //Main
 void				    signal_handler(int inp);

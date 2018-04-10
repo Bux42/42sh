@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2018/04/09 17:48:43 by vboivin          ###   ########.fr        #
+#    Updated: 2018/04/10 13:50:31 by videsvau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,12 +80,10 @@ parsing/context_updater.c\
 exec/pipe.c\
 exec/redir.c\
 exec/redir_tools.c\
+exec/fork_command.c\
 exec/main_exec.c\
 exec/execute_tokens.c\
 exec/execute_tokens_old.c\
-exec/inp_to_exec.c\
-exec/check_valid_command.c\
-exec/fork_command.c\
 builtin/check_builtin.c\
 builtin/change_dir.c\
 signal/signal_event.c\

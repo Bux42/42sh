@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 16:47:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 13:43:08 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,19 @@ int			exec_cmd(char **tab, char **exec, t_sh *sh)
 {
 	int		i;
 	char	*path;
+	int		(*func)(char**, t_sh *);
 
 	i = 0;
+	func = NULL;
 	if (flag_v(exec))
 		show_args(exec);
-	if (!(path = existing_command(exec, &sh->env, sh, 1)))
-	{
-		ft_putstr_fd("env: ", STDERR_FILENO);
-		ft_putstr_fd(exec[0], STDERR_FILENO);
-		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-		i = 127;
-		free(path);
-		return (i);
-	}
-	else if (ft_strcmp(path, "ok") &&
-			bin_exists(path, exec[0], &sh->retval) == 0)
+	if ((func = get_builtin_function(exec[0])))
+		return (sh->retval = func(exec, sh));
+	if ((path = command_path(&sh->env, exec[0], sh)))
 	{
 		i = fork_command(path, exec, tab);
-	}
-	if (path)
 		free(path);
+	}
 	return (i);
 }
 
