@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:35:54 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 09:26:40 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:37:45 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void		search_input(t_sh *sh)
 	{
 		if (sh->search == 2)
 			switch_search_mode(sh, &sh->his_search);
-		print_search_backward(sh, &sh->his_search, &sh->history, 0);
+		print_srch_bckwrd(sh, &sh->his_search, &sh->history, 0);
 	}
 	else if (sh->buff[0] == 6)
 	{
 		if (sh->search == 1)
 			switch_search_mode(sh, &sh->his_search);
-		print_search_forward(sh, &sh->his_search, &sh->history, 0);
+		print_srch_frwrd(sh, &sh->his_search, &sh->history, 0);
 	}
 	else if (sh->search == 1)
-		print_search_backward(sh, &sh->his_search, &sh->history, 1);
+		print_srch_bckwrd(sh, &sh->his_search, &sh->history, 1);
 	else if (sh->search == 2)
-		print_search_forward(sh, &sh->his_search, &sh->history, 1);
+		print_srch_frwrd(sh, &sh->his_search, &sh->history, 1);
 }
 
 void		treat_input_search(t_sh *sh)

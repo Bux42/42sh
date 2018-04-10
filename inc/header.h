@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 17:17:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:37:44 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,8 +339,8 @@ void					treat_input_search(t_sh *sh);
 void					add_delete_letter_search(t_sh *sh);
 void					search_input(t_sh *sh);
 void					switch_search_mode(t_sh *sh, t_inp **his_search);
-void					print_search_forward(t_sh *s, t_inp **a, t_his **h, int r);
-void					print_search_backward(t_sh *s, t_inp **a, t_his **h, int r);
+void					print_srch_frwrd(t_sh *s, t_inp **a, t_his **h, int r);
+void					print_srch_bckwrd(t_sh *s, t_inp **a, t_his **h, int r);
 void					print_match(t_sh *sh);
 void					insert_search(t_sh *sh, t_inp **h, t_inp **his_pos);
 void					hide_history_search(t_sh *sh, t_inp **a, t_inp **h);

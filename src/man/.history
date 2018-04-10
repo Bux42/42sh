@@ -206,3 +206,8 @@ set b=$A$A$A$A$A$A
 set b=$A$A$A$A$A$A
 set b=$A$A$A$A$A$A
 unset $
+set b=$A$A$A$A$A$A
+ls 6>file
+ls 6>file 6>&-
+ ls 6>file 1>&6 
+ls 6>file >&6

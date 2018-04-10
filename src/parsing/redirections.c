@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 08:30:44 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 17:03:49 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:47:31 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			check_fd_aggr_left(t_inp *cp)
 	if (cp && cp->next && cp->next->c == '&')
 	{
 		cp = cp->next;
-		if (cp->next && cp->next->c > 47 && cp->next->c < 51)
+		if (cp->next && cp->next->c > 47 && cp->next->c < 58)
 			if (!cp->next->next)
 				return (type | LAGGR);
 		if (!cp->next)
@@ -48,7 +48,7 @@ int			check_fd_aggr_right(t_inp *cp)
 	if (cp->next->c == '&')
 	{
 		cp = cp->next;
-		if (cp->next && cp->next->c > 47 && cp->next->c < 51)
+		if (cp->next && cp->next->c > 47 && cp->next->c < 58)
 			if (!cp->next->next)
 				return (type | AGGR);
 		if (!cp->next)

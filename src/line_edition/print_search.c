@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 04:53:11 by videsvau          #+#    #+#             */
-/*   Updated: 2018/01/27 06:25:23 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 17:39:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			found_match(t_inp *cp, t_inp **search_pos)
 	return (0);
 }
 
-void		print_search_forward(t_sh *sh, t_inp **search, t_his **his, int re)
+void		print_srch_frwrd(t_sh *sh, t_inp **search, t_his **his, int re)
 {
 	t_inp	*cp;
 
@@ -100,7 +100,7 @@ void		print_search_forward(t_sh *sh, t_inp **search, t_his **his, int re)
 	}
 }
 
-void		print_search_backward(t_sh *sh, t_inp **search, t_his **his, int re)
+void		print_srch_bckwrd(t_sh *sh, t_inp **search, t_his **his, int re)
 {
 	t_inp	*cp;
 
