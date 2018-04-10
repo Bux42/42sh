@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 19:52:33 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 17:32:03 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:27:24 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int			new_local(char *str, t_loc **local)
 	t_loc	*cp;
 
 	cp = *local;
-	if (ft_strlen(str) > 20000)
-		return (0);
 	if (cp == NULL && ((*local) = chain_local(str)))
 		return (1);
 	while (cp && cp->content)
@@ -73,7 +71,7 @@ int			builtin_set(char **exec, t_sh *sh)
 	int		i;
 
 	i = 1;
-	if (!exec[1])
+	if (!exec[1] || too_big(exec))
 		return (builtin_local(exec, sh));
 	while (exec[i])
 	{

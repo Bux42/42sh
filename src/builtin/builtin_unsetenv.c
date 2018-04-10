@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:54:12 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:28:28 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					builtin_unsetenv(char **exec, t_sh *sh)
 
 	i = 1;
 	env = &sh->env;
-	if (!exec[1])
+	if (!exec[1] || too_big(exec))
 		return (err_msg("unsetenv: missing argument", "", 1));
 	while (exec[i])
 	{

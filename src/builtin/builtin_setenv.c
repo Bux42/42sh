@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 14:09:56 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:27:55 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 	len = 0;
 	value = NULL;
 	name = NULL;
-	if (!valid_name(exec[1], "setenv"))
+	if (!valid_name(exec[1], "setenv") || too_big(exec))
 		return (3);
 	while (exec[1][len] && exec[1][len] != '=')
 		len++;

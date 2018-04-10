@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:00:52 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 19:00:21 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:26:51 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ int		builtin_myman(char **input, t_sh *sh)
 	tab[0] = "env";
 	tab[1] = "less";
 	tab[3] = NULL;
-	if (input[1] && input[2])
+	if ((input[1] && input[2]) || too_big(input))
 		return (man_error(1));
-	if (ft_strlen(input[1]) > 1000)
-		return (-1);
 	if (input[1])
 		file = ft_strjoin(input[1], ".txt");
 	if (!input[1])

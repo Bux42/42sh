@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:21:51 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 11:52:52 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:28:13 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			builtin_unset(char **exec, t_sh *sh)
 	int		i;
 
 	i = 0;
-	if (!exec[1])
+	if (!exec[1] || too_big(exec))
 	{
 		ft_putendl_fd("Usage: unset [KEY ...]", 2);
 		return (1);

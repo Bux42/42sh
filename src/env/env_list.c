@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 01:20:53 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/09 16:26:32 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:17:37 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		set_env(t_env **env, char *name, char *value)
 	char	*new_env;
 
 	len = ft_strlen(name) + ft_strlen(value);
-	if (!(new_env = (char*)malloc(sizeof(char) * (len + 1))))
+	if (len > 10000 || !(new_env = (char*)malloc(sizeof(char) * (len + 1))))
 		return ;
 	ft_bzero(new_env, len);
 	ft_strcat(new_env, name);

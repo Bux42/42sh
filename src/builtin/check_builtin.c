@@ -6,12 +6,24 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 08:13:10 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/05 13:12:54 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:23:27 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
 #include "builtin.h"
+
+int				too_big(char **exec)
+{
+	int		i;
+
+	i = -1;
+	if (exec)
+		while (exec[++i])
+			if (ft_strlen(exec[i]) > 10000)
+				return (1);
+	return (0);
+}
 
 int				err_msg(char *message, char *name, int ret)
 {

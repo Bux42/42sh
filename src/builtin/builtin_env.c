@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:15:45 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 15:23:47 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:24:05 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int			builtin_env(char **exec, t_sh *sh)
 
 	i = 0;
 	verbose = 0;
-	if (!exec[1])
+	if (!exec[1] || too_big(exec))
 		return (print_env(&sh->env));
 	if (!(tab = env_in_tab(&sh->env)))
 		return (1);

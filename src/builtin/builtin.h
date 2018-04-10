@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 12:10:02 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:23:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /*
 ** BUILTINS
 */
+int		too_big(char **exec);
 int		builtin_setenv(char **exec, t_sh *sh);
 int		builtin_unsetenv(char **exec, t_sh *sh);
 int		builtin_echo(char **exec, t_sh *sh);

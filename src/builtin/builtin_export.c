@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:39:15 by drecours          #+#    #+#             */
-/*   Updated: 2018/03/03 14:38:05 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:25:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			builtin_export(char **exec, t_sh *sh)
 	i = 0;
 	if (!exec[1])
 		return (builtin_local(exec, sh));
-	if (cp == NULL)
+	if (cp == NULL || too_big(exec))
 		return (0);
 	while (exec[++i])
 	{
