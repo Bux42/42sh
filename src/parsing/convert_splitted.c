@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:59:20 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 14:27:32 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:27:10 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ int			idenfity_regular(t_inpl **inpl)
 	int		type;
 
 	type = 0;
+	if ((*inpl)->previous && (*inpl)->previous->type > 64 &&
+		(*inpl)->previous->type != 2048)
+		return (type | ARGUMENT);
+	if ((*inpl)->previous && (*inpl)->previous->type > 8 &&
+		(*inpl)->previous->type < 128)
+		return (type | _FILE);
+	if ((*inpl)->previous && ((*inpl)->previous->type & HERE))
+		return (type | ARGUMENT);
 	if (inp_cmp(&(*inpl)->inp, "env") || inp_cmp(&(*inpl)->inp, "unsetenv")
 			|| inp_cmp(&(*inpl)->inp, "echo"))
 		return (type | BUILTIN);
@@ -81,14 +89,6 @@ int			idenfity_regular(t_inpl **inpl)
 	if (inp_cmp(&(*inpl)->inp, "local") || inp_cmp(&(*inpl)->inp, "myman")
 			|| inp_cmp(&(*inpl)->inp, "history"))
 		return (type | BUILTIN);
-	if ((*inpl)->previous && (*inpl)->previous->type > 64 &&
-		(*inpl)->previous->type != 2048)
-		return (type | ARGUMENT);
-	if ((*inpl)->previous && (*inpl)->previous->type > 8 &&
-		(*inpl)->previous->type < 128)
-		return (type | _FILE);
-	if ((*inpl)->previous && ((*inpl)->previous->type & HERE))
-		return (type | ARGUMENT);
 	return (type | COMMAND);
 }
 
@@ -129,6 +129,7 @@ void		*convert_splitted(t_inpl **inpl, t_sh *sh)
 				convert_regular(&cp->inp, sh);
 				if (cp)
 					cp->type = idenfity_regular(&cp);
+				ft_putnbr(cp->type);
 			}
 			else if (cp->type == 1)
 				if ((cp->type = check_special(&cp->inp)) == -1)
