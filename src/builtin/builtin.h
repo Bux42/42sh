@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 19:23:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:30:15 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int		dir_exists(char *path);
 /*
 ** HISTORY TOOLS
 */
+int		valid_last(t_inp *inp);
+int		valid_by_last(t_inp **inp);
 void	hist_verbose(int i);
 int		change_fd(t_sh *sh, char *path);
 int		history_clean(char c, t_his **hist, t_sh *sh);
