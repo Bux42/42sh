@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:08:14 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/07 18:08:43 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:05:38 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ char				*get_hash_path(t_hash ***hash_addr, char *bin, t_sh *sh)
 {
 	unsigned int	id;
 	t_hash			*hash;
+	int				i;
 
+	i = -1;
 	if (!(*hash_addr) || !(**hash_addr) || !(bin))
 		return (NULL);
 	id = hash_algo(bin, sh->hash_size);
 	hash = (*hash_addr)[id];
+	while (++i <= (int)id)
+		if (!(*hash_addr)[i])
+			return (NULL);
 	while (hash)
 	{
 		if (hash && hash->bin != NULL)

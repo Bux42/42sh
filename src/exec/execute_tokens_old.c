@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 09:41:22 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:49:12 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:18:16 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char		*command_path(t_env **env, char *command, t_sh *sh)
 	ret = NULL;
 	if (command[0] == '/' || command[0] == '.')
 		return (check_path_bin(command, sh));
+	if ((path = get_hash_path(&sh->hash, command, sh)))
+		return (ft_strdup(path));
 	if ((path = get_specific_env("PATH=", env)))
 	{
 		if ((split = ft_strsplit(path, ':')))
