@@ -101,3 +101,40 @@ pwd
 cd ..
 ls
 cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+cat .testFile
+echo "Testing redirections," > /tmp/test.txt ; echo "with multiple lines" >> /tmp/test.txt
+cat /tmp/test.txt
+rm /tmp/test.txt
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem ; rm /tmp/better_poem
+env
+ls > file > file
+ls
+ls > file1 > file2
+ls
+cat file1
+cat file2
+rm file
+rm file1
+rm file2
+ls
+./2to32.6
+2to32.6
+setenv PATH=/bin
+env
+echo $PATH
+setenv PATH=
+env
+setenv PATH=/bin
+env
+unsetenv PATH
+setenv PATH=/bin
+env
+env
+setenv PATH=/bin
+env
+unsetenv PATH
+env
+setenv PATH=/bin
+env
