@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 12:47:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:38:11 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/11 13:38:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void		is_a_directory(char *str)
 	ft_putstr(str);
 }
 
+int			valid_type(int type)
+{
+	if (type < 1024 && type > 64)
+		return (1);
+	if (type > 2048)
+		return (1);
+	return (0);
+}
+
 char		**concat_content(t_inpl **inpl)
 {
 	int		len;
@@ -26,20 +35,20 @@ char		**concat_content(t_inpl **inpl)
 
 	len = 1;
 	cp = (*inpl);
-	while (cp && cp->type < 1024 && cp->type > 64)
+	while (cp && valid_type(cp->type))
 	{
-		len++;
+		cp->type < 1024 ? len++ : 0;
 		cp = cp->next;
 	}
 	if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (NULL);
 	len = 0;
 	cp = *inpl;
-	while (cp && cp->type < 1024 && cp->type > 64)
+	while (cp && valid_type(cp->type))
 	{
-		if (!(cont[len] = inp_to_cont(&cp->inp)))
-			return (NULL);
-		len++;
+		if (cp->type < 1024)
+			if (!(cont[len++] = inp_to_cont(&cp->inp)))
+				return (NULL);
 		cp = cp->next;
 	}
 	cont[len] = NULL;
