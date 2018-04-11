@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 11:10:34 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 19:28:28 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 09:54:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static int			delete_env(t_env **env, char *input, t_sh *sh)
 	while (cp)
 	{
 		if ((ft_strncmp(input, cp->env, ft_strlen(input))) == 0)
-		{
-			if (tmp)
-				return (remove_between(&cp, &tmp));
-			else
-				return (remove_first(env, &cp));
-		}
+			if (cp->env[ft_strlen(input)] == '=')
+			{
+				if (tmp)
+					return (remove_between(&cp, &tmp));
+				else
+					return (remove_first(env, &cp));
+			}
 		tmp = cp;
 		cp = cp->next;
 	}
@@ -67,8 +68,6 @@ int					builtin_unsetenv(char **exec, t_sh *sh)
 		return (err_msg("unsetenv: missing argument", "", 1));
 	while (exec[i])
 	{
-		if (valid_name(exec[i], "unsetenv") == 0)
-			return (3);
 		delete_env(env, exec[i], sh);
 		i++;
 	}
