@@ -117,3 +117,19 @@ AFe%oM
 g P}A3'9AnB!Mh7?n@OkXP'nRJ_z:</dKs_Z82],vS=jo
 r]aY`oo.(hG!kC{<+P?uPM{Xe#SoPz~T{T!(?kll*6znTgrzjV[ s#ZW+Sk$ab]aoUWHYT""So
 5^<<Ze~kX4@Xomq
+ls
+cat < Makefile
+cat << Makefile
+cat >> fiel
+exit
+ls > file
+cat file
+rm file
+ls >> fiel
+cat fiel
+rm fiel
+ls
+cat << FIN
+exit
+cat << f
+exit

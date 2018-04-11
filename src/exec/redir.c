@@ -19,10 +19,11 @@ void	left_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 	if (!(ret = open(cmd->redirs->file, O_RDONLY)))
 	{
 		close(ret);
+		ft_putstr_fd("21sh: no such file or directory: ", 2);
 		errexit(cmd->redirs->file);
 	}
-	tabtube[i].cote[0] = (cmd->redirs->file) ? ret : cmd->redirs->redir[2];
-	tabtube[i].cote[1] = cmd->redirs->redir[0];
+	tabtube[i].cote[0] = (cmd->redirs->file) ? ret : cmd->redirs->redir[0];
+	tabtube[i].cote[1] = cmd->redirs->redir[2];
 }
 
 void	right_redirect(t_listc *cmd, t_pipe *tabtube, int i)
@@ -41,11 +42,11 @@ void	heredock_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 		errexit("Pipe failed.");
 	while (cmd->redirs->heredoc[j])
 	{
-		write(tabtube[i].cote[1], cmd->redirs->heredoc[j]
+		write(tabtube[i].cote[0], cmd->redirs->heredoc[j]
 			, ft_strlen(cmd->redirs->heredoc[j]));
 		j++;
 	}
-	close(tabtube[i].cote[1]);
+	close(tabtube[i].cote[0]);
 }
 
 void	double_right_redirect(t_listc *cmd, t_pipe *tabtube, int i)
