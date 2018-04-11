@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 12:47:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/11 16:06:20 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 17:02:21 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,26 @@ void		is_a_directory(char *str)
 	ft_putstr(str);
 }
 
-int			valid_type(int type)
+int			valid_type(int type, t_inpl *cp, int which)
 {
-	if (type < 1024 && type > 64)
-		return (1);
-	if (type > 2048 && type < 131072)
-		return (1);
-	return (0);
-}
-
-int			check_next_type(t_inpl *cp)
-{
-	if (cp->type < 1024)
+	if (which)
 	{
-		if (cp->previous)
+		if (type < 1024 && type > 64)
+			return (1);
+		if (type > 2048 && type < 131072)
+			return (1);
+	}
+	else
+	{
+		if (cp->type < 1024)
 		{
-			if (cp->previous->type == 8192)
-				return (0);
+			if (cp->previous)
+			{
+				if (cp->previous->type == 8192)
+					return (0);
+			}
+			return (1);
 		}
-		return (1);
 	}
 	return (0);
 }
@@ -49,22 +50,20 @@ char		**concat_content(t_inpl **inpl)
 
 	len = 1;
 	cp = (*inpl);
-	while (cp && valid_type(cp->type))
+	while (cp && valid_type(cp->type, cp, 1))
 	{
-		check_next_type(cp) ? len++ : 0;
+		valid_type(cp->type, cp, 0) ? len++ : 0;
 		cp = cp->next;
 	}
 	if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (NULL);
 	len = 0;
 	cp = *inpl;
-	while (cp && valid_type(cp->type))
+	while (cp && valid_type(cp->type, cp, 1))
 	{
-		if (check_next_type(cp))
-		{
+		if (valid_type(cp->type, cp, 0))
 			if (!(cont[len++] = inp_to_cont(&cp->inp)))
 				return (NULL);
-		}
 		cp = cp->next;
 	}
 	cont[len] = NULL;
