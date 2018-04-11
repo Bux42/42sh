@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 12:47:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/11 13:38:02 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 13:46:25 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			valid_type(int type)
 {
 	if (type < 1024 && type > 64)
 		return (1);
-	if (type > 2048)
+	if (type > 2048 && type < 131072)
 		return (1);
 	return (0);
 }
