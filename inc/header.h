@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 17:53:09 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:38:39 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void					try_exit(t_sh *sh, t_inp **inp);
 void					init_variables(t_sh *sh);
 void					get_bin(t_env **env, t_sh *sh);
 t_bin					*new_bin(char *name);
+void					add_builtin_completion(t_sh *sh);
 void					bin_push_front(t_bin **bin, char *name);
 void					signal_init(void);
 void					signal_exec(void);
@@ -193,6 +194,7 @@ void					free_comp(int i, t_sh *sh);
 void					print_spaces(int nb, t_sh *sh);
 void					rewrite_beginning(t_sh *sh, t_inp *cp);
 void					completion_readdir(DIR *od, t_sh *sh, t_inp *cp);
+int						literal_path(t_sh *sh);
 
 int						line_is_closed(t_sh *sh, t_inp **inp);
 int						print_expected_prompt(t_sh *sh, t_close **close);

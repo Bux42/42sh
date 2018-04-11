@@ -6,11 +6,28 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:56:37 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 17:07:45 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:43:48 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/header.h"
+
+void		add_builtin_completion(t_sh *sh)
+{
+	bin_push_front(&sh->bin, "history");
+	bin_push_front(&sh->bin, "myman");
+	bin_push_front(&sh->bin, "color");
+	bin_push_front(&sh->bin, "cd");
+	bin_push_front(&sh->bin, "setenv");
+	bin_push_front(&sh->bin, "unsetenv");
+	bin_push_front(&sh->bin, "env");
+	bin_push_front(&sh->bin, "set");
+	bin_push_front(&sh->bin, "unset");
+	bin_push_front(&sh->bin, "export");
+	bin_push_front(&sh->bin, "local");
+	bin_push_front(&sh->bin, "exit");
+	bin_push_front(&sh->bin, "echo");
+}
 
 void		check_if_dir(t_sh *sh, t_inp **inp)
 {

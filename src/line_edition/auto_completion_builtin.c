@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 20:59:04 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/08 12:53:52 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:29:02 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int			complete_builtin(t_inp **inp)
 			break ;
 		cp = cp->previous;
 	}
+	if (cp->c == '.' && cp->next && cp->next->c == '/')
+		return (0);
 	if (cp->previous)
 	{
 		while (cp->previous && cp->previous->c == ' ')

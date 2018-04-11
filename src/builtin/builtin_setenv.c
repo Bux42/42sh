@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:18:57 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/11 11:11:44 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:57:32 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			parse_setenv(char **exec, t_env **env, t_sh *sh)
 		len++;
 	if (!(name = (char*)malloc(sizeof(char) * (++len + 1))))
 		return (1);
+	ft_bzero(name, len);
 	ft_strncat(name, exec[1], len);
 	while (exec[1][len])
 		len++;

@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:14:26 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 11:54:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:14:14 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ int			main(int ac, char **av, char **env)
 		return (0);
 	g_sh->retval = 0;
 	print_prompt(g_sh);
-	g_sh->width = tgetnum("co");
 	if (g_sh->posy - 1 == g_sh->width && g_sh->posy--)
 	{
 		check_endline(g_sh);
 		ft_putchar('1');
 	}
 	init_variables(g_sh);
+	add_builtin_completion(g_sh);
 	while (ac > -1)
 		if (read(1, g_sh->buff, 4))
 			check_pasted(g_sh);
