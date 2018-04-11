@@ -81,7 +81,7 @@ void	dup_fd(t_listc *cmd, t_pipe *tabtube, int i)
 	if (cmd->redirs->redir[1] != 0 && cmd->redirs->redir[1] != 4
 		&& cmd->redirs->redir[0] == 1)
 		dup2(tabtube[i].cote[0], STDOUT_FILENO);
-	else if (cmd->redirs->redir[0] == 0)
+	else if (cmd->redirs->redir[0] == 0 || cmd->redirs->redir[1] == 4)
 		dup2(tabtube[i].cote[0], STDIN_FILENO);
 	else if (cmd->redirs->redir[0] == 2)
 		dup2(tabtube[i].cote[0], STDERR_FILENO);

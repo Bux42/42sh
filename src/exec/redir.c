@@ -42,11 +42,11 @@ void	heredock_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 		errexit("Pipe failed.");
 	while (cmd->redirs->heredoc[j])
 	{
-		write(tabtube[i].cote[0], cmd->redirs->heredoc[j]
+		write(tabtube[i].cote[1], cmd->redirs->heredoc[j]
 			, ft_strlen(cmd->redirs->heredoc[j]));
 		j++;
 	}
-	close(tabtube[i].cote[0]);
+	close(tabtube[i].cote[1]);
 }
 
 void	double_right_redirect(t_listc *cmd, t_pipe *tabtube, int i)
