@@ -6,12 +6,21 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:32:28 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/09 12:09:21 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:10:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../inc/header.h"
+
+int		illegal_name(char *str, char *builtin)
+{
+	ft_putstr_fd(builtin, STDERR_FILENO);
+	ft_putstr_fd(": Illegal variable name: \"", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putendl_fd("\"", STDERR_FILENO);
+	return (0);
+}
 
 int		valid_name(char *str, char *builtin)
 {
@@ -27,6 +36,8 @@ int		valid_name(char *str, char *builtin)
 		}
 		i++;
 	}
+	if (str[0] == '$' && str[1] == '=')
+		return (illegal_name(str, builtin));
 	if (i == -1)
 	{
 		ft_putstr_fd(builtin, STDERR_FILENO);
