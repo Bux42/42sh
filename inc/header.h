@@ -6,14 +6,14 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 05:15:24 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/11 11:38:39 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 17:04:30 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # define TERM "xterm-256color"
-# define DEBUG			1
+# define DEBUG			0
 # define TTY_MAX		10000
 
 # define DQUOTE			1

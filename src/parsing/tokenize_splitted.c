@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 16:33:23 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/10 14:38:27 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/11 17:06:07 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		redir_push_back(t_redir **redir, t_inpl **inpl, int type)
 		last = return_last_redir(redir);
 		last->next = new_redir(redir_type, file, here);
 	}
-	redir_debug(file, redir_type);
+	DEBUG ? redir_debug(file, redir_type) : 0;
 }
 
 void		add_listc_token(t_inpl **inpl, t_listc **tok)
