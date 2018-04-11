@@ -36,8 +36,7 @@ int			check_next_type(t_inpl *cp)
 			if (cp->previous->type == 8192)
 				return (0);
 		}
-		else
-			return (1);
+		return (1);
 	}
 	return (0);
 }
@@ -62,8 +61,10 @@ char		**concat_content(t_inpl **inpl)
 	while (cp && valid_type(cp->type))
 	{
 		if (check_next_type(cp))
+		{
 			if (!(cont[len++] = inp_to_cont(&cp->inp)))
 				return (NULL);
+		}
 		cp = cp->next;
 	}
 	cont[len] = NULL;

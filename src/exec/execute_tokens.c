@@ -6,7 +6,7 @@
 /*   By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 13:59:13 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/11 15:24:05 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:42:09 by jamerlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	sve_fd(int save_fd[3])
 {
-	save_fd[0] = dup(0);
-	save_fd[1] = dup(1);
-	save_fd[2] = dup(2);
+	save_fd[0] = dup(STDIN_FILENO);
+	save_fd[1] = dup(STDOUT_FILENO);
+	save_fd[2] = dup(STDERR_FILENO);
 }
 
 void	reset_fd(int save_fd[3])
 {
-	if (dup2(STDIN_FILENO, 0) != 0)
-		close(save_fd[0]);
-	if (dup2(STDOUT_FILENO, 1) != 1)
-		close(save_fd[1]);
-	if (dup2(STDERR_FILENO, 2) != 2)
-		close(save_fd[2]);
+	dup2(save_fd[0], 0);
+	close(save_fd[0]);
+	dup2(save_fd[1], 1);
+	close(save_fd[1]);
+	dup2(save_fd[2], 2);
+	close(save_fd[2]);
 }
 
 void	builtin_redir(t_listc *cp, int (*func)(char **, t_sh*), t_sh *sh)

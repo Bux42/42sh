@@ -16,9 +16,8 @@ void	left_redirect(t_listc *cmd, t_pipe *tabtube, int i)
 {
 	int ret;
 
-	if (!(ret = open(cmd->redirs->file, O_RDONLY)))
+	if ((ret = open(cmd->redirs->file, O_RDONLY)) == -1)
 	{
-		close(ret);
 		ft_putstr_fd("21sh: no such file or directory: ", 2);
 		errexit(cmd->redirs->file);
 	}
