@@ -6,7 +6,7 @@
 /*   By: videsvau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 12:47:51 by videsvau          #+#    #+#             */
-/*   Updated: 2018/04/11 13:46:25 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:06:20 by videsvau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ int			valid_type(int type)
 	return (0);
 }
 
+int			check_next_type(t_inpl *cp)
+{
+	if (cp->type < 1024)
+	{
+		if (cp->previous)
+		{
+			if (cp->previous->type == 8192)
+				return (0);
+		}
+		else
+			return (1);
+	}
+	return (0);
+}
+
 char		**concat_content(t_inpl **inpl)
 {
 	int		len;
@@ -37,7 +52,7 @@ char		**concat_content(t_inpl **inpl)
 	cp = (*inpl);
 	while (cp && valid_type(cp->type))
 	{
-		cp->type < 1024 ? len++ : 0;
+		check_next_type(cp) ? len++ : 0;
 		cp = cp->next;
 	}
 	if (!(cont = (char**)malloc(sizeof(char*) * (len + 1))))
@@ -46,7 +61,7 @@ char		**concat_content(t_inpl **inpl)
 	cp = *inpl;
 	while (cp && valid_type(cp->type))
 	{
-		if (cp->type < 1024)
+		if (check_next_type(cp))
 			if (!(cont[len++] = inp_to_cont(&cp->inp)))
 				return (NULL);
 		cp = cp->next;
