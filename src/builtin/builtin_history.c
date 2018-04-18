@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/18 16:07:53 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/18 17:40:56 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int		show_err(int err, char c, char *fg)
 	{
 		ft_putstr_fd("history: illegal option -- ", STDERR_FILENO);
 		ft_putchar_fd(c, STDERR_FILENO);
-		ft_putendl_fd("\nusage: history [-nA | -C] [[0]n]", STDERR_FILENO);
+		ft_putstr_fd("\nusage: history [-n] [[-C|c]", STDERR_FILENO);
+		ft_putendl_fd(" | [-I [args ...]] | [[-A] [[0]n]]]", STDERR_FILENO);
 	}
 	if (err == 3)
 		ft_putendl_fd("history: Arguments must be numerical.", STDERR_FILENO);
 	if (err == 4)
-		ft_putendl_fd("history: -A and -C together is illegal", STDERR_FILENO);
+		ft_putendl_fd("history: I|A + C|c  together is illegal", STDERR_FILENO);
 	return (err);
 }
 
@@ -42,6 +43,8 @@ int		put(char c, char *fg)
 		fg[2] = 'n';
 	if (c == 'c')
 		fg[3] = 'c';
+	if (c == 'I')
+		fg[4] = 'I';
 	return (0);
 }
 
@@ -49,7 +52,7 @@ int		built_err(char **exec, char *fg)
 {
 	int			i;
 	int			j;
-	const char	*flag = "ACnc";
+	const char	*flag = "ACncI";
 
 	i = 0;
 	j = 0;
@@ -108,17 +111,16 @@ int		builtin_history(char **exec, t_sh *sh)
 	char	*fg;
 	int		lg;
 
-	fg = ft_strdup("0000");
+	fg = ft_strdup("00000");
 	lg = -1;
 	if (too_big(exec) || (err = built_err(exec, fg)) > 0)
 		return (erase_fg(fg, 3));
-	if (fg[0] == 'A' && (fg[1] == 'C' || fg[3] == 'c'))
+	if ((fg[0] == 'A' || fg[4] == 'I') && (fg[1] == 'C' || fg[3] == 'c'))
 		return (erase_fg(fg, 4));
-	if (fg[1] == 'C' || fg[3] == 'c')
-	{
-		ft_putendl("breby");
+	if (fg[4] == 'I')
+		err = insert_args(fg, sh, exec);
+	else if (fg[1] == 'C' || fg[3] == 'c')
 		err = history_clean(fg, &sh->history, sh);
-	}
 	else if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{
@@ -126,5 +128,5 @@ int		builtin_history(char **exec, t_sh *sh)
 		i = (i > 0) ? i + 1 : i;
 		err = builtin_hist(i, &sh->history, lg, fg);
 	}
-	return (erase_fg(fg, 0));
+	return (erase_fg(fg, err));
 }

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/18 16:00:42 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/18 17:43:11 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void	suppr_letter(t_inp **c);
 char	**env_in_tab(t_env **env);
 int		in_it(int len, int i, int max, int lg);
 int		in_this(int len, int i, int max, int lg);
+int		insert_args(char *fg, t_sh *sh, char **exec);
 
 #endif
