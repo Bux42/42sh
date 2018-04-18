@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:25:32 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 20:53:16 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/18 15:55:48 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		last_command(t_sh *sh, t_inp **inp)
 	t_inp	*tmp;
 
 	tmp = NULL;
-	if (!(sh->history && sh->history->next))
+	if (!(sh->history && sh->history->inp))
 	{
 		if (!((*inp)->next->next) && !((*inp)->previous))
 			return (no_history());
