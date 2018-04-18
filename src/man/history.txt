@@ -7,7 +7,7 @@ NAME
 
 
 SYNOPSIS
-       history [-n] [-C] | [-]NUMBER [LG] | [-A] -- print history
+       history [-n] [-C | -c] | [-]NUMBER [LG] | [-A] -- print history
 
 
 DESCRIPTION
@@ -18,7 +18,11 @@ DESCRIPTION
 OPTIONS
        -C
 
-       All commands of the history are erased.
+       All commands of the history are erased (on the file too).
+
+       -c
+
+       All commands of the history are erased but the file doesn't change.
 
        -n
 
