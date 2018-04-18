@@ -6,7 +6,7 @@
 #    By: jamerlin <jamerlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/17 14:50:04 by vboivin           #+#    #+#              #
-#    Updated: 2018/04/11 10:23:52 by drecours         ###   ########.fr        #
+#    Updated: 2018/04/18 17:36:12 by drecours         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,7 @@ builtin/env_tools2.c\
 builtin/history_exclaim.c\
 builtin/exclaim_tools.c\
 builtin/history_find.c\
+builtin/history_flag_i.c\
 builtin/exclaim_tools2.c\
 builtin/exclaim_misc.c\
 builtin/dir_tools3.c\
