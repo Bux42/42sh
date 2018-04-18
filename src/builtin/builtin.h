@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:01:36 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/10 20:30:15 by videsvau         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:00:42 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int		dir_exists(char *path);
 int		valid_last(t_inp *inp);
 int		valid_by_last(t_inp **inp);
 void	hist_verbose(int i);
-int		change_fd(t_sh *sh, char *path);
-int		history_clean(char c, t_his **hist, t_sh *sh);
+int		change_fd(t_sh *sh, char *path, char c);
+int		history_clean(char *fg, t_his **hist, t_sh *sh);
 int		show_err(int err, char c, char *fg);
 int		get_lg(int *lg, char **exec);
 int		get_beg(int *i, t_his **history, char **exec);

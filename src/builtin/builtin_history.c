@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 17:11:21 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/11 14:38:51 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:07:53 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		put(char c, char *fg)
 		fg[1] = 'C';
 	if (c == 'n')
 		fg[2] = 'n';
+	if (c == 'c')
+		fg[3] = 'c';
 	return (0);
 }
 
@@ -47,7 +49,7 @@ int		built_err(char **exec, char *fg)
 {
 	int			i;
 	int			j;
-	const char	*flag = "ACn";
+	const char	*flag = "ACnc";
 
 	i = 0;
 	j = 0;
@@ -106,14 +108,17 @@ int		builtin_history(char **exec, t_sh *sh)
 	char	*fg;
 	int		lg;
 
-	fg = ft_strdup("000");
+	fg = ft_strdup("0000");
 	lg = -1;
 	if (too_big(exec) || (err = built_err(exec, fg)) > 0)
 		return (erase_fg(fg, 3));
-	if (fg[0] == 'A' && fg[1] == 'C')
+	if (fg[0] == 'A' && (fg[1] == 'C' || fg[3] == 'c'))
 		return (erase_fg(fg, 4));
-	if (fg[1] == 'C')
-		err = history_clean(fg[2], &sh->history, sh);
+	if (fg[1] == 'C' || fg[3] == 'c')
+	{
+		ft_putendl("breby");
+		err = history_clean(fg, &sh->history, sh);
+	}
 	else if (!(err = get_beg(&i, &sh->history, exec)) &&
 			!(err = get_lg(&lg, exec)))
 	{

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:58:27 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:21:40 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:02:04 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int			get_lg(int *lg, char **exec)
 	return (0);
 }
 
-int			history_clean(char c, t_his **hist, t_sh *sh)
+int			history_clean(char *fg, t_his **hist, t_sh *sh)
 {
 	ft_putendl("Cleared");
-	if (c == 'n')
+	if (fg[2] == 'n')
 		hist_verbose(history_len(hist));
 	while ((*hist) && (*hist)->next)
 	{
@@ -87,7 +87,7 @@ int			history_clean(char c, t_his **hist, t_sh *sh)
 		free(*hist);
 		*hist = NULL;
 	}
-	return (change_fd(sh, sh->man_path));
+	return (change_fd(sh, sh->man_path, fg[3]));
 }
 
 int			check_arg(char **exec, int i)

@@ -6,7 +6,7 @@
 /*   By: drecours <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 14:42:12 by drecours          #+#    #+#             */
-/*   Updated: 2018/04/05 13:25:23 by drecours         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:02:28 by drecours         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,31 @@ int					erase_file(char *new_path, t_sh *sh)
 	return (0);
 }
 
-int					change_fd(t_sh *sh, char *path)
+int					change_fd(t_sh *sh, char *path, char c)
 {
 	char	*new_path;
 	int		err;
 
-	new_path = ft_strjoin(path, "/.history");
-	if (close(sh->fd))
+	if (c != 'c')
 	{
-		ft_putendl_fd("Couldn't close .history correctly.", 2);
-		sh->fd = -1;
+		new_path = ft_strjoin(path, "/.history");
+		if (close(sh->fd))
+		{
+			ft_putendl_fd("Couldn't close .history correctly.", 2);
+			sh->fd = -1;
+			free(new_path);
+			return (11);
+		}
+		if ((err = erase_file(new_path, sh)))
+			return (err);
+		if ((sh->fd = open(new_path, O_CREAT | O_RDWR, 0777)) == -1)
+		{
+			ft_putendl_fd("Couldn't open .history correctly", 2);
+			free(new_path);
+			return (12);
+		}
 		free(new_path);
-		return (11);
 	}
-	if ((err = erase_file(new_path, sh)))
-		return (err);
-	if ((sh->fd = open(new_path, O_CREAT | O_RDWR, 0777)) == -1)
-	{
-		ft_putendl_fd("Couldn't open .history correctly", 2);
-		free(new_path);
-		return (12);
-	}
-	free(new_path);
 	return (0);
 }
 
